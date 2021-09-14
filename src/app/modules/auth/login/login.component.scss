@@ -1,0 +1,9 @@
+@use "/src/app/shared/styles/abstracts/mixins";
+@use "/src/app/shared/styles/abstracts/functions";
+
+.login-page {
+  @include mixins.max-viewport();
+  @include mixins.bg-fill();
+  background-image: functions.image("login-page.png");
+  // background-image: url("https://www.q36-5.com/wp-content/uploads/cruise-cycling-clothing-preview.jpg");
+}

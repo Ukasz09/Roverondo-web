@@ -39,3 +39,7 @@ body {
     @include mixins.selection-style();
   }
 }
+
+h1 {
+  font-size: 35px;
+}

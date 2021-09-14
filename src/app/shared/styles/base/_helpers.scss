@@ -1,14 +1,9 @@
 // -----------------------------------------------------------------------------
 // This file contains CSS helper classes.
 // -----------------------------------------------------------------------------
+// TODO: Get rid of
 
 @use "/src/app/shared/styles/abstracts/mixins";
-
-.max-viewport {
-  position: absolute;
-  height: 100vh;
-  width: 100vw;
-}
 
 .bg-image {
   @include mixins.bg-fill();

@@ -2,12 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppRoutingModule } from './routes/app-routing.module';
+import { RoutingModule } from './routes/routing.module';
+import { LayoutsModule } from './layouts/layouts.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { AppComponent } from './app.component';
-
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,13 +13,10 @@ import { MatDividerModule } from '@angular/material/divider';
     BrowserModule,
     BrowserAnimationsModule,
 
-    // Material
-    MatDividerModule,
-    MatIconModule,
-    MatButtonModule,
-
     // Custom modules
-    AppRoutingModule,
+    RoutingModule,
+    LayoutsModule,
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
