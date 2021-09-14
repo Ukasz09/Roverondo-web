@@ -1,0 +1,21 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+$text-font-stack: sans-serif !default;
+$base-font-size: 18px;
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+) !default;
+
+$zindex-fixed: 999;
+$zindex-sticky: 999;
+
+/* Assets
+============================================= */
+$base-assets-url: "/assets/" !default;

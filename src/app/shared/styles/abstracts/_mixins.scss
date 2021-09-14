@@ -1,0 +1,75 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+@mixin selection-style {
+  // TODO: tmp - change it later
+  color: orange;
+  background: black;
+}
+
+@mixin flex-container($direction: column, $justify-content: center) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: $justify-content;
+  text-align: center;
+}
+
+@mixin bg-fill($background-position: center) {
+  background-position: $background-position;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@mixin mask($color, $opacity: 0.65) {
+  background: rgba($color, $opacity);
+}
+
+@mixin py($size) {
+  padding-top: $size;
+  padding-bottom: $size;
+}
+
+@mixin px($size) {
+  padding-left: $size;
+  padding-right: $size;
+}
+
+/* Components
+============================================= */
+
+@mixin btn(
+  $bg-color,
+  $color,
+  $hover-bg-color,
+  $hover-color,
+  $disabled-bg-color,
+  $disabled-color,
+  $border-color: transparent,
+  $hover-border-color: transparent,
+  $disabled-outline-color: transparent,
+  $border-size: 2px
+) {
+  border-radius: 25px;
+  cursor: pointer;
+  background-color: $bg-color;
+  border: $border-size solid $border-color;
+  outline: none;
+  color: $color;
+  transition-duration: 0.5s;
+  font-weight: 600;
+
+  &:hover {
+    background-color: $hover-bg-color;
+    border: $border-size solid $hover-border-color;
+    color: $hover-color;
+  }
+
+  &:disabled {
+    background-color: $disabled-bg-color;
+    border: $border-size solid $disabled-outline-color;
+    color: $disabled-color;
+    cursor: unset;
+  }
+}
