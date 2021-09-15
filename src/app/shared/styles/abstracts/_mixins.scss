@@ -15,7 +15,6 @@
   flex-direction: $direction;
   align-items: center;
   justify-content: $justify-content;
-  text-align: center;
 }
 
 @mixin bg-fill($background-position: center) {
@@ -50,40 +49,13 @@
   backdrop-filter: blur(150px);
 }
 
-/* Components
-============================================= */
+@mixin svg-fix {
+  display: block;
+  margin: auto;
+}
 
-@mixin btn(
-  $bg-color,
-  $color,
-  $hover-bg-color,
-  $hover-color,
-  $disabled-bg-color,
-  $disabled-color,
-  $border-color: transparent,
-  $hover-border-color: transparent,
-  $disabled-outline-color: transparent,
-  $border-size: 2px
-) {
-  border-radius: 25px;
-  cursor: pointer;
-  background-color: $bg-color;
-  border: $border-size solid $border-color;
-  outline: none;
-  color: $color;
-  transition-duration: 0.5s;
-  font-weight: 600;
-
-  &:hover {
-    background-color: $hover-bg-color;
-    border: $border-size solid $hover-border-color;
-    color: $hover-color;
-  }
-
-  &:disabled {
-    background-color: $disabled-bg-color;
-    border: $border-size solid $disabled-outline-color;
-    color: $disabled-color;
-    cursor: unset;
+@mixin media($size) {
+  @media (min-width: #{map-get(variables.$breakpoints, $size)}) {
+    @content;
   }
 }

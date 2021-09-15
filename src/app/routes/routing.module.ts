@@ -1,24 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../modules/auth/login/login.component';
+import { AppRoutes } from './app-routes';
 
 const routes: Routes = [
   {
-    path: 'login',
+    path: AppRoutes.SIGN_IN,
     component: LoginComponent,
   },
   {
-    path: 'home',
-    redirectTo: '/login',
+    path: AppRoutes.HOME,
+    redirectTo: `/${AppRoutes.SIGN_IN}`,
   },
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: `/${AppRoutes.SIGN_IN}`,
     pathMatch: 'full',
   },
   {
     path: '**',
-    redirectTo: '/home',
+    redirectTo: `/${AppRoutes.SIGN_IN}`,
     pathMatch: 'full',
   },
 ];

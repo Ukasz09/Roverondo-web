@@ -1,0 +1,13 @@
+@use "/src/app/shared/styles/abstracts/mixins";
+@use "/src/app/shared/styles/abstracts/variables";
+
+.glass-card {
+  @include mixins.glass-effect(variables.$glass-lighter-bg);
+  border-radius: 25px;
+}
+
+.header {
+  @include mixins.py($size: 0.5rem);
+  display: flex;
+  justify-content: center;
+}

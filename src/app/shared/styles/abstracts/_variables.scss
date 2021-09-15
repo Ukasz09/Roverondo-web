@@ -5,13 +5,18 @@
 $text-font-stack: sans-serif !default;
 $base-font-size: 18px;
 $breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px,
-  xxl: 1400px,
-) !default;
+  xs-small: 360px,
+  xs-medium: 400px,
+  xs-large: 480px,
+  sm-xsmall: 600px,
+  sm-small: 720px,
+  sm-medium: 840px,
+  sm-large: 960px,
+  md-small: 1024px,
+  md-large: 1280px,
+  lg-small: 1440px,
+  lg-large: 1600px,
+);
 
 $zindex-fixed: 999;
 $zindex-sticky: 999;
@@ -23,3 +28,4 @@ $base-assets-url: "/assets/" !default;
 /* Palette
 ============================================= */
 $glass-light-bg: linear-gradient(124.72deg, #f8f9fa 0%, rgba(248, 249, 250, 0.5) 100%);
+$glass-lighter-bg: linear-gradient(124.72deg, #f8f9fa 0%, rgba(248, 249, 250, 0) 100%);
