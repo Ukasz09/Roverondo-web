@@ -13,3 +13,8 @@
 @function image($name, $base: variables.$base-assets-url) {
   @return asset($base, "images/", $name);
 }
+
+@function webkitize($property) {
+  @debug -webkit-#{$property};
+  @return -webkit-#{$property};
+}

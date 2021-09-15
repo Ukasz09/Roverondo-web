@@ -1,0 +1,29 @@
+@use "/src/app/shared/styles/abstracts/mixins";
+@use "/src/app/shared/styles/abstracts/functions";
+@use "/src/app/shared/styles/abstracts/variables";
+
+.home-page {
+  @include mixins.max-viewport();
+  @include mixins.bg-fill();
+  background-image: functions.image("home.png");
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  transition: 0.25s;
+}
+
+.sub-logo-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.sub-logo {
+  margin-bottom: 3.5rem;
+  background: functions.webkitize(variables.$glass-light-bg);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../modules/auth/login/login.component';
+import { HomeComponent } from '../modules/home/home.component';
 import { AppRoutes } from './app-routes';
 
 const routes: Routes = [
@@ -10,16 +11,16 @@ const routes: Routes = [
   },
   {
     path: AppRoutes.HOME,
-    redirectTo: `/${AppRoutes.SIGN_IN}`,
+    component: HomeComponent,
   },
   {
     path: '',
-    redirectTo: `/${AppRoutes.SIGN_IN}`,
+    redirectTo: `/${AppRoutes.HOME}`,
     pathMatch: 'full',
   },
   {
     path: '**',
-    redirectTo: `/${AppRoutes.SIGN_IN}`,
+    redirectTo: `/${AppRoutes.HOME}`,
     pathMatch: 'full',
   },
 ];
