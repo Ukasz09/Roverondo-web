@@ -27,6 +27,8 @@ $base-assets-url: "/assets/" !default;
 
 /* Palette
 ============================================= */
-$glass-light-bg: linear-gradient(124.72deg, #f8f9fa 0%, rgba(248, 249, 250, 0.5) 100%);
-$webkit-glass-light-bg: -webkit-linear-gradient(124.72deg, #f8f9fa 0%, rgba(248, 249, 250, 0.5) 100%);
-$glass-lighter-bg: linear-gradient(124.72deg, #f8f9fa 0%, rgba(248, 249, 250, 0) 100%);
+$accent-color: #ecb767;
+$primary-color: #f8f9fa;
+$glass-light-bg: linear-gradient(124.72deg, $primary-color 0%, rgba(248, 249, 250, 0.5) 100%);
+$webkit-glass-light-bg: -webkit-linear-gradient(124.72deg, $primary-color 0%, rgba(248, 249, 250, 0.5) 100%);
+$glass-lighter-bg: linear-gradient(124.72deg, $primary-color 0%, rgba(248, 249, 250, 0) 100%);

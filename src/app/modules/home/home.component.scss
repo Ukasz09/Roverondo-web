@@ -2,15 +2,14 @@
 @use "/src/app/shared/styles/abstracts/functions";
 @use "/src/app/shared/styles/abstracts/variables";
 
-.home-page {
-  @include mixins.max-viewport();
-  @include mixins.bg-fill();
-  background-image: functions.image("home.png");
+.home-content {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   transition: 0.25s;
+  height: 100%;
+  flex: 1;
 }
 
 .sub-logo-container {
@@ -21,9 +20,33 @@
 }
 
 .sub-logo {
+  @include mixins.gradient-text($gradient: variables.$glass-light-bg);
   margin-bottom: 3.5rem;
-  background: functions.webkitize(variables.$glass-light-bg);
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  -webkit-background-clip: text;
+}
+
+.home-container {
+  @include mixins.bg-fill();
+  @include mixins.max-viewport();
+  background-image: functions.image("home.png");
+  display: flex;
+  flex-direction: row;
+}
+
+mat-drawer-content,
+mat-drawer-container {
+  background: transparent !important;
+}
+
+mat-drawer-container {
+  width: 100%;
+}
+
+.drawer {
+  @include mixins.glass-effect();
+}
+
+.drawer-links {
+  text-decoration: none;
+  list-style: none;
+  padding: 0.5rem 1.75rem;
 }

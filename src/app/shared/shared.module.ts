@@ -10,6 +10,8 @@ import { FbIconComponent } from './components/icons/fb-icon/fb-icon.component';
 import { GithubIconComponent } from './components/icons/github-icon/github-icon.component';
 import { GoogleIconComponent } from './components/icons/google-icon/google-icon.component';
 import { LogoTextComponent } from './components/logo-text/logo-text.component';
+import { HamburgerMenuComponent } from './components/icons/hamburger-menu/hamburger-menu.component';
+import { ProfileAvatarComponent } from './components/profile-avatar/profile-avatar.component';
 @NgModule({
   declarations: [
     GlassCardComponent,
@@ -18,6 +20,8 @@ import { LogoTextComponent } from './components/logo-text/logo-text.component';
     GithubIconComponent,
     GoogleIconComponent,
     LogoTextComponent,
+    HamburgerMenuComponent,
+    ProfileAvatarComponent,
   ],
   imports: [CommonModule, MatCardModule, MatButtonModule],
   exports: [
@@ -27,6 +31,8 @@ import { LogoTextComponent } from './components/logo-text/logo-text.component';
     GithubIconComponent,
     GoogleIconComponent,
     LogoTextComponent,
+    HamburgerMenuComponent,
+    ProfileAvatarComponent,
   ],
 })
 export class SharedModule {}

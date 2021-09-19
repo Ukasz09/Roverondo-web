@@ -1,6 +1,21 @@
-<div class="home-page">
-  <h1 class="logo"><app-logo-text></app-logo-text></h1>
-  <div class="sub-logo-container">
-    <h1 class="sub-logo">Follow your path</h1>
-  </div>
+<div class="home-container">
+  <app-aside-mobile (hamburgerMenuClick)="drawer.toggle()"></app-aside-mobile>
+  <mat-drawer-container hasBackdrop="true">
+    <mat-drawer #drawer mode="over" class="drawer">
+      <ul class="drawer-links">
+        <li>News</li>
+        <li>Your routes</li>
+        <li>Planner</li>
+        <li>Events</li>
+      </ul>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div class="home-content">
+        <h1 class="logo"><app-logo-text></app-logo-text></h1>
+        <div class="sub-logo-container">
+          <h1 class="sub-logo">Follow your path</h1>
+        </div>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
 </div>

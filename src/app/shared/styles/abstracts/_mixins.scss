@@ -1,13 +1,13 @@
 @use "/src/app/shared/styles/abstracts/variables";
+@use "/src/app/shared/styles/abstracts/functions";
 
 // -----------------------------------------------------------------------------
 // This file contains all application-wide Sass mixins.
 // -----------------------------------------------------------------------------
 
 @mixin selection-style {
-  // TODO: tmp - change it later
-  color: orange;
-  background: black;
+  color: variables.$accent-color;
+  background: transparent;
 }
 
 @mixin flex-container($direction: column, $justify-content: center) {
@@ -58,4 +58,11 @@
   @media (min-width: #{map-get(variables.$breakpoints, $size)}) {
     @content;
   }
+}
+
+@mixin gradient-text($gradient) {
+  background: functions.webkitize($gradient);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }

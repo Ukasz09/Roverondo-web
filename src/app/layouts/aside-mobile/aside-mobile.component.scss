@@ -1,0 +1,18 @@
+@use "/src/app/shared/styles/abstracts/mixins";
+@use "/src/app/shared/styles/abstracts/variables";
+@use "/src/app/shared/styles/abstracts/functions";
+
+.aside-mobile {
+  @include mixins.glass-effect(variables.$glass-lighter-bg);
+  @include mixins.py(1rem);
+  width: 50px;
+  height: 100vh;
+}
+
+.menu {
+  cursor: pointer;
+}
+
+.avatar-wrapper {
+  padding: 0.45rem;
+}
