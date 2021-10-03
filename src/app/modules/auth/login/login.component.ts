@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { Utils } from "../../../shared/utils";
+import { Icons } from "../../../shared/icons";
 
 @Component({
   selector: "app-login",
@@ -6,11 +8,15 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
+  public iconsClassRef = Icons;
 
   constructor() {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
+  public getIconPath(iconName: string): string {
+    return Utils.getIconPath(iconName);
+  }
 }

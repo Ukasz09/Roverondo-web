@@ -5,26 +5,20 @@
       <div class="card-content" card-content>
         <app-glass-btn>
           <div class="btn-content" btn-content>
-            <div class="btn-icon">
-              <app-fb-icon></app-fb-icon>
-            </div>
+            <img class="btn-icon" [src]="getIconPath(iconsClassRef.FACEBOOK_ICON)" alt="facebook-icon">
             <div text>Sign In with Facebook</div>
           </div>
         </app-glass-btn>
         <app-glass-btn>
           <div class="btn-content" btn-content>
-            <div class="btn-icon">
-              <app-google-icon></app-google-icon>
-            </div>
+            <img class="btn-icon" [src]="getIconPath(iconsClassRef.GOOGLE_ICON)" alt="google-icon" />
             <div text>Sign In with Google</div>
           </div>
         </app-glass-btn>
         <app-glass-btn>
           <div class="btn-content" btn-content>
-            <div class="btn-icon">
-              <app-github-icon></app-github-icon>
-            </div>
-            <div text>Sign In with Github</div>
+            <img class="btn-icon" [src]="getIconPath(iconsClassRef.GITHUB_ICON)" alt="github-icon" />
+            <div text>Sign In with GitHub</div>
           </div>
         </app-glass-btn>
       </div>

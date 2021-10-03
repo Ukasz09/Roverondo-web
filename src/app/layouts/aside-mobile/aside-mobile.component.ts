@@ -1,5 +1,7 @@
 import { animate, state, style, transition, trigger } from "@angular/animations";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Utils } from "../../shared/utils";
+import { Icons } from "../../shared/icons";
 
 @Component({
   selector: "app-aside-mobile",
@@ -9,6 +11,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 export class AsideMobileComponent implements OnInit {
   @Input() withAvatar = true;
   @Output() hamburgerMenuClick: EventEmitter<void> = new EventEmitter();
+
+  public iconsClassRef = Icons;
 
   constructor() {
   }
@@ -22,5 +26,9 @@ export class AsideMobileComponent implements OnInit {
 
   public onHamburgerMenuClick(): void {
     this.hamburgerMenuClick.emit();
+  }
+
+  public getIconPath(iconName: string): string {
+    return Utils.getIconPath(iconName);
   }
 }

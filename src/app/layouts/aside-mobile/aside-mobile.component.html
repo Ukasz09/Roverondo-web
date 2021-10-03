@@ -2,5 +2,8 @@
   <div *ngIf="withAvatar" class="avatar-wrapper">
     <app-profile-avatar-logged-user></app-profile-avatar-logged-user>
   </div>
-  <app-hamburger-menu class="menu" (click)="onHamburgerMenuClick()"></app-hamburger-menu>
+  <div class="menu">
+    <img class="icon" [src]="getIconPath(iconsClassRef.HAMBURGER_MENU_ICON)" (click)="onHamburgerMenuClick()"
+         alt="hamburger-menu-icon" />
+  </div>
 </div>
