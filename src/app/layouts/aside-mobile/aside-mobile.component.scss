@@ -7,18 +7,20 @@
   @include mixins.py(1rem);
   width: 50px;
   height: 100vh;
-}
 
-.menu {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  .avatar-wrapper {
+    padding: 0.5rem;
+  }
 
-  .icon {
-    cursor: pointer;
+  .menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    .icon {
+      cursor: pointer;
+    }
   }
 }
 
-.avatar-wrapper {
-  padding: 0.5rem;
-}
+
