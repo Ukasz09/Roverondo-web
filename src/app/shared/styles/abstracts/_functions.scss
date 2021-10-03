@@ -15,6 +15,5 @@
 }
 
 @function webkitize($property) {
-  @debug -webkit-#{$property};
   @return -webkit-#{$property};
 }

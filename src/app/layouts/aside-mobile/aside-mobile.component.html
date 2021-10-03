@@ -1,6 +1,6 @@
 <div class="aside-mobile">
-  <div class="avatar-wrapper">
-    <app-profile-avatar></app-profile-avatar>
+  <div *ngIf="withAvatar" class="avatar-wrapper">
+    <app-profile-avatar-logged-user></app-profile-avatar-logged-user>
   </div>
   <app-hamburger-menu class="menu" (click)="onHamburgerMenuClick()"></app-hamburger-menu>
 </div>

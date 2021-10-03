@@ -1,12 +1,28 @@
 <div class="home-container">
-  <app-aside-mobile (hamburgerMenuClick)="drawer.toggle()"></app-aside-mobile>
+  <app-aside-mobile (hamburgerMenuClick)="drawer.toggle()" [withAvatar]="!drawerIsOpen"></app-aside-mobile>
   <mat-drawer-container hasBackdrop="true">
-    <mat-drawer #drawer mode="over" class="drawer">
+    <mat-drawer
+      #drawer
+      mode="over"
+      class="drawer"
+      (openedStart)="onDrawerOpenStart()"
+      (closedStart)="onDrawerCloseStart()"
+    >
+      <div class="user-info">
+        <div class="avatar-wrapper">
+          <app-profile-avatar-logged-user></app-profile-avatar-logged-user>
+        </div>
+        <h3 class="username">Johnny Doe</h3>
+      </div>
       <ul class="drawer-links">
-        <li>News</li>
-        <li>Your routes</li>
-        <li>Planner</li>
-        <li>Events</li>
+        <li><h2>News</h2></li>
+        <li><h2>Your routes</h2></li>
+        <li><h2>Planner</h2></li>
+        <li><h2>Events</h2></li>
+        <li><h2>Leaderboad</h2></li>
+        <li><h2>Liked routes</h2></li>
+        <li><h2>Followers</h2></li>
+        <li><h2>Following</h2></li>
       </ul>
     </mat-drawer>
     <mat-drawer-content>

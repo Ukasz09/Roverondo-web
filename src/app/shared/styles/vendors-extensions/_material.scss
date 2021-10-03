@@ -20,13 +20,13 @@ $roverondo-warn: mat.define-palette(mat.$red-palette);
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 $roverondo-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $roverondo-primary,
-      accent: $roverondo-accent,
-      warn: $roverondo-warn,
-    ),
-  )
+    (
+      color: (
+        primary: $roverondo-primary,
+        accent: $roverondo-accent,
+        warn: $roverondo-warn,
+      ),
+    )
 );
 
 // Include theme styles for core and each component used in your app.

@@ -2,8 +2,8 @@
 // This file contains all application-wide Sass variables.
 // -----------------------------------------------------------------------------
 
-$text-font-stack: sans-serif !default;
-$base-font-size: 18px;
+$text-font-stack: "Montserrat", sans-serif;
+$base-font-size: 16px;
 $breakpoints: (
   xs-small: 360px,
   xs-medium: 400px,
@@ -18,9 +18,6 @@ $breakpoints: (
   lg-large: 1600px,
 );
 
-$zindex-fixed: 999;
-$zindex-sticky: 999;
-
 /* Assets
 ============================================= */
 $base-assets-url: "/assets/" !default;
@@ -29,6 +26,7 @@ $base-assets-url: "/assets/" !default;
 ============================================= */
 $accent-color: #ecb767;
 $primary-color: #f8f9fa;
+$text-primary-color: #343a40;
 $glass-light-bg: linear-gradient(124.72deg, $primary-color 0%, rgba(248, 249, 250, 0.5) 100%);
 $webkit-glass-light-bg: -webkit-linear-gradient(124.72deg, $primary-color 0%, rgba(248, 249, 250, 0.5) 100%);
 $glass-lighter-bg: linear-gradient(124.72deg, $primary-color 0%, rgba(248, 249, 250, 0) 100%);

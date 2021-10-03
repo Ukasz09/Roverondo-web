@@ -1,12 +1,12 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-import { RoutingModule } from './routes/routing.module';
-import { LayoutsModule } from './layouts/layouts.module';
-import { AuthModule } from './modules/auth/auth.module';
-import { AppComponent } from './app.component';
-import { HomeModule } from './modules/home/home.module';
+import { RoutingModule } from "./routes/routing.module";
+import { LayoutsModule } from "./layouts/layouts.module";
+import { AuthModule } from "./modules/auth/auth.module";
+import { AppComponent } from "./app.component";
+import { HomeModule } from "./modules/home/home.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,9 +18,10 @@ import { HomeModule } from './modules/home/home.module';
     RoutingModule,
     LayoutsModule,
     AuthModule,
-    HomeModule,
+    HomeModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
