@@ -17,6 +17,16 @@ $breakpoints: (
   lg-small: 1440px,
   lg-large: 1600px,
 );
+$font-size: (
+  h1: 35px,
+  h2: 30px,
+  h3: 25px,
+  h4: 20px,
+  h5: 18px,
+  h6: 12px,
+  h7: 7px,
+);
+
 
 /* Assets
 ============================================= */
@@ -27,6 +37,7 @@ $base-assets-url: "/assets/" !default;
 $accent-color: #ecb767;
 $primary-color: #f8f9fa;
 $text-primary-color: #343a40;
+$text-muted-color: #6C757D;
 $glass-light-bg: linear-gradient(124.72deg, $primary-color 0%, rgba(248, 249, 250, 0.5) 100%);
 $webkit-glass-light-bg: -webkit-linear-gradient(124.72deg, $primary-color 0%, rgba(248, 249, 250, 0.5) 100%);
 $glass-lighter-bg: linear-gradient(124.72deg, $primary-color 0%, rgba(248, 249, 250, 0) 100%);

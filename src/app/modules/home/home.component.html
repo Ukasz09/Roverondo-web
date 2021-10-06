@@ -1,37 +1,60 @@
 <div class="home-container">
-  <app-aside-mobile (hamburgerMenuClick)="drawer.toggle()" [withAvatar]="!drawerIsOpen"></app-aside-mobile>
-  <mat-drawer-container hasBackdrop="true">
-    <mat-drawer
-      #drawer
-      mode="over"
-      class="drawer"
-      (openedStart)="onDrawerOpenStart()"
-      (closedStart)="onDrawerCloseStart()"
-    >
-      <div class="user-info">
-        <div class="avatar-wrapper">
-          <app-profile-avatar-logged-user></app-profile-avatar-logged-user>
-        </div>
-        <h3 class="username">Johnny Doe</h3>
-      </div>
-      <ul class="drawer-links">
-        <li><h2>News</h2></li>
-        <li><h2>Your routes</h2></li>
-        <li><h2>Planner</h2></li>
-        <li><h2>Events</h2></li>
-        <li><h2>Leaderboad</h2></li>
-        <li><h2>Liked routes</h2></li>
-        <li><h2>Followers</h2></li>
-        <li><h2>Following</h2></li>
-      </ul>
-    </mat-drawer>
-    <mat-drawer-content>
-      <div class="home-content">
-        <h1 class="logo"><app-logo-text></app-logo-text></h1>
-        <div class="sub-logo-container">
-          <h1 class="sub-logo">Follow your path</h1>
-        </div>
-      </div>
-    </mat-drawer-content>
-  </mat-drawer-container>
+  <ng-container *ngIf="mobileMenuIsVisible; else nativeResolutionMenu">
+    <app-aside-mobile (hamburgerMenuClick)="drawer.toggle()" [withAvatar]="!drawerIsOpen"></app-aside-mobile>
+    <mat-drawer-container hasBackdrop="true" class="mobile-menu">
+      <mat-drawer
+        #drawer
+        mode="over"
+        class="drawer"
+        (openedStart)="onDrawerOpenStart()"
+        (closedStart)="onDrawerCloseStart()"
+      >
+        <div [ngTemplateOutlet]="drawerMenuContent"></div>
+      </mat-drawer>
+      <mat-drawer-content>
+        <div [ngTemplateOutlet]="pageContent"></div>
+      </mat-drawer-content>
+    </mat-drawer-container>
+  </ng-container>
+
 </div>
+
+<ng-template #nativeResolutionMenu>
+  <div class="native-menu">
+    <div [ngTemplateOutlet]="drawerMenuContent"></div>
+  </div>
+  <div [ngTemplateOutlet]="pageContent"></div>
+</ng-template>
+
+<ng-template #drawerMenuContent>
+  <div class="user-info">
+    <h1 *ngIf="!mobileMenuIsVisible" class="logo">
+      <app-logo-text></app-logo-text>
+    </h1>
+    <div class="avatar-wrapper">
+      <app-profile-avatar-logged-user></app-profile-avatar-logged-user>
+    </div>
+    <h4 *ngIf="mobileMenuIsVisible" class="username">Johnny Doe</h4>
+  </div>
+  <ul class="drawer-links">
+    <li><h3 class="link">News</h3></li>
+    <li><h3 class="link">Your routes</h3></li>
+    <li><h3 class="link">Planner</h3></li>
+    <li><h3 class="link">Events</h3></li>
+    <li><h3 class="link">Leaderboard</h3></li>
+    <li><h3 class="link">Liked routes</h3></li>
+    <li><h3 class="link">Followers</h3></li>
+    <li><h3 class="link">Following</h3></li>
+  </ul>
+</ng-template>
+
+<ng-template #pageContent>
+  <div class="home-content">
+    <h1 *ngIf="mobileMenuIsVisible" class="logo">
+      <app-logo-text></app-logo-text>
+    </h1>
+    <div class="sub-logo">
+      <h3 class="text">Follow your path</h3>
+    </div>
+  </div>
+</ng-template>

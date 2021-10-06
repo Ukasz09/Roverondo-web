@@ -51,26 +51,26 @@ h5 {
 }
 
 h1 {
-  font-size: 35px;
+  font-size: map-get(variables.$font-size, h1);
   font-weight: 600;
 }
 
 h2 {
-  font-size: 25px;
+  font-size: map-get(variables.$font-size, h2);
   font-weight: 600;
 }
 
 h3 {
-  font-size: 20px;
+  font-size: map-get(variables.$font-size, h3);
   font-weight: 500;
 }
 
 h4 {
-  font-size: 12px;
+  font-size: map-get(variables.$font-size, h4);
   font-weight: 500;
 }
 
 h5 {
-  font-size: 7px;
+  font-size: map-get(variables.$font-size, h5);
   font-weight: 500;
 }
