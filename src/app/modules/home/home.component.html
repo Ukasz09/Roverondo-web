@@ -1,7 +1,7 @@
 <div class="home-container">
   <ng-container *ngIf="mobileMenuIsVisible; else nativeResolutionMenu">
     <app-aside-mobile (hamburgerMenuClick)="drawer.toggle()" [withAvatar]="!drawerIsOpen"></app-aside-mobile>
-    <mat-drawer-container hasBackdrop="true" class="mobile-menu">
+    <mat-drawer-container hasBackdrop="true">
       <mat-drawer
         #drawer
         mode="over"
@@ -37,14 +37,14 @@
     <h4 *ngIf="mobileMenuIsVisible" class="username">Johnny Doe</h4>
   </div>
   <ul class="drawer-links">
-    <li><h3 class="link">News</h3></li>
-    <li><h3 class="link">Your routes</h3></li>
-    <li><h3 class="link">Planner</h3></li>
-    <li><h3 class="link">Events</h3></li>
-    <li><h3 class="link">Leaderboard</h3></li>
-    <li><h3 class="link">Liked routes</h3></li>
-    <li><h3 class="link">Followers</h3></li>
-    <li><h3 class="link">Following</h3></li>
+    <li><h3 class="link" [appActiveLink]="'home'" id="news">News</h3></li>
+    <li><h3 class="link"  id="routes">Your routes</h3></li>
+    <li><h3 class="link"  id="planner">Planner</h3></li>
+    <li><h3 class="link"  id="events">Events</h3></li>
+    <li><h3 class="link"  id="leaderboard">Leaderboard</h3></li>
+    <li><h3 class="link"  id="liked-routes">Liked routes</h3></li>
+    <li><h3 class="link"  id="followers">Followers</h3></li>
+    <li><h3 class="link"  id="following">Following</h3></li>
   </ul>
 </ng-template>
 

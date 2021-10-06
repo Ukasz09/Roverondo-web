@@ -115,13 +115,9 @@ $sub-logo-margin: 3.5rem;
     }
   }
 
-  //TODO: refactor - split classes on mobile and native
-
   .native-menu {
-    $margin: 2rem;
-
     @include mixins.glass-effect(variables.$glass-lighter-bg);
-    @include mixins.py($margin);
+    @include mixins.py(2rem);
     width: 300px;
 
     .user-info {
@@ -130,7 +126,7 @@ $sub-logo-margin: 3.5rem;
       .avatar-wrapper {
         width: 135px;
         margin: auto;
-        @include mixins.my($margin/2);
+        @include mixins.my(1rem);
       }
 
       .username {

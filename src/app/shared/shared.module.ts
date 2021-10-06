@@ -9,6 +9,7 @@ import { GlassBtnComponent } from "./components/glass-btn/glass-btn.component";
 import { LogoTextComponent } from "./components/logo-text/logo-text.component";
 import { ProfileAvatarComponent } from "./components/profile-avatar/profile-avatar.component";
 import { ProfileAvatarLoggedUserComponent } from "./components/profile-avatar-logged-user/profile-avatar-logged-user.component";
+import { ActiveLinkDirective } from "@roverondo/shared/directives";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ProfileAvatarLoggedUserComponent } from "./components/profile-avatar-lo
     GlassBtnComponent,
     LogoTextComponent,
     ProfileAvatarComponent,
-    ProfileAvatarLoggedUserComponent
+    ProfileAvatarLoggedUserComponent,
+    ActiveLinkDirective
   ],
   imports: [CommonModule, MatCardModule, MatButtonModule],
   exports: [
@@ -24,7 +26,8 @@ import { ProfileAvatarLoggedUserComponent } from "./components/profile-avatar-lo
     GlassBtnComponent,
     LogoTextComponent,
     ProfileAvatarComponent,
-    ProfileAvatarLoggedUserComponent
+    ProfileAvatarLoggedUserComponent,
+    ActiveLinkDirective
   ]
 })
 export class SharedModule {
