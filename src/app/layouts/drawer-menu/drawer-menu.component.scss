@@ -21,6 +21,11 @@
   .username {
     margin: auto 0;
   }
+
+  .logo {
+    cursor: pointer;
+    outline: none;
+  }
 }
 
 .drawer-links {
@@ -33,6 +38,12 @@
 
     .link {
       font-weight: 500;
+      cursor: pointer;
+      outline: none;
+
+      &:hover {
+        color: variables.$text-primary-color;
+      }
     }
   }
 }

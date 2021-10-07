@@ -1,6 +1,6 @@
 <div class="menu" [ngClass]="{'native':!menuForMobile}">
   <div class="user-info">
-    <h1 *ngIf="!menuForMobile" class="logo">
+    <h1 *ngIf="!menuForMobile" class="logo" [routerLink]="AppRoutes.HOME">
       <app-logo-text></app-logo-text>
     </h1>
     <div class="avatar-wrapper">
@@ -10,14 +10,62 @@
   </div>
   <div>
     <ul class="drawer-links">
-      <li><h3 class="link" [appActiveLink]="AppRoutes.NEWS" id="news">News</h3></li>
-      <li><h3 class="link" [appActiveLink]="AppRoutes.ROUTES" id="routes">Your routes</h3></li>
-      <li><h3 class="link" [appActiveLink]="AppRoutes.PLANNER" id="planner">Planner</h3></li>
-      <li><h3 class="link" [appActiveLink]="AppRoutes.EVENTS" id="events">Events</h3></li>
-      <li><h3 class="link" [appActiveLink]="AppRoutes.LEADERBOARD" id="leaderboard">Leaderboard</h3></li>
-      <li><h3 class="link" [appActiveLink]="AppRoutes.LIKED_ROUTES" id="liked-routes">Liked routes</h3></li>
-      <li><h3 class="link" [appActiveLink]="AppRoutes.FOLLOWERS" id="followers">Followers</h3></li>
-      <li><h3 class="link" [appActiveLink]="AppRoutes.FOLLOWING" id="following">Following</h3></li>
+      <li><h3
+        class="link"
+        [routerLink]="getRouteLink(AppRoutes.NEWS)"
+        [appActiveLink]="AppRoutes.NEWS"
+        id="news">
+        News
+      </h3></li>
+      <li><h3
+        class="link"
+        [routerLink]="getRouteLink(AppRoutes.ROUTES)"
+        [appActiveLink]="AppRoutes.ROUTES"
+        id="routes">
+        Your routes
+      </h3></li>
+      <li><h3
+        class="link"
+        [routerLink]="getRouteLink(AppRoutes.PLANNER)"
+        [appActiveLink]="AppRoutes.PLANNER"
+        id="planner">
+        Planner
+      </h3></li>
+      <li><h3
+        class="link"
+        [routerLink]="getRouteLink(AppRoutes.EVENTS)"
+        [appActiveLink]="AppRoutes.EVENTS"
+        id="events">
+        Events
+      </h3></li>
+      <li><h3
+        class="link"
+        [routerLink]="getRouteLink(AppRoutes.LEADERBOARD)"
+        [appActiveLink]="AppRoutes.LEADERBOARD"
+        id="leaderboard">
+        Leaderboard
+      </h3></li>
+      <li><h3
+        class="link"
+        [routerLink]="getRouteLink(AppRoutes.LIKED_ROUTES)"
+        [appActiveLink]="AppRoutes.LIKED_ROUTES"
+        id="liked-routes">
+        Liked routes
+      </h3></li>
+      <li><h3
+        class="link"
+        [routerLink]="getRouteLink(AppRoutes.FOLLOWERS)"
+        [appActiveLink]="AppRoutes.FOLLOWERS"
+        id="followers">
+        Followers
+      </h3></li>
+      <li><h3
+        class="link"
+        [routerLink]="getRouteLink(AppRoutes.FOLLOWING)"
+        [appActiveLink]="AppRoutes.FOLLOWING"
+        id="following">
+        Following
+      </h3></li>
     </ul>
   </div>
 </div>

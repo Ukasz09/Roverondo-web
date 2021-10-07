@@ -14,7 +14,10 @@ export class DrawerMenuComponent implements OnInit {
   constructor() {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
+  public getRouteLink(route: string): string {
+    return `/${route}`;
+  }
 }

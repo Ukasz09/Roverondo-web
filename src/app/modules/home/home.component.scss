@@ -5,7 +5,7 @@
 .home-container {
   @include mixins.bg-fill();
   @include mixins.max-viewport();
-  background-image: functions.image("home.jpg");
+  background-image: functions.image("home-3.jpg");
 
   .content {
     height: 100%;
@@ -23,7 +23,7 @@
       justify-content: flex-end;
 
       .text {
-        @include mixins.gradient-text($gradient: variables.$glass-light-bg);
+        @include mixins.gradient-text($gradient: variables.$glass-light-bg-top-bottom);
         margin-bottom: 3.5rem;
         font-weight: 600;
 

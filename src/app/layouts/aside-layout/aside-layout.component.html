@@ -9,7 +9,7 @@
         (openedStart)="onDrawerOpenStart()"
         (closedStart)="onDrawerCloseStart()"
       >
-        <app-drawer-menu [menuForMobile]="isMobileLayout"></app-drawer-menu>
+        <app-drawer-menu [menuForMobile]="true"></app-drawer-menu>
       </mat-drawer>
       <mat-drawer-content>
         <div [ngTemplateOutlet]="content"></div>
@@ -19,7 +19,7 @@
 
   <ng-template #nativeLayout>
     <div class="native-menu">
-      <app-drawer-menu [menuForMobile]="isMobileLayout"></app-drawer-menu>
+      <app-drawer-menu [menuForMobile]="false"></app-drawer-menu>
     </div>
     <div class="content">
       <div [ngTemplateOutlet]="content"></div>
