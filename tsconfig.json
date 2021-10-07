@@ -20,8 +20,26 @@
       "dom"
     ],
     "paths": {
-      "@roverondo/shared/directives": [
-        "./src/app/shared/directives"
+      "@app/shared/directives": [
+        "src/app/shared/directives/index"
+      ],
+      "@app/shared/components": [
+        "src/app/shared/components/index"
+      ],
+      "@app/shared/utils": [
+        "src/app/shared/utils/index"
+      ],
+      "@app/routes": [
+        "src/app/routes/app-routes"
+      ],
+      "@app/layouts": [
+        "src/app/layouts/index"
+      ],
+      "@app/modules/auth": [
+        "src/app/modules/auth"
+      ],
+      "@app/modules/home": [
+        "src/app/modules/home"
       ]
     }
   },

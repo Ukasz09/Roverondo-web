@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Utils } from "../../../shared/utils";
-import { Icons } from "../../../shared/icons";
+import { Icons, Utils } from "@app/shared/utils";
 
 @Component({
   selector: "app-login",

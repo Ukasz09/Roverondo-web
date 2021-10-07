@@ -1,0 +1,33 @@
+<div class="layout">
+  <ng-container *ngIf="isMobileLayout; else nativeLayout">
+    <app-aside-mobile (hamburgerMenuClick)="drawer.toggle()" [withAvatar]="!drawerIsOpen"></app-aside-mobile>
+    <mat-drawer-container hasBackdrop="true">
+      <mat-drawer
+        #drawer
+        mode="over"
+        class="drawer"
+        (openedStart)="onDrawerOpenStart()"
+        (closedStart)="onDrawerCloseStart()"
+      >
+        <app-drawer-menu [menuForMobile]="isMobileLayout"></app-drawer-menu>
+      </mat-drawer>
+      <mat-drawer-content>
+        <div [ngTemplateOutlet]="content"></div>
+      </mat-drawer-content>
+    </mat-drawer-container>
+  </ng-container>
+
+  <ng-template #nativeLayout>
+    <div class="native-menu">
+      <app-drawer-menu [menuForMobile]="isMobileLayout"></app-drawer-menu>
+    </div>
+    <div class="content">
+      <div [ngTemplateOutlet]="content"></div>
+    </div>
+  </ng-template>
+
+  <ng-template #content>
+    <ng-content select="[pageContent]"></ng-content>
+  </ng-template>
+
+</div>

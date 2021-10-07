@@ -1,14 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-glass-card',
-  templateUrl: './glass-card.component.html',
-  styleUrls: ['./glass-card.component.scss'],
+  selector: "app-glass-card",
+  templateUrl: "./glass-card.component.html",
+  styleUrls: ["./glass-card.component.scss"]
 })
 export class GlassCardComponent implements OnInit {
-  @Input() headerText: string = '';
+  @Input() headerText: string = "";
 
-  constructor() {}
+  constructor() {
+  }
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {
+  }
 }

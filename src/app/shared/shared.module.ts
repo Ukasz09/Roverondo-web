@@ -4,12 +4,13 @@ import { CommonModule } from "@angular/common";
 import { MatCardModule } from "@angular/material/card";
 import { MatButtonModule } from "@angular/material/button";
 
-import { GlassCardComponent } from "./components/glass-card/glass-card.component";
-import { GlassBtnComponent } from "./components/glass-btn/glass-btn.component";
-import { LogoTextComponent } from "./components/logo-text/logo-text.component";
-import { ProfileAvatarComponent } from "./components/profile-avatar/profile-avatar.component";
-import { ProfileAvatarLoggedUserComponent } from "./components/profile-avatar-logged-user/profile-avatar-logged-user.component";
-import { ActiveLinkDirective } from "@roverondo/shared/directives";
+import {
+  GlassBtnComponent,
+  GlassCardComponent,
+  LogoTextComponent,
+  ProfileAvatarComponent, ProfileAvatarLoggedUserComponent
+} from "@app/shared/components";
+import { ActiveLinkDirective } from "@app/shared/directives";
 
 @NgModule({
   declarations: [

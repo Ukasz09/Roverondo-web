@@ -1,0 +1,23 @@
+<div class="menu" [ngClass]="{'native':!menuForMobile}">
+  <div class="user-info">
+    <h1 *ngIf="!menuForMobile" class="logo">
+      <app-logo-text></app-logo-text>
+    </h1>
+    <div class="avatar-wrapper">
+      <app-profile-avatar-logged-user></app-profile-avatar-logged-user>
+    </div>
+    <h4 *ngIf="menuForMobile" class="username">Johnny Doe</h4>
+  </div>
+  <div>
+    <ul class="drawer-links">
+      <li><h3 class="link" [appActiveLink]="AppRoutes.NEWS" id="news">News</h3></li>
+      <li><h3 class="link" [appActiveLink]="AppRoutes.ROUTES" id="routes">Your routes</h3></li>
+      <li><h3 class="link" [appActiveLink]="AppRoutes.PLANNER" id="planner">Planner</h3></li>
+      <li><h3 class="link" [appActiveLink]="AppRoutes.EVENTS" id="events">Events</h3></li>
+      <li><h3 class="link" [appActiveLink]="AppRoutes.LEADERBOARD" id="leaderboard">Leaderboard</h3></li>
+      <li><h3 class="link" [appActiveLink]="AppRoutes.LIKED_ROUTES" id="liked-routes">Liked routes</h3></li>
+      <li><h3 class="link" [appActiveLink]="AppRoutes.FOLLOWERS" id="followers">Followers</h3></li>
+      <li><h3 class="link" [appActiveLink]="AppRoutes.FOLLOWING" id="following">Following</h3></li>
+    </ul>
+  </div>
+</div>

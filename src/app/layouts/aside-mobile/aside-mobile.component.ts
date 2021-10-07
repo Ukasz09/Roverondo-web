@@ -1,7 +1,5 @@
-import { animate, state, style, transition, trigger } from "@angular/animations";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { Utils } from "../../shared/utils";
-import { Icons } from "../../shared/icons";
+import { Icons, Utils } from "@app/shared/utils";
 
 @Component({
   selector: "app-aside-mobile",

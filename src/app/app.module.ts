@@ -1,12 +1,13 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
+import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-import { RoutingModule } from "./routes/routing.module";
-import { LayoutsModule } from "./layouts/layouts.module";
-import { AuthModule } from "./modules/auth/auth.module";
 import { AppComponent } from "./app.component";
-import { HomeModule } from "./modules/home/home.module";
+
+import { RoutingModule as AppRoutingModule } from "./routes/routing.module";
+import { LayoutsModule as AppLayoutsModule } from "./layouts/layouts.module";
+import { AuthModule as AppAuthModule } from "./modules/auth/auth.module";
+import { HomeModule as AppHomeModule } from "./modules/home/home.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,11 +15,10 @@ import { HomeModule } from "./modules/home/home.module";
     BrowserModule,
     BrowserAnimationsModule,
 
-    // Custom modules
-    RoutingModule,
-    LayoutsModule,
-    AuthModule,
-    HomeModule
+    AppRoutingModule,
+    AppLayoutsModule,
+    AppAuthModule,
+    AppHomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,6 @@
+# Add all *.ts files to ignore by ESLint
+.vscode
+coverage
+deployment
+dist
+node_modules

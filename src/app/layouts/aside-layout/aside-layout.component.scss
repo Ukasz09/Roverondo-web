@@ -1,0 +1,50 @@
+@use "/src/app/shared/styles/abstracts/mixins";
+@use "/src/app/shared/styles/abstracts/variables";
+
+.layout {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  .drawer {
+    @include mixins.glass-effect(variables.$glass-lighter-bg);
+    width: 100%;
+    border-radius: 0 25px 25px 0;
+    padding: 1.5rem 1.75rem;
+
+    @include mixins.media(xs-small) {
+      width: 80%;
+    }
+
+    @include mixins.media(xs-large) {
+      width: 70%;
+    }
+
+    @include mixins.media(sm-xsmall) {
+      width: 55%;
+    }
+  }
+
+  mat-drawer-content,
+  mat-drawer-container {
+    background: transparent !important;
+  }
+
+  mat-drawer-container {
+    width: 100%;
+  }
+
+  .native-menu {
+    @include mixins.glass-effect(variables.$glass-lighter-bg);
+    @include mixins.py(2rem);
+    width: 300px;
+    height: 100%;
+  }
+
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+}

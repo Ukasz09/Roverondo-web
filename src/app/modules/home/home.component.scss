@@ -2,23 +2,19 @@
 @use "/src/app/shared/styles/abstracts/functions";
 @use "/src/app/shared/styles/abstracts/variables";
 
-$sub-logo-margin: 3.5rem;
-
 .home-container {
   @include mixins.bg-fill();
   @include mixins.max-viewport();
   background-image: functions.image("home.jpg");
-  display: flex;
-  flex-direction: row;
 
-  .home-content {
+  .content {
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     transition: 0.25s;
-    height: 100%;
-    flex: 1;
 
     .sub-logo {
       flex: 1;
@@ -28,7 +24,7 @@ $sub-logo-margin: 3.5rem;
 
       .text {
         @include mixins.gradient-text($gradient: variables.$glass-light-bg);
-        margin-bottom: $sub-logo-margin;
+        margin-bottom: 3.5rem;
         font-weight: 600;
 
         @include mixins.media(xs-small) {
@@ -54,100 +50,6 @@ $sub-logo-margin: 3.5rem;
 
       }
     }
-  }
-
-  $drawer-padding-y: 1.5rem;
-
-  .drawer {
-    @include mixins.glass-effect(variables.$glass-lighter-bg);
-    width: 100%;
-    border-radius: 0 25px 25px 0;
-    padding: $drawer-padding-y 1.75rem;
-
-    @include mixins.media(xs-small) {
-      width: 80%;
-    }
-
-    @include mixins.media(xs-large) {
-      width: 70%;
-    }
-
-    @include mixins.media(sm-xsmall) {
-      width: 55%;
-    }
-  }
-
-  mat-drawer-content,
-  mat-drawer-container {
-    background: transparent !important;
-  }
-
-  mat-drawer-container {
-    width: 100%;
-  }
-
-  .user-info {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 2 * $drawer-padding-y;
-
-    .avatar-wrapper {
-      width: 65px;
-      margin-right: 1rem;
-    }
-
-    .username {
-      margin: auto 0;
-    }
-  }
-
-  .drawer-links {
-    text-decoration: none;
-    list-style: none;
-    padding: 0;
-
-    li {
-      padding-bottom: 1.5rem;
-
-      .link {
-        font-weight: 500;
-      }
-    }
-  }
-
-  .native-menu {
-    @include mixins.glass-effect(variables.$glass-lighter-bg);
-    @include mixins.py(2rem);
-    width: 300px;
-
-    .user-info {
-      flex-direction: column;
-
-      .avatar-wrapper {
-        width: 135px;
-        margin: auto;
-        @include mixins.my(1rem);
-      }
-
-      .username {
-        margin: auto 0;
-      }
-
-      .logo {
-        display: flex;
-        justify-content: center;
-      }
-    }
-
-    .drawer-links {
-      width: fit-content;
-      margin: auto;
-
-      .link {
-        color: variables.$text-muted-color;
-      }
-    }
-
   }
 }
 

@@ -1,0 +1,68 @@
+@use "/src/app/shared/styles/abstracts/mixins";
+@use "/src/app/shared/styles/abstracts/variables";
+
+.menu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 3rem;
+
+  .avatar-wrapper {
+    width: 65px;
+    margin-right: 1rem;
+  }
+
+  .username {
+    margin: auto 0;
+  }
+}
+
+.drawer-links {
+  text-decoration: none;
+  list-style: none;
+  padding: 0;
+
+  li {
+    padding-bottom: 1.5rem;
+
+    .link {
+      font-weight: 500;
+    }
+  }
+}
+
+.native {
+  .user-info {
+    flex-direction: column;
+
+    .avatar-wrapper {
+      width: 135px;
+      margin: auto;
+      @include mixins.my(1rem);
+    }
+
+    .username {
+      margin: auto 0;
+    }
+
+    .logo {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  .drawer-links {
+    width: fit-content;
+    margin: auto;
+
+    .link {
+      color: variables.$text-muted-color;
+    }
+  }
+}
