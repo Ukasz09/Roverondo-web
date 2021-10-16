@@ -1,14 +1,13 @@
 @use "/src/app/styles/abstracts/mixins";
-@use "/src/app/styles/abstracts/functions";
 @use "/src/app/styles/abstracts/variables";
+@use "/src/app/styles/abstracts/functions";
 
-.home-container {
+.container {
   @include mixins.bg-fill();
   @include mixins.max-viewport();
   background-image: functions.image("home-3.jpg");
 
   .content {
-    background-color: rgba(0, 0, 0, 0.25);
     height: 100%;
     width: 100%;
     display: flex;
@@ -48,9 +47,11 @@
           font-size: 65px;
           margin-bottom: 2.5rem;
         }
-
       }
+    }
+
+    .logo {
+      margin-top: 1.5rem;
     }
   }
 }
-

@@ -1,6 +1,7 @@
 <div class="layout">
-  <ng-container *ngIf="isMobileLayout; else nativeLayout">
-    <app-aside-mobile (hamburgerMenuClick)="drawer.toggle()" [withAvatar]="!drawerIsOpen"></app-aside-mobile>
+  <ng-container *ngIf="layoutService.layoutType===LayoutTypeEnum.ASIDE_MOBILE; else nativeLayout">
+    <app-aside-mobile (hamburgerMenuClick)="drawer.toggle()"
+                      [withAvatar]="!layoutService.drawerIsOpen"></app-aside-mobile>
     <mat-drawer-container hasBackdrop="true">
       <mat-drawer
         #drawer
@@ -16,18 +17,16 @@
       </mat-drawer-content>
     </mat-drawer-container>
   </ng-container>
-
   <ng-template #nativeLayout>
     <div class="native-menu">
       <app-drawer-menu [menuForMobile]="false"></app-drawer-menu>
     </div>
-    <div class="content">
+    <div class="page-content">
       <div [ngTemplateOutlet]="content"></div>
     </div>
   </ng-template>
 
   <ng-template #content>
-    <ng-content select="[pageContent]"></ng-content>
+    <ng-content></ng-content>
   </ng-template>
-
 </div>

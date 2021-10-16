@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { RoutesService } from "../../core/services/routes.service";
 
 @Directive({
   selector: "[appActiveLink]"
@@ -7,7 +7,7 @@ import { ActivatedRoute } from "@angular/router";
 export class ActiveLinkDirective implements OnInit {
   @Input() appActiveLink = "";
 
-  constructor(private elementRef: ElementRef, private route: ActivatedRoute) {
+  constructor(private elementRef: ElementRef, private routesService: RoutesService) {
   }
 
   public ngOnInit(): void {
@@ -21,7 +21,7 @@ export class ActiveLinkDirective implements OnInit {
   }
 
   private getActiveRoute(): string {
-    return this.route.snapshot.url[0].path;
+    return this.routesService.actualRoute ?? "";
   }
 
   private changeLinkToActive(): void {
