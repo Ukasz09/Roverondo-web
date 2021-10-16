@@ -20,26 +20,56 @@
       "dom"
     ],
     "paths": {
-      "@app/shared/directives": [
-        "src/app/shared/directives/index"
+      "@app/routes": [
+        "src/app/core/enums/routes"
+      ],
+      "@app/core": [
+        "src/app/core/index"
+      ],
+      "@app/core/component": [
+        "src/app/core/components/index"
+      ],
+      "@app/core/constants": [
+        "src/app/core/constants/index"
+      ],
+      "@app/core/enums": [
+        "src/app/core/enums/index"
+      ],
+      "@app/core/guards": [
+        "src/app/core/guards/index"
+      ],
+      "@app/core/interceptors": [
+        "src/app/core/interceptors/index"
+      ],
+      "@app/core/models": [
+        "src/app/core/models/index"
+      ],
+      "@app/core/services": [
+        "src/app/core/services/index"
+      ],
+      "@app/shared": [
+        "src/app/shared/index"
       ],
       "@app/shared/components": [
         "src/app/shared/components/index"
       ],
+      "@app/shared/directives": [
+        "src/app/shared/directives/index"
+      ],
+      "@app/shared/pipes": [
+        "src/app/shared/pipes/index"
+      ],
       "@app/shared/utils": [
         "src/app/shared/utils/index"
       ],
-      "@app/routes": [
-        "src/app/routes/app-routes"
-      ],
-      "@app/layouts": [
-        "src/app/layouts/index"
+      "@app/modules": [
+        "src/app/modules/index"
       ],
       "@app/modules/auth": [
-        "src/app/modules/auth"
+        "src/app/modules/auth/index"
       ],
       "@app/modules/home": [
-        "src/app/modules/home"
+        "src/app/modules/home/index"
       ]
     }
   },

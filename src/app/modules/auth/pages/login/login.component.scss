@@ -1,0 +1,78 @@
+@use "/src/app/styles/abstracts/mixins";
+@use "/src/app/styles/abstracts/functions";
+
+.login-page {
+  @include mixins.max-viewport();
+  @include mixins.bg-fill();
+  background-image: functions.image("login-page-2.png");
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 0.25s;
+
+  @include mixins.media(sm-medium) {
+    background-image: functions.image("login-page.png");
+  }
+
+  @include mixins.media(md-large) {
+    @include mixins.bg-fill($background-position: left);
+    background-image: functions.image("login-page-3.png");
+  }
+
+  .card-wrapper {
+    width: 85%;
+
+    @include mixins.media(xs-medium) {
+      width: 70%;
+    }
+
+    @include mixins.media(sm-xsmall) {
+      width: 60%;
+    }
+
+    @include mixins.media(sm-medium) {
+      width: 45%;
+    }
+
+    @include mixins.media(md-small) {
+      width: 35%;
+    }
+
+    @include mixins.media(md-large) {
+      width: 30%;
+    }
+
+    @include mixins.media(lg-small) {
+      width: 25%;
+    }
+
+    @include mixins.media(lg-large) {
+      width: 22%;
+    }
+
+    .card-content {
+      display: flex;
+      flex-direction: column;
+
+      & > app-glass-btn {
+        margin-bottom: 0.75rem;
+      }
+
+      .btn-content {
+        width: 100%;
+        @include mixins.flex-container($direction: row);
+
+        .btn-icon {
+          height: 100%;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+

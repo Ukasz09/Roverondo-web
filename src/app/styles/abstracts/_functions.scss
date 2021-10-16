@@ -1,0 +1,17 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass functions.
+// -----------------------------------------------------------------------------
+
+@use "/src/app/styles/abstracts/variables";
+
+@function asset($base, $type, $path) {
+  @return url($base + $type + $path);
+}
+
+@function image($name, $base: variables.$base-assets-url) {
+  @return asset($base, "images/", $name);
+}
+
+@function webkitize($property) {
+  @return -webkit-#{$property};
+}

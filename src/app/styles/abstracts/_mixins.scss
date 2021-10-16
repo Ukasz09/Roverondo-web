@@ -1,0 +1,73 @@
+@use "/src/app/styles/abstracts/variables";
+@use "/src/app/styles/abstracts/functions";
+
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+@mixin selection-style {
+  color: variables.$accent-color;
+  background: transparent;
+}
+
+@mixin flex-container($direction: column, $justify-content: center) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: $justify-content;
+}
+
+@mixin bg-fill($background-position: center) {
+  background-position: $background-position;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@mixin mask($color, $opacity: 0.65) {
+  background: rgba($color, $opacity);
+}
+
+@mixin py($size) {
+  padding-top: $size;
+  padding-bottom: $size;
+}
+
+@mixin my($size) {
+  margin-top: $size;
+  margin-bottom: $size;
+}
+
+@mixin px($size) {
+  padding-left: $size;
+  padding-right: $size;
+}
+
+@mixin mx($size) {
+  margin-left: $size;
+  margin-right: $size;
+}
+
+@mixin max-viewport {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+@mixin glass-effect($bg: variables.$glass-light-bg) {
+  background: $bg;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 100px rgba(0, 0, 0, 0.02);
+  backdrop-filter: blur(150px);
+}
+
+@mixin media($size) {
+  @media (min-width: #{map-get(variables.$breakpoints, $size)}) {
+    @content;
+  }
+}
+
+@mixin gradient-text($gradient) {
+  background: functions.webkitize($gradient);
+  -webkit-text-fill-color: transparent;
+  background-clip: initial;
+  -webkit-background-clip: text;
+}

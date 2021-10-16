@@ -1,0 +1,76 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+@use "/src/app/styles/abstracts/mixins";
+@use "/src/app/styles/abstracts/variables";
+
+/**
+ * Set up a decent box model on the root element
+ */
+html {
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-size: variables.$base-font-size;
+  font-family: variables.$text-font-stack;
+}
+
+/**
+ * Make all elements from the DOM inherit from the parent box-sizing
+ * Since `*` has a specificity of 0, it does not override the `html` value
+ * making all elements inheriting from the root box-sizing value
+ * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+ */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  color: variables.$text-primary-color;
+  background-color: variables.$primary-color;
+
+  ::-moz-selection {
+    @include mixins.selection-style();
+  }
+
+  ::selection {
+    @include mixins.selection-style();
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0;
+  color: variables.$text-primary-color;
+}
+
+h1 {
+  font-size: map-get(variables.$font-size, h1);
+  font-weight: 600;
+}
+
+h2 {
+  font-size: map-get(variables.$font-size, h2);
+  font-weight: 600;
+}
+
+h3 {
+  font-size: map-get(variables.$font-size, h3);
+  font-weight: 500;
+}
+
+h4 {
+  font-size: map-get(variables.$font-size, h4);
+  font-weight: 500;
+}
+
+h5 {
+  font-size: map-get(variables.$font-size, h5);
+  font-weight: 500;
+}

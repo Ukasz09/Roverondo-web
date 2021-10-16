@@ -6,10 +6,11 @@ import { Component, Input, OnInit } from "@angular/core";
   styleUrls: ["./profile-avatar.component.scss"]
 })
 export class ProfileAvatarComponent implements OnInit {
-  // TODO: tmp placeholder
-  @Input() avatarImgPath: string = "/assets/images/login-page-2.png";
+  @Input()
+  public avatarImgPath: string;
 
   constructor() {
+    this.avatarImgPath = `https://avatars.dicebear.com/api/personas/${Math.random()}.svg`;
   }
 
   public get avatarStyles() {

@@ -1,5 +1,5 @@
-@use "/src/app/shared/styles/abstracts/mixins";
-@use "/src/app/shared/styles/abstracts/variables";
+@use "/src/app/styles/abstracts/mixins";
+@use "/src/app/styles/abstracts/variables";
 
 .glass-card {
   @include mixins.glass-effect(variables.$glass-lighter-bg);

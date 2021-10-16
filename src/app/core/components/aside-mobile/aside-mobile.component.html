@@ -1,0 +1,9 @@
+<div class="aside-mobile">
+  <div *ngIf="withAvatar" class="avatar-wrapper">
+    <app-profile-avatar></app-profile-avatar>
+  </div>
+  <div class="menu">
+    <img class="icon" [src]="getIconPath(iconsClassRef.hamburgerMenu)" (click)="onHamburgerMenuClick()"
+         alt="hamburger-menu-icon" />
+  </div>
+</div>

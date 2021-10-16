@@ -6,7 +6,8 @@ import { Component, Input, OnInit } from "@angular/core";
   styleUrls: ["./glass-card.component.scss"]
 })
 export class GlassCardComponent implements OnInit {
-  @Input() headerText: string = "";
+  @Input()
+  public headerText: string = "";
 
   constructor() {
   }

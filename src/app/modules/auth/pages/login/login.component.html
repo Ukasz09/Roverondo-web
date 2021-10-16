@@ -1,0 +1,27 @@
+<div class="login-page">
+<!--  <app-navbar></app-navbar>-->
+  <div class="card-wrapper">
+    <app-glass-card headerText="Sign In">
+      <div class="card-content" card-content>
+        <app-glass-btn (click)="onFacebookSignInClick()">
+          <div class="btn-content" btn-content>
+            <img class="btn-icon" [src]="getIconPath(Icons.facebook)" alt="facebook-icon">
+            <div text>Sign In with Facebook</div>
+          </div>
+        </app-glass-btn>
+        <app-glass-btn (click)="onGoogleSignInClick()">
+          <div class="btn-content" btn-content>
+            <img class="btn-icon" [src]="getIconPath(Icons.google)" alt="google-icon" />
+            <div text>Sign In with Google</div>
+          </div>
+        </app-glass-btn>
+        <app-glass-btn (click)="onGithubSignInClick()">
+          <div class="btn-content" btn-content>
+            <img class="btn-icon" [src]="getIconPath(Icons.github)" alt="github-icon" />
+            <div text>Sign In with GitHub</div>
+          </div>
+        </app-glass-btn>
+      </div>
+    </app-glass-card>
+  </div>
+</div>

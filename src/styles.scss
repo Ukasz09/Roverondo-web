@@ -1,6 +1,6 @@
 @charset "UTF-8";
-@use "./app/shared/styles/base/typography";
-@use "./app/shared/styles/base/base";
-@use "./app/shared/styles/vendors/normalize";
-@use "./app/shared/styles/base/animations";
-@import "./app/shared/styles/vendors-extensions/material";
+@use "./app/styles/vendors/normalize";
+@use "./app/styles/base/base";
+@use "./app/styles/base/typography";
+@use "./app/styles/base/animations";
+@import "./app/styles/vendors-extensions/material";

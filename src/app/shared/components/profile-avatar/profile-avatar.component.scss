@@ -1,6 +1,6 @@
-@use "/src/app/shared/styles/abstracts/mixins";
-@use "/src/app/shared/styles/abstracts/functions";
-@use "/src/app/shared/styles/abstracts/variables";
+@use "/src/app/styles/abstracts/mixins";
+@use "/src/app/styles/abstracts/functions";
+@use "/src/app/styles/abstracts/variables";
 
 .avatar {
   @include mixins.bg-fill();
