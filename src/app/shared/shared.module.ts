@@ -7,7 +7,7 @@ import {
   GlassBtnComponent,
   GlassCardComponent,
   LogoTextComponent, NavbarComponent,
-  ProfileAvatarComponent
+  ProfileAvatarComponent, ScrollContainerComponent
 } from "@app/shared/components";
 import { ActiveLinkDirective } from "@app/shared/directives";
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -23,7 +23,8 @@ import { RouterModule } from "@angular/router";
     AsideLayoutComponent,
     AsideMobileComponent,
     DrawerMenuComponent,
-    NavbarComponent
+    NavbarComponent,
+    ScrollContainerComponent
   ],
   exports: [
     GlassCardComponent,
@@ -32,7 +33,8 @@ import { RouterModule } from "@angular/router";
     ProfileAvatarComponent,
     ActiveLinkDirective,
     AsideLayoutComponent,
-    NavbarComponent
+    NavbarComponent,
+    ScrollContainerComponent
   ],
   imports: [CommonModule, MatCardModule, MatButtonModule, MatSidenavModule, RouterModule]
 })

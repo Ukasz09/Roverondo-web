@@ -9,5 +9,5 @@ export enum Routes {
   likedRoutes = "liked-routes",
   followers = "followers",
   following = "following",
-  news = "news",
+  activities = "activities",
 }

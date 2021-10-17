@@ -1,0 +1,25 @@
+@use "/src/app/styles/abstracts/variables";
+
+.scroll-container {
+  height: 100%;
+  width: 100%;
+  padding: 0 10px;
+  overflow: auto;
+
+
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  &::-webkit-scrollbar-track {
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: variables.$glass-lighter-bg;
+    border-radius: 25px;
+
+    &:hover {
+      background: variables.$glass-lighter-bg-reversed;
+    }
+  }
+}

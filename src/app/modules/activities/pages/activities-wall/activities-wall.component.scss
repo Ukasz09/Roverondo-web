@@ -1,0 +1,69 @@
+@use "/src/app/styles/abstracts/mixins";
+@use "/src/app/styles/abstracts/variables";
+@use "/src/app/styles/abstracts/functions";
+
+.container {
+  @include mixins.bg-fill();
+  @include mixins.max-viewport();
+  background-image: functions.image("activities-bg-2.jpg");
+
+  .content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .card-wrapper {
+      $card-border: 25px;
+      width: 95%;
+      margin-top: 2.5rem;
+      overflow: hidden;
+      height: 100%;
+
+      @include mixins.media(sm-medium) {
+        width: 85%;
+      }
+
+      @include mixins.media(sm-large) {
+        width: 100%;
+
+        ::ng-deep mat-card {
+          border-radius: 0;
+        }
+      }
+
+      @include mixins.media(md-small) {
+        width: 90%;
+        ::ng-deep mat-card {
+          border-radius: $card-border;
+        }
+      }
+
+      @include mixins.media(md-large) {
+        width: 70%;
+      }
+
+      @include mixins.media(lg-small) {
+        width: 60%;
+      }
+
+      @include mixins.media(lg-large) {
+        width: 50%;
+      }
+
+      .activity-card{
+        margin-bottom: 2rem;
+
+        .card-content {
+          display: flex;
+          flex-direction: column;
+          height: 450px;
+        }
+      }
+
+
+    }
+
+  }
+}

@@ -40,4 +40,5 @@ $text-primary-color: #343a40;
 $text-muted-color: #6C757D;
 $glass-light-bg: linear-gradient(125deg, $primary-color 0%, rgba(248, 249, 250, 0.5) 100%);
 $glass-lighter-bg: linear-gradient(125deg, $primary-color 0%, rgba(248, 249, 250, 0) 100%);
-$glass-lighter-bg-bottom-top: linear-gradient(90deg, rgba(248, 249, 250, 0.25) 0%, $primary-color 100%);
+$glass-lighter-bg-reversed: linear-gradient(125deg, rgba(248, 249, 250, 0) 0%, $primary-color 100%);
+$glass-lighter-bg-left-right: linear-gradient(90deg, rgba(248, 249, 250, 0.25) 0%, $primary-color 100%);

@@ -14,6 +14,9 @@ const routes: Routes = [
   {
     path: AppRoutes.auth,
     loadChildren: async () => (await import("@app/modules/auth")).AuthModule
+  }, {
+    path: AppRoutes.activities,
+    loadChildren: async () => (await import("@app/modules/activities")).ActivitiesModule
   },
   {
     path: "**",
