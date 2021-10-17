@@ -17,7 +17,7 @@
 
   @include mixins.media(md-large) {
     @include mixins.bg-fill($background-position: left);
-    background-image: functions.image("login-page-3.png");
+    background-image: functions.image("login-page-4.jpg");
   }
 
   .card-wrapper {

@@ -9,8 +9,10 @@ export class ProfileAvatarComponent implements OnInit {
   @Input()
   public avatarImgPath: string;
 
+  private readonly characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
   constructor() {
-    this.avatarImgPath = `https://avatars.dicebear.com/api/personas/${Math.random()}.svg`;
+    this.avatarImgPath = `https://avatars.dicebear.com/api/initials/${this.getRandomLetter()}${this.getRandomLetter()}.svg`;
   }
 
   public get avatarStyles() {
@@ -20,5 +22,9 @@ export class ProfileAvatarComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+  }
+
+  private getRandomLetter(): string {
+    return this.characters.charAt(Math.floor(Math.random() * this.characters.length));
   }
 }
