@@ -6,12 +6,14 @@ import {
   AsideLayoutComponent, AsideMobileComponent, DrawerMenuComponent,
   GlassBtnComponent,
   GlassCardComponent,
-  LogoTextComponent, NavbarComponent,
+  LogoTextComponent, MapComponent, NavbarComponent,
   ProfileAvatarComponent, ScrollContainerComponent
 } from "@app/shared/components";
 import { ActiveLinkDirective } from "@app/shared/directives";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { RouterModule } from "@angular/router";
+import { HttpClientModule } from "@angular/common/http";
+import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { RouterModule } from "@angular/router";
     AsideMobileComponent,
     DrawerMenuComponent,
     NavbarComponent,
-    ScrollContainerComponent
+    ScrollContainerComponent,
+    MapComponent
   ],
   exports: [
     GlassCardComponent,
@@ -34,9 +37,10 @@ import { RouterModule } from "@angular/router";
     ActiveLinkDirective,
     AsideLayoutComponent,
     NavbarComponent,
-    ScrollContainerComponent
+    ScrollContainerComponent,
+    MapComponent
   ],
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatSidenavModule, RouterModule]
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatSidenavModule, RouterModule, HttpClientModule, LeafletModule]
 })
-export class SharedModule {
+export class AppSharedModule {
 }

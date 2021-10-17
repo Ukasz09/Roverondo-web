@@ -5,7 +5,7 @@
 .container {
   @include mixins.bg-fill();
   @include mixins.max-viewport();
-  background-image: functions.image("activities-bg-2.jpg");
+  background-image: functions.image("activities-bg-3.jpg");
 
   .content {
     height: 100%;
@@ -89,6 +89,11 @@
 
           .trip-title {
             @include mixins.my(1.5rem);
+          }
+
+          .map{
+            height: 75%;
+            width: 100%;
           }
         }
       }
