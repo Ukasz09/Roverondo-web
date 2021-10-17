@@ -4,15 +4,14 @@
 .login-page {
   @include mixins.max-viewport();
   @include mixins.bg-fill();
-  background-image: functions.image("login-page-2.png");
+  background-image: functions.image("login-page-2.jpg");
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: 0.25s;
 
   @include mixins.media(sm-medium) {
-    background-image: functions.image("login-page.png");
+    background-image: functions.image("login-page.jpg");
   }
 
   @include mixins.media(md-large) {
