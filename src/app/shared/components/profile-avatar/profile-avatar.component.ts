@@ -17,7 +17,7 @@ export class ProfileAvatarComponent implements OnInit {
 
   public get avatarStyles() {
     return {
-      "background-image": `url(${this.avatarImgPath})`
+      "background-image": `url(${this.avatarImgPath})`,
     };
   }
 

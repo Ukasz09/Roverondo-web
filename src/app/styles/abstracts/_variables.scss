@@ -2,6 +2,22 @@
 // This file contains all application-wide Sass variables.
 // -----------------------------------------------------------------------------
 
+
+/* Assets
+============================================= */
+$base-assets-url: "/assets/" !default;
+
+/* Palette
+============================================= */
+$accent-color: #ecb767;
+$primary-color: #f8f9fa;
+$text-primary-color: #343a40;
+$text-muted-color: #6C757D;
+$glass-light-bg: linear-gradient(125deg, $primary-color 0%, rgba(248, 249, 250, 0.5) 100%);
+$glass-lighter-bg: linear-gradient(125deg, $primary-color 0%, rgba(248, 249, 250, 0) 100%);
+$glass-lighter-bg-reversed: linear-gradient(125deg, rgba(248, 249, 250, 0) 0%, $primary-color 100%);
+$glass-lighter-bg-left-right: linear-gradient(90deg, rgba(248, 249, 250, 0.25) 0%, $primary-color 100%);
+
 $text-font-stack: "Montserrat", sans-serif;
 $base-font-size: 16px;
 $breakpoints: (
@@ -23,22 +39,14 @@ $font-size: (
   h3: 25px,
   h4: 20px,
   h5: 18px,
-  h6: 12px,
-  h7: 7px,
+  h6: 15px,
+  h7: 12px,
+  h8: 8px,
 );
 
-
-/* Assets
-============================================= */
-$base-assets-url: "/assets/" !default;
-
-/* Palette
-============================================= */
-$accent-color: #ecb767;
-$primary-color: #f8f9fa;
-$text-primary-color: #343a40;
-$text-muted-color: #6C757D;
-$glass-light-bg: linear-gradient(125deg, $primary-color 0%, rgba(248, 249, 250, 0.5) 100%);
-$glass-lighter-bg: linear-gradient(125deg, $primary-color 0%, rgba(248, 249, 250, 0) 100%);
-$glass-lighter-bg-reversed: linear-gradient(125deg, rgba(248, 249, 250, 0) 0%, $primary-color 100%);
-$glass-lighter-bg-left-right: linear-gradient(90deg, rgba(248, 249, 250, 0.25) 0%, $primary-color 100%);
+@each $type, $value in $font-size {
+  .#{$type} {
+    font-size: map-get($font-size, #{$type});
+    color: $text-primary-color;
+  }
+}

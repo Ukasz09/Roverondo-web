@@ -2,10 +2,25 @@
   <app-aside-layout>
     <div class="content">
       <app-scroll-container class="card-wrapper">
-        <div *ngFor="let activity of activities" class="activity-card">
+        <div *ngFor="let _ of activities" class="activity-card">
           <app-glass-card>
             <div class="card-content" card-content>
+              <div class="user-info">
+                <app-profile-avatar></app-profile-avatar>
+                <div class="route-header-text">
+                  <span class="h6"><strong>Jessica</strong> went mountain bike riding</span>
+                  <span class="date h7">{{'2012-04-23T18:25:43.511Z'|date:'medium'}}</span>
+                </div>
+              </div>
+              <div class="trip-title">
+                <h4>Short trip with my chonky boi</h4>
+              </div>
+              <div class="map">
 
+              </div>
+              <div class="actions">
+
+              </div>
             </div>
           </app-glass-card>
         </div>

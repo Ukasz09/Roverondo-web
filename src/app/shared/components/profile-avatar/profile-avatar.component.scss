@@ -4,10 +4,9 @@
 
 .avatar {
   @include mixins.bg-fill();
-  width: 100%;
   position: relative;
   padding-top: 100%;
-  height: auto;
   border-radius: 50%;
-  border-color: variables.$text-muted-color;
+  height: auto;
+  width: 100%;
 }

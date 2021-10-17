@@ -52,13 +52,44 @@
         width: 50%;
       }
 
-      .activity-card{
+      .activity-card {
         margin-bottom: 2rem;
 
         .card-content {
           display: flex;
           flex-direction: column;
-          height: 450px;
+          height: 500px;
+          @include mixins.px(1rem);
+
+          .user-info {
+            height: fit-content;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            app-profile-avatar {
+              width: 50px;
+              margin-right: 1rem;
+            }
+
+            .route-header-text {
+              display: flex;
+              flex-direction: column;
+
+              span:not(:last-child) {
+                margin-bottom: 0.5rem;
+              }
+
+              .date {
+                color: variables.$text-muted-color;
+              }
+            }
+          }
+
+          .trip-title {
+            @include mixins.my(1.5rem);
+          }
         }
       }
 
