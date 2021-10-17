@@ -1,7 +1,14 @@
+@use "/src/app/styles/abstracts/mixins";
+@use "/src/app/styles/abstracts/variables";
+
 .fw-400 {
   font-weight: 400;
 }
 
 .fw-600 {
   font-weight: 600;
+}
+
+.light-theme {
+  @include mixins.gradient-text($gradient: variables.$glass-lighter-bg-left-right)
 }

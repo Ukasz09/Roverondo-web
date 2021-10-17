@@ -3,9 +3,12 @@
 .scroll-container {
   height: 100%;
   width: 100%;
-  padding: 0 10px;
   overflow: auto;
+  padding: 0 10px;
 
+  &.scrollbar-hidden {
+    padding: 0;
+  }
 
   &::-webkit-scrollbar {
     width: 15px;
@@ -22,4 +25,12 @@
       background: variables.$glass-lighter-bg-reversed;
     }
   }
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none !important;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none !important;
 }

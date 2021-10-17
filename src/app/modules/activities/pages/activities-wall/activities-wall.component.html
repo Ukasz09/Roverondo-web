@@ -1,7 +1,11 @@
 <div class="container">
   <app-aside-layout>
     <div class="content">
-      <app-scroll-container class="card-wrapper">
+      <h1 *ngIf="isMobileLayout" class="mobile-logo">
+        <app-logo-text [routerLink]="AppRoutes.home" [lightText]="true"></app-logo-text>
+      </h1>
+      <app-scroll-container class="card-wrapper" [ngStyle]="{'margin-top':isMobileLayout?0:'2.5rem'}"
+                            [withScrollbar]="!isMobileLayout">
         <div *ngFor="let _ of activities" class="activity-card">
           <app-glass-card>
             <div class="card-content" card-content>

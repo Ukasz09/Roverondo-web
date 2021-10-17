@@ -14,10 +14,13 @@
     flex-direction: column;
     align-items: center;
 
+    .mobile-logo{
+      @include mixins.my(1rem);
+    }
+
     .card-wrapper {
       $card-border: 25px;
       width: 95%;
-      margin-top: 2.5rem;
       overflow: hidden;
       height: 100%;
 
@@ -27,10 +30,6 @@
 
       @include mixins.media(sm-large) {
         width: 100%;
-
-        ::ng-deep mat-card {
-          border-radius: 0;
-        }
       }
 
       @include mixins.media(md-small) {

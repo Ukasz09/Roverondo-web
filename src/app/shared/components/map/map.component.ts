@@ -13,6 +13,9 @@ export class MapComponent implements OnInit {
   @Input()
   public zoom = 15;
 
+  @Input()
+  public disabledInteractions = true;
+
   public mapOptions!: MapOptions;
 
   private readonly tileProvider = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -25,16 +28,30 @@ export class MapComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.mapOptions = {
+    const extraOptions = this.disabledInteractions ? this.disabledMapOptions() : {};
+    this.mapOptions = Object.assign({
       layers: [this.initialLayer],
       zoom: this.zoom,
       center: this.latLang
-    };
+    }, extraOptions);
   }
 
   public onMapReady(map: Map): void {
     setTimeout(() => {
       map.invalidateSize();
     }, 0);
+  }
+
+  private disabledMapOptions(): Partial<MapOptions> {
+    return {
+      dragging: false,
+      touchZoom: false,
+      doubleClickZoom: false,
+      scrollWheelZoom: false,
+      boxZoom: false,
+      keyboard: false,
+      tap: false
+    };
+
   }
 }

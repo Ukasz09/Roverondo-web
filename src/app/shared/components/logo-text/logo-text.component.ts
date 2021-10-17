@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
   selector: "app-logo-text",
@@ -6,8 +6,14 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./logo-text.component.scss"]
 })
 export class LogoTextComponent implements OnInit {
+  @Input()
+  public lightText = false;
 
   constructor() {
+  }
+
+  public get themeCssClass(): string {
+    return this.lightText ? "light-theme" : "";
   }
 
   public ngOnInit(): void {

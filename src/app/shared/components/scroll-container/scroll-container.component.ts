@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
   selector: "app-scroll-container",
@@ -6,10 +6,13 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./scroll-container.component.scss"]
 })
 export class ScrollContainerComponent implements OnInit {
+  @Input()
+  public withScrollbar = true;
+
   constructor() {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
 
 }
