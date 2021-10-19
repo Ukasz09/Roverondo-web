@@ -1,18 +1,23 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { ActivitiesWallComponent } from "./pages";
-import { Routes as AppRoutes } from "@app/routes";
-import { LoginComponent } from "@app/modules/auth";
+import { ActivitiesRoutes } from "@app/routes/activities";
 
 const routes: Routes = [
   {
     path: "",
-    component: ActivitiesWallComponent,
-    redirectTo: `${AppRoutes.signIn}`
+    pathMatch: "full",
+    redirectTo: `${ActivitiesRoutes.allActivities}`
   },
   {
-    path: AppRoutes.signIn,
-    component: LoginComponent
+    path: ActivitiesRoutes.allActivities,
+    component: ActivitiesWallComponent
+  }, {
+    path: ActivitiesRoutes.myActivities,
+    component: ActivitiesWallComponent
+  }, {
+    path: ActivitiesRoutes.likedActivities,
+    component: ActivitiesWallComponent
   }
 ];
 

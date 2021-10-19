@@ -12,56 +12,56 @@
     <ul class="drawer-links">
       <li><h3
         class="link"
-        [routerLink]="getRouteLink(AppRoutes.activities)"
+        [routerLink]="getRouteLink([AppRoutes.activities])"
         [appActiveLink]="AppRoutes.activities"
         id="all-activities">
         News
       </h3></li>
       <li><h3
         class="link"
-        [routerLink]="getRouteLink(AppRoutes.yourActivities)"
-        [appActiveLink]="AppRoutes.yourActivities"
-        id="your-activities">
-        Your Activities
+        [routerLink]="getRouteLink([AppRoutes.activities,ActivitiesRoutes.myActivities])"
+        [appActiveLink]="ActivitiesRoutes.myActivities"
+        id="my-activities">
+        My Activities
       </h3></li>
       <li><h3
         class="link"
-        [routerLink]="getRouteLink(AppRoutes.planner)"
+        [routerLink]="getRouteLink([AppRoutes.activities,ActivitiesRoutes.likedActivities])"
+        [appActiveLink]="ActivitiesRoutes.likedActivities"
+        id="liked-activities">
+        Liked Activities
+      </h3></li>
+      <li><h3
+        class="link"
+        [routerLink]="getRouteLink([AppRoutes.planner])"
         [appActiveLink]="AppRoutes.planner"
         id="planner">
         Planner
       </h3></li>
       <li><h3
         class="link"
-        [routerLink]="getRouteLink(AppRoutes.events)"
+        [routerLink]="getRouteLink([AppRoutes.events])"
         [appActiveLink]="AppRoutes.events"
         id="events">
         Events
       </h3></li>
       <li><h3
         class="link"
-        [routerLink]="getRouteLink(AppRoutes.leaderboard)"
+        [routerLink]="getRouteLink([AppRoutes.leaderboard])"
         [appActiveLink]="AppRoutes.leaderboard"
         id="leaderboard">
         Leaderboard
       </h3></li>
       <li><h3
         class="link"
-        [routerLink]="getRouteLink(AppRoutes.likedRoutes)"
-        [appActiveLink]="AppRoutes.likedRoutes"
-        id="liked-routes">
-        Liked routes
-      </h3></li>
-      <li><h3
-        class="link"
-        [routerLink]="getRouteLink(AppRoutes.followers)"
+        [routerLink]="getRouteLink([AppRoutes.followers])"
         [appActiveLink]="AppRoutes.followers"
         id="followers">
         Followers
       </h3></li>
       <li><h3
         class="link"
-        [routerLink]="getRouteLink(AppRoutes.following)"
+        [routerLink]="getRouteLink([AppRoutes.following])"
         [appActiveLink]="AppRoutes.following"
         id="following">
         Following
