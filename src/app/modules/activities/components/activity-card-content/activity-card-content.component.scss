@@ -1,0 +1,276 @@
+@use "/src/app/styles/abstracts/mixins";
+@use "/src/app/styles/abstracts/variables";
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+
+  @include mixins.media(sm-xsmall) {
+    @include mixins.px(1rem);
+  }
+
+  @include mixins.media(sm-small) {
+    @include mixins.my(0.5rem);
+  }
+
+  .user-info {
+    @include mixins.py(0.5rem);
+    order: 1;
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    app-profile-avatar {
+      width: 35px;
+      margin-right: 1rem;
+    }
+
+    .route-header-text {
+      display: flex;
+      flex-direction: column;
+
+      span:not(:last-child) {
+        margin-bottom: 0.25rem;
+      }
+
+      .activity-info {
+        font-size: 15px;
+      }
+
+      .date {
+        font-size: 12px;
+        font-weight: 400;
+        color: variables.$text-muted-color;
+
+        @include mixins.media(md-large) {
+          font-weight: 500;
+        }
+      }
+    }
+
+    .actions {
+      display: none;
+      flex-direction: row;
+      align-items: center;
+      flex: 1;
+      justify-content: flex-end;
+      font-weight: 500;
+
+      @include mixins.media(sm-small) {
+        display: flex;
+      }
+
+      @include mixins.media(md-large) {
+        display: none;
+      }
+
+      .action {
+        margin-right: 1rem;
+        display: flex;
+        align-items: center;
+
+        .icon {
+          cursor: pointer;
+          margin-right: 0.5rem;
+        }
+
+        .text {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .stats {
+      display: none;
+      flex: 1;
+      justify-content: flex-end;
+
+      @include mixins.media(md-large) {
+        display: flex;
+      }
+    }
+  }
+
+  .trip-title {
+    @include mixins.my(1rem);
+    order: 3;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+
+    @include mixins.media(xs-medium) {
+      font-size: 18px;
+    }
+
+    @include mixins.media(md-large) {
+      @include mixins.my(1.5rem);
+      order: 2;
+      font-weight: 600;
+      font-size: 20px;
+    }
+
+    .icon {
+      margin-right: 0.5rem;
+
+      @include mixins.media(md-large) {
+        display: none;
+      }
+    }
+
+  }
+
+  .map {
+    margin-top: 1rem;
+    order: 2;
+    height: 300px;
+    width: 100%;
+
+    @include mixins.media(md-large) {
+      order: 3;
+      margin-top: 0;
+      height: 450px;
+    }
+  }
+
+  .stats {
+    order: 4;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    font-size: 10px;
+    font-weight: 500;
+
+    @include mixins.media(xs-medium) {
+      font-size: 12px;
+    }
+
+    @include mixins.media(md-large) {
+      font-size: 15px;
+    }
+
+    div {
+      display: flex;
+      align-items: flex-end;
+      line-height: 0.85;
+      margin-right: 0.5rem;
+
+      @include mixins.media(xs-medium) {
+        margin-right: 0.75rem;
+      }
+
+      @include mixins.media(sm-small) {
+        margin-right: 1.5rem;
+      }
+
+      &.distance {
+        .icon {
+          transform: rotateZ(-135deg) translateY(-3px);
+        }
+      }
+
+      &.average {
+        .icon {
+          transform: rotateZ(90deg);
+        }
+      }
+
+      .icon {
+        width: fit-content;
+        height: fit-content;
+        font-size: 16px;
+      }
+
+      span {
+        margin-left: 0.25rem;
+
+        @include mixins.media(md-large) {
+          margin-left: 0.75rem;
+        }
+      }
+    }
+  }
+
+  .bottom {
+    order: 5;
+    display: flex;
+    flex-direction: row;
+
+    .actions {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 1.5rem;
+      font-size: 15px;
+
+      @include mixins.media(sm-small) {
+        display: none;
+      }
+
+      @include mixins.media(md-large) {
+        display: flex;
+      }
+
+      .action {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-right: 1rem;
+
+        @include mixins.media(md-large) {
+          margin-right: 2rem;
+        }
+
+        .icon {
+          @include mixins.media(md-large) {
+            margin-right: 0.5rem;
+          }
+        }
+
+        .text {
+          display: none;
+
+          @include mixins.media(md-large) {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .social-stats {
+      display: none;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: flex-end;
+      flex: 1;
+      font-size: 12px;
+      line-height: 2.5;
+
+      @include mixins.media(md-large) {
+        display: flex;
+        font-size: 15px;
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+        margin-right: 1rem;
+
+        .icon {
+          width: auto;
+          height: auto;
+          margin-right: 0.25rem;
+        }
+      }
+    }
+
+    .stats {
+      @include mixins.media(md-large) {
+        display: none;
+      }
+    }
+  }
+}

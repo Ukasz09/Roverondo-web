@@ -1,7 +1,8 @@
 export enum Routes {
   auth = "auth",
-  signIn = "signIn",
   home = "home",
+  activities = "activities",
+  signIn = "signIn",
   yourActivities = "your-activities",
   planner = "planner",
   events = "events",
@@ -9,5 +10,4 @@ export enum Routes {
   likedRoutes = "liked-routes",
   followers = "followers",
   following = "following",
-  activities = "activities",
 }

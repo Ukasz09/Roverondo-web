@@ -8,76 +8,7 @@
                             [withScrollbar]="!isMobileLayout">
         <div *ngFor="let _ of activities" class="activity-card">
           <app-glass-card>
-            <div class="card-content" card-content>
-              <div class="user-info">
-                <app-profile-avatar></app-profile-avatar>
-                <div class="route-header-text">
-                  <span class="activity-info"><strong>Jessica</strong> went mountain bike riding</span>
-                  <span class="date">{{'2012-04-23T18:25:43.511Z'|date:'medium'}}</span>
-                </div>
-
-                <div [ngTemplateOutlet]="actions"></div>
-                <div [ngTemplateOutlet]="stats"></div>
-              </div>
-              <div class="trip-title">
-                <mat-icon class="icon">directions_bike</mat-icon>
-                <span>Short trip with my chonky boi</span>
-              </div>
-              <div class="map">
-                <app-map></app-map>
-              </div>
-              <div class="bottom" >
-                <div [ngTemplateOutlet]="stats"></div>
-              </div>
-              <div class="bottom" >
-                <div [ngTemplateOutlet]="actions"></div>
-                <div class="social-stats">
-                  <div>
-                    <mat-icon class="icon">favorite_border</mat-icon>
-                    <label for="like" class="text">123</label>
-                  </div>
-                  <div>
-                    <mat-icon class="icon">chat_bubble_outline</mat-icon>
-                    <label for="comment" class="text">11</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <ng-template #actions>
-              <div class="actions">
-                <div class="action">
-                  <mat-icon class="icon" id="like">favorite_border</mat-icon>
-                  <label for="like" class="text">Like</label>
-                </div>
-                <div class="action">
-                  <mat-icon class="icon" id="comment">chat_bubble_outline</mat-icon>
-                  <label for="comment" class="text">Comment</label>
-                </div>
-              </div>
-            </ng-template>
-
-            <ng-template #stats>
-              <div class="stats">
-                <div class="time">
-                  <mat-icon class="icon">timer</mat-icon>
-                  <span>1h 33</span>
-                </div>
-                <div class="distance">
-                  <mat-icon class="icon">open_in_full</mat-icon>
-                  <span>31.8km</span>
-                </div>
-                <div class="average">
-                  <mat-icon class="icon">hide_source</mat-icon>
-                  <span>20.6km/h</span>
-                </div>
-                <div class="elevation">
-                  <mat-icon class="icon">north_east</mat-icon>
-                  <span>150m</span>
-                </div>
-              </div>
-            </ng-template>
-
+            <app-activity-card-content card-content></app-activity-card-content>
           </app-glass-card>
         </div>
       </app-scroll-container>
