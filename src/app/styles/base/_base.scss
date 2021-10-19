@@ -28,6 +28,10 @@ html {
   box-sizing: inherit;
 }
 
+*{
+  font-family: variables.$text-font-stack;
+}
+
 body {
   color: variables.$text-primary-color;
   background-color: variables.$primary-color;

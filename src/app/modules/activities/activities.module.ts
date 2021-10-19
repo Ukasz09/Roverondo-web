@@ -13,7 +13,7 @@ import { MatIconModule } from "@angular/material/icon";
     CommonModule,
     ActivitiesRoutingModule,
     AppSharedModule,
-    MatIconModule
+    MatIconModule,
   ]
 })
 export class ActivitiesModule {

@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    redirectTo: `/${AppRoutes.home}`
+    redirectTo: `${AppRoutes.auth}`
   }, {
     path: AppRoutes.home,
     loadChildren: async () => (await import("@app/modules/home")).HomeModule
