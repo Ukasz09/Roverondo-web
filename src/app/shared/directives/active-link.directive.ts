@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Input, OnDestroy, OnInit } from "@angular/core";
-import { RoutesService } from "../../core/services/routes.service";
+import { RoutesService } from "@app/core/services";
 import { Subscription } from "rxjs";
 
 @Directive({

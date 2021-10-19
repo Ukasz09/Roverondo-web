@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { of } from "rxjs";
+import { MocksUrl } from "@app/core/enums";
 
 @Injectable({
   providedIn: "root"
@@ -10,7 +10,7 @@ export class ActivitiesService {
   constructor(private readonly http: HttpClient) {
   }
 
-  public getAllActivities(){
-    of()
+  public getAllActivities() {
+    this.http.get(MocksUrl.all_activities);
   }
 }
