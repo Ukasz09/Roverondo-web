@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Routes } from "@app/routes";
+import { AppRoutes } from "@app/routes";
 import { ActivitiesRoutes } from "@app/routes/activities";
 
 @Component({
@@ -8,7 +8,7 @@ import { ActivitiesRoutes } from "@app/routes/activities";
   styleUrls: ["./drawer-menu.component.scss"]
 })
 export class DrawerMenuComponent implements OnInit {
-  public readonly AppRoutes = Routes;
+  public readonly AppRoutes = AppRoutes;
   public readonly ActivitiesRoutes = ActivitiesRoutes;
 
   @Input() menuForMobile = false;

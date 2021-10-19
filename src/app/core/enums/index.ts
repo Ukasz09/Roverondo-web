@@ -1,2 +1,2 @@
 export * from "./icons";
-export * from "./layout-type.enum";
+export * from "./layout-type";

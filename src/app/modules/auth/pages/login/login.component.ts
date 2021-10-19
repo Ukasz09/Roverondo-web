@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, On
 import { Router } from "@angular/router";
 import { Icons } from "@app/core/enums";
 import { Utils } from "@app/shared/utils";
-import { Routes } from "@app/routes";
+import { AppRoutes } from "@app/routes";
 import { LayoutService } from "@app/core/services";
 
 @Component({
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private navigateToHome(): void {
-    this.router.navigateByUrl(Routes.home).then(_ => {
+    this.router.navigateByUrl(AppRoutes.home).then(_ => {
     });
   }
 }

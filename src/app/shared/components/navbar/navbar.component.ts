@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Routes } from "@app/routes";
+import { AppRoutes } from "@app/routes";
 
 @Component({
   selector: "app-navbar",
@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
 
   public navigateToHome(): void {
     this.router
-      .navigateByUrl(Routes.home).then(_ => {
+      .navigateByUrl(AppRoutes.home).then(_ => {
     });
   }
 }

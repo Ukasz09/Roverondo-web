@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from "@angular/core";
-import { LayoutTypeEnum } from "@app/core/enums";
+import { LayoutType } from "@app/core/enums";
 import { LayoutService } from "@app/core/services";
 
 @Component({
@@ -8,7 +8,7 @@ import { LayoutService } from "@app/core/services";
   styleUrls: ["./aside-layout.component.scss"]
 })
 export class AsideLayoutComponent implements OnInit {
-  public readonly LayoutTypeEnum = LayoutTypeEnum;
+  public readonly LayoutTypeEnum = LayoutType;
 
   constructor(public readonly layoutService: LayoutService) {
   }

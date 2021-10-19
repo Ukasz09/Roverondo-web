@@ -1,23 +1,21 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { ActivitiesWallComponent } from "./pages";
+import { ActivitiesResolver } from "./services";
 import { ActivitiesRoutes } from "@app/routes/activities";
 
 const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    redirectTo: `${ActivitiesRoutes.allActivities}`
+    redirectTo: ActivitiesRoutes.allActivities
   },
   {
-    path: ActivitiesRoutes.allActivities,
-    component: ActivitiesWallComponent
-  }, {
-    path: ActivitiesRoutes.myActivities,
-    component: ActivitiesWallComponent
-  }, {
-    path: ActivitiesRoutes.likedActivities,
-    component: ActivitiesWallComponent
+    path: `:type`,
+    component: ActivitiesWallComponent,
+    resolve: {
+      activities: ActivitiesResolver
+    }
   }
 ];
 
