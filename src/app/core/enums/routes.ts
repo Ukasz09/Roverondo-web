@@ -2,7 +2,7 @@ export enum Routes {
   auth = "auth",
   signIn = "signIn",
   home = "home",
-  routes = "routes",
+  yourActivities = "your-activities",
   planner = "planner",
   events = "events",
   leaderboard = "leaderboard",

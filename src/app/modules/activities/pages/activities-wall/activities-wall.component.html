@@ -12,18 +12,38 @@
               <div class="user-info">
                 <app-profile-avatar></app-profile-avatar>
                 <div class="route-header-text">
-                  <span class="h6"><strong>Jessica</strong> went mountain bike riding</span>
-                  <span class="date h7">{{'2012-04-23T18:25:43.511Z'|date:'medium'}}</span>
+                  <span class="activity-info"><strong>Jessica</strong> went mountain bike riding</span>
+                  <span class="date">{{'2012-04-23T18:25:43.511Z'|date:'medium'}}</span>
                 </div>
               </div>
               <div class="trip-title">
-                <h4>Short trip with my chonky boi</h4>
+                <mat-icon class="icon">directions_bike</mat-icon>
+                <span>Short trip with my chonky boi</span>
               </div>
               <div class="map">
                 <app-map></app-map>
               </div>
+              <div class="stats">
+                <div class="time">
+                  <mat-icon class="icon">timer</mat-icon>
+                  <span>1h 33</span>
+                </div>
+                <div class="distance">
+                  <mat-icon class="icon">open_in_full</mat-icon>
+                  <span>31.8km</span>
+                </div>
+                <div class="average">
+                  <mat-icon class="icon">hide_source</mat-icon>
+                  <span>20.6km/h</span>
+                </div>
+                <div class="elevation">
+                  <mat-icon class="icon">north_east</mat-icon>
+                  <span>150m</span>
+                </div>
+              </div>
               <div class="actions">
-
+                  <mat-icon class="icon">favorite_border</mat-icon>
+                  <mat-icon class="icon">chat_bubble_outline</mat-icon>
               </div>
             </div>
           </app-glass-card>
