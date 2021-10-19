@@ -1,4 +1,3 @@
-import { Moment } from "moment";
 import { Gender } from "./gender";
 
 export interface User {
@@ -8,9 +7,9 @@ export interface User {
   profilePicture: string;
   city: string;
   bio: string;
-  birthdate: Moment;
+  birthdate: Date;
   gender: Gender;
   weight: number;
   maxHeartRate: number;
-  dateJoined: Moment;
+  dateJoined: Date;
 }

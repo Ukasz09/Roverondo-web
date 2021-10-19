@@ -6,9 +6,12 @@
       </h1>
       <app-scroll-container class="card-wrapper" [ngStyle]="{'margin-top':isMobileLayout?0:'2.5rem'}"
                             [withScrollbar]="!isMobileLayout">
-        <div *ngFor="let _ of activities" class="activity-card">
+        <div *ngFor="let activity of activities" class="activity-card">
           <app-glass-card>
-            <app-activity-card-content card-content></app-activity-card-content>
+            <app-activity-card-content
+              [activity]="activity"
+              card-content>
+            </app-activity-card-content>
           </app-glass-card>
         </div>
       </app-scroll-container>

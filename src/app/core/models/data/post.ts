@@ -1,11 +1,13 @@
 import { Visibility } from "./visibility";
-import { Moment } from "moment";
+import { PostComment } from "./post-comment";
+import { PostReaction } from "./post-reaction";
 
 export interface Post {
   title: string;
   description: string;
   visibility: Visibility;
-  createdAt: Moment;
-  modifiedAt: Moment;
-  comments: Comment[];
+  createdAt: Date;
+  modifiedAt: Date;
+  comments: PostComment[];
+  reactions: PostReaction[];
 }

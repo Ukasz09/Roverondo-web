@@ -6,6 +6,7 @@ import { ActivitiesRoutingModule } from "./activities-routing.module";
 import { MatIconModule } from "@angular/material/icon";
 import { ActivityCardContentComponent } from "./components";
 import { ActivitiesResolver } from "./services";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ActivitiesResolver } from "./services";
     CommonModule,
     ActivitiesRoutingModule,
     AppSharedModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     ActivitiesResolver

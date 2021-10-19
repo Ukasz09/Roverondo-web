@@ -3,7 +3,7 @@ export * from "./visibility";
 export * from "./workout";
 export * from "./user";
 export * from "./gender";
-export * from "./comment";
+export * from "./post-comment";
 export * from "./activity-post";
 export * from "./planned-route-post";
 export * from "./planned-route";

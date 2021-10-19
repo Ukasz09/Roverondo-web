@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Big boy ridin in da city",
+    "description": "",
+    "visibility": 0,
+    "createdAt": "2012-04-23T05:25:43.511Z",
+    "modifiedAt": "2012-04-23T23:15:13.511Z",
+    "comments": [],
+    "workout": {
+      "startTime": "2012-04-23T05:25:43.511Z",
+      "endTime": "2012-04-23T23:15:13.511Z",
+      "distance": 198.1,
+      "averageSpeed": 19.1,
+      "elevation": 199,
+      "minAttitude": 10,
+      "maxAttitude": 30,
+      "minAtmosphericPressure": 1050,
+      "maxAtmosphericPressure": 1020,
+      "calories": 250,
+      "location": "Warszawa, Praga",
+      "route": {
+        "points": []
+      }
+    },
+    "reactions": [1,2,2,2,2,2,2,2]
+  },
+  {
+    "title": "Fancy road with friends",
+    "description": "",
+    "visibility": 0,
+    "createdAt": "2021-04-20T11:11:43.511Z",
+    "modifiedAt": "2021-04-20T11:11:13.511Z",
+    "comments": [],
+    "workout": {
+      "startTime": "2021-04-20T11:11:43.511Z",
+      "endTime": "2021-04-20T12:12:23.511Z",
+      "distance": 28,
+      "averageSpeed": 16.9,
+      "elevation": 119,
+      "minAttitude": 11,
+      "maxAttitude": 31,
+      "minAtmosphericPressure": 1050,
+      "maxAtmosphericPressure": 1020,
+      "calories": 250,
+      "location": "Wrocław, Rynek",
+      "route": {
+        "points": []
+      }
+    },
+    "reactions": []
+  }
+]
