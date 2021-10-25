@@ -19,11 +19,11 @@ export class ActivitiesResolver implements Resolve<ActivityPost[]> {
     const type = route.paramMap.get("type");
     switch (type) {
       case ActivitiesRoutes.allActivities:
-        return this.activitiesService.getAllActivities();
+        return this.activitiesService.getAllActivities$();
       case ActivitiesRoutes.likedActivities:
-        return this.activitiesService.getLikedActivities();
+        return this.activitiesService.getLikedActivities$();
       case ActivitiesRoutes.myActivities:
-        return this.activitiesService.getMyActivities();
+        return this.activitiesService.getMyActivities$();
     }
     return of([]);
   }

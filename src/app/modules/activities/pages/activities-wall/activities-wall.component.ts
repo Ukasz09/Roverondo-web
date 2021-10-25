@@ -30,7 +30,7 @@ export class ActivitiesWallComponent implements OnInit {
   }
 
   public onLikeClick(activity: ActivityPost): void {
-    this.activitiesService.likeActivity(activity.id).subscribe({
+    this.activitiesService.likeActivity$(activity.id).subscribe({
       next: updatedActivity => {
         const activityIndex = this.activities.indexOf(activity);
         this.activities[activityIndex] = updatedActivity;

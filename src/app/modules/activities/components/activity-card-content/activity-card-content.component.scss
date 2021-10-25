@@ -225,12 +225,6 @@
           margin-right: 2rem;
         }
 
-        #like {
-          &.liked {
-            color: variables.$like-color;
-          }
-        }
-
         .icon {
           @include mixins.media(md-large) {
             margin-right: 0.5rem;
@@ -278,6 +272,12 @@
       @include mixins.media(md-large) {
         display: none;
       }
+    }
+  }
+
+  #like {
+    &.liked {
+      color: variables.$like-color;
     }
   }
 }

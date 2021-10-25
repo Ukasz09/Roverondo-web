@@ -58,6 +58,9 @@
 
       .activity-card {
         margin-bottom: 2rem;
+        &:first-child{
+          margin-top: 2.5rem;
+        }
       }
     }
   }

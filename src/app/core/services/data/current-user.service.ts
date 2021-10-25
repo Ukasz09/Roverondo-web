@@ -13,7 +13,7 @@ export class CurrentUserService {
   private user?: User;
 
   constructor(private readonly http: HttpClient) {
-    this.fetchCurrentUser().subscribe({
+    this.fetchCurrentUser$().subscribe({
       next: user => this.user = user
     });
   }
@@ -22,7 +22,7 @@ export class CurrentUserService {
     return this.user;
   }
 
-  private fetchCurrentUser(): Observable<User> {
+  private fetchCurrentUser$(): Observable<User> {
     return this.http.get<User>(MocksUrl.currentUser).pipe(tap(data => console.log(data)));
   }
 }

@@ -4,9 +4,9 @@
       <h1 *ngIf="isMobileLayout" class="mobile-logo">
         <app-logo-text [routerLink]="AppRoutes.home" [lightText]="true"></app-logo-text>
       </h1>
+<!--      [ngStyle]="{'margin-top' : isMobileLayout ? 0 : '2.5rem'}"-->
       <app-scroll-container
         class="card-wrapper"
-        [ngStyle]="{'margin-top' : isMobileLayout ? 0 : '2.5rem'}"
         [withScrollbar]="!isMobileLayout">
         <div *ngFor="let activity of activities" class="activity-card">
           <app-glass-card>
