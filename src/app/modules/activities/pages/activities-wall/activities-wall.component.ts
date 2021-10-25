@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivitiesService, CurrentUserService, LayoutService } from "@app/core/services";
+import { ActivitiesService, LayoutService } from "@app/core/services";
 import { LayoutType } from "@app/core/enums";
 import { AppRoutes } from "@app/routes";
 import { ActivatedRoute, Data } from "@angular/router";

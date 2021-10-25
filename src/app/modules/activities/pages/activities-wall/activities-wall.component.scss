@@ -64,7 +64,7 @@
 }
 
 .spinner-wrapper {
+  @include mixins.py(5rem);
   display: flex;
   justify-content: center;
-  margin: 2.5rem;
 }

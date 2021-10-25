@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { MocksUrl } from "@app/core/enums";
 import { Observable } from "rxjs";
 import { ActivityPost } from "@app/core/models";
-import { filter, map, tap } from "rxjs/operators";
+import { delay, filter, map, tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
