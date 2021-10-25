@@ -2,17 +2,17 @@
 // This file contains all application-wide Sass variables.
 // -----------------------------------------------------------------------------
 
-
-/* Assets
-============================================= */
 $base-assets-url: "/assets/" !default;
 
-/* Palette
-============================================= */
+$red-color: #F44336;
+
 $accent-color: #ecb767;
 $primary-color: #f8f9fa;
 $text-primary-color: #343a40;
 $text-muted-color: #6C757D;
+
+$like-color: $red-color;
+
 $glass-light-bg: linear-gradient(125deg, $primary-color 0%, rgba(248, 249, 250, 0.5) 100%);
 $glass-lighter-bg: linear-gradient(125deg, $primary-color 0%, rgba(248, 249, 250, 0) 100%);
 $glass-lighter-bg-reversed: linear-gradient(125deg, rgba(248, 249, 250, 0) 0%, $primary-color 100%);

@@ -227,7 +227,7 @@
 
         #like {
           &.liked {
-            color: red;
+            color: variables.$like-color;
           }
         }
 
