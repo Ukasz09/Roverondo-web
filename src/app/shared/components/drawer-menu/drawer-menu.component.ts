@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { AppRoutes } from "@app/routes";
 import { ActivitiesRoutes } from "@app/routes/activities";
 
@@ -12,6 +12,8 @@ export class DrawerMenuComponent implements OnInit {
   public readonly ActivitiesRoutes = ActivitiesRoutes;
 
   @Input() menuForMobile = false;
+
+  @Output() closeDrawer = new EventEmitter<void>();
 
   constructor() {
   }

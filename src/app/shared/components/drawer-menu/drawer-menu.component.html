@@ -13,6 +13,7 @@
       <li><h3
         class="link"
         [routerLink]="getRouteLink([AppRoutes.activities])"
+        (click)="closeDrawer.emit()"
         [appActiveLink]="AppRoutes.activities"
         id="all-activities">
         News
@@ -21,6 +22,7 @@
         class="link"
         [routerLink]="getRouteLink([AppRoutes.activities,ActivitiesRoutes.myActivities])"
         [appActiveLink]="ActivitiesRoutes.myActivities"
+        (click)="closeDrawer.emit()"
         id="my-activities">
         My Activities
       </h3></li>
@@ -28,6 +30,7 @@
         class="link"
         [routerLink]="getRouteLink([AppRoutes.activities,ActivitiesRoutes.likedActivities])"
         [appActiveLink]="ActivitiesRoutes.likedActivities"
+        (click)="closeDrawer.emit()"
         id="liked-activities">
         Liked Activities
       </h3></li>
@@ -35,6 +38,7 @@
         class="link"
         [routerLink]="getRouteLink([AppRoutes.planner])"
         [appActiveLink]="AppRoutes.planner"
+        (click)="closeDrawer.emit()"
         id="planner">
         Planner
       </h3></li>
@@ -42,6 +46,7 @@
         class="link"
         [routerLink]="getRouteLink([AppRoutes.events])"
         [appActiveLink]="AppRoutes.events"
+        (click)="closeDrawer.emit()"
         id="events">
         Events
       </h3></li>
@@ -49,6 +54,7 @@
         class="link"
         [routerLink]="getRouteLink([AppRoutes.leaderboard])"
         [appActiveLink]="AppRoutes.leaderboard"
+        (click)="closeDrawer.emit()"
         id="leaderboard">
         Leaderboard
       </h3></li>
@@ -56,6 +62,7 @@
         class="link"
         [routerLink]="getRouteLink([AppRoutes.followers])"
         [appActiveLink]="AppRoutes.followers"
+        (click)="closeDrawer.emit()"
         id="followers">
         Followers
       </h3></li>
@@ -63,6 +70,7 @@
         class="link"
         [routerLink]="getRouteLink([AppRoutes.following])"
         [appActiveLink]="AppRoutes.following"
+        (click)="closeDrawer.emit()"
         id="following">
         Following
       </h3></li>
