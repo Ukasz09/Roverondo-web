@@ -25,6 +25,7 @@
     app-profile-avatar {
       width: 35px;
       margin-right: 1rem;
+      cursor: pointer;
     }
 
     .route-header-text {
@@ -144,7 +145,7 @@
     font-weight: 500;
 
     @include mixins.media(xs-medium) {
-      font-size: 12px;
+      font-size: 11px;
     }
 
     @include mixins.media(md-large) {
@@ -224,6 +225,12 @@
           margin-right: 2rem;
         }
 
+        #like {
+          &.liked {
+            color: red;
+          }
+        }
+
         .icon {
           @include mixins.media(md-large) {
             margin-right: 0.5rem;
@@ -275,8 +282,6 @@
   }
 }
 
-.spinner-wrapper{
-  display: flex;
-  justify-content: center;
-  margin: 2.5rem;
+.cursor-pointer {
+  cursor: pointer;
 }

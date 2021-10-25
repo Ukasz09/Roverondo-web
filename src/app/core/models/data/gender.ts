@@ -1,3 +1,3 @@
 export enum Gender {
-  male, female, notSpecified
+  male=0, female=1, notSpecified=2
 }

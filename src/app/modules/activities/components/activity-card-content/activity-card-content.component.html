@@ -1,77 +1,72 @@
 <div class="card-content">
-  <ng-container *ngIf="activity; else spinner">
-    <div class="user-info">
-      <app-profile-avatar></app-profile-avatar>
-      <div class="route-header-text">
-        <span class="activity-info"><strong>Jessica</strong> went bike riding</span>
-        <span class="date">{{activity.createdAt|date:'medium'}}</span>
-      </div>
+  <div class="user-info">
+    <app-profile-avatar [routerLink]="userProfileLink"
+                        [avatarImgPath]="activity.user.profilePicture"></app-profile-avatar>
+    <div class="route-header-text">
+      <span class="activity-info">
+        <strong class="cursor-pointer" [routerLink]="userProfileLink">{{activity.user.name}}</strong> went bike riding
+      </span>
+      <span class="date">{{activity.createdAt|date:'medium'}}</span>
+    </div>
 
-      <div [ngTemplateOutlet]="actions"></div>
-      <div [ngTemplateOutlet]="stats"></div>
-    </div>
-    <div class="trip-title">
-      <mat-icon class="icon">directions_bike</mat-icon>
-      <span>{{activity.title}}</span>
-    </div>
-    <div class="map">
-      <app-map></app-map>
-    </div>
-    <div class="bottom">
-      <div [ngTemplateOutlet]="stats"></div>
-    </div>
-    <div class="bottom">
-      <div [ngTemplateOutlet]="actions"></div>
-      <div class="social-stats">
-        <div>
-          <mat-icon class="icon">favorite_border</mat-icon>
-          <label for="like" class="text">{{activity.reactions.length}}</label>
-        </div>
-        <div>
-          <mat-icon class="icon">chat_bubble_outline</mat-icon>
-          <label for="comment" class="text">{{activity.comments.length}}</label>
-        </div>
-      </div>
-    </div>
-    <ng-template #actions>
-      <div class="actions">
-        <div class="action">
-          <mat-icon class="icon" id="like">favorite_border</mat-icon>
-          <label for="like" class="text">Like</label>
-        </div>
-        <div class="action">
-          <mat-icon class="icon" id="comment">chat_bubble_outline</mat-icon>
-          <label for="comment" class="text">Comment</label>
-        </div>
-      </div>
-    </ng-template>
-
-    <ng-template #stats>
-      <div class="stats">
-        <div class="time">
-          <mat-icon class="icon">timer</mat-icon>
-          <span>1h 33 </span>
-        </div>
-        <div class="distance">
-          <mat-icon class="icon">open_in_full</mat-icon>
-          <span>{{activity.workout.distance}}km</span>
-        </div>
-        <div class="average">
-          <mat-icon class="icon">hide_source</mat-icon>
-          <span>{{ activity.workout.averageSpeed }}km/h</span>
-        </div>
-        <div class="elevation">
-          <mat-icon class="icon">north_east</mat-icon>
-          <span>{{activity.workout.elevation}}m</span>
-        </div>
-      </div>
-    </ng-template>
-
-  </ng-container>
-</div>
-
-<ng-template #spinner>
-  <div class="spinner-wrapper">
-    <mat-spinner></mat-spinner>
+    <div [ngTemplateOutlet]="actions"></div>
+    <div [ngTemplateOutlet]="stats"></div>
   </div>
-</ng-template>
+  <div class="trip-title">
+    <mat-icon class="icon">directions_bike</mat-icon>
+    <span class="cursor-pointer" (click)="detailsClick.emit()">{{activity.title}}</span>
+  </div>
+  <div class="map">
+    <app-map></app-map>
+  </div>
+  <div class="bottom">
+    <div [ngTemplateOutlet]="stats"></div>
+  </div>
+  <div class="bottom">
+    <div [ngTemplateOutlet]="actions"></div>
+    <div class="social-stats">
+      <div>
+        <mat-icon class="icon">favorite_border</mat-icon>
+        <label for="like" class="text">{{activity.reactions.length}}</label>
+      </div>
+      <div>
+        <mat-icon class="icon">chat_bubble_outline</mat-icon>
+        <label for="comment" class="text">{{activity.comments.length}}</label>
+      </div>
+    </div>
+  </div>
+  <ng-template #actions>
+    <div class="actions">
+      <div class="action cursor-pointer" (click)="like.emit()">
+        <mat-icon class="icon" id="like"
+                  [ngClass]="{'liked':isLiked}">{{ isLiked ? 'favorite' : 'favorite_border' }}</mat-icon>
+        <label for="like" class="text cursor-pointer">Like</label>
+      </div>
+      <div class="action cursor-pointer" (click)="comment.emit('test comment')">
+        <mat-icon class="icon" id="comment">chat_bubble_outline</mat-icon>
+        <label for="comment" class="text cursor-pointer">Comment</label>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #stats>
+    <div class="stats">
+      <div class="time">
+        <mat-icon class="icon">timer</mat-icon>
+        <span>{{getActivityDuration().hour}}h {{ getActivityDuration().minute}}min</span>
+      </div>
+      <div class="distance">
+        <mat-icon class="icon">open_in_full</mat-icon>
+        <span>{{activity.workout.distance}}km</span>
+      </div>
+      <div class="average">
+        <mat-icon class="icon">hide_source</mat-icon>
+        <span>{{ activity.workout.averageSpeed }}km/h</span>
+      </div>
+      <div class="elevation">
+        <mat-icon class="icon">north_east</mat-icon>
+        <span>{{activity.workout.elevation}}m</span>
+      </div>
+    </div>
+  </ng-template>
+</div>

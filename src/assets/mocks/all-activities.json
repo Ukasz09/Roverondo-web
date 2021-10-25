@@ -1,11 +1,15 @@
 [
   {
+    "id": "1",
     "title": "Short trip with my chonky boi",
     "description": "",
     "visibility": 0,
     "createdAt": "2012-04-23T18:25:43.511Z",
     "modifiedAt": "2012-04-23T18:25:43.511Z",
-    "comments": [1,2],
+    "comments": [
+      1,
+      2
+    ],
     "workout": {
       "startTime": "2012-04-23T18:25:43.511Z",
       "endTime": "2012-04-23T20:25:43.511Z",
@@ -22,9 +26,40 @@
         "points": []
       }
     },
-    "reactions": [1,2,3,4]
+    "reactions": [
+      {
+        "userId": "2",
+        "addedAt": "2012-04-23T20:25:43.511Z",
+        "emoji": "❤"
+      },
+      {
+        "userId": "3",
+        "addedAt": "2012-04-23T20:25:43.511Z",
+        "emoji": "❤"
+      },
+      {
+        "userId": "4",
+        "addedAt": "2012-04-23T20:25:43.511Z",
+        "emoji": "❤"
+      }
+    ],
+    "user": {
+      "id": "1",
+      "name": "Łukasz",
+      "lastName": "Gajerski",
+      "email": "lukasz@gmail.com",
+      "profilePicture": "https://avatars.dicebear.com/api/initials/Łukasz-Gajerski.svg",
+      "city": "Wrocław",
+      "bio": "I like speed",
+      "birthdate": "1999-06-06",
+      "gender": 0,
+      "weight": 71,
+      "maxHeartRate": 150,
+      "dateJoined": "2021-01-19"
+    }
   },
   {
+    "id": "2",
     "title": "Nice trip with hot gurls",
     "description": "",
     "visibility": 0,
@@ -47,9 +82,35 @@
         "points": []
       }
     },
-    "reactions": [1,4]
+    "reactions": [
+      {
+        "userId": "2",
+        "addedAt": "2012-04-23T20:25:43.511Z",
+        "emoji": "❤"
+      },
+      {
+        "userId": "3",
+        "addedAt": "2012-04-23T20:25:43.511Z",
+        "emoji": "❤"
+      }
+    ],
+    "user": {
+      "id": "2",
+      "name": "Paweł",
+      "lastName": "Piotrowski",
+      "email": "pawel.piotrowski@gmail.com",
+      "profilePicture": "https://avatars.dicebear.com/api/initials/Paweł-Piotrowski.svg",
+      "city": "Wrocław",
+      "bio": "I like sushi and life in general",
+      "birthdate": "1999-07-08",
+      "gender": 0,
+      "weight": 85,
+      "maxHeartRate": 99,
+      "dateJoined": "2021-01-02"
+    }
   },
   {
+    "id": "3",
     "title": "Angry dogs and da fast lane",
     "description": "",
     "visibility": 0,
@@ -77,9 +138,40 @@
         "points": []
       }
     },
-    "reactions": [1]
+    "reactions": [
+      {
+        "userId": "1",
+        "addedAt": "2012-04-23T20:25:43.511Z",
+        "emoji": "❤"
+      },
+      {
+        "userId": "2",
+        "addedAt": "2012-04-23T20:25:43.511Z",
+        "emoji": "❤"
+      },
+      {
+        "userId": "3",
+        "addedAt": "2012-04-23T20:25:43.511Z",
+        "emoji": "❤"
+      }
+    ],
+    "user": {
+      "id": "3",
+      "name": "Maciej",
+      "lastName": "Wasilewski",
+      "email": "maciej.wasyl@gmail.com",
+      "profilePicture": "https://avatars.dicebear.com/api/initials/Maciej-Wasyl.svg",
+      "city": "Wrocław",
+      "bio": "I like going to the gym. My hobby is also cycling",
+      "birthdate": "1999-07-15",
+      "gender": 0,
+      "weight": 72,
+      "maxHeartRate": 130,
+      "dateJoined": "2021-01-01"
+    }
   },
   {
+    "id": "3",
     "title": "Big boy ridin in da city",
     "description": "",
     "visibility": 0,
@@ -102,9 +194,24 @@
         "points": []
       }
     },
-    "reactions": []
+    "reactions": [],
+    "user": {
+      "id": "4",
+      "name": "Jessica",
+      "lastName": "Smith",
+      "email": "jessica@gmail.com",
+      "profilePicture": "https://avatars.dicebear.com/api/initials/Jessica-Smith.svg",
+      "city": "Los Angles",
+      "bio": "I like swimming and cycling. Do you want  to join me?",
+      "birthdate": "1999-08-11",
+      "gender": 1,
+      "weight": 65.9,
+      "maxHeartRate": 120,
+      "dateJoined": "2020-11-11"
+    }
   },
   {
+    "id": "44",
     "title": "Fancy road with friends",
     "description": "",
     "visibility": 0,
@@ -137,6 +244,69 @@
         "points": []
       }
     },
-    "reactions": []
+    "reactions": [
+      {
+        "userId": "1",
+        "addedAt": "2012-04-23T20:25:43.511Z",
+        "emoji": "❤"
+      }
+    ],
+    "user": {
+      "id": "5",
+      "name": "Hannah",
+      "lastName": "Rock",
+      "email": "hanaih@gmail.com",
+      "profilePicture": "https://avatars.dicebear.com/api/initials/Hanna-Rock.svg",
+      "city": "Wrocław",
+      "bio": "I like fishing and hunting",
+      "birthdate": "1987-03-12",
+      "gender": 1,
+      "weight": 78,
+      "maxHeartRate": 100,
+      "dateJoined": "2021-07-19"
+    }
+  },
+  {
+    "id": "99",
+    "title": "Ultra total commando trip",
+    "description": "",
+    "visibility": 0,
+    "createdAt": "2020-11-23T18:25:43.511Z",
+    "modifiedAt": "2020-11-23T18:25:43.511Z",
+    "comments": [
+      1,
+      2
+    ],
+    "workout": {
+      "startTime": "2020-11-23T13:13:43.511Z",
+      "endTime": "2012-04-23T14:19:21.511Z",
+      "distance": 78.8,
+      "averageSpeed": 29.6,
+      "elevation": 102,
+      "minAttitude": 20,
+      "maxAttitude": 30,
+      "minAtmosphericPressure": 1050,
+      "maxAtmosphericPressure": 1020,
+      "calories": 250,
+      "location": "Wrocław, Psie Pole",
+      "route": {
+        "points": []
+      }
+    },
+    "reactions": [],
+    "user": {
+      "id": "1",
+      "name": "Łukasz",
+      "lastName": "Gajerski",
+      "email": "lukasz@gmail.com",
+      "profilePicture": "https://avatars.dicebear.com/api/initials/Łukasz-Gajerski.svg",
+      "city": "Wrocław",
+      "bio": "I like speed",
+      "birthdate": "1999-06-06",
+      "gender": 0,
+      "weight": 71,
+      "maxHeartRate": 150,
+      "dateJoined": "2021-01-19"
+    }
   }
 ]

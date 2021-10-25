@@ -1,5 +1,5 @@
 export interface PostComment {
   text: string;
-  createdAt: Date;
-  modifiedAt: Date;
+  createdAt: string;
+  modifiedAt: string;
 }

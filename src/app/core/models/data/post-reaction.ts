@@ -1,4 +1,5 @@
 export interface PostReaction {
   emoji: string;
-  addedAt: Date;
+  addedAt: string;
+  userId: string;
 }

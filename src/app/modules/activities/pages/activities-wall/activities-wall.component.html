@@ -4,17 +4,31 @@
       <h1 *ngIf="isMobileLayout" class="mobile-logo">
         <app-logo-text [routerLink]="AppRoutes.home" [lightText]="true"></app-logo-text>
       </h1>
-      <app-scroll-container class="card-wrapper" [ngStyle]="{'margin-top':isMobileLayout?0:'2.5rem'}"
-                            [withScrollbar]="!isMobileLayout">
+      <app-scroll-container
+        class="card-wrapper"
+        [ngStyle]="{'margin-top' : isMobileLayout ? 0 : '2.5rem'}"
+        [withScrollbar]="!isMobileLayout">
         <div *ngFor="let activity of activities" class="activity-card">
           <app-glass-card>
-            <app-activity-card-content
-              [activity]="activity"
-              card-content>
-            </app-activity-card-content>
+            <ng-container *ngIf="activity; else spinner">
+              <app-activity-card-content
+                [activity]="activity"
+                (like)="onLikeClick(activity)"
+                (comment)="onAddCommentClick(activity, $event)"
+                (detailsClick)="onActivityDetailsClick(activity)"
+              >
+              </app-activity-card-content>
+            </ng-container>
+
+            <ng-template #spinner>
+              <div class="spinner-wrapper">
+                <mat-spinner></mat-spinner>
+              </div>
+            </ng-template>
           </app-glass-card>
         </div>
       </app-scroll-container>
     </div>
   </app-aside-layout>
 </div>
+

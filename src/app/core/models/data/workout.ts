@@ -1,8 +1,8 @@
 import { Route } from "./route";
 
 export interface Workout {
-  startTime: Date;
-  endTime: Date;
+  startTime: string;
+  endTime: string;
   distance: number;
   averageSpeed: number;
   elevation: number;
