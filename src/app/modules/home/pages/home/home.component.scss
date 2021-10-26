@@ -7,6 +7,12 @@
   @include mixins.max-viewport();
   background-image: functions.image("home-6.jpg");
 
+  .spinner-label{
+    color: variables.$text-light-color;
+    padding-top:  15rem;
+    width: 100%;
+  }
+
   .content {
     height: 100%;
     width: 100%;

@@ -80,12 +80,13 @@
       "@app/modules/activities": [
         "src/app/modules/activities/index"
       ]
-    }
+    },
+    "resolveJsonModule": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
   }
 }

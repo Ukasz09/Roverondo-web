@@ -5,10 +5,12 @@
 $base-assets-url: "/assets/" !default;
 
 $red-color: #F44336;
+$light-color: #f8f9fa;
 
 $accent-color: #ecb767;
-$primary-color: #f8f9fa;
+$primary-color: $light-color;
 $text-primary-color: #343a40;
+$text-light-color: $light-color;
 $text-muted-color: #6C757D;
 
 $like-color: $red-color;

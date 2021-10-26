@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AppRoutes as AppRoutes } from "@app/routes";
+import { AuthGuard } from "@auth0/auth0-angular";
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
     loadChildren: async () => (await import("@app/modules/auth")).AuthModule
   }, {
     path: AppRoutes.activities,
+    canActivate: [AuthGuard],
     loadChildren: async () => (await import("@app/modules/activities")).ActivitiesModule
   },
   {
