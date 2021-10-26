@@ -1,19 +1,19 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Icons } from "@app/core/enums";
 import { Utils } from "@app/shared/utils";
-import { AppRoutes } from "@app/routes";
 import { LayoutService } from "@app/core/services";
+import { AuthService } from "@auth0/auth0-angular";
 
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"],
+  styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit, OnDestroy {
   public readonly Icons = Icons;
 
-  constructor(private readonly router: Router, private readonly layoutService: LayoutService) {
+  constructor(private readonly router: Router, private readonly layoutService: LayoutService, private readonly auth: AuthService) {
   }
 
   public ngOnInit(): void {
@@ -28,23 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     return Utils.getIconPath(iconName);
   }
 
-  public onFacebookSignInClick(): void {
-    //TODO: tmp mocked - add logic
-    this.navigateToHome();
-  }
-
-  public onGoogleSignInClick(): void {
-    //TODO: tmp mocked - add logic
-    this.navigateToHome();
-  }
-
-  public onGithubSignInClick(): void {
-    //TODO: tmp mocked - add logic
-    this.navigateToHome();
-  }
-
-  private navigateToHome(): void {
-    this.router.navigateByUrl(AppRoutes.home).then(_ => {
-    });
+  public onSignInClick(): void {
+    this.auth.loginWithRedirect();
   }
 }
