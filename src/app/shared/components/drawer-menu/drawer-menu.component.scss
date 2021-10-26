@@ -11,11 +11,19 @@
 .user-info {
   display: flex;
   flex-direction: row;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 
   .avatar-wrapper {
     width: 65px;
     margin-right: 1rem;
+
+    .profile-spinner-wrapper {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   .username {
@@ -50,12 +58,13 @@
 
 .native {
   .user-info {
+    @include mixins.my(0);
     flex-direction: column;
 
     .avatar-wrapper {
       width: 135px;
       margin: auto;
-      @include mixins.my(1rem);
+      @include mixins.my(2.5rem);
     }
 
     .username {
@@ -71,9 +80,5 @@
   .drawer-links {
     width: fit-content;
     margin: auto;
-
-    .link {
-      color: variables.$text-muted-color;
-    }
   }
 }

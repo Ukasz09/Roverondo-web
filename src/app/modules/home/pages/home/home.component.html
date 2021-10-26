@@ -1,23 +1,12 @@
 <div class="container">
-  <div *ngIf="auth.isLoading$ | async; else loaded">
-    <ngx-spinner
-      size="large"
-      color="#f8f9fa"
-      type="ball-beat"
-      [fullScreen]="true">
-      <p class="spinner-label"> Loading auth module </p>
-    </ngx-spinner>
-  </div>
-  <ng-template #loaded>
-    <app-aside-layout>
-      <div class="content">
-        <h1 *ngIf="layoutService.layoutType===LayoutTypeEnum.ASIDE_MOBILE" class="logo">
-          <app-logo-text></app-logo-text>
-        </h1>
-        <div class="sub-logo">
-          <h3 class="text">Follow your path</h3>
-        </div>
+  <app-aside-layout>
+    <div class="content">
+      <h1 *ngIf="layoutService.layoutType===LayoutTypeEnum.ASIDE_MOBILE" class="logo">
+        <app-logo-text></app-logo-text>
+      </h1>
+      <div class="sub-logo">
+        <h3 class="text">Follow your path</h3>
       </div>
-    </app-aside-layout>
-  </ng-template>
+    </div>
+  </app-aside-layout>
 </div>

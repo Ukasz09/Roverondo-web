@@ -15,14 +15,15 @@ export class CustomAuthGuard implements CanActivate {
   public canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    this.auth.isAuthenticated$.subscribe({
-      next: authenticated => {
+
+    this.auth.isAuthenticated$.subscribe(
+      (authenticated) => {
         if (!authenticated) {
           this.router.navigate([AppRoutes.auth]).then(_ => {
           });
         }
       }
-    });
+    );
     return this.auth.isAuthenticated$;
   }
 

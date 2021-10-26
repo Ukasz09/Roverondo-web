@@ -44,6 +44,7 @@ export class ActiveLinkDirective implements OnInit, OnDestroy {
   }
 
   private changeLinkToNotActive(): void {
-    this.elementRef.nativeElement.style.color = "#6C757D";
+    this.elementRef.nativeElement.style.color = "#5b5b5b";
+    this.elementRef.nativeElement.style.fontWeight = 500;
   }
 }

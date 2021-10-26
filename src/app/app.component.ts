@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { filter } from "rxjs/operators";
-import { Subscription } from "rxjs";
+import { Subscription, timer } from "rxjs";
 import { RoutesService } from "@app/core/services";
+import { AuthService } from "@auth0/auth0-angular";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-root",
@@ -12,11 +14,18 @@ import { RoutesService } from "@app/core/services";
 export class AppComponent implements OnInit, OnDestroy {
   private routerEventsSubscription$?: Subscription;
 
-  constructor(private readonly router: Router, private readonly routesService: RoutesService) {
+  constructor(
+    private readonly router: Router,
+    private readonly routesService: RoutesService,
+    public readonly auth: AuthService,
+    private readonly spinner: NgxSpinnerService
+  ) {
   }
 
   public ngOnInit(): void {
     this.subscribeRouterEvents();
+    this.spinner.show().then(_ => {
+    });
   }
 
   public ngOnDestroy(): void {

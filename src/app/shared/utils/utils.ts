@@ -14,4 +14,8 @@ export class Utils {
     const minutes = Math.floor(diff / (60 * 1000)) - ((days * 24 * 60) + (hours * 60));
     return { hour: hours, minute: minutes };
   }
+
+  public static getInitialsImage(name: string): string {
+    return `https://avatars.dicebear.com/api/initials/${name}.svg`;
+  }
 }

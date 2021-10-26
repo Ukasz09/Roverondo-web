@@ -14,6 +14,7 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
 import { LeafletModule } from "@asymmetrik/ngx-leaflet";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { LeafletModule } from "@asymmetrik/ngx-leaflet";
     ScrollContainerComponent,
     MapComponent
   ],
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatSidenavModule, RouterModule, HttpClientModule, LeafletModule]
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatSidenavModule, RouterModule, HttpClientModule, LeafletModule, MatProgressSpinnerModule]
 })
 export class AppSharedModule {
 }

@@ -3,10 +3,18 @@
     <h1 *ngIf="!menuForMobile" class="logo" [routerLink]="AppRoutes.home">
       <app-logo-text></app-logo-text>
     </h1>
-    <div class="avatar-wrapper">
-      <app-profile-avatar></app-profile-avatar>
-    </div>
-    <h4 *ngIf="menuForMobile" class="username">Johnny Doe</h4>
+    <ng-container *ngIf="auth.user$ | async as user; else userLoadingSpinner">
+      <div class="avatar-wrapper">
+        <app-profile-avatar [avatarImgPath]="user.picture ?? getDefaultUserPicture(user.name)"></app-profile-avatar>
+      </div>
+      <h4 *ngIf="menuForMobile" class="username">{{ user.name }}</h4>
+
+    </ng-container>
+    <ng-template #userLoadingSpinner>
+      <div class="profile-spinner-wrapper">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
   </div>
   <div>
     <ul class="drawer-links">
