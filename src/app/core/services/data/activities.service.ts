@@ -25,7 +25,7 @@ export class ActivitiesService {
 
   public getLikedActivities$(): Observable<ActivityPost[]> {
     return this.http.get<ActivityPost[]>(MocksUrl.allActivities).pipe(
-      map(data => data.filter(a => !!a.reactions.find(r => r.userId === "1"))),
+      map(data => data.filter(a => !!a.reactions.find(r => r.userId === "github|44710226"))),
       tap(data => console.log(data))
     );
   }
@@ -34,7 +34,7 @@ export class ActivitiesService {
     // TODO: mocked
     return this.http.get<ActivityPost[]>(MocksUrl.allActivities).pipe(map(posts => {
       const reaction = {
-        userId: "1",
+        userId: "github|44710226",
         addedAt: new Date().toJSON(),
         emoji: "❤"
       };

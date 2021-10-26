@@ -20,10 +20,6 @@ export class AsideMobileComponent implements OnInit {
   constructor(public readonly auth: AuthService) {
   }
 
-  public get avatarWrapperClass(): string {
-    return this.withAvatar ? "" : "aside-logo-out-animation";
-  }
-
   public ngOnInit(): void {
   }
 

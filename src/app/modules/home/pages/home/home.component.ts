@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { LayoutService } from "@app/core/services";
 import { LayoutType } from "@app/core/enums";
-import { Utils } from "@app/shared/utils";
 
 @Component({
   selector: "app-home",

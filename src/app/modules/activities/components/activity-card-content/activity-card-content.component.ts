@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { ActivityPost, PostReaction } from "@app/core/models";
+import { ActivityPost } from "@app/core/models";
 import { Utils } from "@app/shared/utils";
 import { AppRoutes } from "@app/routes";
-import { ActivitiesService, CurrentUserService } from "@app/core/services";
+import { AuthService } from "@auth0/auth0-angular";
 
 @Component({
   selector: "app-activity-card-content",
@@ -16,10 +16,13 @@ export class ActivityCardContentComponent implements OnInit {
   @Output() public like: EventEmitter<void> = new EventEmitter<void>();
   @Output() public comment: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private readonly currentUserService: CurrentUserService) {
+  private currentUserId?: string = undefined;
+
+  constructor(private readonly auth: AuthService) {
   }
 
   public ngOnInit(): void {
+    this.auth.user$.subscribe((user) => this.currentUserId = user?.sub);
   }
 
   public getActivityDuration(): { hour: number; minute: number } {
@@ -33,10 +36,6 @@ export class ActivityCardContentComponent implements OnInit {
   }
 
   public get isLiked(): boolean {
-    const currentUserId = this.currentUserService.currentUser?.id;
-    if (currentUserId) {
-      return !!this.activity.reactions.find(r => r.userId === currentUserId);
-    }
-    return false;
+    return !!this.activity.reactions.find(r => r.userId === this.currentUserId);
   }
 }

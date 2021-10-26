@@ -1,6 +1,6 @@
 import { Gender } from "./gender";
 
-export interface User {
+export interface User{
   id: string,
   name: string;
   lastName: string;
@@ -12,5 +12,5 @@ export interface User {
   gender: Gender;
   weight: number;
   maxHeartRate: number;
-  dateJoined: string;
+  dateJoined: string
 }
