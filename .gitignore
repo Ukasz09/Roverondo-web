@@ -46,3 +46,4 @@ Thumbs.db
 
 # App specific
 auth-config.json
+/documentation/*
