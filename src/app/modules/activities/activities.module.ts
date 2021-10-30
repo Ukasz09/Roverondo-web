@@ -4,14 +4,15 @@ import { ActivitiesWallComponent } from "./pages";
 import { AppSharedModule } from "@app/shared";
 import { ActivitiesRoutingModule } from "./activities-routing.module";
 import { MatIconModule } from "@angular/material/icon";
-import { ActivityCardContentComponent } from "./components";
+import { ActivityCardContentComponent, ActivityDetailsComponent } from "./components";
 import { ActivitiesResolver } from "./services";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
     ActivitiesWallComponent,
-    ActivityCardContentComponent
+    ActivityCardContentComponent,
+    ActivityDetailsComponent
   ],
   imports: [
     CommonModule,
