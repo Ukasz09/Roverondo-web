@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from "@angular/core";
 })
 export class ProfileAvatarComponent implements OnInit {
   @Input()
-  public avatarImgPath: string;
+  public avatarImgPath?: string;
 
   private readonly characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 

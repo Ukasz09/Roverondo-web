@@ -4,7 +4,7 @@
                         [avatarImgPath]="activity.user.profilePicture"></app-profile-avatar>
     <div class="route-header-text">
       <span class="activity-info">
-        <strong class="cursor-pointer" [routerLink]="userProfileLink">{{activity.user.name}}</strong> went bike riding
+        <strong class="cursor-pointer" [routerLink]="userProfileLink">{{activity.user.nickname}}</strong> went bike riding
       </span>
       <span class="date">{{activity.createdAt|date:'medium'}}</span>
     </div>

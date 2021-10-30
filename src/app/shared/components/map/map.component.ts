@@ -52,6 +52,5 @@ export class MapComponent implements OnInit {
       keyboard: false,
       tap: false
     };
-
   }
 }

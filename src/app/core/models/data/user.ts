@@ -1,16 +1,15 @@
-import { Gender } from "./gender";
-
-export interface User{
-  id: string,
-  name: string;
-  lastName: string;
+import { Gender } from './gender';
+export interface User {
+  id: number;
+  providerId: string;
+  nickname: string;
   email: string;
-  profilePicture: string;
-  city: string;
-  bio: string;
-  birthdate: string;
-  gender: Gender;
-  weight: number;
-  maxHeartRate: number;
-  dateJoined: string
+  profilePicture?: string;
+  city?: string;
+  bio?: string;
+  birthDate?: string;
+  gender?: Gender;
+  weight?: number;
+  maxHeartRate?: number;
+  dateJoined: string;
 }

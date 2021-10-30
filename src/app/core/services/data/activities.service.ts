@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { MocksUrl } from "@app/core/enums";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { ActivityPost } from "@app/core/models";
 import { map, tap } from "rxjs/operators";
 
@@ -18,7 +18,7 @@ export class ActivitiesService {
 
   public getMyActivities$(): Observable<ActivityPost[]> {
     return this.http.get<ActivityPost[]>(MocksUrl.allActivities).pipe(
-      map(data => data.filter(a => a.user.id === "1")),
+      map(data => data.filter(a => a.user.id == 1)),
       tap(data => console.log(data))
     );
   }
@@ -30,16 +30,7 @@ export class ActivitiesService {
     );
   }
 
-  public likeActivity$(activityId: string): Observable<ActivityPost> {
-    // TODO: mocked
-    return this.http.get<ActivityPost[]>(MocksUrl.allActivities).pipe(map(posts => {
-      const reaction = {
-        userId: "github|44710226",
-        addedAt: new Date().toJSON(),
-        emoji: "❤"
-      };
-      posts[0].reactions.push(reaction);
-      return posts[0];
-    }));
+  public likeActivity$(activityId: string): Observable<void> {
+    return of();
   }
 }

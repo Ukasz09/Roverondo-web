@@ -3,7 +3,7 @@ import { ActivitiesService, LayoutService } from "@app/core/services";
 import { LayoutType } from "@app/core/enums";
 import { AppRoutes } from "@app/routes";
 import { ActivatedRoute, Data } from "@angular/router";
-import { ActivityPost } from "@app/core/models";
+import { ActivityPost, PostReaction } from "@app/core/models";
 
 @Component({
   selector: "app-activities-wall",
@@ -31,9 +31,8 @@ export class ActivitiesWallComponent implements OnInit {
 
   public onLikeClick(activity: ActivityPost): void {
     this.activitiesService.likeActivity$(activity.id).subscribe({
-      next: updatedActivity => {
-        const activityIndex = this.activities.indexOf(activity);
-        this.activities[activityIndex] = updatedActivity;
+      next: () => {
+        activity.reactions.push({ userId: "1", emoji: "", addedAt: "" } as PostReaction);
       }
     });
   }
