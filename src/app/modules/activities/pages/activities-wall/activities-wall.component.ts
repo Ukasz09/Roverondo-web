@@ -18,6 +18,7 @@ export class ActivitiesWallComponent implements OnInit {
   public scrollContainerId = "activities-wall";
   public activities: ActivityPost[] = [];
   public selectedActivity?: ActivityPost;
+  private loadingMoreActivities = false;
 
   constructor(
     private readonly layoutService: LayoutService,
@@ -46,6 +47,12 @@ export class ActivitiesWallComponent implements OnInit {
         this.activities = data.activities as ActivityPost[];
       }
     });
+
+    this.scrollService.scrollBottomChange$.subscribe((event) => {
+      if (this.needToLoadMoreActivities(event.id, event.position)) {
+        this.loadMoreActivities();
+      }
+    });
   }
 
   public onLikeClick(activity: ActivityPost): void {
@@ -66,5 +73,21 @@ export class ActivitiesWallComponent implements OnInit {
 
   public exitDetailsView(): void {
     this.selectedActivity = undefined;
+  }
+
+  private needToLoadMoreActivities(id: string, bottomPosition: number): boolean {
+    // TODO: tmp fixed offset - change
+    return id === this.scrollContainerId && bottomPosition < 700 && !this.loadingMoreActivities;
+  }
+
+  private loadMoreActivities(): void {
+    this.loadingMoreActivities = true;
+    this.activitiesService.getAllActivities$(this.activities.length).subscribe({
+      next: data => {
+        this.activities = this.activities.concat(data);
+        this.loadingMoreActivities = false;
+      }
+    });
+    console.log("Loading more activities");
   }
 }

@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild } from "@angular/core";
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnInit,
+  ViewChild
+} from "@angular/core";
 import { ScrollService } from "@app/core/services";
 
 @Component({
@@ -21,7 +29,10 @@ export class ScrollContainerComponent implements OnInit {
 
   public onScroll() {
     const scrollTopPos = this.scrollContainer.nativeElement.scrollTop;
+    const scrollHeight = this.scrollContainer.nativeElement.scrollHeight - this.scrollContainer.nativeElement.clientHeight;
+    const scrollBottomPos = scrollHeight - scrollTopPos;
     this.scrollService.saveScrollTopPosition(this.id, scrollTopPos);
+    this.scrollService.saveScrollBottomPosition(this.id, scrollBottomPos);
   }
 
   public scrollTop(offset: number): void {
