@@ -16,14 +16,18 @@ export class ActivitiesResolver implements Resolve<ActivityPost[]> {
   }
 
   public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ActivityPost[]> {
-    const type = route.paramMap.get("type");
+    const type = route.paramMap.get("type") || "";
+    return this.getActivities$(0, type);
+  }
+
+  public getActivities$(offset: number, type: string): Observable<ActivityPost[]> {
     switch (type) {
       case ActivitiesRoutes.allActivities:
-        return this.activitiesService.getAllActivities$();
+        return this.activitiesService.getAllActivities$(offset);
       case ActivitiesRoutes.likedActivities:
-        return this.activitiesService.getLikedActivities$();
+        return this.activitiesService.getLikedActivities$(offset);
       case ActivitiesRoutes.myActivities:
-        return this.activitiesService.getMyActivities$();
+        return this.activitiesService.getMyActivities$(offset);
     }
     return of([]);
   }

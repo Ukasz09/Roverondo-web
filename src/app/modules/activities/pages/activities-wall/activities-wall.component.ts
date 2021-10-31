@@ -5,6 +5,7 @@ import { AppRoutes } from "@app/routes";
 import { ActivatedRoute, Data } from "@angular/router";
 import { ActivityPost, PostReaction } from "@app/core/models";
 import { ScrollContainerComponent } from "@app/shared/components";
+import { ActivitiesResolver } from "../../services";
 
 @Component({
   selector: "app-activities-wall",
@@ -18,12 +19,15 @@ export class ActivitiesWallComponent implements OnInit {
   public scrollContainerId = "activities-wall";
   public activities: ActivityPost[] = [];
   public selectedActivity?: ActivityPost;
+
   private loadingMoreActivities = false;
+  private type = "";
 
   constructor(
     private readonly layoutService: LayoutService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly activitiesService: ActivitiesService,
+    private readonly activitiesResolver: ActivitiesResolver,
     public readonly scrollService: ScrollService
   ) {
   }
@@ -34,7 +38,8 @@ export class ActivitiesWallComponent implements OnInit {
 
   public ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      this.scrollContainerId = `${params.type}-activities-wall`;
+      this.type = params.type;
+      this.scrollContainerId = `${this.type}-activities-wall`;
       if (this.scrollContainerComponent) {
         this.scrollContainerComponent.scrollTop(this.scrollService.getScrollTopPosition(this.scrollContainerId));
       } else {
@@ -82,7 +87,7 @@ export class ActivitiesWallComponent implements OnInit {
 
   private loadMoreActivities(): void {
     this.loadingMoreActivities = true;
-    this.activitiesService.getAllActivities$(this.activities.length).subscribe({
+    this.activitiesResolver.getActivities$(this.activities.length, this.type).subscribe({
       next: data => {
         this.activities = this.activities.concat(data);
         this.loadingMoreActivities = false;
