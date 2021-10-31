@@ -8,3 +8,4 @@ export * from "./drawer-menu/drawer-menu.component";
 export * from "./navbar/navbar.component";
 export * from "./scroll-container/scroll-container.component";
 export * from "./map/map.component";
+export * from "./area-graph/area-graph.component";

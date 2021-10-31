@@ -1,4 +1,4 @@
-<mat-card class="glass-card">
+<mat-card class="glass-card" [ngClass]="{'rounded':rounded}">
   <mat-card-header *ngIf="headerText" class="header">
     <mat-card-title>
       <h4>{{ headerText }}</h4>

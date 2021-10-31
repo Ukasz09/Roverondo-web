@@ -1,5 +1,11 @@
 <app-scroll-container [id]="id" [withScrollbar]="!isMobileLayout">
-  <app-glass-card>
-    <div class="card"></div>
+  <app-glass-card [rounded]="false">
+    <div class="basic-details">
+      <app-activity-card-content [activity]="activity"></app-activity-card-content>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="speed-graph">
+      <app-area-graph [id]="'speed-graph'" [label]="'Speed'"></app-area-graph>
+    </div>
   </app-glass-card>
 </app-scroll-container>

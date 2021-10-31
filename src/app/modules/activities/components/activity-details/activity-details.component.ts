@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { ActivitiesService, LayoutService } from "@app/core/services";
 import { LayoutType } from "@app/core/enums";
+import { ActivityPost } from "@app/core/models";
 
 @Component({
   selector: "app-activity-details",
@@ -9,6 +10,7 @@ import { LayoutType } from "@app/core/enums";
 })
 export class ActivityDetailsComponent implements OnInit {
   @Input() id!: string;
+  @Input() activity!: ActivityPost;
 
   constructor(private readonly layoutService: LayoutService, private readonly activitiesService: ActivitiesService) {
   }

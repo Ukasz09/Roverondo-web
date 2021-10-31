@@ -1,0 +1,22 @@
+<div class="graph-wrapper">
+  <div class="h3 label">{{ label }}</div>
+  <ngx-charts-area-chart
+    *ngIf="dataReady; else spinner"
+    [id]="id"
+    [legend]="withLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxis]="xAxis"
+    [yAxis]="yAxis"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel"
+    [results]="data"
+    (select)="onSelect($event)">
+  </ngx-charts-area-chart>
+
+  <ng-template #spinner>
+    <div class="spinner-wrapper">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+</div>
