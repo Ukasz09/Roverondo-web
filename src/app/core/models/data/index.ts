@@ -12,3 +12,4 @@ export * from "./post-reaction";
 export * from "./route";
 export * from "./point";
 export * from "./point-in-time";
+export * from "./activity-post-details";

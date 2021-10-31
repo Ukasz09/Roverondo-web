@@ -1,0 +1,215 @@
+{
+  "id": "1",
+  "title": "Short trip with my chonky boi",
+  "description": "",
+  "visibility": 0,
+  "createdAt": "2012-04-23T18:25:43.511Z",
+  "modifiedAt": "2012-04-23T18:25:43.511Z",
+  "comments": [
+    1,
+    2
+  ],
+  "workout": {
+    "startTime": "2012-04-23T18:25:43.511Z",
+    "endTime": "2012-04-23T20:25:43.511Z",
+    "distance": 31.8,
+    "averageSpeed": 20.6,
+    "elevation": 172,
+    "minAttitude": 10,
+    "maxAttitude": 30,
+    "minAtmosphericPressure": 1050,
+    "maxAtmosphericPressure": 1020,
+    "calories": 250,
+    "location": "Wrocław, Psie Pole",
+    "route": {
+      "points": []
+    }
+  },
+  "reactions": [
+    {
+      "userId": "2",
+      "addedAt": "2012-04-23T20:25:43.511Z",
+      "emoji": "❤"
+    },
+    {
+      "userId": "3",
+      "addedAt": "2012-04-23T20:25:43.511Z",
+      "emoji": "❤"
+    },
+    {
+      "userId": "4",
+      "addedAt": "2012-04-23T20:25:43.511Z",
+      "emoji": "❤"
+    }
+  ],
+  "user": {
+    "id": "1",
+    "name": "Łukasz",
+    "lastName": "Gajerski",
+    "email": "lukasz@gmail.com",
+    "profilePicture": "https://avatars.dicebear.com/api/initials/Łukasz-Gajerski.svg",
+    "city": "Wrocław",
+    "bio": "I like speed",
+    "birthdate": "1999-06-06",
+    "gender": 0,
+    "weight": 71,
+    "maxHeartRate": 150,
+    "dateJoined": "2021-01-19"
+  },
+  "speedPlot": [
+    {
+      "name": "500m",
+      "value": 23
+    },
+    {
+      "name": "1000m",
+      "value": 25
+    },
+    {
+      "name": "1500m",
+      "value": 29
+    },
+    {
+      "name": "2000m",
+      "value": 11
+    },
+    {
+      "name": "2500m",
+      "value": 13
+    },
+    {
+      "name": "3000m",
+      "value": 11
+    },
+    {
+      "name": "3500m",
+      "value": 30
+    },
+    {
+      "name": "4000m",
+      "value": 23
+    },
+    {
+      "name": "4500m",
+      "value": 25
+    },
+    {
+      "name": "5000m",
+      "value": 29
+    },
+    {
+      "name": "5500m",
+      "value": 14
+    },
+    {
+      "name": "6000m",
+      "value": 16
+    },
+    {
+      "name": "6500m",
+      "value": 24
+    },
+    {
+      "name": "7000m",
+      "value": 23
+    },
+    {
+      "name": "7500m",
+      "value": 21
+    },
+    {
+      "name": "8000m",
+      "value": 20
+    },
+    {
+      "name": "8500m",
+      "value": 24
+    },
+    {
+      "name": "9000m",
+      "value": 27
+    },
+    {
+      "name": "9500m",
+      "value": 29
+    }
+  ],
+  "elevationPlot": [
+    {
+      "name": "500m",
+      "value": 280
+    },
+    {
+      "name": "1000m",
+      "value": 290
+    },
+    {
+      "name": "1500m",
+      "value": 210
+    },
+    {
+      "name": "2000m",
+      "value": 210
+    },
+    {
+      "name": "2500m",
+      "value": 330
+    },
+    {
+      "name": "3000m",
+      "value": 410
+    },
+    {
+      "name": "3500m",
+      "value": 200
+    },
+    {
+      "name": "4000m",
+      "value": 130
+    },
+    {
+      "name": "4500m",
+      "value": 150
+    },
+    {
+      "name": "5000m",
+      "value": 390
+    },
+    {
+      "name": "5500m",
+      "value": 340
+    },
+    {
+      "name": "6000m",
+      "value": 260
+    },
+    {
+      "name": "6500m",
+      "value": 270
+    },
+    {
+      "name": "7000m",
+      "value": 260
+    },
+    {
+      "name": "7500m",
+      "value": 250
+    },
+    {
+      "name": "8000m",
+      "value": 200
+    },
+    {
+      "name": "8500m",
+      "value": 210
+    },
+    {
+      "name": "9000m",
+      "value": 240
+    },
+    {
+      "name": "9500m",
+      "value": 190
+    }
+  ]
+}

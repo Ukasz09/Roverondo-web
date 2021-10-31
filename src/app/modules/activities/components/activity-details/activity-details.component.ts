@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { ActivitiesService, LayoutService } from "@app/core/services";
 import { LayoutType } from "@app/core/enums";
-import { ActivityPost } from "@app/core/models";
+import { ActivityPost, ActivityPostDetails, PlotData } from "@app/core/models";
 
 @Component({
   selector: "app-activity-details",
@@ -9,16 +9,25 @@ import { ActivityPost } from "@app/core/models";
   styleUrls: ["./activity-details.component.scss"]
 })
 export class ActivityDetailsComponent implements OnInit {
-  @Input() id!: string;
-  @Input() activity!: ActivityPost;
+  @Input() public id!: string;
+  @Input() public activity!: ActivityPost;
+
+  public activityDetails?: ActivityPostDetails;
 
   constructor(private readonly layoutService: LayoutService, private readonly activitiesService: ActivitiesService) {
   }
 
   public ngOnInit(): void {
+    this.activitiesService.getActivityDetails(this.activity.id).subscribe({
+      next: (data) => this.activityDetails = data
+    });
   }
 
   public get isMobileLayout(): boolean {
     return this.layoutService.layoutType === LayoutType.ASIDE_MOBILE;
+  }
+
+  public getSpeedPlotData(): PlotData[] {
+    return this.activityDetails ? [this.activityDetails.speedPlot] : [];
   }
 }

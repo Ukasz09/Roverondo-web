@@ -7,7 +7,6 @@ import { MatIconModule } from "@angular/material/icon";
 import { ActivityCardContentComponent, ActivityDetailsComponent } from "./components";
 import { ActivitiesResolver } from "./services";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { MatDividerModule } from "@angular/material/divider";
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import { MatDividerModule } from "@angular/material/divider";
     AppSharedModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatDividerModule
   ],
   providers: [
     ActivitiesResolver

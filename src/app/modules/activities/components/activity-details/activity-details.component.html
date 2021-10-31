@@ -3,9 +3,15 @@
     <div class="basic-details">
       <app-activity-card-content [activity]="activity"></app-activity-card-content>
     </div>
-    <mat-divider></mat-divider>
-    <div class="speed-graph">
-      <app-area-graph [id]="'speed-graph'" [label]="'Speed'"></app-area-graph>
+    <div class="graph-plot">
+      <div class="h3 label">Speed</div>
+      <div class="graph">
+        <app-area-graph [id]="'speed-graph'"
+                        [label]="'Speed'"
+                        [data]="this.activityDetails?.speedPlot"
+                        [xAxis]="false">
+        </app-area-graph>
+      </div>
     </div>
   </app-glass-card>
 </app-scroll-container>

@@ -4,14 +4,6 @@
   margin-bottom: 2.5rem;
   width: 100%;
   height: 100%;
-  overflow: hidden;
-
-  .label{
-    @include mixins.my(2rem);
-    margin-left: 2rem;
-    font-weight: 600;
-  }
-
 
   .spinner-wrapper {
     @include mixins.py(2.5rem);
@@ -19,4 +11,5 @@
     justify-content: center;
   }
 }
+
 

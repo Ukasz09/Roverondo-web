@@ -1,7 +1,6 @@
 <div class="graph-wrapper">
-  <div class="h3 label">{{ label }}</div>
   <ngx-charts-area-chart
-    *ngIf="dataReady; else spinner"
+    *ngIf="data; else spinner"
     [id]="id"
     [legend]="withLegend"
     [showXAxisLabel]="showXAxisLabel"
@@ -10,8 +9,9 @@
     [yAxis]="yAxis"
     [xAxisLabel]="xAxisLabel"
     [yAxisLabel]="yAxisLabel"
-    [results]="data"
-    (select)="onSelect($event)">
+    [results]="[data]"
+    [gradient]="true"
+  >
   </ngx-charts-area-chart>
 
   <ng-template #spinner>
