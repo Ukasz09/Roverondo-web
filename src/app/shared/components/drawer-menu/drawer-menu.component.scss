@@ -16,14 +16,6 @@
   .avatar-wrapper {
     width: 65px;
     margin-right: 1rem;
-
-    .profile-spinner-wrapper {
-      margin-top: 2rem;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-    }
   }
 
   .username {
@@ -81,4 +73,13 @@
     width: fit-content;
     margin: auto;
   }
+}
+
+.profile-spinner-wrapper {
+  @include mixins.mx(auto);
+  @include mixins.my(3rem);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
