@@ -14,7 +14,9 @@ export class ActivityDetailsComponent implements OnInit {
 
   @Output() public exitDetailsClick = new EventEmitter<void>();
 
-  public activityDetails?: ActivityPostDetails;
+  public speedPlotData?: PlotData[];
+  public elevationPlotData?: PlotData[];
+  public combinedPlotData?: PlotData[];
   public maxSpeed?: number;
   public avgSpeed?: number;
   public lowestPoint?: number;
@@ -26,15 +28,17 @@ export class ActivityDetailsComponent implements OnInit {
 
   public ngOnInit(): void {
     this.activitiesService.getActivityDetails(this.activity.id).subscribe({
-      next: (data) => {
-        this.activityDetails = data;
-        const speedValues = this.activityDetails.speedPlot.series.map(data => data.value);
-        const elevationValues = this.activityDetails.elevationPlot.series.map(data => data.value);
+      next: (activityDetails) => {
+        this.speedPlotData = [activityDetails.speedPlot];
+        this.elevationPlotData = [activityDetails.elevationPlot];
+        this.combinedPlotData = this.speedPlotData.concat(this.elevationPlotData);
+        const speedValues = activityDetails.speedPlot.series.map(data => data.value);
+        const elevationValues = activityDetails.elevationPlot.series.map(data => data.value);
         this.maxSpeed = Math.max(...speedValues);
         this.highestPoint = Math.max(...elevationValues);
         this.lowestPoint = Math.min(...elevationValues);
         const speedSum = speedValues.reduce((acc, current) => acc + current, 0);
-        this.avgSpeed = speedSum / this.activityDetails.elevationPlot.series.length;
+        this.avgSpeed = speedSum / activityDetails.elevationPlot.series.length;
       }
     });
   }

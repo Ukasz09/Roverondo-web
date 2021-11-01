@@ -7,7 +7,7 @@ import { PlotData } from "@app/core/models";
   styleUrls: ["./area-graph.component.scss"]
 })
 export class AreaGraphComponent implements OnInit {
-  @Input() public data?: PlotData;
+  @Input() public data?: PlotData[];
   @Input() public id!: string;
   @Input() public label!: string;
   @Input() public showYAxisLabel = false;
@@ -30,5 +30,9 @@ export class AreaGraphComponent implements OnInit {
 
   public get isMultiGraph(): boolean {
     return false;
+  }
+
+  public get dataLoaded(): boolean {
+    return !!(this.data && this.data.length > 0);
   }
 }

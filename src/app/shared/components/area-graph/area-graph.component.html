@@ -1,6 +1,6 @@
 <div class="graph-wrapper">
   <ngx-charts-area-chart
-    *ngIf="data; else spinner"
+    *ngIf="dataLoaded; else spinner"
     [id]="id"
     [legend]="withLegend"
     [showXAxisLabel]="showXAxisLabel"
@@ -9,7 +9,7 @@
     [yAxis]="yAxis"
     [xAxisLabel]="xAxisLabel"
     [yAxisLabel]="yAxisLabel"
-    [results]="[data]"
+    [results]="data"
     [gradient]="true"
     [scheme]="colorScheme"
   >
