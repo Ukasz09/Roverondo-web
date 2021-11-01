@@ -79,6 +79,9 @@
       ],
       "@app/modules/activities": [
         "src/app/modules/activities/index"
+      ],
+      "@app/modules/user": [
+        "src/app/modules/user/index"
       ]
     },
     "resolveJsonModule": true
@@ -87,6 +90,6 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true,
+    "strictTemplates": true
   }
 }

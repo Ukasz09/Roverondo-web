@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "providerId": "auth0|6175ca95cac37f00684e2833",
+    "nickname": "John Smith",
+    "email": "john.smith@email.com",
+    "profilePicture": "https://avatars.dicebear.com/api/initials/JS.svg",
+    "city": null,
+    "bio": null,
+    "birthDate": "2001-10-31T10:02:44.912548Z",
+    "gender": null,
+    "weight": null,
+    "maxHeartRate": null,
+    "dateJoined": "2020-10-31T10:02:44.912013Z"
+  },
+  {
+    "id": 2,
+    "providerId": "auth0|6175ca7dcac37f00684e2816",
+    "nickname": "Sophia Smith",
+    "email": "sophia.smith@email.com",
+    "profilePicture": "https://avatars.dicebear.com/api/initials/SS.svg",
+    "city": null,
+    "bio": "Hi, I'm Sophia and I love cycling :)",
+    "birthDate": "1991-10-31T10:02:45.062231Z",
+    "gender": null,
+    "weight": null,
+    "maxHeartRate": null,
+    "dateJoined": "2020-10-31T10:02:45.062322Z"
+  },
+  {
+    "id": 3,
+    "providerId": "auth0|6175ca54ff86f6006a3d562a",
+    "nickname": "Łukasz Kowalski",
+    "email": "lukasz.kowalski@email.com",
+    "profilePicture": "https://avatars.dicebear.com/api/initials/LG.svg",
+    "city": null,
+    "bio": "Siemka, jestem Ukasz i lubię szybkie zakręty.",
+    "birthDate": null,
+    "gender": null,
+    "weight": null,
+    "maxHeartRate": null,
+    "dateJoined": "2021-10-31T08:02:45.233374Z"
+  },
+  {
+    "id": 4,
+    "providerId": "auth0|6175ca2172efa80069d26d82",
+    "nickname": "honda.tanaka",
+    "email": "honda.tanaka@email.jp",
+    "profilePicture": "https://avatars.dicebear.com/api/initials/HT.svg",
+    "city": null,
+    "bio": null,
+    "birthDate": null,
+    "gender": null,
+    "weight": null,
+    "maxHeartRate": null,
+    "dateJoined": "2021-10-31T10:02:44.243631Z"
+  }
+]

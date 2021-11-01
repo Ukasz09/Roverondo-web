@@ -1,0 +1,14 @@
+{
+  "id": 1,
+  "providerId": "auth0|6175ca95cac37f00684e2833",
+  "nickname": "John Smith",
+  "email": "john.smith@email.com",
+  "profilePicture": "https://avatars.dicebear.com/api/initials/JS.svg",
+  "city": null,
+  "bio": null,
+  "birthDate": "2001-10-31T10:02:44.912548Z",
+  "gender": null,
+  "weight": null,
+  "maxHeartRate": null,
+  "dateJoined": "2020-10-31T10:02:44.912013Z"
+}

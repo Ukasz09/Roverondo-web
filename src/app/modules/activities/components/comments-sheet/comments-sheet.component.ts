@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from "@angular/material/bottom-sheet";
 import { ActivitiesService } from "@app/core/services";
 import { PostComment } from "@app/core/models";
-import { timer } from "rxjs";
 
 @Component({
   selector: "app-comments-sheet",
