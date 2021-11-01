@@ -1,12 +1,32 @@
 <mat-nav-list>
-  <ng-container *ngFor="let _ of [1,2,3,4,5,6,7,8,9,1,2,3,4,5,6,7]">
+  <ng-container *ngIf="commentList; else spinner">
     <a class="comment-wrapper" mat-list-item>
-      <div mat-line class="user">
-        <app-profile-avatar></app-profile-avatar>
-        <span class="name">Ania</span>
+      <div mat-line class="comment">
+        Input
+<!--        TODO: -->
       </div>
-      <div mat-line class="comment">Add to a note loremto a not</div>
     </a>
-    <div class="divider"></div>
+    <ng-container *ngIf="commentList.length>0; else noCommentsTemplate">
+      <ng-container *ngFor="let comment of this.commentList">
+        <a class="comment-wrapper" mat-list-item>
+          <div mat-line class="user">
+            <app-profile-avatar [avatarImgPath]="comment.user.profilePicture"></app-profile-avatar>
+            <span class="name">{{comment.user.nickname}}</span>
+          </div>
+          <div mat-line class="comment">{{comment.text}}</div>
+        </a>
+        <div class="divider"></div>
+      </ng-container>
+    </ng-container>
   </ng-container>
 </mat-nav-list>
+<ng-template #noCommentsTemplate>
+  <a class="comment-wrapper" mat-list-item>
+    <div mat-line class="comment no-comments">No comments yet</div>
+  </a>
+</ng-template>
+<ng-template #spinner>
+  <div class="spinner-wrapper">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

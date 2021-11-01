@@ -13,6 +13,7 @@ import { CommentsSheetComponent } from "../comments-sheet/comments-sheet.compone
 })
 export class ActivityCardContentComponent implements OnInit {
   @Input() public activity!: ActivityPost;
+  @Input() public disableMapInteractions = true;
 
   @Output() public detailsClick: EventEmitter<void> = new EventEmitter<void>();
   @Output() public like: EventEmitter<void> = new EventEmitter<void>();
@@ -44,6 +45,6 @@ export class ActivityCardContentComponent implements OnInit {
 
 
   public openCommentsSheet(): void {
-    this._bottomSheet.open(CommentsSheetComponent, { hasBackdrop: true });
+    this._bottomSheet.open(CommentsSheetComponent, { hasBackdrop: true, data: { postId: this.activity.id } });
   }
 }

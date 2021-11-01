@@ -1,0 +1,56 @@
+[
+  {
+    "text": "Nice trip :)",
+    "createdAt": "2012-04-23T20:25:43.511Z",
+    "modifiedAt": null,
+    "user": {
+      "profilePicture": "https://avatars.dicebear.com/api/initials/JN.svg",
+      "nickname": "Jenn"
+    }
+  },
+  {
+    "text": "Cool bro",
+    "createdAt": "2012-01-11T20:25:43.511Z",
+    "modifiedAt": null,
+    "user": {
+      "profilePicture": "https://avatars.dicebear.com/api/initials/JohnSmith.svg",
+      "nickname": "John Smith"
+    }
+  },
+  {
+    "text": "I was faster there ! ;)",
+    "createdAt": "2012-04-21T20:25:43.511Z",
+    "modifiedAt": null,
+    "user": {
+      "profilePicture": "https://avatars.dicebear.com/api/initials/JockoDreg.svg",
+      "nickname": "Jocko Dreg"
+    }
+  },
+  {
+    "text": "Hm.. I would like to go there",
+    "createdAt": "2021-05-23T20:25:43.511Z",
+    "modifiedAt": null,
+    "user": {
+      "profilePicture": "https://avatars.dicebear.com/api/initials/EchoCharles.svg",
+      "nickname": "Echo Charles"
+    }
+  },
+  {
+    "text": "Arriba arriba",
+    "createdAt": "2012-04-23T20:25:43.511Z",
+    "modifiedAt": null,
+    "user": {
+      "profilePicture": "https://avatars.dicebear.com/api/initials/DrunkMath.svg",
+      "nickname": "Drunk Math"
+    }
+  },
+  {
+    "text": "Heh. Lol. And very log comment is here and whatever you know. I like you. Period",
+    "createdAt": "2021-04-23T20:25:43.511Z",
+    "modifiedAt": null,
+    "user": {
+      "profilePicture": "https://avatars.dicebear.com/api/initials/AliceLenn.svg",
+      "nickname": "Alice Lenn"
+    }
+  }
+]

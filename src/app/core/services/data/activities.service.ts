@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { MocksUrl } from "@app/core/enums";
 import { Observable, of } from "rxjs";
-import { ActivityPost, ActivityPostDetails } from "@app/core/models";
+import { ActivityPost, ActivityPostDetails, PostComment } from "@app/core/models";
 import { map, tap } from "rxjs/operators";
 import { PlotDataAdapterService } from "../adapters";
 
@@ -37,5 +37,9 @@ export class ActivitiesService {
 
   public getActivityDetails(activityId: string): Observable<ActivityPostDetails> {
     return this.http.get<ActivityPostDetails>(MocksUrl.activityDetails).pipe(map(post => this.plotDataAdapter.adapt(post)));
+  }
+
+  public getComments(activityId: string): Observable<PostComment[]> {
+    return this.http.get<PostComment[]>(MocksUrl.postComments);
   }
 }

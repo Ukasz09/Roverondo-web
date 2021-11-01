@@ -1,7 +1,7 @@
 <app-scroll-container [id]="id" [withScrollbar]="!isMobileLayout">
   <app-glass-card [rounded]="false">
     <div class="basic-details">
-      <app-activity-card-content [activity]="activity"></app-activity-card-content>
+      <app-activity-card-content [disableMapInteractions]="false" [activity]="activity"></app-activity-card-content>
     </div>
 
     <div class="graph-plot">

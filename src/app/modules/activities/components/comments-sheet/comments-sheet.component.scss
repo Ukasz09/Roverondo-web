@@ -1,3 +1,7 @@
+@use "/src/app/styles/abstracts/variables";
+@use "/src/app/styles/abstracts/mixins";
+
+
 .comment-wrapper {
   display: flex;
   flex-direction: row;
@@ -24,11 +28,23 @@
     display: flex;
     align-items: center;
   }
+
+  .no-comments {
+    text-align: center;
+    color: variables.$text-muted-color;
+    justify-content: center;
+  }
 }
 
-.divider{
+.divider {
   margin-top: 1rem;
   margin-bottom: 1rem;
   width: 100%;
   background: transparent;
+}
+
+.spinner-wrapper {
+  @include mixins.py(5rem);
+  display: flex;
+  justify-content: center;
 }
