@@ -1,1 +1,16 @@
-<p>users-list works!</p>
+<app-scroll-container [id]="'followers-list'"
+                      [withScrollbar]="!isMobileLayout"
+                      [initialScrollTopOffsetPx]="0">
+  <div class="content">
+    <div *ngFor="let user of userList" class="card-wrapper">
+      <app-glass-card [rounded]="true" (click)="onUserClick(user)">
+        <div class="user">
+          <app-profile-avatar [id]="user.id"
+                              [avatarImgPath]="user.profilePicture"
+          ></app-profile-avatar>
+          <label [for]="user.id" class="name">{{user.nickname}}</label>
+        </div>
+      </app-glass-card>
+    </div>
+  </div>
+</app-scroll-container>

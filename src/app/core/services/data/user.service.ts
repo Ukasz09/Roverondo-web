@@ -14,4 +14,8 @@ export class UserService {
   public getUser$(userId: string): Observable<User> {
     return this.http.get<User>(MocksUrl.user);
   }
+
+  public getFollowers$(userId: string): Observable<User[]> {
+    return this.http.get<User[]>(MocksUrl.users);
+  }
 }

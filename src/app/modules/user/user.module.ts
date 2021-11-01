@@ -5,6 +5,7 @@ import { UsersListComponent } from "./components";
 import { AppSharedModule } from "@app/shared";
 import { UserRoutingModule } from "./user-routing.module";
 import { UserResolver } from "./services";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { UserResolver } from "./services";
   imports: [
     CommonModule,
     AppSharedModule,
-    UserRoutingModule
+    UserRoutingModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     UserResolver

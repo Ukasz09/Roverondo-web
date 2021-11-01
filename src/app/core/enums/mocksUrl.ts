@@ -3,4 +3,5 @@ export enum MocksUrl {
   activityDetails = "assets/mocks/activity-details.json",
   postComments = "assets/mocks/post-comments.json",
   user = "assets/mocks/user.json",
+  users = "assets/mocks/users.json",
 }
