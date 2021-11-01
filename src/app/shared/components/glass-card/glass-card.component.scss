@@ -4,6 +4,8 @@
 .glass-card {
   @include mixins.glass-effect(variables.$glass-lighter-bg);
   border-radius: 0;
+  min-height: 100%;
+  width: 100%;
 
   &.rounded {
     border-radius: 25px;

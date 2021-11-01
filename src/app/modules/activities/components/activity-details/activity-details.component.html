@@ -4,7 +4,7 @@
       <app-activity-card-content [activity]="activity"></app-activity-card-content>
     </div>
     <div class="graph-plot">
-      <div class="h3 label">Speed</div>
+      <div class="label">Speed</div>
       <div class="graph">
         <app-area-graph [id]="'speed-graph'"
                         [label]="'Speed'"
@@ -13,5 +13,28 @@
         </app-area-graph>
       </div>
     </div>
+    <div class="graph-plot">
+      <div class="label">Elevation</div>
+      <div class="graph">
+        <app-area-graph [id]="'elevation-graph'"
+                        [label]="'Speed'"
+                        [data]="this.activityDetails?.elevationPlot"
+                        [xAxis]="false"
+                        [colorScheme]="'nightLights'">
+        </app-area-graph>
+      </div>
+    </div>
+
+    <div *ngIf="isMobileLayout" (click)="exitDetailsClick.emit()" class="back-to-wall-btn">
+      <app-glass-btn>
+        <div class="content" btn-content>
+          <div class="icon">
+            <mat-icon>chevron_left</mat-icon>
+          </div>
+          <span>Back to the wall</span>
+        </div>
+      </app-glass-btn>
+    </div>
+
   </app-glass-card>
 </app-scroll-container>

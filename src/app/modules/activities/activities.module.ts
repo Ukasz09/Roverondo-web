@@ -19,7 +19,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     ActivitiesRoutingModule,
     AppSharedModule,
     MatIconModule,
-    MatProgressSpinnerModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     ActivitiesResolver

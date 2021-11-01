@@ -5,7 +5,7 @@
 .container {
   @include mixins.bg-fill();
   @include mixins.max-viewport();
-  background-image: functions.image("activities-bg-2.jpg");
+  background-image: functions.image("activities-bg.jpg");
 
   .content {
     height: 100%;
@@ -74,8 +74,12 @@
     height: 100%;
 
     app-activity-details {
-      width: 95%;
+      width: 100%;
       height: 100%;
+
+      @include mixins.media(sm-small) {
+        width: 90%;
+      }
 
       @include mixins.media(sm-large) {
         width: 85%;
@@ -86,6 +90,7 @@
       display: flex;
       flex: 1;
       height: 100%;
+      cursor: pointer;
     }
   }
 }

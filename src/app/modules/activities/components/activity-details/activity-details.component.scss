@@ -2,29 +2,70 @@
 
 app-scroll-container {
   width: 100%;
+  min-height: 100vh;
   height: 100%;
 
-  .basic-details {
-    margin-bottom: 2.5rem;
-  }
+  app-glass-card {
+    height: 100%;
+    width: 100%;
 
-  .graph-plot {
-
-    .label {
-      @include mixins.my(2rem);
-      margin-left: 2rem;
-      font-weight: 600;
+    .basic-details {
+      margin-bottom: 2.5rem;
     }
 
-    .graph {
-      height: 300px;
-      width: 100%;
-    }
-  }
+    .graph-plot {
+      margin-top: 2rem;
 
-  .spinner-wrapper {
-    @include mixins.py(2.5rem);
-    display: flex;
-    justify-content: center;
+      @include mixins.media(sm-xsmall) {
+        margin-top: 4rem;
+      }
+
+      @include mixins.media(sm-small) {
+        @include mixins.px(1rem);
+      }
+
+
+      .label {
+        @include mixins.my(2rem);
+        font-weight: 600;
+        font-size: 18px;
+
+        @include mixins.media(md-large) {
+          font-size: 20px;
+        }
+      }
+
+      .graph {
+        height: 150px;
+        width: 100%;
+
+        @include mixins.media(md-large) {
+          height: 250px;
+        }
+      }
+    }
+
+    .spinner-wrapper {
+      @include mixins.py(2.5rem);
+      display: flex;
+      justify-content: center;
+    }
+
+    .back-to-wall-btn {
+      margin-top: 2.5rem;
+
+      .content {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        .icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+
+    }
   }
 }

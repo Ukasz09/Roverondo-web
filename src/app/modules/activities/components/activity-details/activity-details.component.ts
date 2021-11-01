@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { ActivitiesService, LayoutService } from "@app/core/services";
 import { LayoutType } from "@app/core/enums";
 import { ActivityPost, ActivityPostDetails, PlotData } from "@app/core/models";
@@ -11,6 +11,8 @@ import { ActivityPost, ActivityPostDetails, PlotData } from "@app/core/models";
 export class ActivityDetailsComponent implements OnInit {
   @Input() public id!: string;
   @Input() public activity!: ActivityPost;
+
+  @Output() public exitDetailsClick = new EventEmitter<void>();
 
   public activityDetails?: ActivityPostDetails;
 
@@ -25,9 +27,5 @@ export class ActivityDetailsComponent implements OnInit {
 
   public get isMobileLayout(): boolean {
     return this.layoutService.layoutType === LayoutType.ASIDE_MOBILE;
-  }
-
-  public getSpeedPlotData(): PlotData[] {
-    return this.activityDetails ? [this.activityDetails.speedPlot] : [];
   }
 }

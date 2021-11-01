@@ -2,8 +2,12 @@
   <app-aside-layout>
     <div class="content">
       <div *ngIf="selectedActivity; else activitiesWall" class="details">
-        <app-activity-details [id]="'activity-details'" [activity]="selectedActivity"></app-activity-details>
-        <div class="backdrop" (click)="exitDetailsView()"></div>
+        <app-activity-details [id]="'activity-details'"
+                              [activity]="selectedActivity"
+                              (exitDetailsClick)="exitDetailsView()">
+        </app-activity-details>
+        <div class="backdrop" (click)="exitDetailsView()">
+        </div>
       </div>
       <ng-template #activitiesWall>
         <h1 *ngIf="isMobileLayout" class="mobile-logo">
