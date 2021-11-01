@@ -15,13 +15,27 @@ export class ActivityDetailsComponent implements OnInit {
   @Output() public exitDetailsClick = new EventEmitter<void>();
 
   public activityDetails?: ActivityPostDetails;
+  public maxSpeed?: number;
+  public avgSpeed?: number;
+  public lowestPoint?: number;
+  public highestPoint?: number;
+  public numberFormat = ".2-2";
 
   constructor(private readonly layoutService: LayoutService, private readonly activitiesService: ActivitiesService) {
   }
 
   public ngOnInit(): void {
     this.activitiesService.getActivityDetails(this.activity.id).subscribe({
-      next: (data) => this.activityDetails = data
+      next: (data) => {
+        this.activityDetails = data;
+        const speedValues = this.activityDetails.speedPlot.series.map(data => data.value);
+        const elevationValues = this.activityDetails.elevationPlot.series.map(data => data.value);
+        this.maxSpeed = Math.max(...speedValues);
+        this.highestPoint = Math.max(...elevationValues);
+        this.lowestPoint = Math.min(...elevationValues);
+        const speedSum = speedValues.reduce((acc, current) => acc + current, 0);
+        this.avgSpeed = speedSum / this.activityDetails.elevationPlot.series.length;
+      }
     });
   }
 

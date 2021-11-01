@@ -16,6 +16,10 @@ app-scroll-container {
     .graph-plot {
       margin-top: 2rem;
 
+      &:last-child{
+      margin-bottom: 1.5rem;
+    }
+
       @include mixins.media(sm-xsmall) {
         margin-top: 4rem;
       }
@@ -41,6 +45,31 @@ app-scroll-container {
 
         @include mixins.media(md-large) {
           height: 250px;
+        }
+      }
+
+      .stats{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        margin-top: 2rem;
+        font-size: 11px;
+
+        @include mixins.media(xs-large){
+          font-size: 15px;
+        }
+
+        @include mixins.media(sm-xsmall){
+          font-size: 18px;
+        }
+
+        .name{
+          font-weight: 600;
+          margin-right: 0.5rem;
+
+          @include mixins.media(sm-xsmall){
+            margin-right: 1rem;
+          }
         }
       }
     }

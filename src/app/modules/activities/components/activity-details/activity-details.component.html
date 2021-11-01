@@ -12,6 +12,16 @@
                         [xAxis]="false">
         </app-area-graph>
       </div>
+      <div class="stats">
+        <div>
+          <span class="name">Max speed:</span>
+          <span>{{ maxSpeed | number:numberFormat }}km/h </span>
+        </div>
+        <div>
+          <span class="name">Avg speed:</span>
+          <span>{{ avgSpeed | number:numberFormat}}km/h</span>
+        </div>
+      </div>
     </div>
     <div class="graph-plot">
       <div class="label">Elevation</div>
@@ -22,6 +32,16 @@
                         [xAxis]="false"
                         [colorScheme]="'nightLights'">
         </app-area-graph>
+      </div>
+      <div class="stats">
+        <div>
+          <span class="name">Highest point:</span>
+          <span>{{ highestPoint | number:numberFormat}}m</span>
+        </div>
+        <div>
+          <span class="name">Lowest point:</span>
+          <span>{{ lowestPoint |number:numberFormat}}m</span>
+        </div>
       </div>
     </div>
 
