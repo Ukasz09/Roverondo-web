@@ -3,6 +3,8 @@ import { ActivityPost } from "@app/core/models";
 import { Utils } from "@app/shared/utils";
 import { AppRoutes } from "@app/routes";
 import { AuthService } from "@auth0/auth0-angular";
+import { MatBottomSheet } from "@angular/material/bottom-sheet";
+import { CommentsSheetComponent } from "../comments-sheet/comments-sheet.component";
 
 @Component({
   selector: "app-activity-card-content",
@@ -18,7 +20,8 @@ export class ActivityCardContentComponent implements OnInit {
 
   private currentUserId?: string = undefined;
 
-  constructor(private readonly auth: AuthService) {
+  constructor(private readonly auth: AuthService,
+              private readonly _bottomSheet: MatBottomSheet) {
   }
 
   public ngOnInit(): void {
@@ -37,5 +40,10 @@ export class ActivityCardContentComponent implements OnInit {
 
   public get isLiked(): boolean {
     return !!this.activity.reactions.find(r => r.userId === this.currentUserId);
+  }
+
+
+  public openCommentsSheet(): void {
+    this._bottomSheet.open(CommentsSheetComponent, { hasBackdrop: true });
   }
 }

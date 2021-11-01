@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { ActivitiesService, LayoutService } from "@app/core/services";
 import { LayoutType } from "@app/core/enums";
-import { ActivityPost, ActivityPostDetails, PlotData } from "@app/core/models";
+import { ActivityPost, PlotData } from "@app/core/models";
 
 @Component({
   selector: "app-activity-details",
@@ -23,7 +23,9 @@ export class ActivityDetailsComponent implements OnInit {
   public highestPoint?: number;
   public numberFormat = ".2-2";
 
-  constructor(private readonly layoutService: LayoutService, private readonly activitiesService: ActivitiesService) {
+  constructor(
+    private readonly layoutService: LayoutService,
+    private readonly activitiesService: ActivitiesService) {
   }
 
   public ngOnInit(): void {

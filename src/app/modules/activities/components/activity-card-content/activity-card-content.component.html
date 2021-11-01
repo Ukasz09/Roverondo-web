@@ -29,7 +29,7 @@
         <mat-icon class="icon">favorite_border</mat-icon>
         <label for="like" class="text">{{activity.reactions.length}}</label>
       </div>
-      <div>
+      <div style="cursor: pointer" (click)="openCommentsSheet()">
         <mat-icon class="icon">chat_bubble_outline</mat-icon>
         <label for="comment" class="text">{{activity.comments.length}}</label>
       </div>
