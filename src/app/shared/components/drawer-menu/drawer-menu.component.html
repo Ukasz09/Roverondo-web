@@ -5,11 +5,11 @@
     </h1>
     <ng-container *ngIf="auth.user$ | async as user; else userLoadingSpinner">
       <div class="avatar-wrapper">
-        <app-profile-avatar [avatarImgPath]="user.picture ?? getDefaultUserPicture(user.name)"
+        <app-profile-avatar id="user-avatar" [avatarImgPath]="user.picture ?? getDefaultUserPicture(user.name)"
                             [routerLink]="getRouteLink([AppRoutes.user])">
         </app-profile-avatar>
       </div>
-      <h4 *ngIf="menuForMobile" class="username">{{ user.name }}</h4>
+      <label for="user-avatar" *ngIf="menuForMobile" class="username">{{ user.name }}</label>
 
     </ng-container>
     <ng-template #userLoadingSpinner>
