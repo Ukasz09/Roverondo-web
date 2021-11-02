@@ -10,7 +10,7 @@ import { LayoutService } from "@app/core/services";
 export class FollowPageComponent implements OnInit {
   @Input() public users?: User[];
 
-  constructor(private readonly layoutService:LayoutService) {
+  constructor() {
   }
 
   public ngOnInit(): void {

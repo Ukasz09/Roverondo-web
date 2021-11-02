@@ -32,7 +32,7 @@ export class CommentsSheetComponent implements OnInit {
   }
 
   public onSubmit(commentModel: NgModel): void {
-    // TODO: add spinner
+    // TODO: add spinner, cleanup
     if (commentModel.valid && this.newCommentValue) {
       this.activitiesService.addComment(this.data.postId, this.newCommentValue).subscribe({
         next: () => {

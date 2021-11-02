@@ -12,8 +12,6 @@ import { UserRoutes } from "../../user-routes";
   styleUrls: ["./users-list.component.scss"]
 })
 export class UsersListComponent implements OnInit {
-  // TODO: improve mobile design
-
   @Input() public userList!: User[];
 
   constructor(

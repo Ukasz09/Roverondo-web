@@ -53,6 +53,28 @@
         height: 100%;
       }
 
+      .no-users{
+        @include mixins.mx(auto);
+        height: 100vh;
+        width: 90%;
+        display: flex;
+        align-items: flex-start;
+
+        .text{
+          @include mixins.glass-effect(variables.$glass-lighter-bg);
+          @include mixins.py(1.5rem);
+          width: 100%;
+          text-align: center;
+          font-size: 16px;
+          font-weight: 600;
+          border-radius: 5px;
+
+          @include mixins.media(sm-large) {
+            font-size: 20px;
+          }
+        }
+      }
+
       .spinner-wrapper {
         @include mixins.py(5rem);
         @include mixins.glass-effect(variables.$glass-lighter-bg);

@@ -44,6 +44,7 @@ export class FollowersComponent implements OnInit {
   public fetchFollowers(userId: string): void {
     this.userService.getFollowers$(userId).subscribe({
       next: (followers) => {
+        this.followers = [];
         this.followers = followers;
         this.sortUsers();
       }

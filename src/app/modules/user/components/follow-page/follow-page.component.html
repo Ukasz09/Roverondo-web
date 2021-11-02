@@ -3,7 +3,16 @@
     <div class="content-wrapper">
       <div class="content">
         <ng-container *ngIf="users; else spinner">
-          <app-users-list [userList]="users"></app-users-list>
+          <ng-container *ngIf="users.length>0; else notFoundUsersTemplate">
+            <app-users-list [userList]="users"></app-users-list>
+          </ng-container>
+          <ng-template #notFoundUsersTemplate>
+            <div class="no-users">
+              <span class="text">
+                Not found any users
+              </span>
+            </div>
+          </ng-template>
         </ng-container>
         <ng-template #spinner>
           <div class="spinner-wrapper">
