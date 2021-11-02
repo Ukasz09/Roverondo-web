@@ -22,7 +22,7 @@ const routes: Routes = [
     loadChildren: async () => (await import("@app/modules/activities")).ActivitiesModule
   },
   {
-    path: AppRoutes.userProfile,
+    path: AppRoutes.user,
     // canActivate: [CustomAuthGuard], // TODO: tmp
     loadChildren: async () => (await import("@app/modules/user")).UserModule
   }

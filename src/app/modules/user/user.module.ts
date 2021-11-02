@@ -6,6 +6,7 @@ import { AppSharedModule } from "@app/shared";
 import { UserRoutingModule } from "./user-routing.module";
 import { UserResolver } from "./services";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { FollowPageComponent } from './components/follow-page/follow-page.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     UserProfileComponent,
     FollowersComponent,
     FollowingComponent,
-    UsersListComponent
+    UsersListComponent,
+    FollowPageComponent
   ],
   imports: [
     CommonModule,

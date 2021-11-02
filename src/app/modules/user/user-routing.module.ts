@@ -8,27 +8,48 @@ const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
+    redirectTo: `${UserRoutes.profile}`
+  },
+  {
+    path: `${UserRoutes.profile}`,
+    pathMatch: "full",
     component: UserProfileComponent,
     resolve: {
       user: UserResolver
     }
   },
   {
-    path: ":id",
+    path: `${UserRoutes.profile}/:id`,
     component: UserProfileComponent,
     resolve: {
       user: UserResolver
     }
   },
   {
-    path: `:id/${UserRoutes.followers}`,
+    path: `${UserRoutes.followers}`,
+    pathMatch: "full",
     component: FollowersComponent,
     resolve: {
       user: UserResolver
     }
   },
   {
-    path: `:id/${UserRoutes.following}`,
+    path: `${UserRoutes.followers}/:id`,
+    component: FollowersComponent,
+    resolve: {
+      user: UserResolver
+    }
+  },
+  {
+    path: `${UserRoutes.following}`,
+    pathMatch: "full",
+    component: FollowingComponent,
+    resolve: {
+      user: UserResolver
+    }
+  },
+  {
+    path: `${UserRoutes.following}/:id`,
     component: FollowingComponent,
     resolve: {
       user: UserResolver

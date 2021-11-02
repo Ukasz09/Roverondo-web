@@ -36,7 +36,7 @@ export class ActivityCardContentComponent implements OnInit {
   }
 
   public get userProfileLink(): string {
-    return `${AppRoutes.userProfile}/${this.activity.user.id}`;
+    return `${AppRoutes.user}/${this.activity.user.id}`;
   }
 
   public get isLiked(): boolean {

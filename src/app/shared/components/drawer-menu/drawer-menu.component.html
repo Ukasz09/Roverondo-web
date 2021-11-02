@@ -5,7 +5,9 @@
     </h1>
     <ng-container *ngIf="auth.user$ | async as user; else userLoadingSpinner">
       <div class="avatar-wrapper">
-        <app-profile-avatar [avatarImgPath]="user.picture ?? getDefaultUserPicture(user.name)"></app-profile-avatar>
+        <app-profile-avatar [avatarImgPath]="user.picture ?? getDefaultUserPicture(user.name)"
+                            [routerLink]="getRouteLink([AppRoutes.user])">
+        </app-profile-avatar>
       </div>
       <h4 *ngIf="menuForMobile" class="username">{{ user.name }}</h4>
 
@@ -68,7 +70,7 @@
       </h3></li>
       <li><h3
         class="link"
-        [routerLink]="getRouteLink([AppRoutes.followers])"
+        [routerLink]="getRouteLink([AppRoutes.user,AppRoutes.followers])"
         [appActiveLink]="AppRoutes.followers"
         (click)="closeDrawer.emit()"
         id="followers">
@@ -76,7 +78,7 @@
       </h3></li>
       <li><h3
         class="link"
-        [routerLink]="getRouteLink([AppRoutes.following])"
+        [routerLink]="getRouteLink([AppRoutes.user,AppRoutes.following])"
         [appActiveLink]="AppRoutes.following"
         (click)="closeDrawer.emit()"
         id="following">

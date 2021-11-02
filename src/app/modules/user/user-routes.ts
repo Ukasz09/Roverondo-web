@@ -1,4 +1,5 @@
 export enum UserRoutes {
   followers = "followers",
-  following = "following"
+  following = "following",
+  profile = "profile"
 }

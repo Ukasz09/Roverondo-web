@@ -4,6 +4,7 @@ import { User } from "@app/core/models";
 import { LayoutType } from "@app/core/enums";
 import { Router } from "@angular/router";
 import { AppRoutes } from "@app/routes";
+import { UserRoutes } from "../../user-routes";
 
 @Component({
   selector: "app-users-list",
@@ -29,6 +30,6 @@ export class UsersListComponent implements OnInit {
   }
 
   public onUserClick(user: User): void {
-    this.router.navigate([`${AppRoutes.userProfile}/${user.id}`]).then();
+    this.router.navigate([`${AppRoutes.user}/${UserRoutes.profile}/${user.id}`]).then();
   }
 }

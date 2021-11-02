@@ -1,0 +1,16 @@
+<div class="container">
+  <app-aside-layout>
+    <div class="content-wrapper">
+      <div class="content">
+        <ng-container *ngIf="users; else spinner">
+          <app-users-list [userList]="users"></app-users-list>
+        </ng-container>
+        <ng-template #spinner>
+          <div class="spinner-wrapper">
+            <mat-spinner></mat-spinner>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </app-aside-layout>
+</div>
