@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { User } from "@app/core/models";
+import { LayoutService } from "@app/core/services";
 
 @Component({
   selector: "app-follow-page",
@@ -9,7 +10,7 @@ import { User } from "@app/core/models";
 export class FollowPageComponent implements OnInit {
   @Input() public users?: User[];
 
-  constructor() {
+  constructor(private readonly layoutService:LayoutService) {
   }
 
   public ngOnInit(): void {

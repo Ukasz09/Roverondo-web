@@ -3,7 +3,7 @@
                       [initialScrollTopOffsetPx]="0">
   <div class="content">
     <div *ngFor="let user of userList" class="card-wrapper">
-      <app-glass-card [rounded]="false" (click)="onUserClick(user)">
+      <app-glass-card [borderRadius]="'5px'" (click)="onUserClick(user)">
         <div class="user">
           <app-profile-avatar [id]="user.id"
                               [avatarImgPath]="user.profilePicture"

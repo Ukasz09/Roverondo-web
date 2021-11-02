@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from "@angular/core";
 })
 export class GlassCardComponent implements OnInit {
   @Input() public headerText: string = "";
-  @Input() public rounded = true;
+  @Input() public borderRadius = "25px";
 
   constructor() {
   }

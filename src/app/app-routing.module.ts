@@ -10,7 +10,7 @@ const routes: Routes = [
     redirectTo: `${AppRoutes.home}`
   }, {
     path: AppRoutes.home,
-    // canActivate: [CustomAuthGuard], // TODO: tmp
+    canActivate: [CustomAuthGuard],
     loadChildren: async () => (await import("@app/modules/home")).HomeModule
   },
   {
@@ -18,12 +18,12 @@ const routes: Routes = [
     loadChildren: async () => (await import("@app/modules/auth")).AuthModule
   }, {
     path: AppRoutes.activities,
-    // canActivate: [CustomAuthGuard], // TODO: tmp
+    canActivate: [CustomAuthGuard],
     loadChildren: async () => (await import("@app/modules/activities")).ActivitiesModule
   },
   {
     path: AppRoutes.user,
-    // canActivate: [CustomAuthGuard], // TODO: tmp
+    canActivate: [CustomAuthGuard],
     loadChildren: async () => (await import("@app/modules/user")).UserModule
   }
   ,

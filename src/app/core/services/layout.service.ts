@@ -8,8 +8,10 @@ import { Constants } from "@app/core/constants";
 })
 export class LayoutService {
   public drawerIsOpen = false;
+  public width:number;
 
   constructor() {
+    this.width= window.innerWidth;
   }
 
   public _layoutType = LayoutType.ASIDE_NATIVE;
@@ -19,7 +21,8 @@ export class LayoutService {
   }
 
   public setAsideLayoutType(width: number): void {
-    this._layoutType = width < Constants.pcResolutionThresholdPx ? LayoutType.ASIDE_MOBILE : LayoutType.ASIDE_NATIVE;
+    this.width=width
+    this._layoutType = this.width < Constants.pcResolutionThresholdPx ? LayoutType.ASIDE_MOBILE : LayoutType.ASIDE_NATIVE;
     if (this.layoutType === LayoutType.ASIDE_NATIVE) {
       this.drawerIsOpen = false;
     }

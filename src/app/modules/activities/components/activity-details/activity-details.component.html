@@ -1,5 +1,5 @@
 <app-scroll-container [id]="id" [withScrollbar]="!isMobileLayout">
-  <app-glass-card [rounded]="false">
+  <app-glass-card [borderRadius]="'0'">
     <div class="basic-details">
       <app-activity-card-content [disableMapInteractions]="false" [activity]="activity"></app-activity-card-content>
     </div>
@@ -55,7 +55,7 @@
                         [label]="'Speed'"
                         [data]="combinedPlotData"
                         [xAxis]="false"
-                        [colorScheme]="combinedColorScheme"        >
+                        [colorScheme]="combinedColorScheme">
         </app-area-graph>
       </div>
     </div>

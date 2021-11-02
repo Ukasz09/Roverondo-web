@@ -5,6 +5,7 @@ import { AppRoutes } from "@app/routes";
 import { AuthService } from "@auth0/auth0-angular";
 import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { CommentsSheetComponent } from "../comments-sheet/comments-sheet.component";
+import { UserRoutes } from "../../../user/user-routes";
 
 @Component({
   selector: "app-activity-card-content",
@@ -36,7 +37,7 @@ export class ActivityCardContentComponent implements OnInit {
   }
 
   public get userProfileLink(): string {
-    return `${AppRoutes.user}/${this.activity.user.id}`;
+    return `/${AppRoutes.user}/${UserRoutes.profile}/${this.activity.user.id}`;
   }
 
   public get isLiked(): boolean {
