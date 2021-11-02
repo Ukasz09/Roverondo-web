@@ -14,8 +14,8 @@
         <div class="comment-wrapper">
           <div style="display: flex; flex-direction: row">
             <div class="user">
-              <app-profile-avatar [avatarImgPath]="comment.user.profilePicture"></app-profile-avatar>
-              <span class="name">{{comment.user.nickname}}</span>
+              <app-profile-avatar (click)="navigateToProfile(comment.user.id)" [avatarImgPath]="comment.user.profilePicture"></app-profile-avatar>
+              <span class="name" (click)="navigateToProfile(comment.user.id)">{{comment.user.nickname}}</span>
             </div>
             <span class="date">{{ comment.createdAt | date }}</span>
           </div>
@@ -27,8 +27,8 @@
   </ng-container>
 </mat-nav-list>
 <ng-template #noCommentsTemplate>
-  <a class="comment-wrapper" mat-list-item>
-    <div  class="comment no-comments">No comments yet</div>
+  <a class="comment-wrapper">
+    <div class="comment no-comments">No comments yet</div>
   </a>
 </ng-template>
 <ng-template #spinner>

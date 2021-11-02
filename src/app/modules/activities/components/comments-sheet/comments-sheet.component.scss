@@ -1,6 +1,8 @@
 @use "/src/app/styles/abstracts/variables";
 @use "/src/app/styles/abstracts/mixins";
 
+$divider-color: #E0E0E0;
+
 ::ng-deep .mat-bottom-sheet-container {
   padding-top: 0;
 }
@@ -27,10 +29,13 @@
 }
 
 .comment-wrapper {
-  @include mixins.my(1rem);
-  @include mixins.px(0.5rem);
+  padding: 1rem 0.5rem;
   display: flex;
   flex-direction: column;
+
+  &:hover {
+    background: $divider-color;
+  }
 
   $text-area-width: 80%;
 
@@ -43,6 +48,7 @@
       display: flex;
       align-items: center;
       font-weight: 600;
+      cursor: pointer;
     }
 
     app-profile-avatar {
@@ -70,6 +76,7 @@
   }
 
   .no-comments {
+    width: 100%;
     text-align: center;
     color: variables.$text-muted-color;
     justify-content: center;
@@ -79,7 +86,7 @@
 .divider {
   height: 1px;
   width: 100%;
-  background: #E0E0E0;
+  background: $divider-color;
 }
 
 .spinner-wrapper {

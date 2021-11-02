@@ -5,7 +5,8 @@
     "modifiedAt": null,
     "user": {
       "profilePicture": "https://avatars.dicebear.com/api/initials/JN.svg",
-      "nickname": "Jenn"
+      "nickname": "Jenn",
+      "id": 2
     }
   },
   {
@@ -14,7 +15,8 @@
     "modifiedAt": null,
     "user": {
       "profilePicture": "https://avatars.dicebear.com/api/initials/JohnSmith.svg",
-      "nickname": "John Smith"
+      "nickname": "John Smith",
+      "id": 1
     }
   },
   {
@@ -23,7 +25,8 @@
     "modifiedAt": null,
     "user": {
       "profilePicture": "https://avatars.dicebear.com/api/initials/JockoDreg.svg",
-      "nickname": "Jocko Dreg"
+      "nickname": "Jocko Dreg",
+      "id": 3
     }
   },
   {
@@ -32,7 +35,8 @@
     "modifiedAt": null,
     "user": {
       "profilePicture": "https://avatars.dicebear.com/api/initials/EchoCharles.svg",
-      "nickname": "Echo Charles"
+      "nickname": "Echo Charles",
+      "id": 4
     }
   },
   {
@@ -41,7 +45,8 @@
     "modifiedAt": null,
     "user": {
       "profilePicture": "https://avatars.dicebear.com/api/initials/DrunkMath.svg",
-      "nickname": "Drunk Math"
+      "nickname": "Drunk Math",
+      "id": 5
     }
   },
   {
@@ -50,7 +55,8 @@
     "modifiedAt": null,
     "user": {
       "profilePicture": "https://avatars.dicebear.com/api/initials/AliceLenn.svg",
-      "nickname": "Alice Lenn"
+      "nickname": "Alice Lenn",
+      "id": 6
     }
   }
 ]

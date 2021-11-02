@@ -5,6 +5,9 @@ import { PostComment, User } from "@app/core/models";
 import { FormBuilder, FormControl, FormGroup, NgModel, Validators } from "@angular/forms";
 import { AuthService } from "@auth0/auth0-angular";
 import { Utils } from "@app/shared/utils";
+import { AppRoutes } from "@app/routes";
+import { UserRoutes } from "../../../user/user-routes";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-comments-sheet",
@@ -19,7 +22,8 @@ export class CommentsSheetComponent implements OnInit {
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: { postId: string },
     private readonly activitiesService: ActivitiesService,
     private readonly authService: AuthService,
-    private readonly _bottomSheetRef: MatBottomSheetRef<CommentsSheetComponent>
+    private readonly _bottomSheetRef: MatBottomSheetRef<CommentsSheetComponent>,
+    private readonly router: Router
   ) {
   }
 
@@ -50,11 +54,20 @@ export class CommentsSheetComponent implements OnInit {
             this.sortComments();
             this.newCommentValue = "";
 
-            console.log('',this.commentList);
+            console.log("", this.commentList);
           });
         }
       });
     }
+  }
+
+  public navigateToProfile(userId: string | number): void {
+    this.router.navigate([this.getUserProfileLink(userId)]).then();
+    this._bottomSheetRef.dismiss()
+  }
+
+  public getUserProfileLink(userId: string | number): string {
+    return `/${AppRoutes.user}/${UserRoutes.profile}/${userId?.toString()}`;
   }
 
   private fetchComments(): void {
