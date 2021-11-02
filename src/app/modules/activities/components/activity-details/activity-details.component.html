@@ -10,7 +10,8 @@
         <app-area-graph [id]="'speed-graph'"
                         [label]="'Speed'"
                         [data]="speedPlotData"
-                        [xAxis]="false">
+                        [xAxis]="false"
+                        [colorScheme]="speedColorScheme">
         </app-area-graph>
       </div>
       <div class="stats">
@@ -32,7 +33,7 @@
                         [label]="'Speed'"
                         [data]="elevationPlotData"
                         [xAxis]="false"
-                        [colorScheme]="'nightLights'">
+                        [colorScheme]="elevationColorScheme">
         </app-area-graph>
       </div>
       <div class="stats">
@@ -54,8 +55,7 @@
                         [label]="'Speed'"
                         [data]="combinedPlotData"
                         [xAxis]="false"
-                        [colorScheme]="'solar'"
-        >
+                        [colorScheme]="combinedColorScheme"        >
         </app-area-graph>
       </div>
     </div>

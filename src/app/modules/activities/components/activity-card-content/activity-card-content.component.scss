@@ -275,7 +275,7 @@
     }
   }
 
-  #like {
+  #like, #like-stat {
     &.liked {
       color: variables.$like-color;
     }

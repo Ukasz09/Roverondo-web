@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { ActivitiesService, LayoutService } from "@app/core/services";
 import { LayoutType } from "@app/core/enums";
-import { ActivityPost, PlotData } from "@app/core/models";
+import { ActivityPost, PlotColors, PlotData } from "@app/core/models";
+import { Color } from "@swimlane/ngx-charts";
 
 @Component({
   selector: "app-activity-details",
@@ -22,6 +23,9 @@ export class ActivityDetailsComponent implements OnInit {
   public lowestPoint?: number;
   public highestPoint?: number;
   public numberFormat = ".2-2";
+  public elevationColorScheme = { domain: [PlotColors.elevation] } as Color;
+  public speedColorScheme = { domain: [PlotColors.speed] } as Color;
+  public combinedColorScheme = { domain: this.elevationColorScheme.domain.concat(this.speedColorScheme.domain) } as Color;
 
   constructor(
     private readonly layoutService: LayoutService,
@@ -33,7 +37,7 @@ export class ActivityDetailsComponent implements OnInit {
       next: (activityDetails) => {
         this.speedPlotData = [activityDetails.speedPlot];
         this.elevationPlotData = [activityDetails.elevationPlot];
-        this.combinedPlotData = this.speedPlotData.concat(this.elevationPlotData);
+        this.combinedPlotData = this.elevationPlotData.concat(this.speedPlotData);
         const speedValues = activityDetails.speedPlot.series.map(data => data.value);
         const elevationValues = activityDetails.elevationPlot.series.map(data => data.value);
         this.maxSpeed = Math.max(...speedValues);

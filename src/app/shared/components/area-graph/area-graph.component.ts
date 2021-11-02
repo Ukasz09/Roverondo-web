@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { PlotData } from "@app/core/models";
+import { Color } from "@swimlane/ngx-charts";
 
 @Component({
   selector: "app-area-graph",
@@ -16,7 +17,8 @@ export class AreaGraphComponent implements OnInit {
   @Input() public yAxisLabel = "y";
   @Input() public xAxis = true;
   @Input() public yAxis = true;
-  @Input() public colorScheme = "neons";
+  @Input() public colorScheme: Color | string = "natural";
+  @Input() public withGradient=true;
 
   public withLegend!: boolean;
   public animations = true;

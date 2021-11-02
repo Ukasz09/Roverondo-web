@@ -26,12 +26,14 @@
     <div [ngTemplateOutlet]="actions"></div>
     <div class="social-stats">
       <div>
-        <mat-icon class="icon">favorite_border</mat-icon>
-        <label for="like" class="text">{{activity.reactions.length}}</label>
+        <mat-icon id="like-stat" class="icon" [ngClass]="{'liked':isLiked}">
+          {{ isLiked ? 'favorite' : 'favorite_border' }}
+        </mat-icon>
+        <label for="like-stat" class="text">{{activity.reactions.length}}</label>
       </div>
       <div style="cursor: pointer" (click)="openCommentsSheet()">
-        <mat-icon class="icon">chat_bubble_outline</mat-icon>
-        <label for="comment" class="text">{{activity.comments.length}}</label>
+        <mat-icon id="comment-stat" class="icon">chat_bubble_outline</mat-icon>
+        <label for="comment-stat" class="text">{{activity.comments.length}}</label>
       </div>
     </div>
   </div>
