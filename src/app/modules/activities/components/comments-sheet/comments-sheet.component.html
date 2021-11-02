@@ -1,11 +1,14 @@
 <mat-nav-list>
   <ng-container *ngIf="commentList; else spinner">
-    <a class="comment-wrapper" mat-list-item>
-      <div mat-line class="comment">
-        Input
-<!--        TODO: -->
-      </div>
-    </a>
+    <form (ngSubmit)="onSubmit(comment)">
+      <mat-form-field appearance="outline" class="comment-input">
+        <mat-label>Your comment</mat-label>
+        <input matInput placeholder="Add comment" [(ngModel)]="newCommentValue" name="comment" #comment="ngModel"
+               maxlength="100">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <button type="submit" style="display: none"></button>
+      </mat-form-field>
+    </form>
     <ng-container *ngIf="commentList.length>0; else noCommentsTemplate">
       <ng-container *ngFor="let comment of this.commentList">
         <a class="comment-wrapper" mat-list-item>

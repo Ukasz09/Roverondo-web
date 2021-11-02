@@ -9,6 +9,9 @@ import { ActivitiesResolver } from "./services";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatListModule } from "@angular/material/list";
 import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -25,6 +28,10 @@ import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
     MatProgressSpinnerModule,
     MatListModule,
     MatBottomSheetModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     ActivitiesResolver

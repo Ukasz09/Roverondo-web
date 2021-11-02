@@ -1,6 +1,10 @@
 @use "/src/app/styles/abstracts/variables";
 @use "/src/app/styles/abstracts/mixins";
 
+.comment-input {
+  @include mixins.my(0);
+  width: 100%;
+}
 
 .comment-wrapper {
   display: flex;
