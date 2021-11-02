@@ -8,18 +8,27 @@ app-scroll-container {
     width: 100%;
 
     .card-wrapper {
-      @include mixins.my(0.5rem);
+      //@include mixins.my(0.5rem);
+      margin-bottom: 0.25rem;
 
       .user {
         @include mixins.py(0.5rem);
         display: flex;
         flex-direction: row;
-        font-size: 20px;
+        font-size: 16px;
 
         app-profile-avatar {
-          width: 45px;
+          width: 34px;
           margin-right: 1rem;
           cursor: pointer;
+
+          @include mixins.media(sm-large) {
+            width: 40px;
+          }
+        }
+
+        @include mixins.media(sm-large) {
+          font-size: 20px;
         }
 
         .name {

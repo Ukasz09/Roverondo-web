@@ -35,7 +35,16 @@ export class FollowersComponent implements OnInit {
     this.userService.getFollowers$(userId).subscribe({
       next: (followers) => {
         this.followers = followers;
+        this.sortUsers();
       }
     });
+  }
+
+  private sortUsers(): void {
+    if (this.followers) {
+      this.followers.sort((a, b) => {
+        return a.nickname.localeCompare(b.nickname);
+      });
+    }
   }
 }
