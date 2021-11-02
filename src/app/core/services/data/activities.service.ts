@@ -31,8 +31,8 @@ export class ActivitiesService {
     );
   }
 
-  public likeActivity$(activityId: string): Observable<void> {
-    return of();
+  public likeActivity$(activityId: string): Observable<boolean> {
+    return of(true);
   }
 
   public getActivityDetails(activityId: string): Observable<ActivityPostDetails> {
@@ -41,5 +41,9 @@ export class ActivitiesService {
 
   public getComments(activityId: string): Observable<PostComment[]> {
     return this.http.get<PostComment[]>(MocksUrl.postComments);
+  }
+
+  public addComment(activityId: string, comment: string): Observable<boolean> {
+    return of(true);
   }
 }

@@ -1,18 +1,43 @@
 @use "/src/app/styles/abstracts/variables";
 @use "/src/app/styles/abstracts/mixins";
 
-.comment-input {
-  @include mixins.my(0);
-  width: 100%;
+::ng-deep .mat-bottom-sheet-container {
+  padding-top: 0;
+}
+
+.comment-form {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #fff;
+  padding-top: 0.5rem;
+
+  .comment-input {
+    @include mixins.my(0);
+    width: 100%;
+
+    ::ng-deep .mat-form-field-wrapper {
+      padding-bottom: 0.5rem;
+    }
+
+    .send-icon {
+      color: variables.$text-muted-color;
+    }
+  }
 }
 
 .comment-wrapper {
+  @include mixins.my(1rem);
+  @include mixins.px(0.5rem);
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  $text-area-width: 80%;
 
   .user {
     display: flex;
     flex-direction: row;
+    width: $text-area-width;
 
     .name {
       display: flex;
@@ -27,7 +52,18 @@
     }
   }
 
+  .date {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    font-size: 12px;
+    justify-content: flex-end;
+    align-items: center;
+    color: variables.$text-muted-color;
+  }
+
   .comment {
+    width: $text-area-width;
     padding-top: 1rem;
     display: flex;
     align-items: center;
@@ -41,10 +77,9 @@
 }
 
 .divider {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  height: 1px;
   width: 100%;
-  background: transparent;
+  background: #E0E0E0;
 }
 
 .spinner-wrapper {

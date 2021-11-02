@@ -1,23 +1,26 @@
-<mat-nav-list>
+<mat-nav-list class="mat-list">
   <ng-container *ngIf="commentList; else spinner">
-    <form (ngSubmit)="onSubmit(comment)">
+    <form (ngSubmit)="onSubmit(comment)" class="comment-form">
       <mat-form-field appearance="outline" class="comment-input">
         <mat-label>Your comment</mat-label>
         <input matInput placeholder="Add comment" [(ngModel)]="newCommentValue" name="comment" #comment="ngModel"
                maxlength="100">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-icon matSuffix class="send-icon" (click)="onSubmit(comment)">send</mat-icon>
         <button type="submit" style="display: none"></button>
       </mat-form-field>
     </form>
     <ng-container *ngIf="commentList.length>0; else noCommentsTemplate">
       <ng-container *ngFor="let comment of this.commentList">
-        <a class="comment-wrapper" mat-list-item>
-          <div mat-line class="user">
-            <app-profile-avatar [avatarImgPath]="comment.user.profilePicture"></app-profile-avatar>
-            <span class="name">{{comment.user.nickname}}</span>
+        <div class="comment-wrapper">
+          <div style="display: flex; flex-direction: row">
+            <div class="user">
+              <app-profile-avatar [avatarImgPath]="comment.user.profilePicture"></app-profile-avatar>
+              <span class="name">{{comment.user.nickname}}</span>
+            </div>
+            <span class="date">{{ comment.createdAt | date }}</span>
           </div>
-          <div mat-line class="comment">{{comment.text}}</div>
-        </a>
+          <div class="comment"> {{comment.text}}</div>
+        </div>
         <div class="divider"></div>
       </ng-container>
     </ng-container>
@@ -25,7 +28,7 @@
 </mat-nav-list>
 <ng-template #noCommentsTemplate>
   <a class="comment-wrapper" mat-list-item>
-    <div mat-line class="comment no-comments">No comments yet</div>
+    <div  class="comment no-comments">No comments yet</div>
   </a>
 </ng-template>
 <ng-template #spinner>
