@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Icons } from "@app/core/enums";
 import { Utils } from "@app/shared/utils";
 import { AuthService } from "@auth0/auth0-angular";
-import { AppRoutes } from "@app/routes";
 
 @Component({
   selector: "app-aside-mobile",

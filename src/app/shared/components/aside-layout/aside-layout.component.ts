@@ -1,6 +1,7 @@
 import { Component, HostListener, OnInit } from "@angular/core";
 import { LayoutType } from "@app/core/enums";
 import { LayoutService } from "@app/core/services";
+import { MatDrawer } from "@angular/material/sidenav";
 
 @Component({
   selector: "app-aside-layout",
@@ -23,6 +24,12 @@ export class AsideLayoutComponent implements OnInit {
 
   public onDrawerCloseStart(): void {
     this.layoutService.drawerIsOpen = false;
+  }
+
+  public closeDrawer(drawer: MatDrawer): void {
+    this.layoutService.drawerIsOpen = false;
+    drawer.close().then(() => {
+    });
   }
 
   @HostListener("window:resize", ["$event"])

@@ -10,7 +10,7 @@
         (openedStart)="onDrawerOpenStart()"
         (closedStart)="onDrawerCloseStart()"
       >
-        <app-drawer-menu [menuForMobile]="true" (closeDrawer)="drawer.close()"></app-drawer-menu>
+        <app-drawer-menu [menuForMobile]="true" (closeDrawer)="closeDrawer(drawer)"></app-drawer-menu>
       </mat-drawer>
       <mat-drawer-content>
         <div [ngTemplateOutlet]="content"></div>
