@@ -22,6 +22,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
     HttpClientModule,
     LeafletModule,
     MatProgressSpinnerModule,
-    NgxChartsModule
+    NgxChartsModule,
+    MatIconModule
   ]
 })
 export class AppSharedModule {
