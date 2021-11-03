@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { User } from "@app/core/models";
+import { AppRoutes } from "@app/routes";
+import { LayoutType } from "@app/core/enums";
 import { LayoutService } from "@app/core/services";
 
 @Component({
@@ -10,9 +12,15 @@ import { LayoutService } from "@app/core/services";
 export class FollowPageComponent implements OnInit {
   @Input() public users?: User[];
 
-  constructor() {
+  public readonly AppRoutes = AppRoutes;
+
+  constructor(private readonly layoutService: LayoutService) {
   }
 
   public ngOnInit(): void {
+  }
+
+  public get isMobileLayout(): boolean {
+    return this.layoutService.layoutType === LayoutType.ASIDE_MOBILE;
   }
 }
