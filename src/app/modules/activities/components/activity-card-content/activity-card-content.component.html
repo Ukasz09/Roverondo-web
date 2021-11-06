@@ -43,11 +43,15 @@
       <div class="action cursor-pointer" (click)="like.emit()">
         <mat-icon class="icon" id="like"
                   [ngClass]="{'liked':isLiked}">{{ isLiked ? 'favorite' : 'favorite_border' }}</mat-icon>
-        <label for="like" class="text cursor-pointer">Like</label>
+        <label for="like" class="text cursor-pointer">
+          <span class="count">{{activity.reactionsCount}}</span><span class="action-name">Like</span>
+        </label>
       </div>
-      <div class="action cursor-pointer" (click)="comment.emit('test comment')">
+      <div class="action cursor-pointer" (click)="openCommentsSheet(true)">
         <mat-icon class="icon" id="comment">chat_bubble_outline</mat-icon>
-        <label for="comment" class="text cursor-pointer">Comment</label>
+        <label for="comment" class="text cursor-pointer">
+          <span class="count">{{activity.commentsCount}}</span><span class="action-name">Comment</span>
+        </label>
       </div>
     </div>
   </ng-template>

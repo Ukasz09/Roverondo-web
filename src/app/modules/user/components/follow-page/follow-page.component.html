@@ -3,7 +3,7 @@
     <div class="content-wrapper">
       <div class="content">
         <h1 *ngIf="isMobileLayout" class="mobile-logo">
-          <app-logo-text [routerLink]="AppRoutes.home" [lightText]="false"></app-logo-text>
+          <app-logo-text [routerLink]="homeRouterLink" [lightText]="false"></app-logo-text>
         </h1>
         <ng-container *ngIf="users; else spinner">
           <ng-container *ngIf="users.length>0; else notFoundUsersTemplate">

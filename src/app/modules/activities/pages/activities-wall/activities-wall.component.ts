@@ -79,13 +79,6 @@ export class ActivitiesWallComponent implements OnInit {
         }
       }
     });
-
-
-  }
-
-  public onAddCommentClick(activity: PostExtended, comment: string): void {
-    // TODO:
-    console.log("Comment = " + comment);
   }
 
   public onActivityDetailsClick(activity: PostExtended): void {

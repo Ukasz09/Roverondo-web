@@ -2,9 +2,9 @@
   <ng-container *ngIf="commentList; else spinner">
     <form (ngSubmit)="onSubmit(comment)" class="comment-form">
       <mat-form-field appearance="outline" class="comment-input">
-        <mat-label>Your comment</mat-label>
-        <input matInput placeholder="Add comment" [(ngModel)]="newCommentValue" name="comment" #comment="ngModel"
-               maxlength="100">
+        <mat-label>Add comment</mat-label>
+        <input matInput placeholder="Your comment" [(ngModel)]="newCommentValue" name="comment" #comment="ngModel"
+               maxlength="100" [inputFocus]="data.withFocus">
         <mat-icon matSuffix class="send-icon" (click)="onSubmit(comment)">send</mat-icon>
         <button type="submit" style="display: none"></button>
       </mat-form-field>

@@ -61,6 +61,10 @@
 
       @include mixins.media(sm-small) {
         display: flex;
+
+        .action-name {
+          display: none;
+        }
       }
 
       @include mixins.media(md-large) {
@@ -226,16 +230,24 @@
         }
 
         .icon {
-          @include mixins.media(md-large) {
-            margin-right: 0.5rem;
-          }
+          margin-right: 0.5rem;
         }
 
         .text {
-          display: none;
-
-          @include mixins.media(md-large) {
+          .count {
             display: block;
+
+            @include mixins.media(md-large) {
+              display: none;
+            }
+          }
+
+          .action-name {
+            display: none;
+
+            @include mixins.media(md-large) {
+              display: block;
+            }
           }
         }
       }

@@ -18,7 +18,7 @@ export class CommentsSheetComponent implements OnInit {
   public newCommentValue = "";
 
   constructor(
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data: { postId: string },
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: { postId: string, withFocus: boolean },
     private readonly activitiesService: ActivitiesService,
     private readonly authService: AuthService,
     private readonly _bottomSheetRef: MatBottomSheetRef<CommentsSheetComponent>,

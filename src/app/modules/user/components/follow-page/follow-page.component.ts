@@ -23,4 +23,8 @@ export class FollowPageComponent implements OnInit {
   public get isMobileLayout(): boolean {
     return this.layoutService.layoutType === LayoutType.ASIDE_MOBILE;
   }
+
+  public get homeRouterLink(): string {
+    return `/${AppRoutes.home}`;
+  }
 }

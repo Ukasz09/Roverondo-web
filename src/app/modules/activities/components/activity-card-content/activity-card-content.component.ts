@@ -18,7 +18,6 @@ export class ActivityCardContentComponent implements OnInit {
 
   @Output() public detailsClick: EventEmitter<void> = new EventEmitter<void>();
   @Output() public like: EventEmitter<void> = new EventEmitter<void>();
-  @Output() public comment: EventEmitter<string> = new EventEmitter<string>();
 
   private readonly valueNotFoundPlaceholder = "N/A";
   private currentUserId?: string = undefined;
@@ -39,8 +38,11 @@ export class ActivityCardContentComponent implements OnInit {
     return this.activity.alreadyReactedTo;
   }
 
-  public openCommentsSheet(): void {
-    this._bottomSheet.open(CommentsSheetComponent, { hasBackdrop: true, data: { postId: this.activity.id } });
+  public openCommentsSheet(withFocus = false): void {
+    this._bottomSheet.open(CommentsSheetComponent, {
+      hasBackdrop: true,
+      data: { postId: this.activity.id, withFocus: withFocus }
+    });
   }
 
   public getActivityDurationText(): string {

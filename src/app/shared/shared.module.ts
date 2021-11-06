@@ -15,7 +15,7 @@ import {
   ScrollContainerComponent,
   AreaGraphComponent
 } from "@app/shared/components";
-import { ActiveLinkDirective } from "@app/shared/directives";
+import { ActiveLinkDirective, InputFocusDirective } from "@app/shared/directives";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
@@ -31,6 +31,7 @@ import { MatIconModule } from "@angular/material/icon";
     LogoTextComponent,
     ProfileAvatarComponent,
     ActiveLinkDirective,
+    InputFocusDirective,
     AsideLayoutComponent,
     AsideMobileComponent,
     DrawerMenuComponent,
@@ -45,6 +46,7 @@ import { MatIconModule } from "@angular/material/icon";
     LogoTextComponent,
     ProfileAvatarComponent,
     ActiveLinkDirective,
+    InputFocusDirective,
     AsideLayoutComponent,
     NavbarComponent,
     ScrollContainerComponent,

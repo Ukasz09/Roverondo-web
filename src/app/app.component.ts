@@ -25,7 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-    this.subscribeAuthIsLoading();
+    this.fetchCurrentUser();
     this.subscribeRouterEvents();
     this.spinner.show().then(_ => {
     });
@@ -46,7 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
 
-  private subscribeAuthIsLoading(): void {
+  private fetchCurrentUser(): void {
     this.authLoading$ = this.auth.isLoading$.subscribe((loaded) => {
       if (!loaded) {
         this.currentUserService.fetchCurrentUser();
