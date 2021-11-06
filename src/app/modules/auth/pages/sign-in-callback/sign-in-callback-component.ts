@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { UsersService } from "@app/core/services";
+import { CurrentUserService, UsersService } from "@app/core/services";
 import { Router } from "@angular/router";
 import { AppRoutes } from "@app/routes";
 
@@ -8,7 +8,11 @@ import { AppRoutes } from "@app/routes";
   selector: "app-sign-in-callback"
 })
 export class SignInCallbackComponent implements OnInit {
-  constructor(private readonly userService: UsersService, private readonly router: Router) {
+  constructor(
+    private readonly userService: UsersService,
+    private readonly router: Router,
+    private readonly currentUserService: CurrentUserService
+  ) {
   }
 
   public ngOnInit(): void {
@@ -17,5 +21,7 @@ export class SignInCallbackComponent implements OnInit {
       this.router.navigate([AppRoutes.home]).then(() => {
       });
     });
+
+    this.currentUserService.fetchCurrentUser();
   }
 }

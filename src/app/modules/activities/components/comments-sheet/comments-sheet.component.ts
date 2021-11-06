@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from "@angular/material/bottom-sheet";
-import { ActivitiesService } from "@app/core/services";
+import { ActivitiesService, CurrentUserService } from "@app/core/services";
 import { PostComment, User } from "@app/core/models";
 import { NgModel } from "@angular/forms";
 import { AuthService } from "@auth0/auth0-angular";
@@ -22,7 +22,8 @@ export class CommentsSheetComponent implements OnInit {
     private readonly activitiesService: ActivitiesService,
     private readonly authService: AuthService,
     private readonly _bottomSheetRef: MatBottomSheetRef<CommentsSheetComponent>,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly currentUserService: CurrentUserService
   ) {
   }
 
@@ -31,27 +32,13 @@ export class CommentsSheetComponent implements OnInit {
   }
 
   public onSubmit(commentModel: NgModel): void {
-    // TODO: add spinner, cleanup
+    // TODO: add spinner
     if (commentModel.valid && this.newCommentValue) {
-      this.activitiesService.addComment(this.data.postId, this.newCommentValue).subscribe({
-        next: () => {
-          this.authService.user$.subscribe((user) => {
-            const createDate = new Date(Date.now()).toISOString();
-            if (!this.commentList) {
-              this.commentList = [];
-            }
-            // TODO: tmp - will be changed during integration with backend
-            const currentUser = user as User;
-            currentUser.profilePicture = user?.picture;
-            this.commentList.push({
-              text: this.newCommentValue,
-              createdAt: createDate,
-              modifiedAt: createDate,
-              user: currentUser
-            } as PostComment);
-            this.sortComments();
-            this.newCommentValue = "";
-          });
+      this.currentUserService.currentUser$.subscribe((user) => {
+        if (user) {
+          this.addComment(user);
+        } else {
+          console.error("Current user not found - comment not added");
         }
       });
     }
@@ -83,5 +70,29 @@ export class CommentsSheetComponent implements OnInit {
         return c2Date.getTime() - c1Date.getTime();
       });
     }
+  }
+
+  private addComment(user: User): void {
+    this.activitiesService.addComment(user.id, this.data.postId, this.newCommentValue).subscribe({
+      next: () => {
+        const createDate = new Date().toISOString();
+        if (!this.commentList) {
+          this.commentList = [];
+        }
+        this.commentList.push({
+          text: this.newCommentValue,
+          createdAt: createDate,
+          modifiedAt: createDate,
+          user: {
+            id: user.id,
+            nickname: user.nickname,
+            profilePicture: user.profilePicture
+          },
+          reactions: 0
+        });
+        this.sortComments();
+        this.newCommentValue = "";
+      }
+    });
   }
 }

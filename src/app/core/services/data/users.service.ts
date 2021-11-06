@@ -2,8 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { User } from "@app/core/models";
-import { MocksUrl } from "@app/core/enums";
-import { map } from "rxjs/operators";
+import { tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -13,24 +12,32 @@ export class UsersService {
   }
 
   public registerUser$(): Observable<void> {
-    const endpoint = `/api/users`;
+    const endpoint = `api/users`;
     return this.http.post<void>(endpoint, {});
   }
 
   public getUsers$(): Observable<User[]> {
-    const endpoint = `/api/users`;
-    return this.http.get<User[]>(endpoint);
+    const endpoint = `api/users`;
+    return this.http.get<User[]>(endpoint).pipe(tap(data => console.log(data)));
   }
 
-  public getUser$(userId: string): Observable<User> {
-    return this.http.get<User>(MocksUrl.user);
+  public getUser$(userId: number): Observable<User> {
+    const endpoint = `api/users/${userId}`;
+    return this.http.get<User>(endpoint).pipe(tap(data => console.log(data)));
   }
 
-  public getFollowers$(userId: string): Observable<User[]> {
-    return this.http.get<User[]>(MocksUrl.users);
+  public getUserByProvider$(providerId: string): Observable<User> {
+    const endpoint = `api/users/providers/${providerId}`;
+    return this.http.get<User>(endpoint).pipe(tap(data => console.log(data)));
   }
 
-  public getFollowing$(userId: string): Observable<User[]> {
-    return this.http.get<User[]>(MocksUrl.users).pipe(map(data => data.filter(u => u.id < 10)));
+  public getFollowers$(userId: number): Observable<User[]> {
+    const endpoint = `api/users/${userId}/followers`;
+    return this.http.get<User[]>(endpoint).pipe(tap(data => console.log(data)));
+  }
+
+  public getFollowing$(userId: number): Observable<User[]> {
+    const endpoint = `api/users/${userId}/followings`;
+    return this.http.get<User[]>(endpoint).pipe(tap(data => console.log(data)));
   }
 }

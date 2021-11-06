@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { ActivitiesService, LayoutService, ScrollService } from "@app/core/services";
+import { ActivitiesService, CurrentUserService, LayoutService, ScrollService } from "@app/core/services";
 import { LayoutType } from "@app/core/enums";
 import { AppRoutes } from "@app/routes";
 import { ActivatedRoute, Data } from "@angular/router";
@@ -28,7 +28,8 @@ export class ActivitiesWallComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private readonly activitiesService: ActivitiesService,
     private readonly activitiesResolver: ActivitiesResolver,
-    public readonly scrollService: ScrollService
+    public readonly scrollService: ScrollService,
+    public readonly currentUserService: CurrentUserService
   ) {
   }
 
@@ -61,11 +62,21 @@ export class ActivitiesWallComponent implements OnInit {
   }
 
   public onLikeClick(activity: PostExtended): void {
-    this.activitiesService.likeActivity$(activity.id).subscribe({
-      next: () => {
-        activity.alreadyReactedTo = true;
+    this.currentUserService.currentUser$.subscribe({
+      next: user => {
+        if (user) {
+          this.activitiesService.likeActivity$(user.id, activity.id).subscribe({
+            next: () => {
+              activity.alreadyReactedTo = true;
+            }
+          });
+        } else {
+          console.error("Current user not found - not liked");
+        }
       }
     });
+
+
   }
 
   public onAddCommentClick(activity: PostExtended, comment: string): void {
@@ -87,13 +98,21 @@ export class ActivitiesWallComponent implements OnInit {
   }
 
   private loadMoreActivities(): void {
+    console.log("Loading more activities");
     this.loadingMoreActivities = true;
-    this.activitiesResolver.getActivities$(this.activities.length, this.type).subscribe({
-      next: data => {
-        this.activities = this.activities.concat(data);
-        this.loadingMoreActivities = false;
+    this.currentUserService.currentUser$.subscribe({
+      next: (user) => {
+        if (user) {
+          this.activitiesResolver.getActivities$(user.id, this.activities.length, this.type).subscribe({
+            next: data => {
+              this.activities = this.activities.concat(data);
+              this.loadingMoreActivities = false;
+            }
+          });
+        } else {
+          console.error("User not found - data not fetched");
+        }
       }
     });
-    console.log("Loading more activities");
   }
 }

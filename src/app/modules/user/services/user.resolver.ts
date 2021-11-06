@@ -15,7 +15,7 @@ export class UserResolver implements Resolve<User | undefined> {
   public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User | undefined> {
     const userId = route.paramMap.get("id");
     if (userId) {
-      return this.userService.getUser$(userId);
+      return this.userService.getUser$(+userId);
     }
     return of(undefined);
   }

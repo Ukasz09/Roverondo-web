@@ -16,18 +16,24 @@ export class ActivitiesResolver implements Resolve<PostExtended[]> {
   }
 
   public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PostExtended[]> {
-    const type = route.paramMap.get("type") || "";
-    return this.getActivities$(0, type);
+    const userId = route.paramMap.get("userId") || "";
+    if (userId) {
+      const type = route.paramMap.get("type") || "";
+      return this.getActivities$(+userId, 0, type);
+    } else {
+      console.error("UserId not provided - return []");
+      return of([]);
+    }
   }
 
-  public getActivities$(offset: number, type: string): Observable<PostExtended[]> {
+  public getActivities$(userId: number, offset: number, type: string): Observable<PostExtended[]> {
     switch (type) {
       case ActivitiesRoutes.allActivities:
-        return this.activitiesService.getAllActivities$(offset);
+        return this.activitiesService.getAllActivities$(userId, offset);
       case ActivitiesRoutes.likedActivities:
-        return this.activitiesService.getLikedActivities$(offset);
+        return this.activitiesService.getLikedActivities$(userId, offset);
       case ActivitiesRoutes.myActivities:
-        return this.activitiesService.getMyActivities$(offset);
+        return this.activitiesService.getMyActivities$(userId, offset);
     }
     return of([]);
   }

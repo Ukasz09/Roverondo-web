@@ -1,6 +1,6 @@
 <div class="menu" [ngClass]="{'native':!menuForMobile}">
   <div class="user-info">
-    <h1 *ngIf="!menuForMobile" class="logo" [routerLink]="AppRoutes.home">
+    <h1 *ngIf="!menuForMobile" class="logo" [routerLink]="homeRouterLink">
       <app-logo-text></app-logo-text>
     </h1>
     <ng-container *ngIf="auth.user$ | async as user; else userLoadingSpinner">
@@ -22,36 +22,33 @@
     <ul class="drawer-links">
       <li><h3
         class="link"
-        [routerLink]="getRouteLink([AppRoutes.activities])"
-        (click)="closeDrawer.emit()"
+        (click)="navigateToActivity(ActivitiesRoutes.allActivities)"
         [appActiveLink]="AppRoutes.activities"
         id="all-activities">
         News
       </h3></li>
       <li><h3
         class="link"
-        [routerLink]="getRouteLink([AppRoutes.activities,ActivitiesRoutes.myActivities])"
         [appActiveLink]="ActivitiesRoutes.myActivities"
-        (click)="closeDrawer.emit()"
+        (click)="navigateToActivity(ActivitiesRoutes.myActivities)"
         id="my-activities">
         My Activities
       </h3></li>
       <li><h3
         class="link"
-        [routerLink]="getRouteLink([AppRoutes.activities,ActivitiesRoutes.likedActivities])"
         [appActiveLink]="ActivitiesRoutes.likedActivities"
-        (click)="closeDrawer.emit()"
+        (click)="navigateToActivity(ActivitiesRoutes.likedActivities)"
         id="liked-activities">
         Liked Activities
       </h3></li>
-      <li><h3
-        class="link"
-        [routerLink]="getRouteLink([AppRoutes.planner])"
-        [appActiveLink]="AppRoutes.planner"
-        (click)="closeDrawer.emit()"
-        id="planner">
-        Planner
-      </h3></li>
+      <!--      <li><h3-->
+      <!--        class="link"-->
+      <!--        [routerLink]="getRouteLink([AppRoutes.planner])"-->
+      <!--        [appActiveLink]="AppRoutes.planner"-->
+      <!--        (click)="closeDrawer.emit()"-->
+      <!--        id="planner">-->
+      <!--        Planner-->
+      <!--      </h3></li>-->
       <li><h3
         class="link"
         [routerLink]="getRouteLink([AppRoutes.events])"
@@ -84,13 +81,15 @@
         id="following">
         Following
       </h3></li>
-      <li><h3
-        class="link"
-        (click)="logout()"
-        id="logout">
-        <span class="logout-text">Logout</span>
-        <mat-icon class="icon">logout</mat-icon>
-      </h3></li>
+      <li>
+        <h3
+          class="link"
+          (click)="logout()"
+          id="logout">
+          <span class="logout-text">Logout</span>
+          <mat-icon class="icon">logout</mat-icon>
+        </h3>
+      </li>
     </ul>
   </div>
 </div>

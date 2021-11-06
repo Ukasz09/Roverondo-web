@@ -4,6 +4,8 @@ import { ActivitiesRoutes } from "@app/routes/activities";
 import { AuthService } from "@auth0/auth0-angular";
 import { Utils } from "@app/shared/utils";
 import { DOCUMENT } from "@angular/common";
+import { CurrentUserService } from "@app/core/services";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-drawer-menu",
@@ -18,7 +20,12 @@ export class DrawerMenuComponent implements OnInit {
 
   @Output() closeDrawer = new EventEmitter<void>();
 
-  constructor(public readonly auth: AuthService, @Inject(DOCUMENT) private readonly document: Document) {
+  constructor(
+    @Inject(DOCUMENT) private readonly document: Document,
+    public readonly auth: AuthService,
+    private readonly currentUserService: CurrentUserService,
+    private readonly router: Router
+  ) {
   }
 
   public ngOnInit(): void {
@@ -35,5 +42,24 @@ export class DrawerMenuComponent implements OnInit {
   public logout(): void {
     this.auth.logout({ returnTo: document.location.origin });
     this.closeDrawer.emit();
+  }
+
+  public navigateToActivity(type: ActivitiesRoutes): void {
+    this.currentUserService.currentUser$.subscribe({
+      next: user => {
+        if (user) {
+          const link = this.getRouteLink([AppRoutes.activities, user.id.toString(), type]);
+          this.router.navigate([link]).then(() => {
+          });
+        } else {
+          console.error("User not found - not navigate");
+        }
+        this.closeDrawer.emit();
+      }
+    });
+  }
+
+  public get homeRouterLink(): string {
+    return `/${AppRoutes.home}`;
   }
 }
