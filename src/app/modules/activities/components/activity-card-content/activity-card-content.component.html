@@ -29,11 +29,11 @@
         <mat-icon id="like-stat" class="icon" [ngClass]="{'liked':isLiked}">
           {{ isLiked ? 'favorite' : 'favorite_border' }}
         </mat-icon>
-        <label for="like-stat" class="text">{{activity.reactions.length}}</label>
+        <label for="like-stat" class="text">{{activity.reactionsCount}}</label>
       </div>
       <div style="cursor: pointer" (click)="openCommentsSheet()">
         <mat-icon id="comment-stat" class="icon">chat_bubble_outline</mat-icon>
-        <label for="comment-stat" class="text">{{activity.comments.length}}</label>
+        <label for="comment-stat" class="text">{{activity.commentsCount}}</label>
       </div>
     </div>
   </div>
@@ -59,7 +59,7 @@
       </div>
       <div class="distance">
         <mat-icon class="icon">open_in_full</mat-icon>
-        <span>{{activity.workout.distance}}km</span>
+        <span>{{activity.workout.route.distance}}km</span>
       </div>
       <div class="average">
         <mat-icon class="icon">hide_source</mat-icon>
@@ -67,7 +67,7 @@
       </div>
       <div class="elevation">
         <mat-icon class="icon">north_east</mat-icon>
-        <span>{{activity.workout.elevation}}m</span>
+        <span>{{activity.workout.route.elevation}}m</span>
       </div>
     </div>
   </ng-template>

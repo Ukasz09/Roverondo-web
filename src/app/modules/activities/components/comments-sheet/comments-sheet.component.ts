@@ -2,11 +2,10 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from "@angular/material/bottom-sheet";
 import { ActivitiesService } from "@app/core/services";
 import { PostComment, User } from "@app/core/models";
-import { FormBuilder, FormControl, FormGroup, NgModel, Validators } from "@angular/forms";
+import { NgModel } from "@angular/forms";
 import { AuthService } from "@auth0/auth0-angular";
-import { Utils } from "@app/shared/utils";
 import { AppRoutes } from "@app/routes";
-import { UserRoutes } from "../../../user/user-routes";
+import { UserRoutes } from "@app/modules/user";
 import { Router } from "@angular/router";
 
 @Component({
@@ -50,11 +49,8 @@ export class CommentsSheetComponent implements OnInit {
               modifiedAt: createDate,
               user: currentUser
             } as PostComment);
-
             this.sortComments();
             this.newCommentValue = "";
-
-            console.log("", this.commentList);
           });
         }
       });
@@ -63,7 +59,7 @@ export class CommentsSheetComponent implements OnInit {
 
   public navigateToProfile(userId: string | number): void {
     this.router.navigate([this.getUserProfileLink(userId)]).then();
-    this._bottomSheetRef.dismiss()
+    this._bottomSheetRef.dismiss();
   }
 
   public getUserProfileLink(userId: string | number): string {

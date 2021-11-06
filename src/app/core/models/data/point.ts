@@ -1,4 +1,6 @@
 export interface Point {
-  latitude: number;
   longitude: number;
+  latitude: number;
+  elevation: number;
+  speed?: number;
 }

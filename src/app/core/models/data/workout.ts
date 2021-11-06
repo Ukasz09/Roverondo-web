@@ -1,16 +1,12 @@
-import { Route } from "./route";
+import { Route } from './route';
 
 export interface Workout {
+  id: number;
   startTime: string;
   endTime: string;
-  distance: number;
   averageSpeed: number;
-  elevation: number;
-  minAttitude: number;
-  maxAttitude: number;
   minAtmosphericPressure: number;
   maxAtmosphericPressure: number;
   calories: number;
-  location: string;
   route: Route;
 }

@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { ActivityPost } from "@app/core/models";
 import { Utils } from "@app/shared/utils";
 import { AppRoutes } from "@app/routes";
 import { AuthService } from "@auth0/auth0-angular";
 import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { CommentsSheetComponent } from "../comments-sheet/comments-sheet.component";
-import { UserRoutes } from "../../../user/user-routes";
+import { PostExtended } from "@app/core/models";
+import { UserRoutes } from "@app/modules/user";
 
 @Component({
   selector: "app-activity-card-content",
@@ -13,7 +13,7 @@ import { UserRoutes } from "../../../user/user-routes";
   styleUrls: ["./activity-card-content.component.scss"]
 })
 export class ActivityCardContentComponent implements OnInit {
-  @Input() public activity!: ActivityPost;
+  @Input() public activity!: PostExtended;
   @Input() public disableMapInteractions = true;
 
   @Output() public detailsClick: EventEmitter<void> = new EventEmitter<void>();
@@ -41,7 +41,7 @@ export class ActivityCardContentComponent implements OnInit {
   }
 
   public get isLiked(): boolean {
-    return !!this.activity.reactions.find(r => r.userId === this.currentUserId);
+    return this.activity.alreadyReactedTo;
   }
 
 

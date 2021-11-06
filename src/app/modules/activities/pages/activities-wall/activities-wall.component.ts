@@ -3,9 +3,9 @@ import { ActivitiesService, LayoutService, ScrollService } from "@app/core/servi
 import { LayoutType } from "@app/core/enums";
 import { AppRoutes } from "@app/routes";
 import { ActivatedRoute, Data } from "@angular/router";
-import { ActivityPost, PostReaction } from "@app/core/models";
 import { ScrollContainerComponent } from "@app/shared/components";
 import { ActivitiesResolver } from "../../services";
+import { PostExtended } from "@app/core/models";
 
 @Component({
   selector: "app-activities-wall",
@@ -17,8 +17,8 @@ export class ActivitiesWallComponent implements OnInit {
 
   public readonly AppRoutes = AppRoutes;
   public scrollContainerId = "activities-wall";
-  public activities: ActivityPost[] = [];
-  public selectedActivity?: ActivityPost;
+  public activities: PostExtended[] = [];
+  public selectedActivity?: PostExtended;
 
   private loadingMoreActivities = false;
   private type = "";
@@ -49,7 +49,7 @@ export class ActivitiesWallComponent implements OnInit {
 
     this.activatedRoute.data.subscribe({
       next: (data: Data) => {
-        this.activities = data.activities as ActivityPost[];
+        this.activities = data.activities as PostExtended[];
       }
     });
 
@@ -60,19 +60,20 @@ export class ActivitiesWallComponent implements OnInit {
     });
   }
 
-  public onLikeClick(activity: ActivityPost): void {
+  public onLikeClick(activity: PostExtended): void {
     this.activitiesService.likeActivity$(activity.id).subscribe({
       next: () => {
-        activity.reactions.push({ userId: "1", emoji: "", addedAt: "" } as PostReaction);
+        activity.alreadyReactedTo = true;
       }
     });
   }
 
-  public onAddCommentClick(activity: ActivityPost, comment: string): void {
+  public onAddCommentClick(activity: PostExtended, comment: string): void {
+    // TODO:
     console.log("Comment = " + comment);
   }
 
-  public onActivityDetailsClick(activity: ActivityPost): void {
+  public onActivityDetailsClick(activity: PostExtended): void {
     this.selectedActivity = activity;
   }
 

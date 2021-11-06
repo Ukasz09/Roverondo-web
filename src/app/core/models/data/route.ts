@@ -1,5 +1,10 @@
-import { PointInTime } from "./point-in-time";
+import { Point } from './point';
 
 export interface Route {
-  points: PointInTime[];
+  distance: number;
+  elevation: number;
+  minAttitude: number;
+  maxAttitude: number;
+  location: string;
+  route: Point[];
 }

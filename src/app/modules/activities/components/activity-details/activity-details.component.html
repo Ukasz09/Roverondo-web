@@ -4,7 +4,7 @@
       <app-activity-card-content [disableMapInteractions]="false" [activity]="activity"></app-activity-card-content>
     </div>
 
-    <div class="graph-plot">
+    <div *ngIf="speedProvided" class="graph-plot">
       <div class="label">Speed</div>
       <div class="graph">
         <app-area-graph [id]="'speed-graph'"
@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <div class="graph-plot">
+    <div *ngIf="speedProvided" class="graph-plot">
       <div class="label">Speed + Elevation</div>
       <div class="graph">
         <app-area-graph [id]="'combined-graph'"
