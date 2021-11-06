@@ -4,7 +4,7 @@ import { User } from "@app/core/models";
 import { Observable } from "rxjs";
 import { AuthService } from "@auth0/auth0-angular";
 import { AppRoutes } from "@app/routes";
-import { UserService } from "@app/core/services";
+import { UsersService } from "@app/core/services";
 
 @Component({
   selector: "app-user-profile",
@@ -18,7 +18,7 @@ export class UserProfileComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private readonly authService: AuthService,
     private readonly router: Router,
-    private readonly userService: UserService
+    private readonly userService: UsersService
   ) {
   }
 

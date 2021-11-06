@@ -20,6 +20,9 @@
       "dom"
     ],
     "paths": {
+      "@app/env": [
+        "src/environments/environment"
+      ],
       "@app/routes": [
         "src/app/core/enums/routes"
       ],

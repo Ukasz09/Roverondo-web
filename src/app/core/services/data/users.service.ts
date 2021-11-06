@@ -8,8 +8,18 @@ import { map } from "rxjs/operators";
 @Injectable({
   providedIn: "root"
 })
-export class UserService {
+export class UsersService {
   constructor(private readonly http: HttpClient) {
+  }
+
+  public registerUser$(): Observable<void> {
+    const endpoint = `/api/users`;
+    return this.http.post<void>(endpoint, {});
+  }
+
+  public getUsers$(): Observable<User[]> {
+    const endpoint = `/api/users`;
+    return this.http.get<User[]>(endpoint);
   }
 
   public getUser$(userId: string): Observable<User> {

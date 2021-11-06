@@ -2,13 +2,13 @@ import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/router";
 import { Observable, of } from "rxjs";
 import { User } from "@app/core/models";
-import { UserService } from "@app/core/services";
+import { UsersService } from "@app/core/services";
 
 @Injectable()
 export class UserResolver implements Resolve<User | undefined> {
 
   constructor(
-    private readonly userService: UserService
+    private readonly userService: UsersService
   ) {
   }
 

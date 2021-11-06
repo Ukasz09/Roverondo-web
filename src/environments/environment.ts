@@ -18,6 +18,8 @@ export const environment = {
     errorPath
   },
   httpInterceptor: {
-    allowedList: [`${apiUri}/*`]
-  }
+    allowedList: [`${apiUri}/*`,`/api/*`]
+  },
+  usersApi: "http://localhost:8080",
+  activitiesApi: "http://localhost:8080"
 };

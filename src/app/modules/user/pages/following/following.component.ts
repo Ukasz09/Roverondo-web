@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { User } from "@app/core/models";
 import { ActivatedRoute, Data, Router } from "@angular/router";
-import { UserService } from "@app/core/services";
+import { UsersService } from "@app/core/services";
 import { AppRoutes } from "@app/routes";
 import { AuthService } from "@auth0/auth0-angular";
 
@@ -16,7 +16,7 @@ export class FollowingComponent implements OnInit {
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly router: Router,
-    private readonly userService: UserService,
+    private readonly userService: UsersService,
     private readonly authService: AuthService
   ) {
   }
