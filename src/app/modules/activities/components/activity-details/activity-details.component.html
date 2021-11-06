@@ -11,7 +11,9 @@
                         [label]="'Speed'"
                         [data]="speedPlotData"
                         [xAxis]="false"
-                        [colorScheme]="speedColorScheme">
+                        [colorScheme]="speedColorScheme"
+                        [yScaleMin]="minSpeed ?? 0"
+        >
         </app-area-graph>
       </div>
       <div class="stats">
@@ -33,7 +35,9 @@
                         [label]="'Speed'"
                         [data]="elevationPlotData"
                         [xAxis]="false"
-                        [colorScheme]="elevationColorScheme">
+                        [colorScheme]="elevationColorScheme"
+                        [yScaleMin]="lowestPoint ?? 0"
+        >
         </app-area-graph>
       </div>
       <div class="stats">
@@ -55,7 +59,9 @@
                         [label]="'Speed'"
                         [data]="combinedPlotData"
                         [xAxis]="false"
-                        [colorScheme]="combinedColorScheme">
+                        [colorScheme]="combinedColorScheme"
+                        [yScaleMin]="yScaleMinCompound"
+        >
         </app-area-graph>
       </div>
     </div>

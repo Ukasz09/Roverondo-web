@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { Utils } from "@app/shared/utils";
 import { LayoutType } from "@app/core/enums";
 import { Constants } from "@app/core/constants";
 

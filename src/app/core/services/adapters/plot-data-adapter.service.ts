@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { PostExtended, PlotData, Workout, Route } from "@app/core/models";
+import { PlotData, Route } from "@app/core/models";
 import { Adapter } from "./adapter";
 import { Plots } from "../../models/data/plots";
 

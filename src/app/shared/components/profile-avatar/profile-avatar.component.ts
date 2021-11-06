@@ -23,6 +23,5 @@ export class ProfileAvatarComponent implements OnInit {
       let processedNickname = this.nickname ? this.nickname.split(" ").join("%20").trim() : "?";
       this.avatarImgPath = `https://avatars.dicebear.com/api/initials/${processedNickname}.svg`;
     }
-    console.log(this.avatarImgPath);
   }
 }

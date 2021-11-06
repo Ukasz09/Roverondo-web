@@ -21,6 +21,7 @@ export class ActivitiesWallComponent implements OnInit {
   public selectedActivity?: PostExtended;
 
   private loadingMoreActivities = false;
+  private noMoreActivities = false;
   private type = "";
 
   constructor(
@@ -51,6 +52,9 @@ export class ActivitiesWallComponent implements OnInit {
     this.activatedRoute.data.subscribe({
       next: (data: Data) => {
         this.activities = data.activities as PostExtended[];
+        this.noMoreActivities = false;
+        this.loadingMoreActivities = false;
+        this.selectedActivity = undefined;
       }
     });
 
@@ -94,7 +98,7 @@ export class ActivitiesWallComponent implements OnInit {
 
   private needToLoadMoreActivities(id: string, bottomPosition: number): boolean {
     // TODO: tmp fixed offset - change
-    return id === this.scrollContainerId && bottomPosition < 700 && !this.loadingMoreActivities;
+    return id === this.scrollContainerId && bottomPosition < 700 && !this.loadingMoreActivities && !this.noMoreActivities;
   }
 
   private loadMoreActivities(): void {
@@ -105,6 +109,9 @@ export class ActivitiesWallComponent implements OnInit {
         if (user) {
           this.activitiesResolver.getActivities$(user.id, this.activities.length, this.type).subscribe({
             next: data => {
+              if (data.length === 0) {
+                this.noMoreActivities = true;
+              }
               this.activities = this.activities.concat(data);
               this.loadingMoreActivities = false;
             }

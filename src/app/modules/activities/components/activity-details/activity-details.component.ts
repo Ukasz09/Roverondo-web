@@ -24,6 +24,7 @@ export class ActivityDetailsComponent implements OnInit {
   public elevationPlotData: PlotData[] = [];
   public combinedPlotData: PlotData[] = [];
   public maxSpeed?: number;
+  public minSpeed?: number;
   public avgSpeed?: number;
   public lowestPoint!: number;
   public highestPoint!: number;
@@ -47,6 +48,10 @@ export class ActivityDetailsComponent implements OnInit {
     return this.speedPlotData[0].series.length > 0;
   }
 
+  public get yScaleMinCompound(): number {
+    return Math.min(this.lowestPoint ?? 0, this.minSpeed ?? 0);
+  }
+
   private parsePlotData(): void {
     const route = this.activity.workout.route;
     const plots = this.plotDataAdapter.adapt(route);
@@ -58,6 +63,7 @@ export class ActivityDetailsComponent implements OnInit {
     if (this.speedProvided) {
       const speedValues = plots.speed.series.map(data => data.value);
       this.maxSpeed = Math.max(...speedValues);
+      this.minSpeed = Math.min(...speedValues);
       const speedSum = speedValues.reduce((acc, current) => acc + current, 0);
       this.avgSpeed = speedSum / plots.elevation.series.length;
     }
