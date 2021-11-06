@@ -56,19 +56,19 @@
     <div class="stats">
       <div class="time">
         <mat-icon class="icon">timer</mat-icon>
-        <span>{{getActivityDuration().hour}}h {{ getActivityDuration().minute}}min</span>
+        <span>{{getActivityDurationText()}}</span>
       </div>
       <div class="distance">
         <mat-icon class="icon">open_in_full</mat-icon>
-        <span>{{activity.workout.route.distance}}km</span>
+        <span>{{ totalDistanceText }}</span>
       </div>
       <div class="average">
         <mat-icon class="icon">hide_source</mat-icon>
-        <span>{{ activity.workout.averageSpeed }}km/h</span>
+        <span>{{ avgSpeedText }}</span>
       </div>
       <div class="elevation">
         <mat-icon class="icon">north_east</mat-icon>
-        <span>{{activity.workout.route.elevation}}m</span>
+        <span>{{avgElevationText}}</span>
       </div>
     </div>
   </ng-template>

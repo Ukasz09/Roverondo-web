@@ -20,6 +20,7 @@ export class ActivityCardContentComponent implements OnInit {
   @Output() public like: EventEmitter<void> = new EventEmitter<void>();
   @Output() public comment: EventEmitter<string> = new EventEmitter<string>();
 
+  private readonly valueNotFoundPlaceholder = "N/A";
   private currentUserId?: string = undefined;
 
   constructor(private readonly auth: AuthService,
@@ -30,12 +31,6 @@ export class ActivityCardContentComponent implements OnInit {
     this.auth.user$.subscribe((user) => this.currentUserId = user?.sub);
   }
 
-  public getActivityDuration(): { hour: number; minute: number } {
-    const startDate = new Date(Date.parse(this.activity.workout.startTime));
-    const endDate = new Date(Date.parse(this.activity.workout.endTime));
-    return Utils.calcDeltaTime(startDate, endDate);
-  }
-
   public get userProfileLink(): string {
     return `/${AppRoutes.user}/${UserRoutes.profile}/${this.activity.user.id}`;
   }
@@ -44,8 +39,36 @@ export class ActivityCardContentComponent implements OnInit {
     return this.activity.alreadyReactedTo;
   }
 
-
   public openCommentsSheet(): void {
     this._bottomSheet.open(CommentsSheetComponent, { hasBackdrop: true, data: { postId: this.activity.id } });
+  }
+
+  public getActivityDurationText(): string {
+    if (this.activity.workout.startTime && this.activity.workout.endTime) {
+      const activityDuration = this.getActivityDuration();
+      return `${activityDuration.hour}h ${activityDuration.minute}min`;
+    }
+    return this.valueNotFoundPlaceholder;
+  }
+
+  public get totalDistanceText(): string {
+    const distance = this.activity.workout.route.distance;
+    return distance ? `${distance} km` : this.valueNotFoundPlaceholder;
+  }
+
+  public get avgSpeedText(): string {
+    const avgSpeed = this.activity.workout.averageSpeed;
+    return avgSpeed ? `${avgSpeed} km/h` : this.valueNotFoundPlaceholder;
+  }
+
+  public get avgElevationText(): string {
+    const elevation = this.activity.workout.route.elevation;
+    return elevation ? `${elevation} m` : this.valueNotFoundPlaceholder;
+  }
+
+  private getActivityDuration(): { hour: number; minute: number } {
+    const startDate = new Date(Date.parse(this.activity.workout.startTime));
+    const endDate = new Date(Date.parse(this.activity.workout.endTime));
+    return Utils.calcDeltaTime(startDate, endDate);
   }
 }
