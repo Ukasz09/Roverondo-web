@@ -4,7 +4,7 @@ import { AppRoutes } from "@app/routes";
 import { AuthService } from "@auth0/auth0-angular";
 import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { CommentsSheetComponent } from "../comments-sheet/comments-sheet.component";
-import { PostExtended } from "@app/core/models";
+import { Point, PostExtended } from "@app/core/models";
 import { UserRoutes } from "@app/modules/user";
 
 @Component({
@@ -66,6 +66,10 @@ export class ActivityCardContentComponent implements OnInit {
   public get avgElevationText(): string {
     const elevation = this.activity.workout.route.elevation;
     return elevation ? `${elevation} m` : this.valueNotFoundPlaceholder;
+  }
+
+  public get routes(): Point[] {
+    return this.activity.workout.route.route;
   }
 
   private getActivityDuration(): { hour: number; minute: number } {

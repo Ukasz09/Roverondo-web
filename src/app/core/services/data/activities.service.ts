@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { PostComment, PostExtended } from "@app/core/models";
 import { map, tap } from "rxjs/operators";
 import { MockedSpeedAdapterService } from "../adapters";
@@ -30,8 +30,9 @@ export class ActivitiesService {
 
   public getLikedActivities$(userId: number, offset = 0, type = "ActivityPost", extended = true, amount = 5): Observable<PostExtended[]> {
     // TODO: integrate with backend
-    const endpoint = `api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=${type}&extended=${extended}`;
-    return this.http.get<PostExtended[]>(endpoint).pipe(tap(data => console.log(data)));
+    // const endpoint = `api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=${type}&extended=${extended}`;
+    // return this.http.get<PostExtended[]>(endpoint).pipe(tap(data => console.log(data)));
+    return of([])
   }
 
   public likeActivity$(userId: number, activityId: number): Observable<void> {

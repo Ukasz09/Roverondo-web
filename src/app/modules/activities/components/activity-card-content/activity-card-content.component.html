@@ -18,7 +18,7 @@
     <span class="cursor-pointer" (click)="detailsClick.emit()">{{activity.title}}</span>
   </div>
   <div class="map">
-    <app-map [disabledInteractions]="disableMapInteractions"></app-map>
+    <app-map [disabledInteractions]="disableMapInteractions" [routePoints]="routes"></app-map>
   </div>
   <div class="bottom">
     <div [ngTemplateOutlet]="stats"></div>
