@@ -6,25 +6,23 @@ import { Component, Input, OnInit } from "@angular/core";
   styleUrls: ["./profile-avatar.component.scss"]
 })
 export class ProfileAvatarComponent implements OnInit {
-  @Input()
-  public avatarImgPath?: string;
-
-  private readonly characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  @Input() public avatarImgPath?: string;
+  @Input() public nickname?: string;
 
   constructor() {
-    this.avatarImgPath = `https://avatars.dicebear.com/api/initials/${this.getRandomLetter()}${this.getRandomLetter()}.svg`;
   }
 
   public get avatarStyles() {
     return {
-      "background-image": `url(${this.avatarImgPath})`,
+      "background-image": `url(${this.avatarImgPath})`
     };
   }
 
   public ngOnInit(): void {
-  }
-
-  private getRandomLetter(): string {
-    return this.characters.charAt(Math.floor(Math.random() * this.characters.length));
+    if (!this.avatarImgPath) {
+      let processedNickname = this.nickname ? this.nickname.split(" ").join("%20").trim() : "?";
+      this.avatarImgPath = `https://avatars.dicebear.com/api/initials/${processedNickname}.svg`;
+    }
+    console.log(this.avatarImgPath);
   }
 }

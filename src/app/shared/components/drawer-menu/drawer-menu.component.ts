@@ -35,10 +35,6 @@ export class DrawerMenuComponent implements OnInit {
     return `/${routes.join("/")}`;
   }
 
-  public getDefaultUserPicture(name?: string): string {
-    return Utils.getInitialsImage(name as string);
-  }
-
   public logout(): void {
     this.auth.logout({ returnTo: document.location.origin });
     this.closeDrawer.emit();

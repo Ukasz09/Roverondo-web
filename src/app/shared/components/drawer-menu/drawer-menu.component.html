@@ -5,7 +5,9 @@
     </h1>
     <ng-container *ngIf="auth.user$ | async as user; else userLoadingSpinner">
       <div class="avatar-wrapper">
-        <app-profile-avatar id="user-avatar" [avatarImgPath]="user.picture ?? getDefaultUserPicture(user.name)"
+        <app-profile-avatar id="user-avatar"
+                            [nickname]="user.nickname"
+                            [avatarImgPath]="user.picture"
                             [routerLink]="getRouteLink([AppRoutes.user])">
         </app-profile-avatar>
       </div>

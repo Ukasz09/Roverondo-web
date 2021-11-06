@@ -14,7 +14,10 @@
         <div class="comment-wrapper">
           <div style="display: flex; flex-direction: row">
             <div class="user">
-              <app-profile-avatar (click)="navigateToProfile(comment.user.id)" [avatarImgPath]="comment.user.profilePicture"></app-profile-avatar>
+              <app-profile-avatar (click)="navigateToProfile(comment.user.id)"
+                                  [avatarImgPath]="comment.user.profilePicture"
+                                  [nickname]="comment.user.nickname"
+              ></app-profile-avatar>
               <span class="name" (click)="navigateToProfile(comment.user.id)">{{comment.user.nickname}}</span>
             </div>
             <span class="date">{{ comment.createdAt | date }}</span>

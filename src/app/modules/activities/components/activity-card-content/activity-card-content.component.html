@@ -1,6 +1,7 @@
 <div class="card-content">
   <div class="user-info">
-    <app-profile-avatar [routerLink]="userProfileLink"
+    <app-profile-avatar [nickname]="activity.user.nickname"
+                        [routerLink]="userProfileLink"
                         [avatarImgPath]="activity.user.profilePicture"></app-profile-avatar>
     <div class="route-header-text">
       <span class="activity-info">
