@@ -3,7 +3,6 @@ import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from "@angular/material/bott
 import { ActivitiesService, CurrentUserService } from "@app/core/services";
 import { PostComment, User } from "@app/core/models";
 import { NgModel } from "@angular/forms";
-import { AuthService } from "@auth0/auth0-angular";
 import { AppRoutes } from "@app/routes";
 import { UserRoutes } from "@app/modules/user";
 import { Router } from "@angular/router";
@@ -20,7 +19,6 @@ export class CommentsSheetComponent implements OnInit {
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: { postId: string, withFocus: boolean },
     private readonly activitiesService: ActivitiesService,
-    private readonly authService: AuthService,
     private readonly _bottomSheetRef: MatBottomSheetRef<CommentsSheetComponent>,
     private readonly router: Router,
     private readonly currentUserService: CurrentUserService
@@ -54,7 +52,7 @@ export class CommentsSheetComponent implements OnInit {
   }
 
   private fetchComments(): void {
-    this.activitiesService.getComments(this.data.postId).subscribe({
+    this.activitiesService.getComments$(this.data.postId).subscribe({
       next: comments => {
         this.commentList = comments;
         this.sortComments();

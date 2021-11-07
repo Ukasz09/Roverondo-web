@@ -6,6 +6,7 @@ import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { CommentsSheetComponent } from "../comments-sheet/comments-sheet.component";
 import { Point, PostExtended } from "@app/core/models";
 import { UserRoutes } from "@app/modules/user";
+import { ReactionsSheetComponent } from "../reactions-sheet/reactions-sheet.component";
 
 @Component({
   selector: "app-activity-card-content",
@@ -42,6 +43,13 @@ export class ActivityCardContentComponent implements OnInit {
     this._bottomSheet.open(CommentsSheetComponent, {
       hasBackdrop: true,
       data: { postId: this.activity.id, withFocus: withFocus }
+    });
+  }
+
+  public openReactionsSheet(): void {
+    this._bottomSheet.open(ReactionsSheetComponent, {
+      hasBackdrop: true,
+      data: { postId: this.activity.id }
     });
   }
 

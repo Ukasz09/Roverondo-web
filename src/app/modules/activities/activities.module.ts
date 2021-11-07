@@ -12,13 +12,15 @@ import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ReactionsSheetComponent } from './components/reactions-sheet/reactions-sheet.component';
 
 @NgModule({
   declarations: [
     ActivitiesWallComponent,
     ActivityCardContentComponent,
     ActivityDetailsComponent,
-    CommentsSheetComponent
+    CommentsSheetComponent,
+    ReactionsSheetComponent
   ],
   imports: [
     CommonModule,

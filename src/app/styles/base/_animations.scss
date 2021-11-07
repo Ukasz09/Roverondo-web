@@ -11,3 +11,7 @@
 .fadeOut {
   animation: fadeOut 0.5s linear 1 normal forwards;
 }
+
+.heartbeat {
+  animation: heartbeat 3.5s ease-in-out infinite both;
+}
