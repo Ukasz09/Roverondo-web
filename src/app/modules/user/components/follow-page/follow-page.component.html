@@ -5,9 +5,22 @@
         <h1 *ngIf="isMobileLayout" class="mobile-logo">
           <app-logo-text [routerLink]="homeRouterLink" [lightText]="false"></app-logo-text>
         </h1>
-        <ng-container *ngIf="users; else spinner">
-          <ng-container *ngIf="users.length>0; else notFoundUsersTemplate">
-            <app-users-list [userList]="users"></app-users-list>
+        <ng-container *ngIf="userList; else spinner">
+          <ng-container *ngIf="userList.length>0; else notFoundUsersTemplate">
+            <app-scroll-container [id]="'followers-list'"
+                                  [withScrollbar]="!isMobileLayout"
+                                  [initialScrollTopOffsetPx]="0">
+              <div class="content">
+                <div *ngFor="let user of userList; let i=index" class="card-wrapper">
+                  <app-user-card [user]="user">
+                    <img *ngIf="withRankMedals && rankMedalImg(i)"
+                         height="64px"
+                         [src]="rankMedalImg(i)"
+                         alt="medal-image">
+                  </app-user-card>
+                </div>
+              </div>
+            </app-scroll-container>
           </ng-container>
           <ng-template #notFoundUsersTemplate>
             <div class="no-users">

@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { FollowersComponent, FollowingComponent, UserProfileComponent } from "./pages";
+import { FollowersComponent, FollowingComponent, LeaderboardComponent, UserProfileComponent } from "./pages";
 import { UserRoutes } from "./user-routes";
 import { UserResolver } from "./services";
 
@@ -54,6 +54,10 @@ const routes: Routes = [
     resolve: {
       user: UserResolver
     }
+  },
+  {
+    path: `${UserRoutes.leaderboard}`,
+    component: LeaderboardComponent
   }
 ];
 

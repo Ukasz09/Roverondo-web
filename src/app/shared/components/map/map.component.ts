@@ -62,7 +62,7 @@ export class MapComponent implements OnInit {
       for (const point of this.routePoints) {
         latLangExpression.push(new LatLng(point.latitude, point.longitude, point.elevation));
       }
-      const lineBorder = polyline(latLangExpression, { color: "#fff", weight: 8, opacity: 1 });
+      const lineBorder = polyline(latLangExpression, { color: "#fff", weight: 9, opacity: 0.9 });
       const line = polyline(latLangExpression, { color: "#d50000", weight: 4, opacity: 1 });
       this.routeLayers.push(lineBorder);
       this.routeLayers.push(line);

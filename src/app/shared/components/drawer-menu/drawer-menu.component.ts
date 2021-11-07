@@ -2,7 +2,6 @@ import { Component, EventEmitter, Inject, Input, OnInit, Output } from "@angular
 import { AppRoutes } from "@app/routes";
 import { ActivitiesRoutes } from "@app/routes/activities";
 import { AuthService } from "@auth0/auth0-angular";
-import { Utils } from "@app/shared/utils";
 import { DOCUMENT } from "@angular/common";
 import { CurrentUserService } from "@app/core/services";
 import { Router } from "@angular/router";

@@ -1,0 +1,13 @@
+<app-glass-card [borderRadius]="'0px'" (click)="onUserClick(user)">
+  <div class="content">
+    <app-profile-avatar [id]="user.id"
+                        [avatarImgPath]="user.profilePicture"
+                        [nickname]="user.nickname"
+    ></app-profile-avatar>
+    <label [for]="user.id" class="name">{{user.nickname}}</label>
+    <div class="aside-content">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</app-glass-card>
+

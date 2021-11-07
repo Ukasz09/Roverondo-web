@@ -4,7 +4,12 @@ import { ActivitiesWallComponent } from "./pages";
 import { AppSharedModule } from "@app/shared";
 import { ActivitiesRoutingModule } from "./activities-routing.module";
 import { MatIconModule } from "@angular/material/icon";
-import { ActivityCardContentComponent, ActivityDetailsComponent, CommentsSheetComponent } from "./components";
+import {
+  ActivityCardContentComponent,
+  ActivityDetailsComponent,
+  CommentsSheetComponent,
+  ReactionsSheetComponent
+} from "./components";
 import { ActivitiesResolver } from "./services";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatListModule } from "@angular/material/list";
@@ -12,7 +17,6 @@ import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { ReactionsSheetComponent } from './components/reactions-sheet/reactions-sheet.component';
 
 @NgModule({
   declarations: [
