@@ -17,7 +17,7 @@
     <mat-icon class="icon">directions_bike</mat-icon>
     <span class="cursor-pointer" (click)="detailsClick.emit()">{{activity.title}}</span>
   </div>
-  <div class="map">
+  <div class="map fadeIn">
     <app-map [disabledInteractions]="disableMapInteractions" [routePoints]="routes"></app-map>
   </div>
   <div class="bottom">
@@ -40,7 +40,7 @@
   </div>
   <ng-template #actions>
     <div class="actions">
-      <div class="action cursor-pointer" (click)="like.emit()">
+      <div class="action cursor-pointer" (click)="onLikeClick()">
         <mat-icon class="icon" id="like"
                   [ngClass]="{'liked':isLiked}">{{ isLiked ? 'favorite' : 'favorite_border' }}</mat-icon>
         <label for="like" class="text cursor-pointer">

@@ -1,4 +1,4 @@
-<div class="graph-wrapper">
+<div class="graph-wrapper fadeIn">
   <ngx-charts-area-chart
     *ngIf="dataLoaded; else spinner"
     [id]="id"
@@ -13,6 +13,7 @@
     [gradient]="withGradient"
     [scheme]="colorScheme"
     [yScaleMin]="yScaleMin"
+    [animations]="true"
   >
   </ngx-charts-area-chart>
 

@@ -24,7 +24,6 @@
                 <ng-container *ngIf="activity; else spinner">
                   <app-activity-card-content
                     [activity]="activity"
-                    (like)="onLikeClick(activity)"
                     (detailsClick)="onActivityDetailsClick(activity)"
                   >
                   </app-activity-card-content>

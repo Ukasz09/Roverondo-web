@@ -1,7 +1,7 @@
 <div class="aside-mobile">
   <ng-container *ngIf="withAvatar">
     <div *ngIf=" auth.user$ | async as user" class="avatar-wrapper">
-      <app-profile-avatar [nickname]="user.nickname" [avatarImgPath]="user.picture ?? getDefaultUserPicture(user.name)"
+      <app-profile-avatar [fadeIn]="false" [nickname]="user.nickname" [avatarImgPath]="user.picture ?? getDefaultUserPicture(user.name)"
                           (click)="onHamburgerMenuClick()">
       </app-profile-avatar>
     </div>

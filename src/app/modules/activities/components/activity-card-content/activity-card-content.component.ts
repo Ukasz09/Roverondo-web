@@ -7,6 +7,7 @@ import { CommentsSheetComponent } from "../comments-sheet/comments-sheet.compone
 import { Point, PostExtended } from "@app/core/models";
 import { UserRoutes } from "@app/modules/user";
 import { ReactionsSheetComponent } from "../reactions-sheet/reactions-sheet.component";
+import { ActivitiesService, CurrentUserService } from "@app/core/services";
 
 @Component({
   selector: "app-activity-card-content",
@@ -18,13 +19,16 @@ export class ActivityCardContentComponent implements OnInit {
   @Input() public disableMapInteractions = true;
 
   @Output() public detailsClick: EventEmitter<void> = new EventEmitter<void>();
-  @Output() public like: EventEmitter<void> = new EventEmitter<void>();
 
   private readonly valueNotFoundPlaceholder = "N/A";
   private currentUserId?: string = undefined;
 
-  constructor(private readonly auth: AuthService,
-              private readonly _bottomSheet: MatBottomSheet) {
+  constructor(
+    private readonly auth: AuthService,
+    private readonly _bottomSheet: MatBottomSheet,
+    private readonly currentUserService: CurrentUserService,
+    private readonly activitiesService: ActivitiesService
+  ) {
   }
 
   public ngOnInit(): void {
@@ -42,7 +46,7 @@ export class ActivityCardContentComponent implements OnInit {
   public openCommentsSheet(withFocus = false): void {
     this._bottomSheet.open(CommentsSheetComponent, {
       hasBackdrop: true,
-      data: { postId: this.activity.id, withFocus: withFocus }
+      data: { post: this.activity, withFocus: withFocus }
     });
   }
 
@@ -78,6 +82,23 @@ export class ActivityCardContentComponent implements OnInit {
 
   public get routes(): Point[] {
     return this.activity.workout.route.route;
+  }
+
+  public onLikeClick(): void {
+    this.currentUserService.currentUser$.subscribe({
+      next: user => {
+        if (user) {
+          this.activitiesService.likeActivity$(user.id, this.activity.id).subscribe({
+            next: () => {
+              this.activity.alreadyReactedTo = true;
+              this.activity.reactionsCount++;
+            }
+          });
+        } else {
+          console.error("Current user not found - not liked");
+        }
+      }
+    });
   }
 
   private getActivityDuration(): { hour: number; minute: number } {

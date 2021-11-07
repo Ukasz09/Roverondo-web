@@ -22,16 +22,13 @@ export class ActivitiesService {
   }
 
   public getMyActivities$(userId: number, offset = 0, type = "ActivityPost", extended = true, amount = 5): Observable<PostExtended[]> {
-    // TODO: integrate with backend
-    const endpoint = `api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=${type}&extended=${extended}`;
-    return this.http.get<PostExtended[]>(endpoint).pipe(tap(data => console.log(data)));
+    return of([]);
   }
 
   public getLikedActivities$(userId: number, offset = 0, type = "ActivityPost", extended = true, amount = 5): Observable<PostExtended[]> {
     // TODO: integrate with backend
-    // const endpoint = `api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=${type}&extended=${extended}`;
-    // return this.http.get<PostExtended[]>(endpoint).pipe(tap(data => console.log(data)));
-    return of([]);
+    const endpoint = `api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=${type}&extended=${extended}`;
+    return this.http.get<PostExtended[]>(endpoint).pipe(tap(data => console.log(data)));
   }
 
   public likeActivity$(userId: number, activityId: number): Observable<void> {

@@ -65,22 +65,6 @@ export class ActivitiesWallComponent implements OnInit {
     });
   }
 
-  public onLikeClick(activity: PostExtended): void {
-    this.currentUserService.currentUser$.subscribe({
-      next: user => {
-        if (user) {
-          this.activitiesService.likeActivity$(user.id, activity.id).subscribe({
-            next: () => {
-              activity.alreadyReactedTo = true;
-            }
-          });
-        } else {
-          console.error("Current user not found - not liked");
-        }
-      }
-    });
-  }
-
   public onActivityDetailsClick(activity: PostExtended): void {
     this.selectedActivity = activity;
   }

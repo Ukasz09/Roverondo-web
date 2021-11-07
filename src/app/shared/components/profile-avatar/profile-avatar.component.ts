@@ -8,6 +8,7 @@ import { Component, Input, OnInit } from "@angular/core";
 export class ProfileAvatarComponent implements OnInit {
   @Input() public avatarImgPath?: string;
   @Input() public nickname?: string;
+  @Input() public fadeIn = true;
 
   constructor() {
   }

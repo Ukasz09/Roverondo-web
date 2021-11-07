@@ -7,5 +7,6 @@ export enum AppRoutes {
   leaderboard = "leaderboard",
   followers = "followers",
   following = "following",
-  user = "user"
+  user = "user",
+  plannedRoutes = "plannedRoutes"
 }

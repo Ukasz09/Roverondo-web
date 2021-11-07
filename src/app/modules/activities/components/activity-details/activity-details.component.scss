@@ -10,18 +10,49 @@ app-scroll-container {
     width: 100%;
 
     .basic-details {
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .description {
+      @include mixins.media(sm-small) {
+        @include mixins.px(1rem);
+      }
+
+      .label {
+        @include mixins.my(2rem);
+        font-weight: 600;
+        font-size: 18px;
+
+        @include mixins.media(md-large) {
+          font-size: 20px;
+        }
+      }
+
+      .content {
+        font-size: 14px;
+
+
+        @include mixins.media(xs-medium) {
+          font-size: 16px;
+        }
+
+        @include mixins.media(md-large) {
+          font-size: 18px;
+        }
+      }
+
     }
 
     .graph-plot {
-      margin-top: 2rem;
+      margin-top: 1.5rem;
 
-      &:last-child{
-      margin-bottom: 1.5rem;
-    }
+      &:last-child {
+        margin-bottom: 1.5rem;
+      }
 
       @include mixins.media(sm-xsmall) {
-        margin-top: 4rem;
+        margin-top: 2rem;
+        bottom: 2rem;
       }
 
       @include mixins.media(sm-small) {
@@ -48,26 +79,26 @@ app-scroll-container {
         }
       }
 
-      .stats{
+      .stats {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
         margin-top: 2rem;
         font-size: 11px;
 
-        @include mixins.media(xs-large){
+        @include mixins.media(xs-large) {
           font-size: 15px;
         }
 
-        @include mixins.media(sm-xsmall){
+        @include mixins.media(sm-xsmall) {
           font-size: 18px;
         }
 
-        .name{
+        .name {
           font-weight: 600;
           margin-right: 0.5rem;
 
-          @include mixins.media(sm-xsmall){
+          @include mixins.media(sm-xsmall) {
             margin-right: 1rem;
           }
         }
