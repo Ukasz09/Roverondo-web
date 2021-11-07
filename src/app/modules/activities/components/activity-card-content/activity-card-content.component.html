@@ -58,7 +58,7 @@
 
   <ng-template #stats>
     <div class="stats">
-      <div class="time">
+      <div *ngIf="withTime" class="time">
         <mat-icon class="icon">timer</mat-icon>
         <span>{{getActivityDurationText()}}</span>
       </div>
@@ -66,7 +66,7 @@
         <mat-icon class="icon">open_in_full</mat-icon>
         <span>{{ totalDistanceText }}</span>
       </div>
-      <div class="average">
+      <div *ngIf="withAvgSpeed" class="average">
         <mat-icon class="icon">hide_source</mat-icon>
         <span>{{ avgSpeedText }}</span>
       </div>

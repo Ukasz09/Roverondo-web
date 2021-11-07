@@ -4,10 +4,11 @@ import { AppRoutes } from "@app/routes";
 import { AuthService } from "@auth0/auth0-angular";
 import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { CommentsSheetComponent } from "../comments-sheet/comments-sheet.component";
-import { Point, PostExtended } from "@app/core/models";
+import { Point, Post, Route } from "@app/core/models";
 import { UserRoutes } from "@app/modules/user";
 import { ReactionsSheetComponent } from "../reactions-sheet/reactions-sheet.component";
 import { ActivitiesService, CurrentUserService } from "@app/core/services";
+import { PostType } from "@app/core/enums";
 
 @Component({
   selector: "app-activity-card-content",
@@ -15,8 +16,13 @@ import { ActivitiesService, CurrentUserService } from "@app/core/services";
   styleUrls: ["./activity-card-content.component.scss"]
 })
 export class ActivityCardContentComponent implements OnInit {
-  @Input() public activity!: PostExtended;
+  @Input() public activity!: Post;
+  @Input() public route!: Route;
   @Input() public disableMapInteractions = true;
+  @Input() public startTime?: string;
+  @Input() public endTime?: string;
+  @Input() public averageSpeed?: number;
+  @Input() public type!: PostType;
 
   @Output() public detailsClick: EventEmitter<void> = new EventEmitter<void>();
 
@@ -58,7 +64,7 @@ export class ActivityCardContentComponent implements OnInit {
   }
 
   public getActivityDurationText(): string {
-    if (this.activity.workout.startTime && this.activity.workout.endTime) {
+    if (this.startTime && this.endTime) {
       const activityDuration = this.getActivityDuration();
       return `${activityDuration.hour}h ${activityDuration.minute}min`;
     }
@@ -66,22 +72,21 @@ export class ActivityCardContentComponent implements OnInit {
   }
 
   public get totalDistanceText(): string {
-    const distance = this.activity.workout.route.distance;
+    const distance = this.route.distance;
     return distance ? `${distance} km` : this.valueNotFoundPlaceholder;
   }
 
   public get avgSpeedText(): string {
-    const avgSpeed = this.activity.workout.averageSpeed;
-    return avgSpeed ? `${avgSpeed} km/h` : this.valueNotFoundPlaceholder;
+    return this.averageSpeed ? `${this.averageSpeed} km/h` : this.valueNotFoundPlaceholder;
   }
 
   public get avgElevationText(): string {
-    const elevation = this.activity.workout.route.elevation;
+    const elevation = this.route.elevation;
     return elevation ? `${elevation} m` : this.valueNotFoundPlaceholder;
   }
 
   public get routes(): Point[] {
-    return this.activity.workout.route.route;
+    return this.route.route;
   }
 
   public onLikeClick(): void {
@@ -101,9 +106,20 @@ export class ActivityCardContentComponent implements OnInit {
     });
   }
 
+  public get withAvgSpeed(): boolean {
+    return this.type === PostType.activityPost;
+  }
+
+  public get withTime(): boolean {
+    return this.type === PostType.activityPost;
+  }
+
   private getActivityDuration(): { hour: number; minute: number } {
-    const startDate = new Date(Date.parse(this.activity.workout.startTime));
-    const endDate = new Date(Date.parse(this.activity.workout.endTime));
-    return Utils.calcDeltaTime(startDate, endDate);
+    if (this.startTime && this.endTime) {
+      const startDate = new Date(Date.parse(this.startTime));
+      const endDate = new Date(Date.parse(this.endTime));
+      return Utils.calcDeltaTime(startDate, endDate);
+    }
+    return { hour: 0, minute: 0 };
   }
 }

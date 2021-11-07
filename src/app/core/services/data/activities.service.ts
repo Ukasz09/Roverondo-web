@@ -13,19 +13,26 @@ export class ActivitiesService {
   }
 
   // TODO: cleanup - user object instead of params
-  public getAllActivities$(userId: number, offset = 0, type = "ActivityPost", extended = true, amount = 5): Observable<PostExtended[]> {
-    const endpoint = `api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=${type}&extended=${extended}`;
+  public getAllActivities$(userId: number, offset = 0, extended = true, amount = 3): Observable<PostExtended[]> {
+    const endpoint = `api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=ActivityPost&extended=${extended}`;
     return this.http.get<PostExtended[]>(endpoint).pipe(
       map(data => data.map(post => this.mockedSpeedAdapter.adapt(post))),
       tap(data => console.log(data))
     );
   }
 
-  public getMyActivities$(userId: number, offset = 0, type = "ActivityPost", extended = true, amount = 5): Observable<PostExtended[]> {
+  public getMyActivities$(userId: number, offset = 0, type = "ActivityPost", extended = true, amount = 3): Observable<PostExtended[]> {
     return of([]);
   }
 
-  public getLikedActivities$(userId: number, offset = 0, type = "ActivityPost", extended = true, amount = 5): Observable<PostExtended[]> {
+  public getPlannedActivities$(userId: number, offset = 0, extended = true, amount = 3): Observable<PostExtended[]> {
+    const endpoint = `api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=PlannedRoutePost&extended=${extended}`;
+    return this.http.get<PostExtended[]>(endpoint).pipe(
+      tap(data => console.log(data))
+    );
+  }
+
+  public getLikedActivities$(userId: number, offset = 0, type = "ActivityPost", extended = true, amount = 3): Observable<PostExtended[]> {
     // TODO: integrate with backend
     const endpoint = `api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=${type}&extended=${extended}`;
     return this.http.get<PostExtended[]>(endpoint).pipe(tap(data => console.log(data)));

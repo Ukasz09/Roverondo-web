@@ -54,9 +54,8 @@
       <!--      </h3></li>-->
       <li><h3
         class="link"
-        [routerLink]="getRouteLink([AppRoutes.plannedRoutes])"
-        [appActiveLink]="AppRoutes.plannedRoutes"
-        (click)="closeDrawer.emit()"
+        (click)="navigateToActivity(ActivitiesRoutes.plannedActivities)"
+        [appActiveLink]="ActivitiesRoutes.plannedActivities"
         id="plannedRoutes">
         Planned routes
       </h3></li>

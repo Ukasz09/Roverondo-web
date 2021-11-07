@@ -1,7 +1,15 @@
 <app-scroll-container [id]="id" [withScrollbar]="!isMobileLayout">
   <app-glass-card [borderRadius]="'0'">
     <div class="basic-details">
-      <app-activity-card-content [disableMapInteractions]="false" [activity]="activity"></app-activity-card-content>
+      <app-activity-card-content
+        [disableMapInteractions]="false"
+        [route]="getRouteData(activity)"
+        [startTime]="getStartTimeData(activity)"
+        [endTime]="getEndTimeData(activity)"
+        [averageSpeed]="getAvgSpeedData(activity)"
+        [activity]="activity"
+        [type]="type"
+      ></app-activity-card-content>
     </div>
 
     <div class="description">

@@ -1,4 +1,4 @@
-import { Post } from './activity-post';
+import { Post } from './post';
 import { Workout } from './workout';
 
 export interface PostExtended extends Post {

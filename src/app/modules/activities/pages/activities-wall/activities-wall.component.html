@@ -4,7 +4,9 @@
       <div *ngIf="selectedActivity; else activitiesWall" class="details">
         <app-activity-details [id]="'activity-details'"
                               [activity]="selectedActivity"
-                              (exitDetailsClick)="exitDetailsView()">
+                              (exitDetailsClick)="exitDetailsView()"
+                              [type]="postType"
+        >
         </app-activity-details>
         <div class="backdrop" (click)="exitDetailsView()">
         </div>
@@ -23,7 +25,12 @@
               <app-glass-card>
                 <ng-container *ngIf="activity; else spinner">
                   <app-activity-card-content
+                    [route]="getRouteData(activity)"
+                    [startTime]="getStartTimeData(activity)"
+                    [endTime]="getEndTimeData(activity)"
+                    [averageSpeed]="getAvgSpeedData(activity)"
                     [activity]="activity"
+                    [type]="postType"
                     (detailsClick)="onActivityDetailsClick(activity)"
                   >
                   </app-activity-card-content>

@@ -8,5 +8,4 @@ export enum AppRoutes {
   followers = "followers",
   following = "following",
   user = "user",
-  plannedRoutes = "plannedRoutes"
 }

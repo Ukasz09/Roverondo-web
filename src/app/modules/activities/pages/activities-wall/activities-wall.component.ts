@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivitiesService, CurrentUserService, LayoutService, ScrollService } from "@app/core/services";
-import { LayoutType } from "@app/core/enums";
+import { LayoutType, PostType } from "@app/core/enums";
 import { AppRoutes } from "@app/routes";
 import { ActivatedRoute, Data } from "@angular/router";
 import { ScrollContainerComponent } from "@app/shared/components";
 import { ActivitiesResolver } from "../../services";
-import { PostExtended } from "@app/core/models";
+import { PlannedPostExtended, PostExtended, Route } from "@app/core/models";
+import { ActivitiesRoutes } from "@app/routes/activities";
 
 @Component({
   selector: "app-activities-wall",
@@ -17,8 +18,8 @@ export class ActivitiesWallComponent implements OnInit {
 
   public readonly AppRoutes = AppRoutes;
   public scrollContainerId = "activities-wall";
-  public activities: PostExtended[] = [];
-  public selectedActivity?: PostExtended;
+  public activities: (PostExtended | PlannedPostExtended)[] = [];
+  public selectedActivity?: PostExtended | PlannedPostExtended;
 
   private loadingMoreActivities = false;
   private noMoreActivities = false;
@@ -51,7 +52,7 @@ export class ActivitiesWallComponent implements OnInit {
 
     this.activatedRoute.data.subscribe({
       next: (data: Data) => {
-        this.activities = data.activities as PostExtended[];
+        this.activities = data.activities as PostExtended[] | PlannedPostExtended[];
         this.noMoreActivities = false;
         this.loadingMoreActivities = false;
         this.selectedActivity = undefined;
@@ -65,12 +66,47 @@ export class ActivitiesWallComponent implements OnInit {
     });
   }
 
-  public onActivityDetailsClick(activity: PostExtended): void {
+  public onActivityDetailsClick(activity: PostExtended | PlannedPostExtended): void {
     this.selectedActivity = activity;
   }
 
   public exitDetailsView(): void {
     this.selectedActivity = undefined;
+  }
+
+  public getRouteData(activity: PostExtended | PlannedPostExtended): Route {
+    if ("workout" in activity) {
+      return activity.workout.route;
+    }
+    return activity.plannedRoute.route;
+  }
+
+  public getStartTimeData(activity: PostExtended | PlannedPostExtended): string {
+    if ("workout" in activity) {
+      return activity.workout.startTime;
+    }
+    return "";
+  }
+
+  public getEndTimeData(activity: PostExtended | PlannedPostExtended): string {
+    if ("workout" in activity) {
+      return activity.workout.endTime;
+    }
+    return "";
+  }
+
+  public getAvgSpeedData(activity: PostExtended | PlannedPostExtended): number {
+    if ("workout" in activity) {
+      return activity.workout.averageSpeed;
+    }
+    return 0;
+  }
+
+  public get postType(): PostType {
+    if (this.type === ActivitiesRoutes.plannedActivities) {
+      return PostType.plannedRoutePost;
+    }
+    return PostType.activityPost;
   }
 
   private needToLoadMoreActivities(id: string, bottomPosition: number): boolean {
