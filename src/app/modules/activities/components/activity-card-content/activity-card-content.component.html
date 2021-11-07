@@ -74,6 +74,14 @@
         <mat-icon class="icon">north_east</mat-icon>
         <span>{{avgElevationText}}</span>
       </div>
+      <div *ngIf="withEventStartDate"  class="event-start-date">
+        <mat-icon class="icon">date_range</mat-icon>
+        <span>{{eventStartDateText}}</span>
+      </div>
+      <div *ngIf="withEventDurationTime"  class="event-duration-time">
+        <mat-icon class="icon">query_builder</mat-icon>
+        <span>{{eventDurationTimeText}}</span>
+      </div>
     </div>
   </ng-template>
 </div>

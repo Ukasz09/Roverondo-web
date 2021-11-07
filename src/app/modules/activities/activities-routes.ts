@@ -3,4 +3,5 @@ export enum ActivitiesRoutes {
   myActivities = "my",
   likedActivities = "liked",
   plannedActivities = "planned",
+  eventsActivities = "events",
 }

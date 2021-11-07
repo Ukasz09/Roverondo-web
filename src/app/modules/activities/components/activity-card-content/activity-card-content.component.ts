@@ -22,6 +22,8 @@ export class ActivityCardContentComponent implements OnInit {
   @Input() public startTime?: string;
   @Input() public endTime?: string;
   @Input() public averageSpeed?: number;
+  @Input() public eventStartDate?: string;
+  @Input() public eventDurationTime?: string;
   @Input() public type!: PostType;
 
   @Output() public detailsClick: EventEmitter<void> = new EventEmitter<void>();
@@ -85,6 +87,14 @@ export class ActivityCardContentComponent implements OnInit {
     return elevation ? `${elevation} m` : this.valueNotFoundPlaceholder;
   }
 
+  public get eventStartDateText(): string {
+    return this.eventStartDate ? `${this.eventStartDate} m` : this.valueNotFoundPlaceholder;
+  }
+
+  public get eventDurationTimeText(): string {
+    return this.eventDurationTime ? `${this.eventDurationTime} m` : this.valueNotFoundPlaceholder;
+  }
+
   public get routes(): Point[] {
     return this.route.route;
   }
@@ -112,6 +122,14 @@ export class ActivityCardContentComponent implements OnInit {
 
   public get withTime(): boolean {
     return this.type === PostType.activityPost;
+  }
+
+  public get withEventDurationTime(): boolean {
+    return this.type === PostType.eventPost;
+  }
+
+  public get withEventStartDate(): boolean {
+    return this.type === PostType.eventPost;
   }
 
   private getActivityDuration(): { hour: number; minute: number } {

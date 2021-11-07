@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
-import { PostComment, PostExtended, PostReaction } from "@app/core/models";
+import { EventPostExtended, PlannedPostExtended, PostComment, PostExtended, PostReaction } from "@app/core/models";
 import { map, tap } from "rxjs/operators";
 import { MockedSpeedAdapterService } from "../adapters";
 
@@ -25,10 +25,24 @@ export class ActivitiesService {
     return of([]);
   }
 
-  public getPlannedActivities$(userId: number, offset = 0, extended = true, amount = 3): Observable<PostExtended[]> {
+  public getPlannedActivities$(userId: number, offset = 0, extended = true, amount = 3): Observable<PlannedPostExtended[]> {
     const endpoint = `api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=PlannedRoutePost&extended=${extended}`;
-    return this.http.get<PostExtended[]>(endpoint).pipe(
+    return this.http.get<PlannedPostExtended[]>(endpoint).pipe(
       tap(data => console.log(data))
+    );
+  }
+
+  public getEventActivities$(userId: number, offset = 0, extended = true, amount = 3): Observable<EventPostExtended[]> {
+    // TODO: tmp mocked
+    // const endpoint = `api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=EventRoutePost&extended=${extended}`;
+    // return this.http.get<PostExtended[]>(endpoint).pipe(
+    //   tap(data => console.log(data))
+    // );
+    return this.getPlannedActivities$(userId, offset, extended, amount).pipe(
+      map(data => data.map(a => {
+        (a as any)["eventRoute"] = a.plannedRoute;
+        return (a as unknown) as EventPostExtended;
+      }))
     );
   }
 

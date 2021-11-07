@@ -7,15 +7,15 @@ import {
 import { Observable, of } from "rxjs";
 import { ActivitiesRoutes } from "@app/routes/activities";
 import { ActivitiesService } from "@app/core/services";
-import { PlannedPostExtended, PostExtended } from "@app/core/models";
+import { EventPostExtended, PlannedPostExtended, PostExtended } from "@app/core/models";
 
 @Injectable()
-export class ActivitiesResolver implements Resolve<PostExtended[] | PlannedPostExtended[]> {
+export class ActivitiesResolver implements Resolve<(PostExtended | PlannedPostExtended | EventPostExtended)[]> {
 
   constructor(private readonly activitiesService: ActivitiesService) {
   }
 
-  public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PostExtended[] | PlannedPostExtended[]> {
+  public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<(PostExtended | PlannedPostExtended | EventPostExtended)[]> {
     const userId = route.paramMap.get("userId") || "";
     if (userId) {
       const type = route.paramMap.get("type") || "";
@@ -26,7 +26,7 @@ export class ActivitiesResolver implements Resolve<PostExtended[] | PlannedPostE
     }
   }
 
-  public getActivities$(userId: number, offset: number, type: string): Observable<PostExtended[] | PlannedPostExtended[]> {
+  public getActivities$(userId: number, offset: number, type: string): Observable<(PostExtended | PlannedPostExtended | EventPostExtended)[]> {
     switch (type) {
       case ActivitiesRoutes.allActivities:
         return this.activitiesService.getAllActivities$(userId, offset);
@@ -36,6 +36,8 @@ export class ActivitiesResolver implements Resolve<PostExtended[] | PlannedPostE
         return this.activitiesService.getMyActivities$(userId, offset);
       case ActivitiesRoutes.plannedActivities:
         return this.activitiesService.getPlannedActivities$(userId, offset);
+      case ActivitiesRoutes.eventsActivities:
+        return this.activitiesService.getEventActivities$(userId, offset);
     }
     return of([]);
   }

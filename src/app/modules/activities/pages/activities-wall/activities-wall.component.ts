@@ -5,7 +5,7 @@ import { AppRoutes } from "@app/routes";
 import { ActivatedRoute, Data } from "@angular/router";
 import { ScrollContainerComponent } from "@app/shared/components";
 import { ActivitiesResolver } from "../../services";
-import { PlannedPostExtended, PostExtended, Route } from "@app/core/models";
+import { EventPostExtended, PlannedPostExtended, PostExtended, Route } from "@app/core/models";
 import { ActivitiesRoutes } from "@app/routes/activities";
 
 @Component({
@@ -18,8 +18,8 @@ export class ActivitiesWallComponent implements OnInit {
 
   public readonly AppRoutes = AppRoutes;
   public scrollContainerId = "activities-wall";
-  public activities: (PostExtended | PlannedPostExtended)[] = [];
-  public selectedActivity?: PostExtended | PlannedPostExtended;
+  public activities: (PostExtended | PlannedPostExtended | EventPostExtended)[] = [];
+  public selectedActivity?: PostExtended | PlannedPostExtended | EventPostExtended;
 
   private loadingMoreActivities = false;
   private noMoreActivities = false;
@@ -52,7 +52,7 @@ export class ActivitiesWallComponent implements OnInit {
 
     this.activatedRoute.data.subscribe({
       next: (data: Data) => {
-        this.activities = data.activities as PostExtended[] | PlannedPostExtended[];
+        this.activities = data.activities;
         this.noMoreActivities = false;
         this.loadingMoreActivities = false;
         this.selectedActivity = undefined;
@@ -66,7 +66,7 @@ export class ActivitiesWallComponent implements OnInit {
     });
   }
 
-  public onActivityDetailsClick(activity: PostExtended | PlannedPostExtended): void {
+  public onActivityDetailsClick(activity: PostExtended | PlannedPostExtended | EventPostExtended): void {
     this.selectedActivity = activity;
   }
 
@@ -74,37 +74,57 @@ export class ActivitiesWallComponent implements OnInit {
     this.selectedActivity = undefined;
   }
 
-  public getRouteData(activity: PostExtended | PlannedPostExtended): Route {
+  public getRouteData(activity: PostExtended | PlannedPostExtended | EventPostExtended): Route {
     if ("workout" in activity) {
       return activity.workout.route;
     }
-    return activity.plannedRoute.route;
+    if ("plannedRoute" in activity) {
+      return activity.plannedRoute.route;
+    }
+    return activity.eventRoute.route;
   }
 
-  public getStartTimeData(activity: PostExtended | PlannedPostExtended): string {
+  public getStartTimeData(activity: PostExtended | PlannedPostExtended | EventPostExtended): string {
     if ("workout" in activity) {
       return activity.workout.startTime;
     }
     return "";
   }
 
-  public getEndTimeData(activity: PostExtended | PlannedPostExtended): string {
+  public getEndTimeData(activity: PostExtended | PlannedPostExtended | EventPostExtended): string {
     if ("workout" in activity) {
       return activity.workout.endTime;
     }
     return "";
   }
 
-  public getAvgSpeedData(activity: PostExtended | PlannedPostExtended): number {
+  public getAvgSpeedData(activity: PostExtended | PlannedPostExtended | EventPostExtended): number {
     if ("workout" in activity) {
       return activity.workout.averageSpeed;
     }
     return 0;
   }
 
+  public getEventDurationTime(activity: PostExtended | PlannedPostExtended | EventPostExtended): string {
+    if ("eventRoute" in activity) {
+      return activity.eventRoute.eventDurationTime;
+    }
+    return "";
+  }
+
+  public getEventStartDate(activity: PostExtended | PlannedPostExtended | EventPostExtended) {
+    if ("eventRoute" in activity) {
+      return activity.eventRoute.eventStartDate;
+    }
+    return "";
+  }
+
   public get postType(): PostType {
     if (this.type === ActivitiesRoutes.plannedActivities) {
       return PostType.plannedRoutePost;
+    }
+    if (this.type === ActivitiesRoutes.eventsActivities) {
+      return PostType.eventPost;
     }
     return PostType.activityPost;
   }

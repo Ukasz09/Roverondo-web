@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { ActivitiesService, LayoutService, PlotDataAdapterService } from "@app/core/services";
 import { LayoutType, PlotColors, PostType } from "@app/core/enums";
-import { PlannedPostExtended, PlotData, PostExtended, Route } from "@app/core/models";
+import { EventPostExtended, PlannedPostExtended, PlotData, PostExtended, Route } from "@app/core/models";
 import { Color } from "@swimlane/ngx-charts";
 import { ActivitiesRoutes } from "@app/routes/activities";
 
@@ -12,7 +12,7 @@ import { ActivitiesRoutes } from "@app/routes/activities";
 })
 export class ActivityDetailsComponent implements OnInit {
   @Input() public id!: string;
-  @Input() public activity!: PostExtended | PlannedPostExtended;
+  @Input() public activity!: PostExtended | PlannedPostExtended | EventPostExtended;
   @Input() public type!: PostType;
 
   @Output() public exitDetailsClick = new EventEmitter<void>();
@@ -54,32 +54,49 @@ export class ActivityDetailsComponent implements OnInit {
     return Math.min(this.lowestPoint ?? 0, this.minSpeed ?? 0);
   }
 
-  public getRouteData(activity: PostExtended | PlannedPostExtended): Route {
+  public getRouteData(activity: PostExtended | PlannedPostExtended | EventPostExtended): Route {
     if ("workout" in activity) {
       return activity.workout.route;
     }
-    return activity.plannedRoute.route;
+    if ("plannedRoute" in activity) {
+      return activity.plannedRoute.route;
+    }
+    return activity.eventRoute.route;
   }
 
-  public getStartTimeData(activity: PostExtended | PlannedPostExtended): string {
+  public getStartTimeData(activity: PostExtended | PlannedPostExtended | EventPostExtended): string {
     if ("workout" in activity) {
       return activity.workout.startTime;
     }
     return "";
   }
 
-  public getEndTimeData(activity: PostExtended | PlannedPostExtended): string {
+  public getEndTimeData(activity: PostExtended | PlannedPostExtended | EventPostExtended): string {
     if ("workout" in activity) {
       return activity.workout.endTime;
     }
     return "";
   }
 
-  public getAvgSpeedData(activity: PostExtended | PlannedPostExtended): number {
+  public getAvgSpeedData(activity: PostExtended | PlannedPostExtended | EventPostExtended): number {
     if ("workout" in activity) {
       return activity.workout.averageSpeed;
     }
     return 0;
+  }
+
+  public getEventDurationTime(activity: PostExtended | PlannedPostExtended | EventPostExtended): string {
+    if ("eventRoute" in activity) {
+      return activity.eventRoute.eventDurationTime;
+    }
+    return "";
+  }
+
+  public getEventStartDate(activity: PostExtended | PlannedPostExtended | EventPostExtended) {
+    if ("eventRoute" in activity) {
+      return activity.eventRoute.eventStartDate;
+    }
+    return "";
   }
 
   private parsePlotData(): void {
@@ -106,8 +123,11 @@ export class ActivityDetailsComponent implements OnInit {
   private getRoute(): Route {
     if ("workout" in this.activity) {
       return this.activity.workout.route;
-    } else {
+    }
+    if ("plannedRoute" in this.activity) {
       return this.activity.plannedRoute.route;
+    } else {
+      return this.activity.eventRoute.route;
     }
   }
 }
