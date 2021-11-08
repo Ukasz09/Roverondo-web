@@ -74,24 +74,28 @@ export class CommentsSheetComponent implements OnInit {
 
   private addComment(user: User): void {
     this.activitiesService.addComment(user.id, this.data.post.id.toString(), this.newCommentValue.trim()).subscribe(() => {
-      const createDate = new Date().toISOString();
       if (!this.commentList) {
         this.commentList = [];
       }
-      this.commentList.push({
-        text: this.newCommentValue,
-        createdAt: createDate,
-        modifiedAt: createDate,
-        user: {
-          id: user.id,
-          nickname: user.nickname,
-          profilePicture: user.profilePicture
-        },
-        reactions: 0
-      });
+      this.commentList.push(this.getNewComment(user));
       this.data.post.commentsCount++;
       this.sortComments();
       this.newCommentValue = "";
     });
+  }
+
+  private getNewComment(user: User): PostComment {
+    const createDate = new Date().toISOString();
+    return {
+      text: this.newCommentValue,
+      createdAt: createDate,
+      modifiedAt: createDate,
+      user: {
+        id: user.id,
+        nickname: user.nickname,
+        profilePicture: user.profilePicture
+      },
+      reactions: 0
+    };
   }
 }

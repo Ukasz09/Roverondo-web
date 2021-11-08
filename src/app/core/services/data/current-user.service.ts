@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { BehaviorSubject, zip } from "rxjs";
+import { BehaviorSubject, throwError, zip } from "rxjs";
 import { User } from "@app/core/models";
 import { UsersService } from "./users.service";
 import { AuthService } from "@auth0/auth0-angular";
+import { switchMap } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -22,15 +23,14 @@ export class CurrentUserService {
     zip(
       this.authService.isAuthenticated$,
       this.authService.user$
-    ).subscribe(([authenticated, providerUser]) => {
-      console.log("Fetch current", authenticated, providerUser);
-      if (authenticated) {
-        const userId = providerUser?.sub as string;
-        this.usersService.getUserByProvider$(userId).subscribe({
-          next: (user) => this.currentUserSubject$.next(user)
-        });
-      }
-    });
+    ).pipe(
+      switchMap(([authenticated, providerUser]) => {
+        if (authenticated) {
+          const userId = providerUser?.sub as string;
+          return this.usersService.getUserByProvider$(userId);
+        } else return throwError("User not authenticated");
+      })
+    ).subscribe((user) => this.currentUserSubject$.next(user));
   }
 
   public get currentUser$() {

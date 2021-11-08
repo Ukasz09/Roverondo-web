@@ -1,44 +1,35 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, of } from "rxjs";
+import { Observable } from "rxjs";
 import { EventPostExtended, PlannedPostExtended, PostComment, PostExtended, PostReaction } from "@app/core/models";
 import { map, tap } from "rxjs/operators";
-import { MockedSpeedAdapterService } from "../adapters";
 
 @Injectable({
   providedIn: "root"
 })
 export class ActivitiesService {
-  constructor(private readonly http: HttpClient, private readonly mockedSpeedAdapter: MockedSpeedAdapterService) {
+  constructor(private readonly http: HttpClient) {
   }
 
-  // TODO: cleanup - user object instead of params
-  public getAllActivities$(userId: number, offset = 0, extended = true, amount = 3): Observable<PostExtended[]> {
-    const endpoint = `api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=ActivityPost&extended=${extended}`;
-    return this.http.get<PostExtended[]>(endpoint).pipe(
-      map(data => data.map(post => this.mockedSpeedAdapter.adapt(post))),
-      tap(data => console.log(data))
-    );
+  public getActivityPostWall$(userId: number, offset = 0): Observable<PostExtended[]> {
+    return this.getWall$({ userId: userId, type: "ActivityPost", offset: offset })
+      .pipe(map(data => data as PostExtended[]));
   }
 
-  public getMyActivities$(userId: number, offset = 0, type = "ActivityPost", extended = true, amount = 3): Observable<PostExtended[]> {
-    return of([]);
+  public getMyActivityPostWall$(userId: number, offset = 0): Observable<PostExtended[]> {
+    // TODO: integrate with backend
+    return this.getWall$({ userId: userId, type: "ActivityPost", offset: offset })
+      .pipe(map(data => data as PostExtended[]));
   }
 
-  public getPlannedActivities$(userId: number, offset = 0, extended = true, amount = 3): Observable<PlannedPostExtended[]> {
-    const endpoint = `api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=PlannedRoutePost&extended=${extended}`;
-    return this.http.get<PlannedPostExtended[]>(endpoint).pipe(
-      tap(data => console.log(data))
-    );
+  public getPlannedActivities$(userId: number, offset = 0): Observable<PlannedPostExtended[]> {
+    return this.getWall$({ userId: userId, type: "PlannedRoutePost", offset: offset })
+      .pipe(map(data => data as PlannedPostExtended[]));
   }
 
-  public getEventActivities$(userId: number, offset = 0, extended = true, amount = 3): Observable<EventPostExtended[]> {
-    // TODO: tmp mocked
-    // const endpoint = `api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=EventRoutePost&extended=${extended}`;
-    // return this.http.get<PostExtended[]>(endpoint).pipe(
-    //   tap(data => console.log(data))
-    // );
-    return this.getPlannedActivities$(userId, offset, extended, amount).pipe(
+  public getEventActivities$(userId: number, offset = 0): Observable<EventPostExtended[]> {
+    // TODO: integrate with backend
+    return this.getPlannedActivities$(userId, offset).pipe(
       map(data => data.map(a => {
         (a as any)["eventRoute"] = a.plannedRoute;
         return (a as unknown) as EventPostExtended;
@@ -46,10 +37,9 @@ export class ActivitiesService {
     );
   }
 
-  public getLikedActivities$(userId: number, offset = 0, type = "ActivityPost", extended = true, amount = 3): Observable<PostExtended[]> {
+  public getLikedActivities$(userId: number, offset = 0): Observable<PostExtended[]> {
     // TODO: integrate with backend
-    const endpoint = `api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=${type}&extended=${extended}`;
-    return this.http.get<PostExtended[]>(endpoint).pipe(tap(data => console.log(data)));
+    return this.getActivityPostWall$(userId, offset);
   }
 
   public addReactionToActivity$(userId: number, activityId: number): Observable<void> {
@@ -87,4 +77,25 @@ export class ActivitiesService {
     };
     return this.http.post<void>(endpoint, comment);
   }
+
+  private getWall$({
+                     userId,
+                     type,
+                     offset = 0,
+                     extended = true,
+                     amount = 3
+                   }: wallRequestParameters): Observable<(PostExtended | PlannedPostExtended)[]> {
+    const endpoint = `api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=${type}&extended=${extended}`;
+    return this.http.get<(PostExtended | PlannedPostExtended)[]>(endpoint).pipe(
+      tap(data => console.log(data))
+    );
+  }
 }
+
+export type wallRequestParameters = {
+  userId: number;
+  type: string;
+  offset?: number;
+  extended?: boolean;
+  amount?: number;
+};

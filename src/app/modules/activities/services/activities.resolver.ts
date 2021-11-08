@@ -29,11 +29,11 @@ export class ActivitiesResolver implements Resolve<(PostExtended | PlannedPostEx
   public getActivities$(userId: number, offset: number, type: string): Observable<(PostExtended | PlannedPostExtended | EventPostExtended)[]> {
     switch (type) {
       case ActivitiesRoutes.allActivities:
-        return this.activitiesService.getAllActivities$(userId, offset);
+        return this.activitiesService.getActivityPostWall$(userId, offset);
       case ActivitiesRoutes.likedActivities:
         return this.activitiesService.getLikedActivities$(userId, offset);
       case ActivitiesRoutes.myActivities:
-        return this.activitiesService.getMyActivities$(userId, offset);
+        return this.activitiesService.getMyActivityPostWall$(userId, offset);
       case ActivitiesRoutes.plannedActivities:
         return this.activitiesService.getPlannedActivities$(userId, offset);
       case ActivitiesRoutes.eventsActivities:
