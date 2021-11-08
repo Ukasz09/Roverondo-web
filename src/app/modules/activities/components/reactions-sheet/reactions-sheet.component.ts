@@ -19,7 +19,7 @@ export class ReactionsSheetComponent implements OnInit {
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: { postId: string },
     private readonly activitiesService: ActivitiesService,
     private readonly _bottomSheetRef: MatBottomSheetRef<ReactionsSheetComponent>,
-    private readonly router: Router,
+    private readonly router: Router
   ) {
   }
 
@@ -37,10 +37,8 @@ export class ReactionsSheetComponent implements OnInit {
   }
 
   private fetchReactions(): void {
-    this.activitiesService.getReactions$(this.data.postId).subscribe({
-      next: reactions => {
-        this.reactionList = reactions;
-      }
+    this.activitiesService.getReactions$(this.data.postId).subscribe(reactions => {
+      this.reactionList = reactions;
     });
   }
 }

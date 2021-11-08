@@ -126,8 +126,7 @@ export class ActivityDetailsComponent implements OnInit {
     }
     if ("plannedRoute" in this.activity) {
       return this.activity.plannedRoute.route;
-    } else {
-      return this.activity.eventRoute.route;
     }
+    return this.activity.eventRoute.route;
   }
 }

@@ -13,8 +13,9 @@ import { Router } from "@angular/router";
   styleUrls: ["./comments-sheet.component.scss"]
 })
 export class CommentsSheetComponent implements OnInit {
-  public commentList?: PostComment[] = undefined;
+  public commentList: PostComment[] = [];
   public newCommentValue = "";
+  public showSpinner = true;
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: { post: PostExtended, withFocus: boolean },
@@ -30,12 +31,14 @@ export class CommentsSheetComponent implements OnInit {
   }
 
   public onSubmit(commentModel: NgModel): void {
-    // TODO: add spinner
-    if (commentModel.valid && this.newCommentValue) {
+    if (commentModel.valid && this.newCommentValue?.trim()) {
+      this.showSpinner = true;
       this.currentUserService.currentUser$.subscribe((user) => {
         if (user) {
           this.addComment(user);
+          this.showSpinner = false;
         } else {
+          this.showSpinner = false;
           console.error("Current user not found - comment not added");
         }
       });
@@ -52,11 +55,10 @@ export class CommentsSheetComponent implements OnInit {
   }
 
   private fetchComments(): void {
-    this.activitiesService.getComments$(this.data.post.id.toString()).subscribe({
-      next: comments => {
-        this.commentList = comments;
-        this.sortComments();
-      }
+    this.activitiesService.getComments$(this.data.post.id.toString()).subscribe(comments => {
+      this.commentList = comments;
+      this.sortComments();
+      this.showSpinner = false;
     });
   }
 
@@ -71,27 +73,25 @@ export class CommentsSheetComponent implements OnInit {
   }
 
   private addComment(user: User): void {
-    this.activitiesService.addComment(user.id, this.data.post.id.toString(), this.newCommentValue).subscribe({
-      next: () => {
-        const createDate = new Date().toISOString();
-        if (!this.commentList) {
-          this.commentList = [];
-        }
-        this.commentList.push({
-          text: this.newCommentValue,
-          createdAt: createDate,
-          modifiedAt: createDate,
-          user: {
-            id: user.id,
-            nickname: user.nickname,
-            profilePicture: user.profilePicture
-          },
-          reactions: 0
-        });
-        this.data.post.commentsCount++;
-        this.sortComments();
-        this.newCommentValue = "";
+    this.activitiesService.addComment(user.id, this.data.post.id.toString(), this.newCommentValue.trim()).subscribe(() => {
+      const createDate = new Date().toISOString();
+      if (!this.commentList) {
+        this.commentList = [];
       }
+      this.commentList.push({
+        text: this.newCommentValue,
+        createdAt: createDate,
+        modifiedAt: createDate,
+        user: {
+          id: user.id,
+          nickname: user.nickname,
+          profilePicture: user.profilePicture
+        },
+        reactions: 0
+      });
+      this.data.post.commentsCount++;
+      this.sortComments();
+      this.newCommentValue = "";
     });
   }
 }

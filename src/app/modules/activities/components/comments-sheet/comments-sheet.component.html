@@ -1,5 +1,5 @@
 <mat-nav-list class="mat-list">
-  <ng-container *ngIf="commentList; else spinner">
+  <ng-container *ngIf="!showSpinner; else spinner">
     <form (ngSubmit)="onSubmit(comment)" class="comment-form">
       <mat-form-field appearance="outline" class="comment-input">
         <mat-label>Add comment</mat-label>
