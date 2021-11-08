@@ -52,14 +52,19 @@ export class ActivitiesService {
     return this.http.get<PostExtended[]>(endpoint).pipe(tap(data => console.log(data)));
   }
 
-  public likeActivity$(userId: number, activityId: number): Observable<void> {
-    const endpoint = "api/posts/react";
+  public addReactionToActivity$(userId: number, activityId: number): Observable<void> {
+    const endpoint = "api/posts/reactions";
     const reaction = {
       "createdAt": new Date().toISOString(),
       "postId": activityId,
       "userId": userId
     };
     return this.http.post<void>(endpoint, reaction);
+  }
+
+  public removeReactionFromActivity$(userId: number, activityId: number): Observable<void> {
+    const endpoint = `api/posts/reactions?post=${activityId}&user=${userId}`;
+    return this.http.delete<void>(endpoint);
   }
 
   public getComments$(activityId: string): Observable<PostComment[]> {

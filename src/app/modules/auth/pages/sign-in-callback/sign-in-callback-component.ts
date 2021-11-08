@@ -16,8 +16,8 @@ export class SignInCallbackComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.userService.registerUser$().subscribe(() => {
-      console.log("User registered");
+    this.userService.registerUser$().subscribe((user) => {
+      this.currentUserService.setCurrentUser(user);
       this.router.navigate([AppRoutes.home]).then(() => {
       });
     });

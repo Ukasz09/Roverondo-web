@@ -11,10 +11,6 @@ import { AuthService } from "@auth0/auth0-angular";
 export class CurrentUserService {
   private currentUserSubject$: BehaviorSubject<User | undefined> = new BehaviorSubject<User | undefined>(undefined);
 
-  public get currentUser$() {
-    return this.currentUserSubject$.asObservable();
-  }
-
   constructor(
     private readonly http: HttpClient,
     private readonly usersService: UsersService,
@@ -35,5 +31,13 @@ export class CurrentUserService {
         });
       }
     });
+  }
+
+  public get currentUser$() {
+    return this.currentUserSubject$.asObservable();
+  }
+
+  public setCurrentUser(user: User) {
+    this.currentUserSubject$.next(user);
   }
 }

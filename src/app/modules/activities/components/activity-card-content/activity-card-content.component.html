@@ -27,8 +27,8 @@
     <div [ngTemplateOutlet]="actions"></div>
     <div class="social-stats">
       <div style="cursor: pointer" (click)="openReactionsSheet()">
-        <mat-icon id="like-stat" class="icon" [ngClass]="{'liked':isLiked}">
-          {{ isLiked ? 'favorite' : 'favorite_border' }}
+        <mat-icon id="like-stat" class="icon" [ngClass]="{'liked':alreadyReacted}">
+          {{ alreadyReacted ? 'favorite' : 'favorite_border' }}
         </mat-icon>
         <label for="like-stat" class="text">{{activity.reactionsCount}}</label>
       </div>
@@ -40,9 +40,9 @@
   </div>
   <ng-template #actions>
     <div class="actions">
-      <div class="action cursor-pointer" (click)="onLikeClick()">
+      <div class="action cursor-pointer" (click)="onReactionBtnClick()">
         <mat-icon class="icon" id="like"
-                  [ngClass]="{'liked':isLiked}">{{ isLiked ? 'favorite' : 'favorite_border' }}</mat-icon>
+                  [ngClass]="{'liked':alreadyReacted}">{{ alreadyReacted ? 'favorite' : 'favorite_border' }}</mat-icon>
         <label for="like" class="text cursor-pointer">
           <span class="count">{{activity.reactionsCount}}</span><span class="action-name">Like</span>
         </label>

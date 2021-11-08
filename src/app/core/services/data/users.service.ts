@@ -11,9 +11,9 @@ export class UsersService {
   constructor(private readonly http: HttpClient) {
   }
 
-  public registerUser$(): Observable<void> {
-    const endpoint = `api/users`;
-    return this.http.post<void>(endpoint, {});
+  public registerUser$(): Observable<User> {
+    const endpoint = `api/users/register`;
+    return this.http.post<User>(endpoint, {});
   }
 
   public getUsers$(): Observable<User[]> {

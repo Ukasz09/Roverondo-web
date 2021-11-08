@@ -9,6 +9,8 @@ import { UserRoutes } from "@app/modules/user";
 import { ReactionsSheetComponent } from "../reactions-sheet/reactions-sheet.component";
 import { ActivitiesService, CurrentUserService } from "@app/core/services";
 import { PostType } from "@app/core/enums";
+import { switchMap } from "rxjs/operators";
+import { throwError } from "rxjs";
 
 @Component({
   selector: "app-activity-card-content",
@@ -47,7 +49,7 @@ export class ActivityCardContentComponent implements OnInit {
     return `/${AppRoutes.user}/${UserRoutes.profile}/${this.activity.user.id}`;
   }
 
-  public get isLiked(): boolean {
+  public get alreadyReacted(): boolean {
     return this.activity.alreadyReactedTo;
   }
 
@@ -99,21 +101,8 @@ export class ActivityCardContentComponent implements OnInit {
     return this.route.route;
   }
 
-  public onLikeClick(): void {
-    this.currentUserService.currentUser$.subscribe({
-      next: user => {
-        if (user) {
-          this.activitiesService.likeActivity$(user.id, this.activity.id).subscribe({
-            next: () => {
-              this.activity.alreadyReactedTo = true;
-              this.activity.reactionsCount++;
-            }
-          });
-        } else {
-          console.error("Current user not found - not liked");
-        }
-      }
-    });
+  public onReactionBtnClick(): void {
+    this.alreadyReacted ? this.removeReactionFromActivity() : this.addReactionToActivity();
   }
 
   public get withAvgSpeed(): boolean {
@@ -130,6 +119,32 @@ export class ActivityCardContentComponent implements OnInit {
 
   public get withEventStartDate(): boolean {
     return this.type === PostType.eventPost;
+  }
+
+  private addReactionToActivity(): void {
+    this.currentUserService.currentUser$.pipe(
+      switchMap(user => {
+        return user ?
+          this.activitiesService.addReactionToActivity$(user.id, this.activity.id) :
+          throwError("Current user not found - reaction not added");
+      })
+    ).subscribe(() => {
+      this.activity.alreadyReactedTo = true;
+      this.activity.reactionsCount++;
+    });
+  }
+
+  private removeReactionFromActivity(): void {
+    this.currentUserService.currentUser$.pipe(
+      switchMap(user => {
+        return user ?
+          this.activitiesService.removeReactionFromActivity$(user.id, this.activity.id) :
+          throwError("Current user not found - reaction not removed");
+      })
+    ).subscribe(() => {
+      this.activity.alreadyReactedTo = false;
+      this.activity.reactionsCount--;
+    });
   }
 
   private getActivityDuration(): { hour: number; minute: number } {
