@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable, of } from "rxjs";
+import { Observable } from "rxjs";
 import { User } from "@app/core/models";
 import { tap } from "rxjs/operators";
 
@@ -42,10 +42,7 @@ export class UsersService {
   }
 
   public getUsersLeaderboard$(): Observable<User[]> {
-    // const endpoint = `api/users/leaderboard`;
-    // return this.http.get<User[]>(endpoint).pipe(tap(data => console.log(data)));
-
-    // TODO: tmp mocked
+    // TODO: integrate with backend
     return this.getUsers$();
   }
 }

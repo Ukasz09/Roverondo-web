@@ -1,10 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Data, Router } from "@angular/router";
 import { User } from "@app/core/models";
-import { Observable } from "rxjs";
 import { AuthService } from "@auth0/auth0-angular";
-import { AppRoutes } from "@app/routes";
-import { UsersService } from "@app/core/services";
+import { CurrentUserService, UsersService } from "@app/core/services";
 
 @Component({
   selector: "app-user-profile",
@@ -18,33 +16,23 @@ export class UserProfileComponent implements OnInit {
     private readonly activatedRoute: ActivatedRoute,
     private readonly authService: AuthService,
     private readonly router: Router,
-    private readonly userService: UsersService
+    private readonly userService: UsersService,
+    private readonly currentUserService: CurrentUserService
   ) {
   }
 
   public ngOnInit(): void {
-    this.activatedRoute.data.subscribe({
-      next: (data: Data) => {
-        if (!data.user) {
-          this.fetchCurrentUserData();
-        }
-        this.user = data.user;
+    this.activatedRoute.data.subscribe((data: Data) => {
+      if (!data.user) {
+        this.currentUserService.currentUser$.subscribe(user => {
+          this.user = user;
+        });
       }
+      this.user = data.user;
     });
   }
 
-  private fetchCurrentUserData(): void {
-    this.authService.user$.subscribe((user) => {
-      const currentUser = user as any;
-      if (!currentUser) {
-        this.router.navigate([AppRoutes.home]).then();
-        return;
-      }
-      this.userService.getUser$(currentUser.sub).subscribe({
-        next: user => {
-          this.user = user;
-        }
-      });
-    });
+  public userStringify(): string {
+    return JSON.stringify(this.user);
   }
 }
