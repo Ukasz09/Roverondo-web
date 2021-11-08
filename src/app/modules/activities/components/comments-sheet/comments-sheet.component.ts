@@ -6,6 +6,7 @@ import { NgModel } from "@angular/forms";
 import { AppRoutes } from "@app/routes";
 import { UserRoutes } from "@app/modules/user";
 import { Router } from "@angular/router";
+import { MessageInfoService } from "../../../../core/services/message-info.service";
 
 @Component({
   selector: "app-comments-sheet",
@@ -22,7 +23,8 @@ export class CommentsSheetComponent implements OnInit {
     private readonly activitiesService: ActivitiesService,
     private readonly _bottomSheetRef: MatBottomSheetRef<CommentsSheetComponent>,
     private readonly router: Router,
-    private readonly currentUserService: CurrentUserService
+    private readonly currentUserService: CurrentUserService,
+    public readonly msgInfoService: MessageInfoService
   ) {
   }
 
@@ -81,6 +83,7 @@ export class CommentsSheetComponent implements OnInit {
       this.data.post.commentsCount++;
       this.sortComments();
       this.newCommentValue = "";
+      this.msgInfoService.openSnackbar("Comment has been added", "OK");
     });
   }
 

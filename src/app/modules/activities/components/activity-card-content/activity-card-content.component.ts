@@ -11,6 +11,7 @@ import { ActivitiesService, CurrentUserService } from "@app/core/services";
 import { PostType } from "@app/core/enums";
 import { switchMap } from "rxjs/operators";
 import { throwError } from "rxjs";
+import { MessageInfoService } from "../../../../core/services/message-info.service";
 
 @Component({
   selector: "app-activity-card-content",
@@ -37,7 +38,8 @@ export class ActivityCardContentComponent implements OnInit {
     private readonly auth: AuthService,
     private readonly _bottomSheet: MatBottomSheet,
     private readonly currentUserService: CurrentUserService,
-    private readonly activitiesService: ActivitiesService
+    private readonly activitiesService: ActivitiesService,
+    public readonly msgInfoService: MessageInfoService
   ) {
   }
 
@@ -131,6 +133,7 @@ export class ActivityCardContentComponent implements OnInit {
     ).subscribe(() => {
       this.activity.alreadyReactedTo = true;
       this.activity.reactionsCount++;
+      this.msgInfoService.openSnackbar("Reaction has been added", "OK");
     });
   }
 
@@ -144,6 +147,7 @@ export class ActivityCardContentComponent implements OnInit {
     ).subscribe(() => {
       this.activity.alreadyReactedTo = false;
       this.activity.reactionsCount--;
+      this.msgInfoService.openSnackbar("Reaction has been removed", "OK");
     });
   }
 

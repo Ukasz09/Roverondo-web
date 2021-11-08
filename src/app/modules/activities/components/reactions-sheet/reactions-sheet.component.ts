@@ -2,10 +2,10 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { PostReaction } from "@app/core/models";
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from "@angular/material/bottom-sheet";
 import { ActivitiesService } from "@app/core/services";
-import { AuthService } from "@auth0/auth0-angular";
 import { Router } from "@angular/router";
 import { AppRoutes } from "@app/routes";
 import { UserRoutes } from "@app/modules/user";
+import { MessageInfoService } from "../../../../core/services/message-info.service";
 
 @Component({
   selector: "app-reactions-sheet",
