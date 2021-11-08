@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { LayoutService, UsersService } from "@app/core/services";
+import { LayoutService } from "@app/core/services";
 import { LayoutType } from "@app/core/enums";
 
 @Component({
@@ -10,7 +10,7 @@ import { LayoutType } from "@app/core/enums";
 export class HomeComponent implements OnInit {
   public readonly LayoutTypeEnum = LayoutType;
 
-  constructor(public readonly layoutService: LayoutService, private readonly userService: UsersService) {
+  constructor(public readonly layoutService: LayoutService) {
   }
 
   public ngOnInit(): void {

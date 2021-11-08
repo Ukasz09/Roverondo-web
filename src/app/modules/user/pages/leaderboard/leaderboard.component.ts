@@ -22,10 +22,8 @@ export class LeaderboardComponent implements OnInit {
   }
 
   public fetchUsers(): void {
-    this.userService.getUsersLeaderboard$().subscribe({
-      next: (users) => {
-        this.userList = users;
-      }
+    this.userService.getUsersLeaderboard$().subscribe((users) => {
+      this.userList = users;
     });
   }
 }

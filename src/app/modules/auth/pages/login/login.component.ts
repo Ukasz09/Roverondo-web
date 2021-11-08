@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public onSignInClick(): void {
-    this.auth.loginWithRedirect({ redirect_uri: `${window.location.origin}/${AppRoutes.auth}/${AuthRoutes.signInCallback}` });
+    const redirectUri = `${window.location.origin}/${AppRoutes.auth}/${AuthRoutes.signInCallback}`;
+    this.auth.loginWithRedirect({ redirect_uri: redirectUri });
   }
 }

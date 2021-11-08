@@ -3,7 +3,8 @@ import { User } from "@app/core/models";
 import { ActivatedRoute, Data, Router } from "@angular/router";
 import { CurrentUserService, UsersService } from "@app/core/services";
 import { AppRoutes } from "@app/routes";
-import { AuthService } from "@auth0/auth0-angular";
+import { switchMap } from "rxjs/operators";
+import { Observable, throwError } from "rxjs";
 
 @Component({
   selector: "app-following",
@@ -22,31 +23,33 @@ export class FollowingComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.activatedRoute.data.subscribe({
-      next: (data: Data) => {
-        if (!data.user) {
-          this.currentUserService.currentUser$.subscribe({
-            next: user => {
-              if (!user) {
-                this.router.navigate([AppRoutes.home]).then();
-              } else {
-                this.fetchFollowing(user.id);
-              }
-            }
-          });
-          return;
-        }
-        this.fetchFollowing(data.user.id);
-      }
-    });
+    this.fetchFollowing();
   }
 
-  public fetchFollowing(userId: number): void {
-    this.userService.getFollowing$(userId).subscribe({
-      next: (followers) => {
-        this.following = followers;
-        this.sortUsers();
-      }
+  private getFollowingUsersData$(): Observable<User[]> {
+    return this.activatedRoute.data.pipe(
+      switchMap((data: Data) => {
+        if (!data.user) {
+          return this.currentUserService.currentUser$.pipe(
+            switchMap(currentUser => {
+              if (!currentUser) {
+                this.router.navigate([AppRoutes.home]).then();
+                return throwError("Not found current user");
+              } else {
+                return this.userService.getFollowing$(currentUser.id);
+              }
+            })
+          );
+        }
+        return this.userService.getFollowing$(data.user.id);
+      })
+    );
+  }
+
+  public fetchFollowing(): void {
+    this.getFollowingUsersData$().subscribe((followers) => {
+      this.following = followers;
+      this.sortUsers();
     });
   }
 
@@ -57,5 +60,4 @@ export class FollowingComponent implements OnInit {
       });
     }
   }
-
 }
