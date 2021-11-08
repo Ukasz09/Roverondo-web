@@ -7,6 +7,8 @@ import { ScrollContainerComponent } from "@app/shared/components";
 import { ActivitiesResolver } from "../../services";
 import { EventPostExtended, PlannedPostExtended, PostExtended, Route } from "@app/core/models";
 import { ActivitiesRoutes } from "@app/routes/activities";
+import { switchMap } from "rxjs/operators";
+import { Observable, throwError } from "rxjs";
 
 @Component({
   selector: "app-activities-wall",
@@ -21,6 +23,7 @@ export class ActivitiesWallComponent implements OnInit {
   public activities: (PostExtended | PlannedPostExtended | EventPostExtended)[] = [];
   public selectedActivity?: PostExtended | PlannedPostExtended | EventPostExtended;
 
+  private readonly loadMoreDataScrollOffsetPx = 700;
   private loadingMoreActivities = false;
   private noMoreActivities = false;
   private type = "";
@@ -130,29 +133,33 @@ export class ActivitiesWallComponent implements OnInit {
   }
 
   private needToLoadMoreActivities(id: string, bottomPosition: number): boolean {
-    // TODO: tmp fixed offset - change
-    return id === this.scrollContainerId && bottomPosition < 700 && !this.loadingMoreActivities && !this.noMoreActivities;
+    return id === this.scrollContainerId &&
+      bottomPosition < this.loadMoreDataScrollOffsetPx &&
+      !this.loadingMoreActivities &&
+      !this.noMoreActivities;
   }
 
   private loadMoreActivities(): void {
     console.log("Loading more activities");
     this.loadingMoreActivities = true;
-    this.currentUserService.currentUser$.subscribe({
-      next: (user) => {
-        if (user) {
-          this.activitiesResolver.getActivities$(user.id, this.activities.length, this.type).subscribe({
-            next: data => {
-              if (data.length === 0) {
-                this.noMoreActivities = true;
-              }
-              this.activities = this.activities.concat(data);
-              this.loadingMoreActivities = false;
-            }
-          });
-        } else {
-          console.error("User not found - data not fetched");
-        }
+
+    this.getMoreActivitiesData$().subscribe(data => {
+      if (data.length === 0) {
+        this.noMoreActivities = true;
       }
+      this.activities = this.activities.concat(data);
+      this.loadingMoreActivities = false;
     });
+  }
+
+  private getMoreActivitiesData$(): Observable<(PlannedPostExtended | PostExtended | EventPostExtended)[]> {
+    return this.currentUserService.currentUser$.pipe(
+      switchMap((user) => {
+        if (user) {
+          return this.activitiesResolver.getActivities$(user.id, this.activities.length, this.type);
+        }
+        return throwError("User not found - data not fetched");
+      })
+    );
   }
 }
