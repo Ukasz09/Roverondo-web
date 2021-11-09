@@ -1,4 +1,5 @@
 export interface PostComment {
+  id: number;
   text: string;
   createdAt: string;
   modifiedAt: string;

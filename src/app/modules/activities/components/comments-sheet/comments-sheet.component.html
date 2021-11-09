@@ -22,7 +22,21 @@
             </div>
             <span class="date">{{ comment.createdAt | date }}</span>
           </div>
-          <div class="comment"> {{comment.text}}</div>
+          <div style="display: flex; flex-direction: row">
+            <div class="comment"> {{comment.text}}</div>
+
+            <!--            TODO: add spinner-->
+            <ng-container>
+              <div class="reactions">
+                <mat-icon class="icon" [ngClass]="{'reacted':commentAlreadyReacted(comment.id)}"
+                (click)="onCommentReactionClick(comment.id)"
+                >
+                  {{commentAlreadyReacted(comment.id) ? 'favorite' : 'favorite_border'}}
+                </mat-icon>
+                <span class="count">{{comment.reactions}}</span>
+              </div>
+            </ng-container>
+          </div>
         </div>
         <div class="divider"></div>
       </ng-container>

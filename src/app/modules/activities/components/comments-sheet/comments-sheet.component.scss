@@ -75,6 +75,23 @@ $divider-color: #E0E0E0;
     align-items: center;
   }
 
+  .reactions {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .reacted {
+      color: variables.$like-color;
+    }
+
+    .icon {
+      font-size: 24px;
+      cursor: pointer;
+      margin-right: 0.5rem;
+    }
+  }
+
   .no-comments {
     width: 100%;
     text-align: center;

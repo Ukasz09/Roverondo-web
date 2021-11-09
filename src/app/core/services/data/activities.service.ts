@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { EventPostExtended, PlannedPostExtended, PostComment, PostExtended, PostReaction } from "@app/core/models";
+import { EventPostExtended, PlannedPostExtended, PostComment, PostExtended, Reaction } from "@app/core/models";
 import { map, tap } from "rxjs/operators";
 
 @Injectable({
@@ -57,14 +57,29 @@ export class ActivitiesService {
     return this.http.delete<void>(endpoint);
   }
 
+  public removeReactionFromComment$(reactionId: number): Observable<void> {
+    const endpoint = `/api/comments/reactions/${reactionId}`;
+    return this.http.delete<void>(endpoint);
+  }
+
+  public addReactionToComment$(userId: number, commentId: number): Observable<void> {
+    const endpoint = `/api/comments/reactions`;
+    const payload = {
+      "commentId": commentId,
+      "createdAt": new Date().toISOString(),
+      "userId": userId
+    };
+    return this.http.post<void>(endpoint, payload);
+  }
+
   public getComments$(activityId: string): Observable<PostComment[]> {
     const endpoint = `api/posts/${activityId}/comments`;
     return this.http.get<PostComment[]>(endpoint).pipe(tap(data => console.log(data)));
   }
 
-  public getReactions$(activityId: string): Observable<PostReaction[]> {
+  public getReactions$(activityId: string): Observable<Reaction[]> {
     const endpoint = `api/posts/${activityId}/reactions`;
-    return this.http.get<PostReaction[]>(endpoint).pipe(tap(data => console.log(data)));
+    return this.http.get<Reaction[]>(endpoint).pipe(tap(data => console.log(data)));
   }
 
   public addComment(userId: number, activityId: string, commentText: string): Observable<void> {
@@ -76,6 +91,11 @@ export class ActivitiesService {
       "userId": userId
     };
     return this.http.post<void>(endpoint, comment);
+  }
+
+  public getCommentsReactions(commentId: number): Observable<Reaction[]> {
+    const endpoint = `api/comments/${commentId}/reactions`;
+    return this.http.get<Reaction[]>(endpoint);
   }
 
   private getWall$({

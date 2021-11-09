@@ -1,4 +1,5 @@
-export interface PostReaction {
+export interface Reaction {
+  id: number;
   user: {
     "id": number,
     "nickname": string,

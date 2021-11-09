@@ -2,7 +2,7 @@ export * from './post';
 export * from './workout';
 export * from './user';
 export * from './post-comment';
-export * from './post-reaction';
+export * from './reaction';
 export * from './post-extended';
 export * from './planned-post-extended';
 export * from './event-post-extended';

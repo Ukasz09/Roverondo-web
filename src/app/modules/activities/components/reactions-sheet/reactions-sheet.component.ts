@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { PostReaction } from "@app/core/models";
+import { Reaction } from "@app/core/models";
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from "@angular/material/bottom-sheet";
 import { ActivitiesService } from "@app/core/services";
 import { Router } from "@angular/router";
@@ -13,7 +13,7 @@ import { MessageInfoService } from "../../../../core/services/message-info.servi
   styleUrls: ["./reactions-sheet.component.scss"]
 })
 export class ReactionsSheetComponent implements OnInit {
-  public reactionList?: PostReaction[] = undefined;
+  public reactionList?: Reaction[] = undefined;
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: { postId: string },
