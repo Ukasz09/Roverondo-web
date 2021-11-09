@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { CommonModule, DecimalPipe } from "@angular/common";
 import { ActivitiesWallComponent } from "./pages";
 import { AppSharedModule } from "@app/shared";
 import { ActivitiesRoutingModule } from "./activities-routing.module";
@@ -17,6 +17,8 @@ import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MToKmPipe } from "@app/shared/pipes";
+import { MsToKmhPipe } from "../../shared/pipes/ms-to-kmh.pipe";
 
 @NgModule({
   declarations: [
@@ -40,7 +42,10 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     FormsModule
   ],
   providers: [
-    ActivitiesResolver
+    ActivitiesResolver,
+    MToKmPipe,
+    DecimalPipe,
+    MsToKmhPipe
   ]
 })
 export class ActivitiesModule {

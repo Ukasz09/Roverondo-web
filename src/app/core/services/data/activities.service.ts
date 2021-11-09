@@ -3,23 +3,29 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { EventPostExtended, PlannedPostExtended, PostComment, PostExtended, Reaction } from "@app/core/models";
 import { map, tap } from "rxjs/operators";
+import { MockedSpeedAdapterService } from "../adapters";
 
 @Injectable({
   providedIn: "root"
 })
 export class ActivitiesService {
-  constructor(private readonly http: HttpClient) {
+  constructor(private readonly http: HttpClient, private readonly mockedSpeedAdapter: MockedSpeedAdapterService) {
   }
 
   public getActivityPostWall$(userId: number, offset = 0): Observable<PostExtended[]> {
     return this.getWall$({ userId: userId, type: "ActivityPost", offset: offset })
-      .pipe(map(data => data as PostExtended[]));
+      .pipe(
+        map(data => data as PostExtended[]),
+        map(data => data.map(p => this.mockedSpeedAdapter.adapt(p))));
   }
 
   public getMyActivityPostWall$(userId: number, offset = 0): Observable<PostExtended[]> {
     // TODO: integrate with backend
     return this.getWall$({ userId: userId, type: "ActivityPost", offset: offset })
-      .pipe(map(data => data as PostExtended[]));
+      .pipe(
+        map(data => data as PostExtended[]),
+        map(data => data.map(p => this.mockedSpeedAdapter.adapt(p)))
+      );
   }
 
   public getPlannedActivities$(userId: number, offset = 0): Observable<PlannedPostExtended[]> {

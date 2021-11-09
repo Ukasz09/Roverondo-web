@@ -7,11 +7,13 @@ import { CommentsSheetComponent } from "../comments-sheet/comments-sheet.compone
 import { Point, Post, Route } from "@app/core/models";
 import { UserRoutes } from "@app/modules/user";
 import { ReactionsSheetComponent } from "../reactions-sheet/reactions-sheet.component";
-import { ActivitiesService, CurrentUserService } from "@app/core/services";
+import { ActivitiesService, CurrentUserService, MessageInfoService } from "@app/core/services";
 import { PostType } from "@app/core/enums";
 import { switchMap } from "rxjs/operators";
 import { throwError } from "rxjs";
-import { MessageInfoService } from "../../../../core/services/message-info.service";
+import { MToKmPipe } from "@app/shared/pipes";
+import { DecimalPipe } from "@angular/common";
+import { MsToKmhPipe } from "../../../../shared/pipes/ms-to-kmh.pipe";
 
 @Component({
   selector: "app-activity-card-content",
@@ -39,7 +41,10 @@ export class ActivityCardContentComponent implements OnInit {
     private readonly _bottomSheet: MatBottomSheet,
     private readonly currentUserService: CurrentUserService,
     private readonly activitiesService: ActivitiesService,
-    public readonly msgInfoService: MessageInfoService
+    public readonly msgInfoService: MessageInfoService,
+    public readonly mToKmPipe: MToKmPipe,
+    public readonly decimalPipe: DecimalPipe,
+    public readonly msToKmhPipe: MsToKmhPipe
   ) {
   }
 
@@ -79,16 +84,16 @@ export class ActivityCardContentComponent implements OnInit {
 
   public get totalDistanceText(): string {
     const distance = this.route.distance;
-    return distance ? `${distance} km` : this.valueNotFoundPlaceholder;
+    return distance ? `${this.decimalPipe.transform(this.mToKmPipe.transform(distance), "1.2-2")} km` : this.valueNotFoundPlaceholder;
   }
 
   public get avgSpeedText(): string {
-    return this.averageSpeed ? `${this.averageSpeed} km/h` : this.valueNotFoundPlaceholder;
+    return this.averageSpeed ? `${this.decimalPipe.transform(this.msToKmhPipe.transform(this.averageSpeed),"1.1-1")} km/h` : this.valueNotFoundPlaceholder;
   }
 
   public get avgElevationText(): string {
     const elevation = this.route.elevation;
-    return elevation ? `${elevation} m` : this.valueNotFoundPlaceholder;
+    return elevation ? `${this.decimalPipe.transform(elevation, "1.0-0")} m` : this.valueNotFoundPlaceholder;
   }
 
   public get eventStartDateText(): string {
