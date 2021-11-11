@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { FollowersComponent, FollowingsComponent, LeaderboardComponent, UserProfileComponent } from "./pages";
+import { FollowersComponent, FollowingsComponent, UserProfileComponent } from "./pages";
 import { FollowersResolver, FollowingsResolver, UserResolver } from "./services";
 import { AppRoutes, UserRoutes } from "@app/core/enums";
 
@@ -32,10 +32,6 @@ const routes: Routes = [
     resolve: {
       followings: FollowingsResolver
     }
-  },
-  {
-    path: `${AppRoutes.leaderboard}`,
-    component: LeaderboardComponent
   }
 ];
 

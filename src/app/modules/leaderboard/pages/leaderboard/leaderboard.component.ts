@@ -21,6 +21,7 @@ export class LeaderboardComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    console.log('init');
     this.spinner.show(SpinnerType.main).then();
     this.fetchUsers();
   }

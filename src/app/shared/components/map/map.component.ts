@@ -8,7 +8,7 @@ import { Point as DataPoint } from "@app/core/models";
   styleUrls: ["./map.component.scss"]
 })
 export class MapComponent implements OnInit {
-  @Input() public zoom = 13;
+  @Input() public zoom = 10;
   @Input() public disabledInteractions = true;
   @Input() public routePoints: DataPoint[] = [];
 
@@ -31,11 +31,11 @@ export class MapComponent implements OnInit {
     this.mapOptions = Object.assign({
       layers: [this.initialLayer],
       zoom: this.zoom,
-      center: this.defaultCenterLatLng
+      center: this.defaultCenterLatLng,
     }, extraOptions);
     setTimeout(() => {
       this.addRouteLayer();
-    }, 100);
+    }, 200);
   }
 
   public onMapReady(map: Map): void {

@@ -1,6 +1,5 @@
 @use "/src/app/styles/abstracts/mixins";
 
-
 .content {
   @include mixins.py(0.5rem);
   display: flex;

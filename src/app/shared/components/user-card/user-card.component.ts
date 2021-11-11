@@ -9,7 +9,7 @@ import { AppRoutes, UserRoutes } from "@app/core/enums";
   templateUrl: "./user-card.component.html",
   styleUrls: ["./user-card.component.scss"]
 })
-export class UsersCardComponent implements OnInit {
+export class UserCardComponent implements OnInit {
   @Input() public user!: User;
 
   constructor(

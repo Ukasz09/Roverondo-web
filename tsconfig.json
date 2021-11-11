@@ -76,6 +76,9 @@
       ],
       "@app/modules/user": [
         "src/app/modules/user/index"
+      ],
+      "@app/modules/leaderboard": [
+        "src/app/modules/leaderboard/index"
       ]
     },
     "resolveJsonModule": true

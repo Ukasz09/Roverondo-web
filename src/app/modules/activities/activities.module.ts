@@ -17,8 +17,7 @@ import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { LengthUnitPipe } from "@app/shared/pipes";
-import { SpeedUnitPipe } from "../../shared/pipes/speed-unit.pipe";
+import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
 
 @NgModule({
   declarations: [

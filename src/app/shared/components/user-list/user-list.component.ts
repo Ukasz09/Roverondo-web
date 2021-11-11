@@ -6,11 +6,11 @@ import { Utils } from "@app/shared/utils";
 
 @Component({
   selector: "app-user-list",
-  templateUrl: "./user-list-page.component.html",
-  styleUrls: ["./user-list-page.component.scss"]
+  templateUrl: "./user-list.component.html",
+  styleUrls: ["./user-list.component.scss"]
 })
-export class UserListPageComponent implements OnInit {
-  @Input() public userList?: User[] = [];
+export class UserListComponent implements OnInit {
+  @Input() public userList: User[] = [];
   @Input() public withRankMedals = false;
 
   public readonly AppRoutes = AppRoutes;

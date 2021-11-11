@@ -13,7 +13,7 @@ import {
   NavbarComponent,
   ProfileAvatarComponent,
   ScrollContainerComponent,
-  AreaGraphComponent
+  AreaGraphComponent, UserListComponent, UserCardComponent
 } from "@app/shared/components";
 import { ActiveLinkDirective, InputFocusDirective } from "@app/shared/directives";
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -23,8 +23,7 @@ import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { MatIconModule } from "@angular/material/icon";
-import { LengthUnitPipe } from "@app/shared/pipes";
-import { SpeedUnitPipe } from "./pipes/speed-unit.pipe";
+import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
 
 @NgModule({
   declarations: [
@@ -42,7 +41,9 @@ import { SpeedUnitPipe } from "./pipes/speed-unit.pipe";
     MapComponent,
     AreaGraphComponent,
     LengthUnitPipe,
-    SpeedUnitPipe
+    SpeedUnitPipe,
+    UserListComponent,
+    UserCardComponent
   ],
   exports: [
     GlassCardComponent,
@@ -57,7 +58,9 @@ import { SpeedUnitPipe } from "./pipes/speed-unit.pipe";
     MapComponent,
     AreaGraphComponent,
     LengthUnitPipe,
-    SpeedUnitPipe
+    SpeedUnitPipe,
+    UserListComponent,
+    UserCardComponent
   ],
   imports: [
     CommonModule,

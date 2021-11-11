@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { FollowersComponent, FollowingsComponent, LeaderboardComponent, UserProfileComponent } from "./pages";
-import { UserListPageComponent, UsersCardComponent } from "./components";
+import { FollowersComponent, FollowingsComponent, UserProfileComponent } from "./pages";
 import { AppSharedModule } from "@app/shared";
 import { UserRoutingModule } from "./user-routing.module";
 import { FollowersResolver, FollowingsResolver, UserResolver } from "./services";
@@ -13,9 +12,6 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     UserProfileComponent,
     FollowersComponent,
     FollowingsComponent,
-    UsersCardComponent,
-    UserListPageComponent,
-    LeaderboardComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +19,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     UserRoutingModule,
     MatProgressSpinnerModule
   ],
+  exports: [  ],
   providers: [
     UserResolver,
     FollowersResolver,

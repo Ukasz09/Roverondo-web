@@ -25,8 +25,12 @@ const routes: Routes = [
     path: AppRoutes.user,
     canActivate: [CustomAuthGuard],
     loadChildren: async () => (await import("@app/modules/user")).UserModule
-  }
-  ,
+  },
+  {
+    path: AppRoutes.leaderboard,
+    canActivate: [CustomAuthGuard],
+    loadChildren: async () => (await import("@app/modules/leaderboard")).LeaderboardModule
+  },
   {
     path: "**",
     redirectTo: `/${AppRoutes.home}`
