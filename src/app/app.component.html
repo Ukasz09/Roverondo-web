@@ -1,13 +1,13 @@
-<div *ngIf="auth.isLoading$ | async; else loaded" class="auth-loader">
-  <ngx-spinner
-    size="large"
-    color="#f8f9fa"
-    type="ball-beat"
-    [fullScreen]="true">
-    <span class="spinner-label"> Loading application</span>
-  </ngx-spinner>
-</div>
-<ng-template #loaded>
+<ngx-spinner
+  [name]="spinnerName"
+  size="large"
+  color="#f8f9fa"
+  type="ball-beat"
+  [fullScreen]="true">
+  <span class="spinner-label"> Loading application</span>
+</ngx-spinner>
+<div *ngIf="auth.isLoading$ | async; else appLoadedTemplate" class="auth-loader"></div>
+<ng-template #appLoadedTemplate>
   <router-outlet></router-outlet>
 </ng-template>
 

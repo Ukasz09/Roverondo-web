@@ -2,25 +2,25 @@
 @use "/src/app/styles/abstracts/functions";
 @use "/src/app/styles/abstracts/variables";
 
-.auth-loader{
+.auth-loader {
   @include mixins.bg-fill();
   @include mixins.max-viewport();
   background-image: functions.image("auth-login-bg.jpg");
   width: 100vw;
   height: 100vh;
+}
 
-  .spinner-label{
-    color: variables.$text-light-color;
-    text-align: center;
-    width: 100%;
-    font-size: map-get(variables.$font-size, h6);
+.spinner-label {
+  color: variables.$text-light-color;
+  text-align: center;
+  width: 100%;
+  font-size: map-get(variables.$font-size, h6);
 
-    @include mixins.media(xs-medium){
-      font-size: map-get(variables.$font-size, h5);
-    }
+  @include mixins.media(xs-medium) {
+    font-size: map-get(variables.$font-size, h5);
+  }
 
-    @include mixins.media(sm-small){
-      font-size: map-get(variables.$font-size, h2);
-    }
+  @include mixins.media(sm-small) {
+    font-size: map-get(variables.$font-size, h2);
   }
 }

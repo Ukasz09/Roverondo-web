@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { EventPostExtended, PlannedPostExtended, PostComment, PostExtended, Reaction } from "@app/core/models";
-import { map, tap } from "rxjs/operators";
+import { delay, map, tap } from "rxjs/operators";
 import { MockedSpeedAdapterService } from "../adapters";
 
 @Injectable({
@@ -16,7 +16,8 @@ export class ActivitiesService {
     return this.getWall$({ userId: userId, type: "ActivityPost", offset: offset })
       .pipe(
         map(data => data as PostExtended[]),
-        map(data => data.map(p => this.mockedSpeedAdapter.adapt(p))));
+        map(data => data.map(p => this.mockedSpeedAdapter.adapt(p)))
+      );
   }
 
   public getMyActivityPostWall$(userId: number, offset = 0): Observable<PostExtended[]> {

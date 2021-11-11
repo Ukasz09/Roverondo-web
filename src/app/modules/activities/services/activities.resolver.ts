@@ -7,15 +7,20 @@ import {
 import { Observable, of } from "rxjs";
 import { ActivitiesRoutes } from "@app/routes/activities";
 import { ActivitiesService } from "@app/core/services";
-import { EventPostExtended, PlannedPostExtended, PostExtended } from "@app/core/models";
+import { ActivityType } from "@app/core/models";
+import { NgxSpinnerService } from "ngx-spinner";
+import { SpinnerType } from "@app/core/enums";
+import { tap } from "rxjs/operators";
 
 @Injectable()
-export class ActivitiesResolver implements Resolve<(PostExtended | PlannedPostExtended | EventPostExtended)[]> {
+export class ActivitiesResolver implements Resolve<ActivityType[]> {
 
-  constructor(private readonly activitiesService: ActivitiesService) {
+  constructor(
+    private readonly activitiesService: ActivitiesService,
+    private readonly spinner: NgxSpinnerService) {
   }
 
-  public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<(PostExtended | PlannedPostExtended | EventPostExtended)[]> {
+  public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ActivityType[]> {
     const userId = route.paramMap.get("userId") || "";
     if (userId) {
       const type = route.paramMap.get("type") || "";
@@ -26,19 +31,26 @@ export class ActivitiesResolver implements Resolve<(PostExtended | PlannedPostEx
     }
   }
 
-  public getActivities$(userId: number, offset: number, type: string): Observable<(PostExtended | PlannedPostExtended | EventPostExtended)[]> {
+  public getActivities$(userId: number, offset: number, type: string): Observable<ActivityType[]> {
+    this.spinner.show(SpinnerType.main).then();
+    let activities$: Observable<ActivityType[]> = of([]);
     switch (type) {
       case ActivitiesRoutes.allActivities:
-        return this.activitiesService.getActivityPostWall$(userId, offset);
+        activities$ = this.activitiesService.getActivityPostWall$(userId, offset);
+        break;
       case ActivitiesRoutes.likedActivities:
-        return this.activitiesService.getLikedActivities$(userId, offset);
+        activities$ = this.activitiesService.getLikedActivities$(userId, offset);
+        break;
       case ActivitiesRoutes.myActivities:
-        return this.activitiesService.getMyActivityPostWall$(userId, offset);
+        activities$ = this.activitiesService.getMyActivityPostWall$(userId, offset);
+        break;
       case ActivitiesRoutes.plannedActivities:
-        return this.activitiesService.getPlannedActivities$(userId, offset);
+        activities$ = this.activitiesService.getPlannedActivities$(userId, offset);
+        break;
       case ActivitiesRoutes.eventsActivities:
-        return this.activitiesService.getEventActivities$(userId, offset);
+        activities$ = this.activitiesService.getEventActivities$(userId, offset);
+        break;
     }
-    return of([]);
+    return activities$.pipe(tap(() => this.spinner.hide(SpinnerType.main)));
   }
 }
