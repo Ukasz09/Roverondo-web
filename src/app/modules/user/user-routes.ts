@@ -1,6 +1,6 @@
 export enum UserRoutes {
   followers = "followers",
-  following = "following",
+  followings = "followings",
   profile = "profile",
   leaderboard = "leaderboard"
 }

@@ -39,18 +39,16 @@ export class DrawerMenuComponent implements OnInit {
     this.closeDrawer.emit();
   }
 
-  public navigateToActivity(type: ActivitiesRoutes): void {
-    this.currentUserService.currentUser$.subscribe({
-      next: user => {
-        if (user) {
-          const link = this.getRouteLink([AppRoutes.activities, user.id.toString(), type]);
-          this.router.navigate([link]).then(() => {
-          });
-        } else {
-          console.error("User not found - not navigate");
-        }
-        this.closeDrawer.emit();
+  public navigate(moduleRoute: string, subRoute: string): void {
+    this.currentUserService.currentUser$.subscribe((user) => {
+      if (user) {
+        const link = this.getRouteLink([moduleRoute, user.id.toString(), subRoute]);
+        this.router.navigate([link]).then(() => {
+        });
+      } else {
+        console.error("User not found - not navigate");
       }
+      this.closeDrawer.emit();
     });
   }
 

@@ -91,15 +91,6 @@
           }
         }
       }
-
-      .spinner-wrapper {
-        @include mixins.py(5rem);
-        @include mixins.glass-effect(variables.$glass-lighter-bg);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        //height: 100vh;
-      }
     }
   }
 }

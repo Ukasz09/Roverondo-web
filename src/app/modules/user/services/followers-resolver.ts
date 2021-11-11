@@ -1,15 +1,15 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
-import { Observable, throwError } from "rxjs";
 import { User } from "@app/core/models";
 import { UsersService } from "@app/core/services";
 import { NgxSpinnerService } from "ngx-spinner";
-import { catchError, tap } from "rxjs/operators";
+import { Observable, throwError } from "rxjs";
 import { SpinnerType } from "@app/core/enums";
 import { AppRoutes } from "@app/routes";
+import { catchError, tap } from "rxjs/operators";
 
 @Injectable()
-export class UserResolver implements Resolve<User> {
+export class FollowersResolver implements Resolve<User[]> {
 
   constructor(
     private readonly userService: UsersService,
@@ -18,23 +18,22 @@ export class UserResolver implements Resolve<User> {
   ) {
   }
 
-  public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User> {
+  public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User[]> {
     this.spinner.show(SpinnerType.main).then();
 
     const userId = route.paramMap.get("id");
     if (!userId) {
       this.navigateToHome();
-      return throwError("User id not given");
+      return throwError(`User id not given`);
     }
-    return this.userService.getUser$(+userId).pipe(
+    return this.userService.getFollowers$(+userId).pipe(
       tap(() => this.spinner.hide(SpinnerType.main).then()),
       catchError(() => {
         this.navigateToHome();
-        return throwError(`Not found user with id=${userId}`);
+        return throwError(`Not found followers for user with id=${userId}`);
       })
     );
   }
-
 
   private navigateToHome(): void {
     this.router.navigate([AppRoutes.home]).then();

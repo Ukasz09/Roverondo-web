@@ -25,7 +25,7 @@
     <ul class="drawer-links">
       <li><h3
         class="link"
-        (click)="navigateToActivity(ActivitiesRoutes.allActivities)"
+        (click)="navigate(AppRoutes.activities, ActivitiesRoutes.allActivities)"
         [appActiveLink]="ActivitiesRoutes.allActivities"
         id="all-activities">
         News
@@ -33,27 +33,27 @@
       <li><h3
         class="link"
         [appActiveLink]="ActivitiesRoutes.myActivities"
-        (click)="navigateToActivity(ActivitiesRoutes.myActivities)"
+        (click)="navigate(AppRoutes.activities,ActivitiesRoutes.myActivities)"
         id="my-activities">
         My Activities
       </h3></li>
       <li><h3
         class="link"
         [appActiveLink]="ActivitiesRoutes.likedActivities"
-        (click)="navigateToActivity(ActivitiesRoutes.likedActivities)"
+        (click)="navigate(AppRoutes.activities,ActivitiesRoutes.likedActivities)"
         id="liked-activities">
         Liked Activities
       </h3></li>
       <li><h3
         class="link"
-        (click)="navigateToActivity(ActivitiesRoutes.plannedActivities)"
+        (click)="navigate(AppRoutes.activities, ActivitiesRoutes.plannedActivities)"
         [appActiveLink]="ActivitiesRoutes.plannedActivities"
         id="plannedRoutes">
         Planned routes
       </h3></li>
       <li><h3
         class="link"
-        (click)="navigateToActivity(ActivitiesRoutes.eventsActivities)"
+        (click)="navigate(AppRoutes.activities, ActivitiesRoutes.eventsActivities)"
         [appActiveLink]="ActivitiesRoutes.eventsActivities"
         id="events">
         Events
@@ -68,17 +68,15 @@
       </h3></li>
       <li><h3
         class="link"
-        [routerLink]="getRouteLink([AppRoutes.user,AppRoutes.followers])"
         [appActiveLink]="AppRoutes.followers"
-        (click)="closeDrawer.emit()"
+        (click)="navigate(AppRoutes.user,AppRoutes.followers)"
         id="followers">
         Followers
       </h3></li>
       <li><h3
         class="link"
-        [routerLink]="getRouteLink([AppRoutes.user,AppRoutes.following])"
-        [appActiveLink]="AppRoutes.following"
-        (click)="closeDrawer.emit()"
+        [appActiveLink]="AppRoutes.followings"
+        (click)="navigate(AppRoutes.user,AppRoutes.followings)"
         id="following">
         Following
       </h3></li>

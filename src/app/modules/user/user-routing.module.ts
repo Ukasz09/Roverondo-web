@@ -1,17 +1,18 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { FollowersComponent, FollowingComponent, LeaderboardComponent, UserProfileComponent } from "./pages";
+import { FollowersComponent, FollowingsComponent, LeaderboardComponent, UserProfileComponent } from "./pages";
 import { UserRoutes } from "./user-routes";
-import { UserResolver } from "./services";
+import { FollowersResolver, FollowingsResolver, UserResolver } from "./services";
+import { AppRoutes } from "@app/routes";
 
 const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    redirectTo: `${UserRoutes.profile}`
+    redirectTo: `/${AppRoutes.home}`
   },
   {
-    path: `${UserRoutes.profile}`,
+    path: `:id/${UserRoutes.profile}`,
     pathMatch: "full",
     component: UserProfileComponent,
     resolve: {
@@ -19,40 +20,18 @@ const routes: Routes = [
     }
   },
   {
-    path: `${UserRoutes.profile}/:id`,
-    component: UserProfileComponent,
-    resolve: {
-      user: UserResolver
-    }
-  },
-  {
-    path: `${UserRoutes.followers}`,
+    path: `:id/${UserRoutes.followers}`,
     pathMatch: "full",
     component: FollowersComponent,
     resolve: {
-      user: UserResolver
+      followers: FollowersResolver
     }
   },
   {
-    path: `${UserRoutes.followers}/:id`,
-    component: FollowersComponent,
+    path: `:id/${UserRoutes.followings}`,
+    component: FollowingsComponent,
     resolve: {
-      user: UserResolver
-    }
-  },
-  {
-    path: `${UserRoutes.following}`,
-    pathMatch: "full",
-    component: FollowingComponent,
-    resolve: {
-      user: UserResolver
-    }
-  },
-  {
-    path: `${UserRoutes.following}/:id`,
-    component: FollowingComponent,
-    resolve: {
-      user: UserResolver
+      followings: FollowingsResolver
     }
   },
   {

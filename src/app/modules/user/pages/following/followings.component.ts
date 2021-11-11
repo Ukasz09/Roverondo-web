@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Data } from "@angular/router";
 import { User } from "@app/core/models";
+import { ActivatedRoute, Data } from "@angular/router";
 
 @Component({
-  selector: "app-followers",
-  templateUrl: "./followers.component.html"
+  selector: "app-following",
+  templateUrl: "./followings.component.html"
 })
-export class FollowersComponent implements OnInit {
-  public followers: User[] = [];
+export class FollowingsComponent implements OnInit {
+  public followings: User[]=[];
 
   constructor(
     private readonly activatedRoute: ActivatedRoute
@@ -15,19 +15,19 @@ export class FollowersComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.fetchFollowers();
+    this.fetchFollowing();
   }
 
-  public fetchFollowers(): void {
+  public fetchFollowing(): void {
     this.activatedRoute.data.subscribe((data: Data) => {
-      this.followers = data.followers;
+      this.followings = data.followings;
       this.sortUsers();
     });
   }
 
   private sortUsers(): void {
-    if (this.followers) {
-      this.followers.sort((a, b) => {
+    if (this.followings) {
+      this.followings.sort((a, b) => {
         return a.nickname.localeCompare(b.nickname);
       });
     }

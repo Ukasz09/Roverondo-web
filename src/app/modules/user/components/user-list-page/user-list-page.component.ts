@@ -6,12 +6,12 @@ import { LayoutService } from "@app/core/services";
 import { Utils } from "@app/shared/utils";
 
 @Component({
-  selector: "app-follow-page",
-  templateUrl: "./follow-page.component.html",
-  styleUrls: ["./follow-page.component.scss"]
+  selector: "app-user-list-page",
+  templateUrl: "./user-list-page.component.html",
+  styleUrls: ["./user-list-page.component.scss"]
 })
-export class FollowPageComponent implements OnInit {
-  @Input() public userList?: User[];
+export class UserListPageComponent implements OnInit {
+  @Input() public userList?: User[] = [];
   @Input() public withRankMedals = false;
 
   public readonly AppRoutes = AppRoutes;
