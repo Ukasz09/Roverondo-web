@@ -23,8 +23,8 @@ import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { MatIconModule } from "@angular/material/icon";
-import { MToKmPipe } from "@app/shared/pipes";
-import { MsToKmhPipe } from "./pipes/ms-to-kmh.pipe";
+import { LengthUnitPipe } from "@app/shared/pipes";
+import { SpeedUnitPipe } from "./pipes/speed-unit.pipe";
 
 @NgModule({
   declarations: [
@@ -41,8 +41,8 @@ import { MsToKmhPipe } from "./pipes/ms-to-kmh.pipe";
     ScrollContainerComponent,
     MapComponent,
     AreaGraphComponent,
-    MToKmPipe,
-    MsToKmhPipe
+    LengthUnitPipe,
+    SpeedUnitPipe
   ],
   exports: [
     GlassCardComponent,
@@ -56,8 +56,8 @@ import { MsToKmhPipe } from "./pipes/ms-to-kmh.pipe";
     ScrollContainerComponent,
     MapComponent,
     AreaGraphComponent,
-    MToKmPipe,
-    MsToKmhPipe
+    LengthUnitPipe,
+    SpeedUnitPipe
   ],
   imports: [
     CommonModule,

@@ -11,9 +11,9 @@ import { ActivitiesService, CurrentUserService, MessageInfoService } from "@app/
 import { PostType } from "@app/core/enums";
 import { switchMap } from "rxjs/operators";
 import { throwError } from "rxjs";
-import { MToKmPipe } from "@app/shared/pipes";
+import { LengthUnitPipe } from "@app/shared/pipes";
 import { DecimalPipe } from "@angular/common";
-import { MsToKmhPipe } from "../../../../shared/pipes/ms-to-kmh.pipe";
+import { SpeedUnitPipe } from "../../../../shared/pipes/speed-unit.pipe";
 
 @Component({
   selector: "app-activity-card-content",
@@ -42,9 +42,9 @@ export class ActivityCardContentComponent implements OnInit {
     private readonly currentUserService: CurrentUserService,
     private readonly activitiesService: ActivitiesService,
     public readonly msgInfoService: MessageInfoService,
-    public readonly mToKmPipe: MToKmPipe,
+    public readonly mToKmPipe: LengthUnitPipe,
     public readonly decimalPipe: DecimalPipe,
-    public readonly msToKmhPipe: MsToKmhPipe
+    public readonly msToKmhPipe: SpeedUnitPipe
   ) {
   }
 
