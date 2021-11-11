@@ -5,6 +5,7 @@ import { AppSharedModule } from "@app/shared";
 import { ActivitiesRoutingModule } from "./activities-routing.module";
 import { MatIconModule } from "@angular/material/icon";
 import {
+  ActivitiesListComponent,
   ActivityCardContentComponent,
   ActivityDetailsComponent,
   CommentsSheetComponent,
@@ -25,7 +26,8 @@ import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
     ActivityCardContentComponent,
     ActivityDetailsComponent,
     CommentsSheetComponent,
-    ReactionsSheetComponent
+    ReactionsSheetComponent,
+    ActivitiesListComponent
   ],
   imports: [
     CommonModule,

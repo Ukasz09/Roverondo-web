@@ -18,4 +18,8 @@ export class Utils {
   public static getInitialsImage(name: string): string {
     return `https://avatars.dicebear.com/api/initials/${name}.svg`;
   }
+
+  public static getScrollContainerId(type: string): string {
+    return `${type}-activities-wall`;
+  }
 }

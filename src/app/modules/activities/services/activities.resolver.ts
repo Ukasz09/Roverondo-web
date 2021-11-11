@@ -5,18 +5,21 @@ import {
   ActivatedRouteSnapshot
 } from "@angular/router";
 import { Observable, of } from "rxjs";
-import { ActivitiesService } from "@app/core/services";
+import { ActivitiesService, ScrollService } from "@app/core/services";
 import { ActivityType } from "@app/core/models";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ActivitiesRoutes, SpinnerType } from "@app/core/enums";
 import { tap } from "rxjs/operators";
+import { Utils } from "@app/shared/utils";
 
 @Injectable()
 export class ActivitiesResolver implements Resolve<ActivityType[]> {
 
   constructor(
     private readonly activitiesService: ActivitiesService,
-    private readonly spinner: NgxSpinnerService) {
+    private readonly spinner: NgxSpinnerService,
+    private readonly scrollService: ScrollService
+  ) {
   }
 
   public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ActivityType[]> {
@@ -52,6 +55,7 @@ export class ActivitiesResolver implements Resolve<ActivityType[]> {
         activities$ = this.activitiesService.getEventActivities$(userId, offset);
         break;
     }
+    this.scrollService.clearScrollPosition(Utils.getScrollContainerId(type));
     return activities$.pipe(tap(() => {
       if (withSpinner) {
         this.spinner.hide(SpinnerType.main).then();

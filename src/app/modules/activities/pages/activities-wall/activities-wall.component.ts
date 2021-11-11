@@ -1,30 +1,32 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { ActivitiesService, CurrentUserService, LayoutService, ScrollService } from "@app/core/services";
-import { ActivitiesRoutes, AppRoutes, LayoutType, PostType } from "@app/core/enums";
-import { ActivatedRoute, Data } from "@angular/router";
+import { ActivitiesRoutes, LayoutType, PostType } from "@app/core/enums";
+import { ActivatedRoute } from "@angular/router";
 import { ScrollContainerComponent } from "@app/shared/components";
 import { ActivitiesResolver } from "../../services";
-import { ActivityType, Route } from "@app/core/models";
+import { ActivityType } from "@app/core/models";
 import { switchMap } from "rxjs/operators";
-import { Observable, throwError } from "rxjs";
+import { combineLatest, Observable, Subscription, throwError } from "rxjs";
+import { Utils } from "@app/shared/utils";
 
 @Component({
   selector: "app-activities-wall",
   templateUrl: "./activities-wall.component.html",
   styleUrls: ["./activities-wall.component.scss"]
 })
-export class ActivitiesWallComponent implements OnInit {
+export class ActivitiesWallComponent implements OnInit, OnDestroy {
   @ViewChild("scrollContainerComponent") scrollContainerComponent?: ScrollContainerComponent;
 
-  public readonly AppRoutes = AppRoutes;
   public scrollContainerId = "activities-wall";
   public activities: ActivityType[] = [];
+  public wallReady = false;
   public selectedActivity?: ActivityType;
 
   private readonly loadMoreDataScrollOffsetPx = 700;
   private loadingMoreActivities = false;
   private noMoreActivities = false;
   private type = "";
+  private scrollBottomSubscription$?: Subscription;
 
   constructor(
     private readonly layoutService: LayoutService,
@@ -41,30 +43,28 @@ export class ActivitiesWallComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
+    combineLatest([
+      this.activatedRoute.params,
+      this.activatedRoute.data
+    ]).subscribe(([params, data]) => {
       this.type = params.type;
-      this.scrollContainerId = `${this.type}-activities-wall`;
-      if (this.scrollContainerComponent) {
-        this.scrollContainerComponent.scrollTop(this.scrollService.getScrollTopPosition(this.scrollContainerId));
-      } else {
-        console.warn("Scroll container not exist - not scrolled");
-      }
+      this.scrollContainerId = Utils.getScrollContainerId(this.type);
+      this.activities = data.activities;
+      this.noMoreActivities = false;
+      this.loadingMoreActivities = false;
+      this.selectedActivity = undefined;
+      this.wallReady = true;
     });
 
-    this.activatedRoute.data.subscribe({
-      next: (data: Data) => {
-        this.activities = data.activities;
-        this.noMoreActivities = false;
-        this.loadingMoreActivities = false;
-        this.selectedActivity = undefined;
-      }
-    });
-
-    this.scrollService.scrollBottomChange$.subscribe((event) => {
+    this.scrollBottomSubscription$ = this.scrollService.scrollBottomChange$.subscribe((event) => {
       if (this.needToLoadMoreActivities(event.id, event.position)) {
         this.loadMoreActivities();
       }
     });
+  }
+
+  public ngOnDestroy(): void {
+    this.scrollBottomSubscription$?.unsubscribe();
   }
 
   public onActivityDetailsClick(activity: ActivityType): void {
@@ -75,59 +75,15 @@ export class ActivitiesWallComponent implements OnInit {
     this.selectedActivity = undefined;
   }
 
-  public getRouteData(activity: ActivityType): Route {
-    if ("workout" in activity) {
-      return activity.workout.route;
-    }
-    if ("plannedRoute" in activity) {
-      return activity.plannedRoute.route;
-    }
-    return activity.eventRoute.route;
-  }
-
-  public getStartTimeData(activity: ActivityType): string {
-    if ("workout" in activity) {
-      return activity.workout.startTime;
-    }
-    return "";
-  }
-
-  public getEndTimeData(activity: ActivityType): string {
-    if ("workout" in activity) {
-      return activity.workout.endTime;
-    }
-    return "";
-  }
-
-  public getAvgSpeedData(activity: ActivityType): number {
-    if ("workout" in activity) {
-      return activity.workout.averageSpeed;
-    }
-    return 0;
-  }
-
-  public getEventDurationTime(activity: ActivityType): string {
-    if ("eventRoute" in activity) {
-      return activity.eventRoute.eventDurationTime;
-    }
-    return "";
-  }
-
-  public getEventStartDate(activity: ActivityType) {
-    if ("eventRoute" in activity) {
-      return activity.eventRoute.eventStartDate;
-    }
-    return "";
-  }
-
   public get postType(): PostType {
-    if (this.type === ActivitiesRoutes.plannedActivities) {
-      return PostType.plannedRoutePost;
+    switch (this.type) {
+      case ActivitiesRoutes.plannedActivities:
+        return PostType.plannedRoutePost;
+      case ActivitiesRoutes.eventsActivities:
+        return PostType.eventPost;
+      default:
+        return PostType.activityPost;
     }
-    if (this.type === ActivitiesRoutes.eventsActivities) {
-      return PostType.eventPost;
-    }
-    return PostType.activityPost;
   }
 
   private needToLoadMoreActivities(id: string, bottomPosition: number): boolean {

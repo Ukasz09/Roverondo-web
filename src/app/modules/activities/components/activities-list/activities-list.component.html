@@ -1,0 +1,32 @@
+<h1 *ngIf="isMobileLayout" class="mobile-logo">
+  <app-logo-text [routerLink]="homeRouterLink" [lightText]="true"></app-logo-text>
+</h1>
+<div class="card-wrapper">
+
+<app-scroll-container [id]="scrollContainerId"
+                      [withScrollbar]="!isMobileLayout"
+                      [initialScrollTopOffsetPx]="scrollService.getScrollTopPosition(scrollContainerId)"
+                      #scrollContainerComponent>
+  <ng-container *ngIf="activities.length>0; else notFoundActivitiesTemplate">
+    <div *ngFor="let activity of activities" class="activity-card">
+      <app-glass-card>
+        <app-activity-card-content
+          [route]="getRouteData(activity)"
+          [startTime]="getStartTimeData(activity)"
+          [endTime]="getEndTimeData(activity)"
+          [averageSpeed]="getAvgSpeedData(activity)"
+          [eventStartDate]="getEventStartDate(activity)"
+          [eventDurationTime]="getEventDurationTime(activity)"
+          [activity]="activity"
+          [type]="postType"
+          (detailsClick)="activityDetailsClick.emit(activity)"
+        ></app-activity-card-content>
+      </app-glass-card>
+    </div>
+  </ng-container>
+  <ng-template #notFoundActivitiesTemplate>
+    <div class="no-activities"><span class="text">Not found any activities</span></div>
+  </ng-template>
+</app-scroll-container>
+
+</div>

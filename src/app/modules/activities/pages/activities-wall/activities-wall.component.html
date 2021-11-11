@@ -1,60 +1,26 @@
 <div class="container">
   <app-aside-layout>
     <div class="content">
-      <div *ngIf="selectedActivity; else activitiesWall" class="details">
-        <app-activity-details [id]="'activity-details'"
-                              [activity]="selectedActivity"
-                              (exitDetailsClick)="exitDetailsView()"
-                              [type]="postType"
-        >
-        </app-activity-details>
-        <div class="backdrop" (click)="exitDetailsView()">
+      <ng-container *ngIf="wallReady">
+        <div *ngIf="selectedActivity; else activitiesWall" class="details">
+          <app-activity-details [id]="'activity-details'"
+                                [activity]="selectedActivity"
+                                (exitDetailsClick)="exitDetailsView()"
+                                [type]="postType">
+          </app-activity-details>
+          <div class="backdrop" (click)="exitDetailsView()">
+          </div>
         </div>
-      </div>
-      <ng-template #activitiesWall>
-        <h1 *ngIf="isMobileLayout" class="mobile-logo">
-          <app-logo-text [routerLink]="AppRoutes.home" [lightText]="true"></app-logo-text>
-        </h1>
-        <app-scroll-container [id]="scrollContainerId" class="card-wrapper"
-                              [withScrollbar]="!isMobileLayout"
-                              [initialScrollTopOffsetPx]="scrollService.getScrollTopPosition(scrollContainerId)"
-                              #scrollContainerComponent
-        >
-          <ng-container *ngIf="activities.length>0; else notFoundActivitiesTemplate">
-            <div *ngFor="let activity of activities" class="activity-card">
-              <app-glass-card>
-                <ng-container *ngIf="activity; else spinner">
-                  <app-activity-card-content
-                    [route]="getRouteData(activity)"
-                    [startTime]="getStartTimeData(activity)"
-                    [endTime]="getEndTimeData(activity)"
-                    [averageSpeed]="getAvgSpeedData(activity)"
-                    [eventStartDate]="getEventStartDate(activity)"
-                    [eventDurationTime]="getEventDurationTime(activity)"
-                    [activity]="activity"
-                    [type]="postType"
-                    (detailsClick)="onActivityDetailsClick(activity)"
-                  >
-                  </app-activity-card-content>
-                </ng-container>
-
-                <ng-template #spinner>
-                  <div class="spinner-wrapper">
-                    <mat-spinner></mat-spinner>
-                  </div>
-                </ng-template>
-              </app-glass-card>
-            </div>
-          </ng-container>
-          <ng-template #notFoundActivitiesTemplate>
-            <div class="no-activities">
-              <span class="text">
-                Not found any activities
-              </span>
-            </div>
-          </ng-template>
-        </app-scroll-container>
-      </ng-template>
+        <ng-template #activitiesWall>
+          <app-activities-list
+            style="height: 100vh"
+            [activities]="activities"
+            [scrollContainerId]="scrollContainerId"
+            [postType]="postType"
+            (activityDetailsClick)="onActivityDetailsClick($event)">
+          </app-activities-list>
+        </ng-template>
+      </ng-container>
     </div>
   </app-aside-layout>
 </div>
