@@ -4,7 +4,7 @@ import { ActivitiesRoutes, AppRoutes, LayoutType, PostType } from "@app/core/enu
 import { ActivatedRoute, Data } from "@angular/router";
 import { ScrollContainerComponent } from "@app/shared/components";
 import { ActivitiesResolver } from "../../services";
-import { EventPostExtended, PlannedPostExtended, PostExtended, Route } from "@app/core/models";
+import { ActivityType, Route } from "@app/core/models";
 import { switchMap } from "rxjs/operators";
 import { Observable, throwError } from "rxjs";
 
@@ -18,8 +18,8 @@ export class ActivitiesWallComponent implements OnInit {
 
   public readonly AppRoutes = AppRoutes;
   public scrollContainerId = "activities-wall";
-  public activities: (PostExtended | PlannedPostExtended | EventPostExtended)[] = [];
-  public selectedActivity?: PostExtended | PlannedPostExtended | EventPostExtended;
+  public activities: ActivityType[] = [];
+  public selectedActivity?: ActivityType;
 
   private readonly loadMoreDataScrollOffsetPx = 700;
   private loadingMoreActivities = false;
@@ -67,7 +67,7 @@ export class ActivitiesWallComponent implements OnInit {
     });
   }
 
-  public onActivityDetailsClick(activity: PostExtended | PlannedPostExtended | EventPostExtended): void {
+  public onActivityDetailsClick(activity: ActivityType): void {
     this.selectedActivity = activity;
   }
 
@@ -75,7 +75,7 @@ export class ActivitiesWallComponent implements OnInit {
     this.selectedActivity = undefined;
   }
 
-  public getRouteData(activity: PostExtended | PlannedPostExtended | EventPostExtended): Route {
+  public getRouteData(activity: ActivityType): Route {
     if ("workout" in activity) {
       return activity.workout.route;
     }
@@ -85,35 +85,35 @@ export class ActivitiesWallComponent implements OnInit {
     return activity.eventRoute.route;
   }
 
-  public getStartTimeData(activity: PostExtended | PlannedPostExtended | EventPostExtended): string {
+  public getStartTimeData(activity: ActivityType): string {
     if ("workout" in activity) {
       return activity.workout.startTime;
     }
     return "";
   }
 
-  public getEndTimeData(activity: PostExtended | PlannedPostExtended | EventPostExtended): string {
+  public getEndTimeData(activity: ActivityType): string {
     if ("workout" in activity) {
       return activity.workout.endTime;
     }
     return "";
   }
 
-  public getAvgSpeedData(activity: PostExtended | PlannedPostExtended | EventPostExtended): number {
+  public getAvgSpeedData(activity: ActivityType): number {
     if ("workout" in activity) {
       return activity.workout.averageSpeed;
     }
     return 0;
   }
 
-  public getEventDurationTime(activity: PostExtended | PlannedPostExtended | EventPostExtended): string {
+  public getEventDurationTime(activity: ActivityType): string {
     if ("eventRoute" in activity) {
       return activity.eventRoute.eventDurationTime;
     }
     return "";
   }
 
-  public getEventStartDate(activity: PostExtended | PlannedPostExtended | EventPostExtended) {
+  public getEventStartDate(activity: ActivityType) {
     if ("eventRoute" in activity) {
       return activity.eventRoute.eventStartDate;
     }
@@ -150,7 +150,7 @@ export class ActivitiesWallComponent implements OnInit {
     });
   }
 
-  private getMoreActivitiesData$(): Observable<(PlannedPostExtended | PostExtended | EventPostExtended)[]> {
+  private getMoreActivitiesData$(): Observable<ActivityType[]> {
     return this.currentUserService.currentUser$.pipe(
       switchMap((user) => {
         if (user) {

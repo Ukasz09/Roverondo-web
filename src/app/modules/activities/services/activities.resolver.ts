@@ -23,15 +23,17 @@ export class ActivitiesResolver implements Resolve<ActivityType[]> {
     const userId = route.paramMap.get("userId") || "";
     if (userId) {
       const type = route.paramMap.get("type") || "";
-      return this.getActivities$(+userId, 0, type);
+      return this.getActivities$(+userId, 0, type, true);
     } else {
       console.error("UserId not provided - return []");
       return of([]);
     }
   }
 
-  public getActivities$(userId: number, offset: number, type: string): Observable<ActivityType[]> {
-    this.spinner.show(SpinnerType.main).then();
+  public getActivities$(userId: number, offset: number, type: string, withSpinner = false): Observable<ActivityType[]> {
+    if (withSpinner) {
+      this.spinner.show(SpinnerType.main).then();
+    }
     let activities$: Observable<ActivityType[]> = of([]);
     switch (type) {
       case ActivitiesRoutes.allActivities:
@@ -50,6 +52,10 @@ export class ActivitiesResolver implements Resolve<ActivityType[]> {
         activities$ = this.activitiesService.getEventActivities$(userId, offset);
         break;
     }
-    return activities$.pipe(tap(() => this.spinner.hide(SpinnerType.main)));
+    return activities$.pipe(tap(() => {
+      if (withSpinner) {
+        this.spinner.hide(SpinnerType.main).then();
+      }
+    }));
   }
 }
