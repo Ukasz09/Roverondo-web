@@ -4,7 +4,8 @@ import { User } from "@app/core/models";
 
 @Component({
   selector: "app-followers",
-  templateUrl: "./followers.component.html"
+  templateUrl: "./followers.component.html",
+  styleUrls: ["./followers.component.scss"]
 })
 export class FollowersComponent implements OnInit {
   public followers: User[] = [];

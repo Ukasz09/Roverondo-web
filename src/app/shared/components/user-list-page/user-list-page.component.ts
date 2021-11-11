@@ -5,7 +5,7 @@ import { LayoutService } from "@app/core/services";
 import { Utils } from "@app/shared/utils";
 
 @Component({
-  selector: "app-user-list-page",
+  selector: "app-user-list",
   templateUrl: "./user-list-page.component.html",
   styleUrls: ["./user-list-page.component.scss"]
 })

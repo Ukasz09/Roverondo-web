@@ -7,7 +7,8 @@ import { SpinnerType } from "@app/core/enums";
 
 @Component({
   selector: "app-leaderboard",
-  templateUrl: "./leaderboard.component.html"
+  templateUrl: "./leaderboard.component.html",
+  styleUrls: ["./leaderboard.component.scss"]
 })
 export class LeaderboardComponent implements OnInit {
   public userList?: User[];

@@ -4,10 +4,11 @@ import { ActivatedRoute, Data } from "@angular/router";
 
 @Component({
   selector: "app-following",
-  templateUrl: "./followings.component.html"
+  templateUrl: "./followings.component.html",
+  styleUrls: ["./followings.component.scss"]
 })
 export class FollowingsComponent implements OnInit {
-  public followings: User[]=[];
+  public followings: User[] = [];
 
   constructor(
     private readonly activatedRoute: ActivatedRoute
