@@ -5,8 +5,7 @@ import { User } from "@app/core/models";
 import { UsersService } from "@app/core/services";
 import { NgxSpinnerService } from "ngx-spinner";
 import { catchError, tap } from "rxjs/operators";
-import { SpinnerType } from "@app/core/enums";
-import { AppRoutes } from "@app/routes";
+import { AppRoutes, SpinnerType } from "@app/core/enums";
 
 @Injectable()
 export class UserResolver implements Resolve<User> {

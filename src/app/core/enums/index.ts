@@ -4,3 +4,7 @@ export * from "./mocks-url";
 export * from "./plot-colors";
 export * from "./post-type";
 export * from "./spinner-type";
+export * from "./user-routes";
+export * from "./activities-routes";
+export * from "./auth-routes";
+export * from "./routes";

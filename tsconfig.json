@@ -23,15 +23,6 @@
       "@app/env": [
         "src/environments/environment"
       ],
-      "@app/routes": [
-        "src/app/core/enums/routes"
-      ],
-      "@app/routes/activities": [
-        "src/app/modules/activities/activities-routes"
-      ],
-      "@app/routes/auth": [
-        "src/app/modules/auth/auth-routes"
-      ],
       "@app/core": [
         "src/app/core/index"
       ],

@@ -3,7 +3,6 @@ import { ActivitiesService, LayoutService, PlotDataAdapterService } from "@app/c
 import { LayoutType, PlotColors, PostType } from "@app/core/enums";
 import { EventPostExtended, PlannedPostExtended, PlotData, PostExtended, Route } from "@app/core/models";
 import { Color } from "@swimlane/ngx-charts";
-import { ActivitiesRoutes } from "@app/routes/activities";
 
 @Component({
   selector: "app-activity-details",

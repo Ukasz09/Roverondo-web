@@ -4,9 +4,8 @@ import { User } from "@app/core/models";
 import { UsersService } from "@app/core/services";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Observable, throwError } from "rxjs";
-import { SpinnerType } from "@app/core/enums";
+import { AppRoutes, SpinnerType } from "@app/core/enums";
 import { catchError, tap } from "rxjs/operators";
-import { AppRoutes } from "@app/routes";
 
 @Injectable()
 export class FollowingsResolver implements Resolve<User[]> {

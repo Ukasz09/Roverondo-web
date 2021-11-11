@@ -5,11 +5,10 @@ import {
   ActivatedRouteSnapshot
 } from "@angular/router";
 import { Observable, of } from "rxjs";
-import { ActivitiesRoutes } from "@app/routes/activities";
 import { ActivitiesService } from "@app/core/services";
 import { ActivityType } from "@app/core/models";
 import { NgxSpinnerService } from "ngx-spinner";
-import { SpinnerType } from "@app/core/enums";
+import { ActivitiesRoutes, SpinnerType } from "@app/core/enums";
 import { tap } from "rxjs/operators";
 
 @Injectable()

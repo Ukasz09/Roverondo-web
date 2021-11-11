@@ -1,9 +1,8 @@
-import { Component, Input, OnInit, Output } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { LayoutService } from "@app/core/services";
 import { User } from "@app/core/models";
 import { Router } from "@angular/router";
-import { AppRoutes } from "@app/routes";
-import { UserRoutes } from "../../user-routes";
+import { AppRoutes, UserRoutes } from "@app/core/enums";
 
 @Component({
   selector: "app-user-card",

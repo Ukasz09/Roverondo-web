@@ -1,19 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Utils } from "@app/shared/utils";
-import { AppRoutes } from "@app/routes";
 import { AuthService } from "@auth0/auth0-angular";
 import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { CommentsSheetComponent } from "../comments-sheet/comments-sheet.component";
 import { Point, Post, Route } from "@app/core/models";
-import { UserRoutes } from "@app/modules/user";
 import { ReactionsSheetComponent } from "../reactions-sheet/reactions-sheet.component";
-import { ActivitiesService, CurrentUserService, MessageInfoService } from "@app/core/services";
-import { PostType } from "@app/core/enums";
+import { ActivitiesService, CurrentUserService, SnackbarInfoService } from "@app/core/services";
+import { AppRoutes, PostType, UserRoutes } from "@app/core/enums";
 import { switchMap } from "rxjs/operators";
 import { throwError } from "rxjs";
-import { LengthUnitPipe } from "@app/shared/pipes";
+import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
 import { DecimalPipe } from "@angular/common";
-import { SpeedUnitPipe } from "../../../../shared/pipes/speed-unit.pipe";
 
 @Component({
   selector: "app-activity-card-content",
@@ -41,7 +38,7 @@ export class ActivityCardContentComponent implements OnInit {
     private readonly _bottomSheet: MatBottomSheet,
     private readonly currentUserService: CurrentUserService,
     private readonly activitiesService: ActivitiesService,
-    public readonly msgInfoService: MessageInfoService,
+    public readonly msgInfoService: SnackbarInfoService,
     public readonly mToKmPipe: LengthUnitPipe,
     public readonly decimalPipe: DecimalPipe,
     public readonly msToKmhPipe: SpeedUnitPipe

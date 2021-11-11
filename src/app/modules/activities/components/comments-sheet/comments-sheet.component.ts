@@ -1,14 +1,12 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from "@angular/material/bottom-sheet";
-import { ActivitiesService, CurrentUserService } from "@app/core/services";
+import { ActivitiesService, CurrentUserService, SnackbarInfoService } from "@app/core/services";
 import { PostComment, PostExtended, Reaction, User } from "@app/core/models";
 import { NgModel } from "@angular/forms";
-import { AppRoutes } from "@app/routes";
-import { UserRoutes } from "@app/modules/user";
 import { Router } from "@angular/router";
-import { MessageInfoService } from "../../../../core/services/message-info.service";
 import { Observable, throwError } from "rxjs";
 import { map, switchMap } from "rxjs/operators";
+import { AppRoutes, UserRoutes } from "@app/core/enums";
 
 @Component({
   selector: "app-comments-sheet",
@@ -27,7 +25,7 @@ export class CommentsSheetComponent implements OnInit {
     private readonly _bottomSheetRef: MatBottomSheetRef<CommentsSheetComponent>,
     private readonly router: Router,
     private readonly currentUserService: CurrentUserService,
-    public readonly msgInfoService: MessageInfoService
+    public readonly msgInfoService: SnackbarInfoService
   ) {
   }
 

@@ -1,12 +1,10 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivitiesService, CurrentUserService, LayoutService, ScrollService } from "@app/core/services";
-import { LayoutType, PostType } from "@app/core/enums";
-import { AppRoutes } from "@app/routes";
+import { ActivitiesRoutes, AppRoutes, LayoutType, PostType } from "@app/core/enums";
 import { ActivatedRoute, Data } from "@angular/router";
 import { ScrollContainerComponent } from "@app/shared/components";
 import { ActivitiesResolver } from "../../services";
 import { EventPostExtended, PlannedPostExtended, PostExtended, Route } from "@app/core/models";
-import { ActivitiesRoutes } from "@app/routes/activities";
 import { switchMap } from "rxjs/operators";
 import { Observable, throwError } from "rxjs";
 

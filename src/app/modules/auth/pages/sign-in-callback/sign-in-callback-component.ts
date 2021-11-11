@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { CurrentUserService, UsersService } from "@app/core/services";
 import { Router } from "@angular/router";
-import { AppRoutes } from "@app/routes";
+import { AppRoutes } from "@app/core/enums";
 
 @Component({
   template: ``,

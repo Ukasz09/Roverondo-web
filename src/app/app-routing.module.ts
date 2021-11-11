@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AppRoutes as AppRoutes } from "@app/routes";
 import { CustomAuthGuard } from "@app/core/guards";
+import { AppRoutes } from "@app/core/enums";
 
 const routes: Routes = [
   {

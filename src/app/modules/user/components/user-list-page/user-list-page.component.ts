@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { User } from "@app/core/models";
-import { AppRoutes } from "@app/routes";
-import { LayoutType } from "@app/core/enums";
+import { AppRoutes, LayoutType } from "@app/core/enums";
 import { LayoutService } from "@app/core/services";
 import { Utils } from "@app/shared/utils";
 

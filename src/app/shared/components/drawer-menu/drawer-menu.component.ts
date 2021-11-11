@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from "@angular/core";
-import { AppRoutes } from "@app/routes";
-import { ActivitiesRoutes } from "@app/routes/activities";
 import { AuthService } from "@auth0/auth0-angular";
 import { DOCUMENT } from "@angular/common";
 import { CurrentUserService } from "@app/core/services";
 import { Router } from "@angular/router";
+import { ActivitiesRoutes, AppRoutes, UserRoutes } from "@app/core/enums";
 
 @Component({
   selector: "app-drawer-menu",
@@ -14,6 +13,7 @@ import { Router } from "@angular/router";
 export class DrawerMenuComponent implements OnInit {
   public readonly AppRoutes = AppRoutes;
   public readonly ActivitiesRoutes = ActivitiesRoutes;
+  public readonly UserRoutes = UserRoutes;
 
   @Input() menuForMobile = false;
 

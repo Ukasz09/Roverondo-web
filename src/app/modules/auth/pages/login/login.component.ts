@@ -1,11 +1,9 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Icons } from "@app/core/enums";
+import { AppRoutes, AuthRoutes, Icons } from "@app/core/enums";
 import { Utils } from "@app/shared/utils";
 import { LayoutService } from "@app/core/services";
 import { AuthService } from "@auth0/auth0-angular";
-import { AppRoutes } from "@app/routes";
-import { AuthRoutes } from "@app/routes/auth";
 
 @Component({
   selector: "app-login",
