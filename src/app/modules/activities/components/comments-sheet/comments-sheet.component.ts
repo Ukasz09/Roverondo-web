@@ -84,7 +84,7 @@ export class CommentsSheetComponent implements OnInit {
           comment.reactions = 0;
         }
       }
-      this.msgInfoService.openSnackbar("Reaction removed from comment", "OK");
+      this.msgInfoService.openTextSnackbar("Reaction removed from comment", "OK");
     });
   }
 
@@ -104,7 +104,7 @@ export class CommentsSheetComponent implements OnInit {
           if (comment) {
             comment.reactions++;
           }
-          this.msgInfoService.openSnackbar("Reaction added to comment", "OK");
+          this.msgInfoService.openTextSnackbar("Reaction added to comment", "OK");
         }
       );
     });
@@ -143,7 +143,7 @@ export class CommentsSheetComponent implements OnInit {
       this.data.post.commentsCount++;
       this.sortComments();
       this.newCommentValue = "";
-      this.msgInfoService.openSnackbar("Comment has been added", "OK");
+      this.msgInfoService.openTextSnackbar("Comment has been added", "OK");
     });
   }
 

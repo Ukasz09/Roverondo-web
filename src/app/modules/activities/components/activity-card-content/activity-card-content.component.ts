@@ -135,7 +135,7 @@ export class ActivityCardContentComponent implements OnInit {
     ).subscribe(() => {
       this.activity.alreadyReactedTo = true;
       this.activity.reactionsCount++;
-      this.msgInfoService.openSnackbar("Reaction has been added", "OK");
+      this.msgInfoService.openTextSnackbar("Reaction has been added", "OK");
     });
   }
 
@@ -149,7 +149,7 @@ export class ActivityCardContentComponent implements OnInit {
     ).subscribe(() => {
       this.activity.alreadyReactedTo = false;
       this.activity.reactionsCount--;
-      this.msgInfoService.openSnackbar("Reaction has been removed", "OK");
+      this.msgInfoService.openTextSnackbar("Reaction has been removed", "OK");
     });
   }
 

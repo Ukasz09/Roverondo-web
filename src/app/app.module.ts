@@ -9,6 +9,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { AuthHttpInterceptor, AuthModule } from "@auth0/auth0-angular";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { environment as env } from "../environments/environment";
+import { HttpErrorInterceptor } from "@app/core/interceptors";
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +31,10 @@ import { environment as env } from "../environments/environment";
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHttpInterceptor,
+      multi: true
+    }, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
       multi: true
     }
   ],

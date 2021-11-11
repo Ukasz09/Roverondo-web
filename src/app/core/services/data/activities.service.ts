@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { HttpClient, HttpErrorResponse, HttpResponse } from "@angular/common/http";
+import { Observable, of, throwError } from "rxjs";
 import { EventPostExtended, PlannedPostExtended, PostComment, PostExtended, Reaction } from "@app/core/models";
 import { delay, map, tap } from "rxjs/operators";
 import { MockedSpeedAdapterService } from "../adapters";

@@ -11,3 +11,4 @@ export * from "./map/map.component";
 export * from "./area-graph/area-graph.component";
 export * from "./user-list/user-list.component";
 export * from "./user-card/user-card.component";
+export * from "./snackbar-error/snackbar-error.component";

@@ -4,7 +4,9 @@
 
 .mobile-logo {
   @include mixins.my(1rem);
-  @include mixins.mx(auto);
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
 
 .card-wrapper {

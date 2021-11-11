@@ -13,7 +13,7 @@ import {
   NavbarComponent,
   ProfileAvatarComponent,
   ScrollContainerComponent,
-  AreaGraphComponent, UserListComponent, UserCardComponent
+  AreaGraphComponent, UserListComponent, UserCardComponent, SnackbarErrorComponent
 } from "@app/shared/components";
 import { ActiveLinkDirective, InputFocusDirective } from "@app/shared/directives";
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -43,7 +43,8 @@ import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
     LengthUnitPipe,
     SpeedUnitPipe,
     UserListComponent,
-    UserCardComponent
+    UserCardComponent,
+    SnackbarErrorComponent
   ],
   exports: [
     GlassCardComponent,
@@ -60,7 +61,8 @@ import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
     LengthUnitPipe,
     SpeedUnitPipe,
     UserListComponent,
-    UserCardComponent
+    UserCardComponent,
+    SnackbarErrorComponent
   ],
   imports: [
     CommonModule,
