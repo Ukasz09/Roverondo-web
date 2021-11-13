@@ -1,12 +1,32 @@
 {
   "name": "roverondo",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "files": [
+    "dist/**/*"
+  ],
+  "author": {
+    "name": "Lukasz Gajerski",
+    "email": "gajerski.lukasz@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "Lukasz Gajerski",
+      "email": "gajerski.lukasz@gmail.com"
+    }
+  ],
+  "description": "Roverondo - web application for cyclists",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ukasz09/Roverondo-web"
+  },
   "scripts": {
-    "ng": "ng",
     "start": "ng serve",
+    "start:inside-docker": "ng serve --host 0.0.0.0 --disableHostCheck=true",
     "start:proxy": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "build:prod": "ng build --configuration production",
+    "docker:up:prod-local": "docker-compose -f deployment/production/roverondo-web-prod-local/docker-compose.yml up --build --force-recreate",
+    "docker:up:prod-prebuild": "docker-compose -f deployment/production/roverondo-web-prod-prebuild/docker-compose.yml up --build --force-recreate",
+    "docker:up:dev-local": "docker-compose -f deployment/development/roverondo-web-dev-local/docker-compose.yml up --build --force-recreate",
     "test": "ng test",
     "compodoc": "npx compodoc -p tsconfig.doc.json"
   },

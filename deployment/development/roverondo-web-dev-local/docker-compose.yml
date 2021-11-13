@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  roverondo-web:
+    container_name: roverondo-web-dev-local
+    build:
+      context: ../../..
+      dockerfile: deployment/development/Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - ../../..:/usr/src/app
+      - /usr/src/app/node_modules

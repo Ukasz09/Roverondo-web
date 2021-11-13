@@ -1,0 +1,46 @@
+/dist
+/tmp
+/out-tsc
+/build
+/node_modules
+assets
+e2e
+.dockerignore
+.editorconfig
+.eslintignore
+.eslintrc.json
+.gitattributes
+.gitignore
+CHANGELOG.md
+docker-compose.yml
+Dockerfile
+README.md
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# App specific
+/documentation/*

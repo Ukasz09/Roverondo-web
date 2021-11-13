@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { User } from "@app/core/models";
-import { delay, tap } from "rxjs/operators";
+import { tap } from "rxjs/operators";
+import { environment } from "@app/env";
 
 @Injectable({
   providedIn: "root"
@@ -12,32 +13,32 @@ export class UsersService {
   }
 
   public registerUser$(): Observable<User> {
-    const endpoint = `api/users/register`;
+    const endpoint = `${environment.backendApi}/api/users/register`;
     return this.http.post<User>(endpoint, {});
   }
 
   public getUsers$(): Observable<User[]> {
-    const endpoint = `api/users`;
+    const endpoint = `${environment.backendApi}/api/users`;
     return this.http.get<User[]>(endpoint).pipe(tap(data => console.log(data)));
   }
 
   public getUser$(userId: number): Observable<User> {
-    const endpoint = `api/users/${userId}`;
+    const endpoint = `${environment.backendApi}/api/users/${userId}`;
     return this.http.get<User>(endpoint).pipe(tap(data => console.log(data)));
   }
 
   public getUserByProvider$(providerId: string): Observable<User> {
-    const endpoint = `api/users/providers/${providerId}`;
+    const endpoint = `${environment.backendApi}/api/users/providers/${providerId}`;
     return this.http.get<User>(endpoint).pipe(tap(data => console.log(data)));
   }
 
   public getFollowers$(userId: number): Observable<User[]> {
-    const endpoint = `api/users/${userId}/followers`;
+    const endpoint = `${environment.backendApi}/api/users/${userId}/followers`;
     return this.http.get<User[]>(endpoint).pipe(tap(data => console.log(data)));
   }
 
   public getFollowing$(userId: number): Observable<User[]> {
-    const endpoint = `api/users/${userId}/followings`;
+    const endpoint = `${environment.backendApi}/api/users/${userId}/followings`;
     return this.http.get<User[]>(endpoint).pipe(tap(data => console.log(data)));
   }
 

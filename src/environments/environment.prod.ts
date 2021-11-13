@@ -13,13 +13,12 @@ export const environment = {
   auth: {
     domain,
     clientId,
-    ...(audience && audience !== "YOUR_API_IDENTIFIER" ? { audience } : null),
+    ...(audience ? { audience } : null),
     redirectUri: window.location.origin,
     errorPath
   },
   httpInterceptor: {
-    allowedList: [`${apiUri}/*`]
+    allowedList: [`${apiUri}/*`,"*"]
   },
-  usersApi: "http://localhost:8080",
-  activitiesApi: "http://localhost:8080"
+  backendApi: "http://localhost:8080"
 };

@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  roverondo-web:
+    container_name: roverondo-web-prod-prebuild
+    build:
+      context: ../../..
+      dockerfile: deployment/production/Dockerfile
+    ports:
+      - "4200:80"
