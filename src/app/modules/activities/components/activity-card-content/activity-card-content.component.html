@@ -53,6 +53,15 @@
           <span class="count">{{activity.commentsCount}}</span><span class="action-name">Comment</span>
         </label>
       </div>
+      <!-- TODO: Integrate with backend -->
+      <div *ngIf="type===PostType.eventPost" class="action cursor-pointer" (click)="true ? joinEvent() : leaveEvent()">
+        <mat-icon class="icon" id="comment" [ngClass]="true ? 'join-event' : 'leave-event'">
+          {{ true ? 'person_add' : 'person_add_disabled' }}
+        </mat-icon>
+        <label for="comment" class="text cursor-pointer">
+          <span class="action-name">{{true ? 'Join' : 'Leave'}}</span>
+        </label>
+      </div>
     </div>
   </ng-template>
 
@@ -74,11 +83,11 @@
         <mat-icon class="icon">north_east</mat-icon>
         <span>{{avgElevationText}}</span>
       </div>
-      <div *ngIf="withEventStartDate"  class="event-start-date">
+      <div *ngIf="withEventStartDate" class="event-start-date">
         <mat-icon class="icon">date_range</mat-icon>
         <span>{{eventStartDateText}}</span>
       </div>
-      <div *ngIf="withEventDurationTime"  class="event-duration-time">
+      <div *ngIf="withEventDurationTime" class="event-duration-time">
         <mat-icon class="icon">query_builder</mat-icon>
         <span>{{eventDurationTimeText}}</span>
       </div>

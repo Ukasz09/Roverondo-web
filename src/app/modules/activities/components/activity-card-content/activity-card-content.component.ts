@@ -3,7 +3,7 @@ import { Utils } from "@app/shared/utils";
 import { AuthService } from "@auth0/auth0-angular";
 import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { CommentsSheetComponent } from "../comments-sheet/comments-sheet.component";
-import { Point, Post, Route } from "@app/core/models";
+import { ActivityType, Point, Route } from "@app/core/models";
 import { ReactionsSheetComponent } from "../reactions-sheet/reactions-sheet.component";
 import { ActivitiesService, CurrentUserService, SnackbarInfoService } from "@app/core/services";
 import { AppRoutes, PostType, UserRoutes } from "@app/core/enums";
@@ -18,17 +18,12 @@ import { DecimalPipe } from "@angular/common";
   styleUrls: ["./activity-card-content.component.scss"]
 })
 export class ActivityCardContentComponent implements OnInit {
-  @Input() public activity!: Post;
-  @Input() public route!: Route;
-  @Input() public disableMapInteractions = true;
-  @Input() public startTime?: string;
-  @Input() public endTime?: string;
-  @Input() public averageSpeed?: number;
-  @Input() public eventStartDate?: string;
-  @Input() public eventDurationTime?: string;
+  @Input() public activity!: ActivityType;
   @Input() public type!: PostType;
+  @Input() public disableMapInteractions = false;
 
   @Output() public detailsClick: EventEmitter<void> = new EventEmitter<void>();
+  public readonly PostType = PostType;
 
   private readonly valueNotFoundPlaceholder = "N/A";
   private currentUserId?: string = undefined;
@@ -64,6 +59,14 @@ export class ActivityCardContentComponent implements OnInit {
     });
   }
 
+  public joinEvent(): void {
+    console.log("Join event click");
+  }
+
+  public leaveEvent(): void {
+    console.log("Join event click");
+  }
+
   public openReactionsSheet(): void {
     this._bottomSheet.open(ReactionsSheetComponent, {
       hasBackdrop: true,
@@ -85,7 +88,7 @@ export class ActivityCardContentComponent implements OnInit {
   }
 
   public get avgSpeedText(): string {
-    return this.averageSpeed ? `${this.decimalPipe.transform(this.msToKmhPipe.transform(this.averageSpeed),"1.1-1")} km/h` : this.valueNotFoundPlaceholder;
+    return this.averageSpeed ? `${this.decimalPipe.transform(this.msToKmhPipe.transform(this.averageSpeed), "1.1-1")} km/h` : this.valueNotFoundPlaceholder;
   }
 
   public get avgElevationText(): string {
@@ -123,6 +126,51 @@ export class ActivityCardContentComponent implements OnInit {
 
   public get withEventStartDate(): boolean {
     return this.type === PostType.eventPost;
+  }
+
+  public get route(): Route {
+    if ("workout" in this.activity) {
+      return this.activity.workout.route;
+    }
+    if ("plannedRoute" in this.activity) {
+      return this.activity.plannedRoute.route;
+    }
+    return this.activity.eventRoute.route;
+  }
+
+  public get startTime(): string {
+    if ("workout" in this.activity) {
+      return this.activity.workout.startTime;
+    }
+    return "";
+  }
+
+  public get endTime(): string {
+    if ("workout" in this.activity) {
+      return this.activity.workout.endTime;
+    }
+    return "";
+  }
+
+  public get averageSpeed(): number {
+    if ("workout" in this.activity) {
+      return this.activity.workout.averageSpeed;
+    }
+    return 0;
+  }
+
+  public get eventDurationTime(): string {
+    if ("eventRoute" in this.activity) {
+      return this.activity.eventRoute.eventDurationTime;
+    }
+    return "";
+  }
+
+  public get eventStartDate(): string {
+    if ("eventRoute" in this.activity) {
+      return this.activity.eventRoute.eventStartDate;
+    }
+    return "";
   }
 
   private addReactionToActivity(): void {

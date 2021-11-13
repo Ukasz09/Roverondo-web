@@ -11,12 +11,6 @@
     <div *ngFor="let activity of activities" class="activity-card">
       <app-glass-card>
         <app-activity-card-content
-          [route]="getRouteData(activity)"
-          [startTime]="getStartTimeData(activity)"
-          [endTime]="getEndTimeData(activity)"
-          [averageSpeed]="getAvgSpeedData(activity)"
-          [eventStartDate]="getEventStartDate(activity)"
-          [eventDurationTime]="getEventDurationTime(activity)"
           [activity]="activity"
           [type]="postType"
           (detailsClick)="activityDetailsClick.emit(activity)"

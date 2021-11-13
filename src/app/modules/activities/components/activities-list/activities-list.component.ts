@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
 import { ScrollContainerComponent } from "@app/shared/components";
-import { ActivityType, Route } from "@app/core/models";
+import { ActivityType } from "@app/core/models";
 import { CurrentUserService, LayoutService, ScrollService } from "@app/core/services";
 import { AppRoutes, LayoutType, PostType } from "@app/core/enums";
 
@@ -38,50 +38,5 @@ export class ActivitiesListComponent implements OnInit, AfterViewInit {
 
   public get homeRouterLink(): string {
     return `/${AppRoutes.home}`;
-  }
-
-  public getRouteData(activity: ActivityType): Route {
-    if ("workout" in activity) {
-      return activity.workout.route;
-    }
-    if ("plannedRoute" in activity) {
-      return activity.plannedRoute.route;
-    }
-    return activity.eventRoute.route;
-  }
-
-  public getStartTimeData(activity: ActivityType): string {
-    if ("workout" in activity) {
-      return activity.workout.startTime;
-    }
-    return "";
-  }
-
-  public getEndTimeData(activity: ActivityType): string {
-    if ("workout" in activity) {
-      return activity.workout.endTime;
-    }
-    return "";
-  }
-
-  public getAvgSpeedData(activity: ActivityType): number {
-    if ("workout" in activity) {
-      return activity.workout.averageSpeed;
-    }
-    return 0;
-  }
-
-  public getEventDurationTime(activity: ActivityType): string {
-    if ("eventRoute" in activity) {
-      return activity.eventRoute.eventDurationTime;
-    }
-    return "";
-  }
-
-  public getEventStartDate(activity: ActivityType) {
-    if ("eventRoute" in activity) {
-      return activity.eventRoute.eventStartDate;
-    }
-    return "";
   }
 }
