@@ -8,7 +8,7 @@ import {
   ActivitiesListComponent,
   ActivityCardContentComponent,
   ActivityDetailsComponent,
-  CommentsSheetComponent,
+  CommentsSheetComponent, EventParticipantsSheetComponent,
   ReactionsSheetComponent
 } from "./components";
 import { ActivitiesResolver } from "./services";
@@ -27,7 +27,8 @@ import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
     ActivityDetailsComponent,
     CommentsSheetComponent,
     ReactionsSheetComponent,
-    ActivitiesListComponent
+    ActivitiesListComponent,
+    EventParticipantsSheetComponent
   ],
   imports: [
     CommonModule,

@@ -13,7 +13,7 @@ import {
   NavbarComponent,
   ProfileAvatarComponent,
   ScrollContainerComponent,
-  AreaGraphComponent, UserListComponent, UserCardComponent, SnackbarErrorComponent
+  AreaGraphComponent, UserListComponent, UserCardComponent, SnackbarErrorComponent, UserListBottomSheetComponent
 } from "@app/shared/components";
 import { ActiveLinkDirective, InputFocusDirective } from "@app/shared/directives";
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -24,6 +24,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { MatIconModule } from "@angular/material/icon";
 import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
+import { MatListModule } from "@angular/material/list";
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
     SpeedUnitPipe,
     UserListComponent,
     UserCardComponent,
-    SnackbarErrorComponent
+    SnackbarErrorComponent,
+    UserListBottomSheetComponent
   ],
   exports: [
     GlassCardComponent,
@@ -62,7 +64,8 @@ import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
     SpeedUnitPipe,
     UserListComponent,
     UserCardComponent,
-    SnackbarErrorComponent
+    SnackbarErrorComponent,
+    UserListBottomSheetComponent
   ],
   imports: [
     CommonModule,
@@ -74,7 +77,8 @@ import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
     LeafletModule,
     MatProgressSpinnerModule,
     NgxChartsModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule,
   ]
 })
 export class AppSharedModule {

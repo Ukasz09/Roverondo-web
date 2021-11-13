@@ -1,9 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { Reaction } from "@app/core/models";
+import { UserBottomSheet } from "@app/core/models";
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from "@angular/material/bottom-sheet";
 import { PostsService } from "@app/core/services";
-import { Router } from "@angular/router";
-import { AppRoutes, UserRoutes } from "@app/core/enums";
 
 @Component({
   selector: "app-reactions-sheet",
@@ -11,13 +9,12 @@ import { AppRoutes, UserRoutes } from "@app/core/enums";
   styleUrls: ["./reactions-sheet.component.scss"]
 })
 export class ReactionsSheetComponent implements OnInit {
-  public reactionList?: Reaction[] = undefined;
+  public userList?: UserBottomSheet[] = undefined;
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: { postId: string },
     private readonly postsService: PostsService,
     private readonly _bottomSheetRef: MatBottomSheetRef<ReactionsSheetComponent>,
-    private readonly router: Router
   ) {
   }
 
@@ -25,18 +22,9 @@ export class ReactionsSheetComponent implements OnInit {
     this.fetchReactions();
   }
 
-  public navigateToProfile(userId: string | number): void {
-    this.router.navigate([this.getUserProfileLink(userId)]).then();
-    this._bottomSheetRef.dismiss();
-  }
-
-  public getUserProfileLink(userId: string | number): string {
-    return `/${AppRoutes.user}/${UserRoutes.profile}/${userId?.toString()}`;
-  }
-
   private fetchReactions(): void {
     this.postsService.getReactions$(this.data.postId).subscribe(reactions => {
-      this.reactionList = reactions;
+      this.userList = reactions.map(r => r.user);
     });
   }
 }

@@ -5,12 +5,13 @@ import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { CommentsSheetComponent } from "../comments-sheet/comments-sheet.component";
 import { ActivityType, Point, Route } from "@app/core/models";
 import { ReactionsSheetComponent } from "../reactions-sheet/reactions-sheet.component";
-import { CurrentUserService, SnackbarInfoService, PostsService } from "@app/core/services";
+import { CurrentUserService, SnackbarInfoService, PostsService, EventsService } from "@app/core/services";
 import { AppRoutes, PostType, UserRoutes } from "@app/core/enums";
 import { switchMap } from "rxjs/operators";
 import { throwError } from "rxjs";
 import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
 import { DecimalPipe } from "@angular/common";
+import { EventParticipantsSheetComponent } from "../event-participants-sheet/event-participants-sheet.component";
 
 @Component({
   selector: "app-activity-card-content",
@@ -20,10 +21,22 @@ import { DecimalPipe } from "@angular/common";
 export class ActivityCardContentComponent implements OnInit {
   @Input() public activity!: ActivityType;
   @Input() public type!: PostType;
-  @Input() public disableMapInteractions = false;
+  @Input() public disableMapInteractions = true;
 
   @Output() public detailsClick: EventEmitter<void> = new EventEmitter<void>();
   public readonly PostType = PostType;
+
+  // TODO: integrate with backend and use get
+  public alreadyJoinedToEvent = false;
+  // public get alreadyJoinedToEvent(): boolean {
+  //   return false;
+  // }
+
+  // TODO: integrate with backend and use get
+  public eventParticipantsQty = 0;
+// public get eventParticipantsQty(): number {
+  //   return 0;
+  // }
 
   private readonly valueNotFoundPlaceholder = "N/A";
   private currentUserId?: string = undefined;
@@ -36,7 +49,8 @@ export class ActivityCardContentComponent implements OnInit {
     public readonly msgInfoService: SnackbarInfoService,
     public readonly mToKmPipe: LengthUnitPipe,
     public readonly decimalPipe: DecimalPipe,
-    public readonly msToKmhPipe: SpeedUnitPipe
+    public readonly msToKmhPipe: SpeedUnitPipe,
+    private readonly eventsService: EventsService
   ) {
   }
 
@@ -60,11 +74,24 @@ export class ActivityCardContentComponent implements OnInit {
   }
 
   public joinEvent(): void {
-    console.log("Join event click");
+    this.eventsService.joinToTheEvent$(this.activity.id).subscribe(() => {
+      this.alreadyJoinedToEvent = true;
+      this.eventParticipantsQty++;
+    });
   }
 
   public leaveEvent(): void {
-    console.log("Join event click");
+    this.eventsService.leaveEvent$(this.activity.id).subscribe(() => {
+      this.alreadyJoinedToEvent = false;
+      this.eventParticipantsQty--;
+    });
+  }
+
+  public openEventParticipantsSheet(): void {
+    this._bottomSheet.open(EventParticipantsSheetComponent, {
+      hasBackdrop: true,
+      data: { eventId: this.activity.id }
+    });
   }
 
   public openReactionsSheet(): void {
@@ -171,10 +198,6 @@ export class ActivityCardContentComponent implements OnInit {
       return this.activity.eventRoute.eventStartDate;
     }
     return "";
-  }
-
-  public get alreadyJoinedToEvent(): boolean {
-    return false;
   }
 
   private addReactionToActivity(): void {

@@ -54,12 +54,22 @@
         </label>
       </div>
       <!-- TODO: Integrate with backend -->
-      <div *ngIf="type===PostType.eventPost" class="action cursor-pointer" (click)="alreadyJoinedToEvent ? joinEvent() : leaveEvent()">
+      <div *ngIf="type===PostType.eventPost" class="action cursor-pointer"
+           (click)="alreadyJoinedToEvent ? leaveEvent() : joinEvent()">
         <mat-icon class="icon" id="join-leave-event">
           {{ alreadyJoinedToEvent ? 'person_add' : 'person_add_disabled' }}
         </mat-icon>
-        <label for="comment" class="text cursor-pointer">
-          <span class="action-name">{{alreadyJoinedToEvent ? 'Join' : 'Leave'}}</span>
+        <label for="join-leave-event" class="text cursor-pointer">
+          <span>{{alreadyJoinedToEvent ? 'Join' : 'Leave'}}</span>
+        </label>
+      </div>
+
+      <!-- TODO: Integrate with backend -->
+      <div *ngIf="type===PostType.eventPost" class="action cursor-pointer"
+           (click)="openEventParticipantsSheet()">
+        <mat-icon class="icon" id="event-participants">face</mat-icon>
+        <label for="event-participants" class="text cursor-pointer">
+          <span>{{eventParticipantsQty}}</span>
         </label>
       </div>
     </div>
