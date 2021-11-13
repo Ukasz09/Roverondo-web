@@ -25,7 +25,7 @@
     "start:proxy": "ng serve --proxy-config proxy.conf.json",
     "build:prod": "ng build --configuration production",
     "docker:up:prod-local": "docker-compose -f deployment/production/roverondo-web-prod-local/docker-compose.yml up --build --force-recreate",
-    "docker:up:prod-prebuild": "docker-compose -f deployment/production/roverondo-web-prod-prebuild/docker-compose.yml up --build --force-recreate",
+    "docker:up:prod-prebuilt": "docker-compose -f deployment/production/roverondo-web-prod-prebuilt/docker-compose.yml up --build --force-recreate",
     "docker:up:dev-local": "docker-compose -f deployment/development/roverondo-web-dev-local/docker-compose.yml up --build --force-recreate",
     "test": "ng test",
     "compodoc": "npx compodoc -p tsconfig.doc.json"
