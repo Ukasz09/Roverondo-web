@@ -8,7 +8,7 @@ PACKAGE_VERSION=$(cat ./package.json \
   | awk -F: '{ print $2 }' \
   | sed 's/[",]//g' \
   | tr -d '[[:space:]]')
-image_name="ukasz09/roverondo-web-prod-prebuild"
+image_name="ukasz09/roverondo-web-prod-prebuilt"
 new_tag="$image_name:$PACKAGE_VERSION"
 latest_tag="$image_name:latest"
 

@@ -2,7 +2,7 @@ version: '3'
 
 services:
   roverondo-web:
-    container_name: roverondo-web-prod-prebuild
+    container_name: roverondo-web-prod-local
     build:
       context: ../../..
       dockerfile: deployment/production/Dockerfile
