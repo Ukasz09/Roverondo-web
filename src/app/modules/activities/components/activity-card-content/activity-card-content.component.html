@@ -54,12 +54,12 @@
         </label>
       </div>
       <!-- TODO: Integrate with backend -->
-      <div *ngIf="type===PostType.eventPost" class="action cursor-pointer" (click)="true ? joinEvent() : leaveEvent()">
-        <mat-icon class="icon" id="comment" [ngClass]="true ? 'join-event' : 'leave-event'">
-          {{ true ? 'person_add' : 'person_add_disabled' }}
+      <div *ngIf="type===PostType.eventPost" class="action cursor-pointer" (click)="alreadyJoinedToEvent ? joinEvent() : leaveEvent()">
+        <mat-icon class="icon" id="join-leave-event">
+          {{ alreadyJoinedToEvent ? 'person_add' : 'person_add_disabled' }}
         </mat-icon>
         <label for="comment" class="text cursor-pointer">
-          <span class="action-name">{{true ? 'Join' : 'Leave'}}</span>
+          <span class="action-name">{{alreadyJoinedToEvent ? 'Join' : 'Leave'}}</span>
         </label>
       </div>
     </div>

@@ -41,9 +41,4 @@ export class UsersService {
     const endpoint = `${environment.backendApi}/api/users/${userId}/followings`;
     return this.http.get<User[]>(endpoint).pipe(tap(data => console.log(data)));
   }
-
-  public getUsersLeaderboard$(): Observable<User[]> {
-    // TODO: integrate with backend
-    return this.getUsers$();
-  }
 }

@@ -5,7 +5,7 @@ import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { CommentsSheetComponent } from "../comments-sheet/comments-sheet.component";
 import { ActivityType, Point, Route } from "@app/core/models";
 import { ReactionsSheetComponent } from "../reactions-sheet/reactions-sheet.component";
-import { ActivitiesService, CurrentUserService, SnackbarInfoService } from "@app/core/services";
+import { CurrentUserService, SnackbarInfoService, PostsService } from "@app/core/services";
 import { AppRoutes, PostType, UserRoutes } from "@app/core/enums";
 import { switchMap } from "rxjs/operators";
 import { throwError } from "rxjs";
@@ -32,7 +32,7 @@ export class ActivityCardContentComponent implements OnInit {
     private readonly auth: AuthService,
     private readonly _bottomSheet: MatBottomSheet,
     private readonly currentUserService: CurrentUserService,
-    private readonly activitiesService: ActivitiesService,
+    private readonly postsService: PostsService,
     public readonly msgInfoService: SnackbarInfoService,
     public readonly mToKmPipe: LengthUnitPipe,
     public readonly decimalPipe: DecimalPipe,
@@ -173,11 +173,15 @@ export class ActivityCardContentComponent implements OnInit {
     return "";
   }
 
+  public get alreadyJoinedToEvent(): boolean {
+    return false;
+  }
+
   private addReactionToActivity(): void {
     this.currentUserService.currentUser$.pipe(
       switchMap(user => {
         return user ?
-          this.activitiesService.addReactionToActivity$(user.id, this.activity.id) :
+          this.postsService.addReactionToActivity$(user.id, this.activity.id) :
           throwError("Current user not found - reaction not added");
       })
     ).subscribe(() => {
@@ -191,7 +195,7 @@ export class ActivityCardContentComponent implements OnInit {
     this.currentUserService.currentUser$.pipe(
       switchMap(user => {
         return user ?
-          this.activitiesService.removeReactionFromActivity$(user.id, this.activity.id) :
+          this.postsService.removeReactionFromActivity$(user.id, this.activity.id) :
           throwError("Current user not found - reaction not removed");
       })
     ).subscribe(() => {

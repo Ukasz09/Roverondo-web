@@ -5,7 +5,7 @@ import {
   ActivatedRouteSnapshot
 } from "@angular/router";
 import { Observable, of } from "rxjs";
-import { ActivitiesService, ScrollService } from "@app/core/services";
+import { WallPostsService, ScrollService } from "@app/core/services";
 import { ActivityType } from "@app/core/models";
 import { NgxSpinnerService } from "ngx-spinner";
 import { ActivitiesRoutes, SpinnerType } from "@app/core/enums";
@@ -16,7 +16,7 @@ import { Utils } from "@app/shared/utils";
 export class ActivitiesResolver implements Resolve<ActivityType[]> {
 
   constructor(
-    private readonly activitiesService: ActivitiesService,
+    private readonly activitiesService: WallPostsService,
     private readonly spinner: NgxSpinnerService,
     private readonly scrollService: ScrollService
   ) {
@@ -40,13 +40,13 @@ export class ActivitiesResolver implements Resolve<ActivityType[]> {
     let activities$: Observable<ActivityType[]> = of([]);
     switch (type) {
       case ActivitiesRoutes.allActivities:
-        activities$ = this.activitiesService.getActivityPostWall$(userId, offset);
+        activities$ = this.activitiesService.getActivities$(userId, offset);
         break;
       case ActivitiesRoutes.likedActivities:
         activities$ = this.activitiesService.getLikedActivities$(userId, offset);
         break;
       case ActivitiesRoutes.myActivities:
-        activities$ = this.activitiesService.getMyActivityPostWall$(userId, offset);
+        activities$ = this.activitiesService.getMyActivities$(userId, offset);
         break;
       case ActivitiesRoutes.plannedActivities:
         activities$ = this.activitiesService.getPlannedActivities$(userId, offset);

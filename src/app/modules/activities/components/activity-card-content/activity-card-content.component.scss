@@ -292,16 +292,6 @@
       color: variables.$like-color;
     }
   }
-
-  .icon {
-    &.join-event {
-      //color: variables.$text-muted-color;
-    }
-
-    &.leave-event {
-      color: variables.$red-color;
-    }
-  }
 }
 
 .cursor-pointer {

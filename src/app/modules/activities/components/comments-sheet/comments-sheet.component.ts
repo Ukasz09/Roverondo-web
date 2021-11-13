@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from "@angular/material/bottom-sheet";
-import { ActivitiesService, CurrentUserService, SnackbarInfoService } from "@app/core/services";
+import { WallPostsService, CurrentUserService, SnackbarInfoService, PostsService } from "@app/core/services";
 import { PostComment, PostExtended, Reaction, User } from "@app/core/models";
 import { NgModel } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -21,7 +21,7 @@ export class CommentsSheetComponent implements OnInit {
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: { post: PostExtended, withFocus: boolean },
-    private readonly activitiesService: ActivitiesService,
+    private readonly postsService: PostsService,
     private readonly _bottomSheetRef: MatBottomSheetRef<CommentsSheetComponent>,
     private readonly router: Router,
     private readonly currentUserService: CurrentUserService,
@@ -75,7 +75,7 @@ export class CommentsSheetComponent implements OnInit {
   }
 
   private removeReactionFromComment(commentId: number, reactionId: number): void {
-    this.activitiesService.removeReactionFromComment$(reactionId).subscribe(() => {
+    this.postsService.removeReactionFromComment$(reactionId).subscribe(() => {
       this.alreadyReactedMap.set(commentId, undefined);
       const comment = this.commentList.find(c => c.id === commentId);
       if (comment) {
@@ -92,7 +92,7 @@ export class CommentsSheetComponent implements OnInit {
     this.currentUserService.currentUser$.pipe(
       switchMap(user => {
         if (user) {
-          return this.activitiesService.addReactionToComment$(user.id, commentId);
+          return this.postsService.addReactionToComment$(user.id, commentId);
         }
         return throwError("Current user not found");
       })
@@ -111,7 +111,7 @@ export class CommentsSheetComponent implements OnInit {
   }
 
   private fetchComments(): void {
-    this.activitiesService.getComments$(this.data.post.id.toString()).subscribe(comments => {
+    this.postsService.getComments$(this.data.post.id.toString()).subscribe(comments => {
       this.commentList = comments;
       this.sortComments();
       this.showSpinner = false;
@@ -135,7 +135,7 @@ export class CommentsSheetComponent implements OnInit {
   }
 
   private addComment(user: User): void {
-    this.activitiesService.addComment(user.id, this.data.post.id.toString(), this.newCommentValue.trim()).subscribe(() => {
+    this.postsService.addComment$(user.id, this.data.post.id.toString(), this.newCommentValue.trim()).subscribe(() => {
       if (!this.commentList) {
         this.commentList = [];
       }
@@ -167,8 +167,8 @@ export class CommentsSheetComponent implements OnInit {
     return this.currentUserService.currentUser$.pipe(
       switchMap(user => {
         if (user) {
-          return this.activitiesService
-            .getCommentsReactions(commentId)
+          return this.postsService
+            .getCommentsReactions$(commentId)
             .pipe(map(reactions => reactions.find(r => r.user.id === user.id)));
         }
         return throwError("Not found current user");

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { ActivitiesService, CurrentUserService, LayoutService, ScrollService } from "@app/core/services";
+import { WallPostsService, CurrentUserService, LayoutService, ScrollService } from "@app/core/services";
 import { ActivitiesRoutes, LayoutType, PostType } from "@app/core/enums";
 import { ActivatedRoute } from "@angular/router";
 import { ScrollContainerComponent } from "@app/shared/components";
@@ -31,7 +31,7 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
   constructor(
     private readonly layoutService: LayoutService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly activitiesService: ActivitiesService,
+    private readonly activitiesService: WallPostsService,
     private readonly activitiesResolver: ActivitiesResolver,
     public readonly scrollService: ScrollService,
     public readonly currentUserService: CurrentUserService

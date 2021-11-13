@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { Reaction } from "@app/core/models";
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from "@angular/material/bottom-sheet";
-import { ActivitiesService } from "@app/core/services";
+import { PostsService } from "@app/core/services";
 import { Router } from "@angular/router";
 import { AppRoutes, UserRoutes } from "@app/core/enums";
 
@@ -15,7 +15,7 @@ export class ReactionsSheetComponent implements OnInit {
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: { postId: string },
-    private readonly activitiesService: ActivitiesService,
+    private readonly postsService: PostsService,
     private readonly _bottomSheetRef: MatBottomSheetRef<ReactionsSheetComponent>,
     private readonly router: Router
   ) {
@@ -35,7 +35,7 @@ export class ReactionsSheetComponent implements OnInit {
   }
 
   private fetchReactions(): void {
-    this.activitiesService.getReactions$(this.data.postId).subscribe(reactions => {
+    this.postsService.getReactions$(this.data.postId).subscribe(reactions => {
       this.reactionList = reactions;
     });
   }

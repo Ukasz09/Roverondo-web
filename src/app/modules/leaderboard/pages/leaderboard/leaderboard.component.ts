@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { User } from "@app/core/models";
 import { Router } from "@angular/router";
-import { UsersService } from "@app/core/services";
 import { NgxSpinnerService } from "ngx-spinner";
 import { SpinnerType } from "@app/core/enums";
+import { LeaderboardService } from "@app/core/services";
 
 @Component({
   selector: "app-leaderboard",
@@ -15,19 +15,19 @@ export class LeaderboardComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private readonly userService: UsersService,
+    private readonly leaderboardService: LeaderboardService,
     private readonly spinner: NgxSpinnerService
   ) {
   }
 
   public ngOnInit(): void {
-    console.log('init');
+    console.log("init");
     this.spinner.show(SpinnerType.main).then();
     this.fetchUsers();
   }
 
   public fetchUsers(): void {
-    this.userService.getUsersLeaderboard$().subscribe((users) => {
+    this.leaderboardService.getUsersLeaderboard$().subscribe((users) => {
       this.userList = users;
       this.spinner.hide(SpinnerType.main).then();
     });
