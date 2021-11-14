@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from "@angular/material/bottom-sheet";
-import { WallPostsService, CurrentUserService, SnackbarInfoService, PostsService } from "@app/core/services";
+import { CurrentUserService, SnackbarInfoService, PostsService } from "@app/core/services";
 import { PostComment, PostExtended, Reaction, User } from "@app/core/models";
 import { NgModel } from "@angular/forms";
 import { Router } from "@angular/router";

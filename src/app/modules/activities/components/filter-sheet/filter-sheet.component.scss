@@ -1,11 +1,22 @@
+@use "/src/app/styles/abstracts/mixins";
+
 .icon {
   margin-right: 1rem;
 }
 
-mat-action-list{
-  button{
-    span{
+mat-action-list {
+  button {
+    span {
       font-weight: 600;
     }
   }
+
+  ::ng-deep .disabled{
+    cursor: not-allowed !important;
+    opacity: 0.5;
+    text-decoration: none;
+    pointer-events: none;
+  }
 }
+
+

@@ -6,6 +6,14 @@ import { UserResolver } from "@app/core/services";
 
 const routes: Routes = [
   {
+    path: `:userId/wall/:type`,
+    component: ActivitiesWallComponent,
+    resolve: {
+      activities: ActivitiesResolver,
+      user: UserResolver
+    }
+  },
+  {
     path: `:userId/:type`,
     component: ActivitiesWallComponent,
     resolve: {

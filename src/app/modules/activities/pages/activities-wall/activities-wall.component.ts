@@ -29,7 +29,7 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
   private readonly loadMoreDataScrollOffsetPx = 700;
   private loadingMoreActivities = false;
   private noMoreActivities = false;
-  private type = "";
+  private type!: ActivitiesRoutes;
   private scrollBottomSubscription$?: Subscription;
 
   constructor(
@@ -81,9 +81,9 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
 
   public get postType(): PostType {
     switch (this.type) {
-      case ActivitiesRoutes.plannedActivities:
+      case ActivitiesRoutes.planned:
         return PostType.plannedRoutePost;
-      case ActivitiesRoutes.eventsActivities:
+      case ActivitiesRoutes.events:
         return PostType.eventPost;
       default:
         return PostType.activityPost;
@@ -92,13 +92,13 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
 
   public get headerText(): string {
     switch (this.type) {
-      case ActivitiesRoutes.eventsActivities:
+      case ActivitiesRoutes.events:
         return "Events Wall";
-      case ActivitiesRoutes.plannedActivities:
+      case ActivitiesRoutes.planned:
         return "Planned routes";
-      case ActivitiesRoutes.likedActivities:
+      case ActivitiesRoutes.liked:
         return "Liked activities";
-      case ActivitiesRoutes.myActivities:
+      case ActivitiesRoutes.my:
         return "Activities";
       default:
         return "Activities Wall";
@@ -107,7 +107,8 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
 
   public openFilterSheet(): void {
     this._bottomSheet.open(FilterSheetComponent, {
-      hasBackdrop: true
+      hasBackdrop: true,
+      data: { activatedRouteType: this.type }
     });
   }
 

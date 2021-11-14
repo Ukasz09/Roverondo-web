@@ -33,19 +33,19 @@ export class ActivitiesResolver implements Resolve<ActivityType[]> {
   public getActivities$(userId: number, offset: number, type: string): Observable<ActivityType[]> {
     let activities$: Observable<ActivityType[]> = of([]);
     switch (type) {
-      case ActivitiesRoutes.allActivities:
+      case ActivitiesRoutes.completed:
         activities$ = this.activitiesService.getActivities$(userId, offset);
         break;
-      case ActivitiesRoutes.likedActivities:
+      case ActivitiesRoutes.liked:
         activities$ = this.activitiesService.getLikedActivities$(userId, offset);
         break;
-      case ActivitiesRoutes.myActivities:
+      case ActivitiesRoutes.my:
         activities$ = this.activitiesService.getMyActivities$(userId, offset);
         break;
-      case ActivitiesRoutes.plannedActivities:
+      case ActivitiesRoutes.planned:
         activities$ = this.activitiesService.getPlannedActivities$(userId, offset);
         break;
-      case ActivitiesRoutes.eventsActivities:
+      case ActivitiesRoutes.events:
         activities$ = this.activitiesService.getEventActivities$(userId, offset);
         break;
     }

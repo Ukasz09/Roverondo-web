@@ -25,36 +25,36 @@
     <ul class="drawer-links">
       <li><h3
         class="link"
-        (click)="navigate(AppRoutes.activities, ActivitiesRoutes.allActivities)"
-        [appActiveLink]="ActivitiesRoutes.allActivities"
+        (click)="navigate(AppRoutes.activities, ActivitiesRoutes.completed)"
+        [appActiveLink]="ActivitiesRoutes.completed"
         id="all-activities">
-        Activities wall
+        Wall
       </h3></li>
       <li><h3
         class="link"
-        [appActiveLink]="ActivitiesRoutes.myActivities"
-        (click)="navigate(AppRoutes.activities,ActivitiesRoutes.myActivities)"
+        [appActiveLink]="ActivitiesRoutes.my"
+        (click)="navigate(AppRoutes.activities,ActivitiesRoutes.my)"
         id="my-activities">
         My Activities
       </h3></li>
       <li><h3
         class="link"
-        [appActiveLink]="ActivitiesRoutes.likedActivities"
-        (click)="navigate(AppRoutes.activities,ActivitiesRoutes.likedActivities)"
+        [appActiveLink]="ActivitiesRoutes.liked"
+        (click)="navigate(AppRoutes.activities,ActivitiesRoutes.liked)"
         id="liked-activities">
         Liked Activities
       </h3></li>
       <li><h3
         class="link"
-        (click)="navigate(AppRoutes.activities, ActivitiesRoutes.plannedActivities)"
-        [appActiveLink]="ActivitiesRoutes.plannedActivities"
+        (click)="navigate(AppRoutes.activities, ActivitiesRoutes.planned)"
+        [appActiveLink]="ActivitiesRoutes.planned"
         id="plannedRoutes">
         Planned routes
       </h3></li>
       <li><h3
         class="link"
-        (click)="navigate(AppRoutes.activities, ActivitiesRoutes.eventsActivities)"
-        [appActiveLink]="ActivitiesRoutes.eventsActivities"
+        (click)="navigate(AppRoutes.activities, ActivitiesRoutes.events)"
+        [appActiveLink]="ActivitiesRoutes.events"
         id="events">
         Events
       </h3></li>

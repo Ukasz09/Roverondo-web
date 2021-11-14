@@ -1,15 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from "@angular/core";
+import { ActivitiesRoutes, SpinnerType } from "@app/core/enums";
+import { NgxSpinnerService } from "ngx-spinner";
+import { CurrentUserService } from "@app/core/services";
+import { ActivatedRoute, Router } from "@angular/router";
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from "@angular/material/bottom-sheet";
+import { combineLatest } from "rxjs";
+import { PostExtended } from "@app/core/models";
 
 @Component({
-  selector: 'app-filter-sheet',
-  templateUrl: './filter-sheet.component.html',
-  styleUrls: ['./filter-sheet.component.scss']
+  selector: "app-filter-sheet",
+  templateUrl: "./filter-sheet.component.html",
+  styleUrls: ["./filter-sheet.component.scss"]
 })
 export class FilterSheetComponent implements OnInit {
+  public activatedRouteType!: ActivitiesRoutes;
 
-  constructor() { }
+  public readonly ActivitiesRoutes = ActivitiesRoutes;
 
-  ngOnInit(): void {
+  constructor(
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: { activatedRouteType: ActivitiesRoutes },
+    public readonly activatedRoute: ActivatedRoute,
+    private readonly spinner: NgxSpinnerService,
+    private readonly currentUserService: CurrentUserService,
+    private readonly router: Router,
+    private readonly _bottomSheetRef: MatBottomSheetRef<FilterSheetComponent>) {
   }
 
+  public ngOnInit(): void {
+    this.activatedRouteType = this.data.activatedRouteType;
+  }
+
+  public navigate(type: ActivitiesRoutes): void {
+    this.spinner.show(SpinnerType.main).then();
+    this.currentUserService.currentUser$.subscribe((user) => {
+      if (this.activatedRouteType !== type) {
+        if (user) {
+          const link = `/activities/${user.id}/wall/${type}`;
+          this.router.navigate([link]).then();
+        } else {
+          console.error("User not found - not navigate");
+        }
+      }
+      this.spinner.hide(SpinnerType.main).then();
+      this._bottomSheetRef.dismiss();
+    });
+  }
 }

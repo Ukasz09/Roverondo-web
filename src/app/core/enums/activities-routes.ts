@@ -1,7 +1,7 @@
 export enum ActivitiesRoutes {
-  allActivities = "all",
-  myActivities = "my",
-  likedActivities = "liked",
-  plannedActivities = "planned",
-  eventsActivities = "events",
+  completed = "completed",
+  my = "my",
+  liked = "liked",
+  planned = "planned",
+  events = "events",
 }
