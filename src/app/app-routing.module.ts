@@ -2,13 +2,19 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { CustomAuthGuard } from "@app/core/guards";
 import { AppRoutes } from "@app/core/enums";
+import { PageNotFoundComponent } from "@app/shared/components";
 
 const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
     redirectTo: `${AppRoutes.home}`
-  }, {
+  },
+  {
+    path: AppRoutes.pageNotFound,
+    component: PageNotFoundComponent
+  },
+  {
     path: AppRoutes.home,
     canActivate: [CustomAuthGuard],
     loadChildren: async () => (await import("@app/modules/home")).HomeModule
@@ -38,7 +44,7 @@ const routes: Routes = [
   },
   {
     path: "**",
-    redirectTo: `/${AppRoutes.home}`
+    redirectTo: `/${AppRoutes.pageNotFound}`
   }
 ];
 

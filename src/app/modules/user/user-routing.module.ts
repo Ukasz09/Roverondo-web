@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    redirectTo: `/${AppRoutes.home}`
+    redirectTo: `/${AppRoutes.pageNotFound}`
   },
   {
     path: `:userId/${UserRoutes.profile}`,

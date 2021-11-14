@@ -15,3 +15,4 @@ export * from "./snackbar-error/snackbar-error.component";
 export * from "./user-list-bottom-sheet/user-list-bottom-sheet.component";
 export * from "./page-title/page-title.component";
 export * from "./glass-btn-mini/glass-btn-mini.component";
+export * from "./page-not-found/page-not-found.component";

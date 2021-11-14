@@ -5,4 +5,5 @@ export enum AppRoutes {
   leaderboard = "leaderboard",
   user = "user",
   findFriends = "findFriends",
+  pageNotFound = "404",
 }

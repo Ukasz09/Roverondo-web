@@ -9,6 +9,7 @@ import { WallPostsService, ScrollService } from "@app/core/services";
 import { ActivityType } from "@app/core/models";
 import { ActivitiesRoutes, AppRoutes, SpinnerType } from "@app/core/enums";
 import { Utils } from "@app/shared/utils";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Injectable()
 export class WallResolver implements Resolve<ActivityType[]> {
@@ -16,7 +17,8 @@ export class WallResolver implements Resolve<ActivityType[]> {
   constructor(
     private readonly wallPostsService: WallPostsService,
     private readonly scrollService: ScrollService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly spinner: NgxSpinnerService
   ) {
   }
 
@@ -27,7 +29,7 @@ export class WallResolver implements Resolve<ActivityType[]> {
       this.scrollService.clearScrollPosition(Utils.getScrollContainerId(type));
       return this.getActivities$(+userId, 0, type);
     } else {
-      this.router.navigate([`/${AppRoutes.home}`]).then();
+      this.navigateHomeAndHideSpinner();
       return throwError(`User not provided - redirected to /home`);
     }
   }
@@ -45,9 +47,14 @@ export class WallResolver implements Resolve<ActivityType[]> {
         activities$ = this.wallPostsService.getEvents$(userId, offset);
         break;
       default:
-        this.router.navigate([`/${AppRoutes.home}`]).then();
+        this.navigateHomeAndHideSpinner();
         return throwError(`Not found route for type = ${type}`);
     }
     return activities$;
+  }
+
+  private navigateHomeAndHideSpinner(): void {
+    this.router.navigate([`/${AppRoutes.home}`]).then();
+    this.spinner.hide(SpinnerType.main).then();
   }
 }
