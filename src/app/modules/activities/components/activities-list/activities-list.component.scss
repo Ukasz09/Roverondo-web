@@ -2,12 +2,12 @@
 @use "/src/app/styles/abstracts/variables";
 @use "/src/app/styles/abstracts/functions";
 
-.mobile-logo {
-  @include mixins.my(1rem);
-  display: flex;
-  justify-content: center;
-  text-align: center;
-}
+//.mobile-logo {
+//  @include mixins.my(1rem);
+//  display: flex;
+//  justify-content: center;
+//  text-align: center;
+//}
 
 .card-wrapper {
   $card-border: 25px;
@@ -48,7 +48,6 @@
     width: 55%;
   }
 
-
   app-scroll-container {
     overflow: hidden;
     height: 100%;
@@ -57,9 +56,9 @@
     .activity-card {
       margin-bottom: 2rem;
 
-      &:first-child {
-        margin-top: 2.5rem;
-      }
+      //&:first-child {
+      //  margin-top: 2.5rem;
+      //}
     }
 
     .no-activities {

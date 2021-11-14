@@ -13,3 +13,4 @@ export * from "./user-list/user-list.component";
 export * from "./user-card/user-card.component";
 export * from "./snackbar-error/snackbar-error.component";
 export * from "./user-list-bottom-sheet/user-list-bottom-sheet.component";
+export * from "./page-title/page-title.component";

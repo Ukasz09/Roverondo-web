@@ -13,7 +13,12 @@ import {
   NavbarComponent,
   ProfileAvatarComponent,
   ScrollContainerComponent,
-  AreaGraphComponent, UserListComponent, UserCardComponent, SnackbarErrorComponent, UserListBottomSheetComponent
+  AreaGraphComponent,
+  UserListComponent,
+  UserCardComponent,
+  SnackbarErrorComponent,
+  UserListBottomSheetComponent,
+  PageTitleComponent
 } from "@app/shared/components";
 import { ActiveLinkDirective, InputFocusDirective } from "@app/shared/directives";
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -46,7 +51,8 @@ import { MatListModule } from "@angular/material/list";
     UserListComponent,
     UserCardComponent,
     SnackbarErrorComponent,
-    UserListBottomSheetComponent
+    UserListBottomSheetComponent,
+    PageTitleComponent
   ],
   exports: [
     GlassCardComponent,
@@ -65,7 +71,8 @@ import { MatListModule } from "@angular/material/list";
     UserListComponent,
     UserCardComponent,
     SnackbarErrorComponent,
-    UserListBottomSheetComponent
+    UserListBottomSheetComponent,
+    PageTitleComponent
   ],
   imports: [
     CommonModule,

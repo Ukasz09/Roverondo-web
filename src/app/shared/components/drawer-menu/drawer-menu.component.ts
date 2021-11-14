@@ -3,7 +3,8 @@ import { AuthService } from "@auth0/auth0-angular";
 import { DOCUMENT } from "@angular/common";
 import { CurrentUserService } from "@app/core/services";
 import { Router } from "@angular/router";
-import { ActivitiesRoutes, AppRoutes, UserRoutes } from "@app/core/enums";
+import { ActivitiesRoutes, AppRoutes, SpinnerType, UserRoutes } from "@app/core/enums";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-drawer-menu",
@@ -23,7 +24,8 @@ export class DrawerMenuComponent implements OnInit {
     @Inject(DOCUMENT) private readonly document: Document,
     public readonly auth: AuthService,
     private readonly currentUserService: CurrentUserService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly spinner: NgxSpinnerService
   ) {
   }
 
@@ -40,6 +42,7 @@ export class DrawerMenuComponent implements OnInit {
   }
 
   public navigate(moduleRoute: string, subRoute: string): void {
+    this.spinner.show(SpinnerType.main).then();
     this.currentUserService.currentUser$.subscribe((user) => {
       if (user) {
         const link = this.getRouteLink([moduleRoute, user.id.toString(), subRoute]);

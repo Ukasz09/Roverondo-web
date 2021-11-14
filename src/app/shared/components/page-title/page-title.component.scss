@@ -1,0 +1,34 @@
+@use "/src/app/styles/abstracts/mixins";
+
+.header {
+  @include mixins.my(1.5rem);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  font-size: 15px;
+
+  @include mixins.media(xs-large) {
+    font-size: 17.5px;
+  }
+
+  @include mixins.media(sm-small) {
+    font-size: 20px;
+  }
+
+  .logo {
+    display: flex;
+    justify-content: center;
+  }
+
+  .text {
+    text-align: center;
+  }
+
+  app-profile-avatar {
+    @include mixins.mx(0.5rem);
+    width: 35px;
+    cursor: pointer;
+  }
+}

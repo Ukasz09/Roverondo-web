@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { WallPostsService, CurrentUserService, LayoutService, ScrollService } from "@app/core/services";
-import { ActivitiesRoutes, LayoutType, PostType } from "@app/core/enums";
+import { CurrentUserService, LayoutService, ScrollService, WallPostsService } from "@app/core/services";
+import { ActivitiesRoutes, AppRoutes, PostType, SpinnerType } from "@app/core/enums";
 import { ActivatedRoute } from "@angular/router";
 import { ScrollContainerComponent } from "@app/shared/components";
 import { ActivitiesResolver } from "../../services";
-import { ActivityType } from "@app/core/models";
+import { ActivityType, User } from "@app/core/models";
 import { switchMap } from "rxjs/operators";
 import { combineLatest, Observable, Subscription, throwError } from "rxjs";
 import { Utils } from "@app/shared/utils";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-activities-wall",
@@ -19,6 +20,7 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
 
   public scrollContainerId = "activities-wall";
   public activities: ActivityType[] = [];
+  public user!: User;
   public wallReady = false;
   public selectedActivity?: ActivityType;
 
@@ -34,12 +36,9 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
     private readonly activitiesService: WallPostsService,
     private readonly activitiesResolver: ActivitiesResolver,
     public readonly scrollService: ScrollService,
-    public readonly currentUserService: CurrentUserService
+    public readonly currentUserService: CurrentUserService,
+    private readonly spinner: NgxSpinnerService
   ) {
-  }
-
-  public get isMobileLayout(): boolean {
-    return this.layoutService.layoutType === LayoutType.ASIDE_MOBILE;
   }
 
   public ngOnInit(): void {
@@ -50,10 +49,12 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
       this.type = params.type;
       this.scrollContainerId = Utils.getScrollContainerId(this.type);
       this.activities = data.activities;
+      this.user = data.user;
       this.noMoreActivities = false;
       this.loadingMoreActivities = false;
       this.selectedActivity = undefined;
       this.wallReady = true;
+      this.spinner.hide(SpinnerType.main).then();
     });
 
     this.scrollBottomSubscription$ = this.scrollService.scrollBottomChange$.subscribe((event) => {
@@ -83,6 +84,21 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
         return PostType.eventPost;
       default:
         return PostType.activityPost;
+    }
+  }
+
+  public get headerText(): string {
+    switch (this.type) {
+      case ActivitiesRoutes.eventsActivities:
+        return "Events Wall";
+      case ActivitiesRoutes.plannedActivities:
+        return "Planned routes";
+      case ActivitiesRoutes.likedActivities:
+        return "Liked activities";
+      case ActivitiesRoutes.myActivities:
+        return "Activities";
+      default:
+        return "Activities Wall";
     }
   }
 

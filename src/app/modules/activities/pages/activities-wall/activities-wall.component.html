@@ -12,13 +12,15 @@
           </div>
         </div>
         <ng-template #activitiesWall>
-          <app-activities-list
-            style="height: 100vh"
-            [activities]="activities"
-            [scrollContainerId]="scrollContainerId"
-            [postType]="postType"
-            (activityDetailsClick)="onActivityDetailsClick($event)">
-          </app-activities-list>
+          <app-page-title [user]="user" [headerText]="headerText"></app-page-title>
+          <div class="activities-list">
+            <app-activities-list
+              [activities]="activities"
+              [scrollContainerId]="scrollContainerId"
+              [postType]="postType"
+              (activityDetailsClick)="onActivityDetailsClick($event)">
+            </app-activities-list>
+          </div>
         </ng-template>
       </ng-container>
     </div>

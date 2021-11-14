@@ -7,9 +7,7 @@ import {
 import { Observable, of } from "rxjs";
 import { WallPostsService, ScrollService } from "@app/core/services";
 import { ActivityType } from "@app/core/models";
-import { NgxSpinnerService } from "ngx-spinner";
 import { ActivitiesRoutes, SpinnerType } from "@app/core/enums";
-import { tap } from "rxjs/operators";
 import { Utils } from "@app/shared/utils";
 
 @Injectable()
@@ -17,7 +15,6 @@ export class ActivitiesResolver implements Resolve<ActivityType[]> {
 
   constructor(
     private readonly activitiesService: WallPostsService,
-    private readonly spinner: NgxSpinnerService,
     private readonly scrollService: ScrollService
   ) {
   }
@@ -26,17 +23,14 @@ export class ActivitiesResolver implements Resolve<ActivityType[]> {
     const userId = route.paramMap.get("userId") || "";
     if (userId) {
       const type = route.paramMap.get("type") || "";
-      return this.getActivities$(+userId, 0, type, true);
+      return this.getActivities$(+userId, 0, type);
     } else {
       console.error("UserId not provided - return []");
       return of([]);
     }
   }
 
-  public getActivities$(userId: number, offset: number, type: string, withSpinner = false): Observable<ActivityType[]> {
-    if (withSpinner) {
-      this.spinner.show(SpinnerType.main).then();
-    }
+  public getActivities$(userId: number, offset: number, type: string): Observable<ActivityType[]> {
     let activities$: Observable<ActivityType[]> = of([]);
     switch (type) {
       case ActivitiesRoutes.allActivities:
@@ -56,10 +50,6 @@ export class ActivitiesResolver implements Resolve<ActivityType[]> {
         break;
     }
     this.scrollService.clearScrollPosition(Utils.getScrollContainerId(type));
-    return activities$.pipe(tap(() => {
-      if (withSpinner) {
-        this.spinner.hide(SpinnerType.main).then();
-      }
-    }));
+    return activities$;
   }
 }

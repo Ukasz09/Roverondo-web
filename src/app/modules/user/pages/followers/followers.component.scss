@@ -6,4 +6,9 @@
   @include mixins.max-viewport();
   background-image: functions.image("activities-bg-3.jpg");
   height: 100vh;
+
+  .user-list {
+    flex: 1;
+    overflow: hidden
+  }
 }

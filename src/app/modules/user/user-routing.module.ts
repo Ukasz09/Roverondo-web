@@ -1,8 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { FollowersComponent, FollowingsComponent, UserProfileComponent } from "./pages";
-import { FollowersResolver, FollowingsResolver, UserResolver } from "./services";
+import { FollowersResolver, FollowingsResolver } from "./services";
 import { AppRoutes, UserRoutes } from "@app/core/enums";
+import { UserResolver } from "@app/core/services";
 
 const routes: Routes = [
   {
@@ -11,7 +12,7 @@ const routes: Routes = [
     redirectTo: `/${AppRoutes.home}`
   },
   {
-    path: `:id/${UserRoutes.profile}`,
+    path: `:userId/${UserRoutes.profile}`,
     pathMatch: "full",
     component: UserProfileComponent,
     resolve: {
@@ -19,18 +20,20 @@ const routes: Routes = [
     }
   },
   {
-    path: `:id/${UserRoutes.followers}`,
+    path: `:userId/${UserRoutes.followers}`,
     pathMatch: "full",
     component: FollowersComponent,
     resolve: {
-      followers: FollowersResolver
+      followers: FollowersResolver,
+      user: UserResolver
     }
   },
   {
-    path: `:id/${UserRoutes.followings}`,
+    path: `:userId/${UserRoutes.followings}`,
     component: FollowingsComponent,
     resolve: {
-      followings: FollowingsResolver
+      followings: FollowingsResolver,
+      user: UserResolver
     }
   }
 ];

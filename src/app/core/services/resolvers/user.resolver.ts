@@ -3,30 +3,27 @@ import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@a
 import { Observable, throwError } from "rxjs";
 import { User } from "@app/core/models";
 import { UsersService } from "@app/core/services";
-import { NgxSpinnerService } from "ngx-spinner";
-import { catchError, tap } from "rxjs/operators";
-import { AppRoutes, SpinnerType } from "@app/core/enums";
+import { catchError } from "rxjs/operators";
+import { AppRoutes } from "@app/core/enums";
 
-@Injectable()
+@Injectable({
+  providedIn: "root"
+})
 export class UserResolver implements Resolve<User> {
 
   constructor(
     private readonly userService: UsersService,
-    private readonly spinner: NgxSpinnerService,
     private readonly router: Router
   ) {
   }
 
   public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User> {
-    this.spinner.show(SpinnerType.main).then();
-
-    const userId = route.paramMap.get("id");
+    const userId = route.paramMap.get("userId");
     if (!userId) {
       this.navigateToHome();
       return throwError("User id not given");
     }
     return this.userService.getUser$(+userId).pipe(
-      tap(() => this.spinner.hide(SpinnerType.main).then()),
       catchError(() => {
         this.navigateToHome();
         return throwError(`Not found user with id=${userId}`);
@@ -37,6 +34,5 @@ export class UserResolver implements Resolve<User> {
 
   private navigateToHome(): void {
     this.router.navigate([AppRoutes.home]).then();
-    this.spinner.hide(SpinnerType.main).then();
   }
 }

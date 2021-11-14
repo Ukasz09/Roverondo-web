@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
 import { ScrollContainerComponent } from "@app/shared/components";
-import { ActivityType } from "@app/core/models";
+import { ActivityType, User } from "@app/core/models";
 import { CurrentUserService, LayoutService, ScrollService } from "@app/core/services";
 import { AppRoutes, LayoutType, PostType } from "@app/core/enums";
 
@@ -34,9 +34,5 @@ export class ActivitiesListComponent implements OnInit, AfterViewInit {
 
   public ngAfterViewInit() {
     this.scrollContainerComponent.scrollTop(this.scrollService.getScrollTopPosition(this.scrollContainerId));
-  }
-
-  public get homeRouterLink(): string {
-    return `/${AppRoutes.home}`;
   }
 }

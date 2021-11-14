@@ -3,7 +3,7 @@ import { CommonModule } from "@angular/common";
 import { FollowersComponent, FollowingsComponent, UserProfileComponent } from "./pages";
 import { AppSharedModule } from "@app/shared";
 import { UserRoutingModule } from "./user-routing.module";
-import { FollowersResolver, FollowingsResolver, UserResolver } from "./services";
+import { FollowersResolver, FollowingsResolver } from "./services";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 
@@ -11,7 +11,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
   declarations: [
     UserProfileComponent,
     FollowersComponent,
-    FollowingsComponent,
+    FollowingsComponent
   ],
   imports: [
     CommonModule,
@@ -19,9 +19,8 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     UserRoutingModule,
     MatProgressSpinnerModule
   ],
-  exports: [  ],
+  exports: [],
   providers: [
-    UserResolver,
     FollowersResolver,
     FollowingsResolver
   ]

@@ -2,13 +2,15 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { ActivitiesWallComponent } from "./pages";
 import { ActivitiesResolver } from "./services";
+import { UserResolver } from "@app/core/services";
 
 const routes: Routes = [
   {
     path: `:userId/:type`,
     component: ActivitiesWallComponent,
     resolve: {
-      activities: ActivitiesResolver
+      activities: ActivitiesResolver,
+      user: UserResolver
     }
   }
 ];
