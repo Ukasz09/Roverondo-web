@@ -10,7 +10,7 @@ import {
   PostExtended,
   Reaction
 } from "@app/core/models";
-import { map, tap } from "rxjs/operators";
+import { delay, map, tap } from "rxjs/operators";
 import { MockedSpeedAdapterService } from "../adapters";
 
 @Injectable({

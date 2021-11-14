@@ -1,5 +1,7 @@
 <div class="container">
   <app-aside-layout>
-    <app-user-list *ngIf="userList" [userList]="userList" [withRankMedals]="true"></app-user-list>
+    <div style="height: 100vh">
+      <app-user-list *ngIf="userList" [userList]="userList" [withRankMedals]="true"></app-user-list>
+    </div>
   </app-aside-layout>
 </div>

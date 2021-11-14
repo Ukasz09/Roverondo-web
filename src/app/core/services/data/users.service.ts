@@ -41,4 +41,9 @@ export class UsersService {
     const endpoint = `${environment.backendApi}/api/users/${userId}/followings`;
     return this.http.get<User[]>(endpoint).pipe(tap(data => console.log(data)));
   }
+
+  public searchUsers$(query: string, amount = 10, offset = 0): Observable<User[]> {
+    const endpoint = `${environment.backendApi}/api/users/search/${query}?amount=${amount}&offset=${offset}`;
+    return this.http.get<User[]>(endpoint).pipe(tap(data => console.log(data)));
+  }
 }

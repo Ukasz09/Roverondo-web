@@ -7,7 +7,7 @@ import { Subscription } from "rxjs";
 })
 export class ActiveLinkDirective implements OnInit, OnDestroy {
   @Input() public appActiveLink = "";
-  @Input() public routeIndex = 0;
+  @Input() public appActiveLinkIndex = 0;
 
   private routeChange$?: Subscription;
 
@@ -28,8 +28,8 @@ export class ActiveLinkDirective implements OnInit, OnDestroy {
   }
 
   private decorateLink(route: string[]): void {
-    if (route.length >= this.routeIndex) {
-      if (this.appActiveLink === route[this.routeIndex]) {
+    if (route.length >= this.appActiveLinkIndex) {
+      if (this.appActiveLink === route[this.appActiveLinkIndex]) {
         this.changeLinkToActive();
       } else {
         this.changeLinkToNotActive();

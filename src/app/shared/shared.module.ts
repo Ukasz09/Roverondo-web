@@ -20,7 +20,7 @@ import {
   UserListBottomSheetComponent,
   PageTitleComponent, GlassBtnMiniComponent
 } from "@app/shared/components";
-import { ActiveLinkDirective, InputFocusDirective } from "@app/shared/directives";
+import { ActiveLinkDirective, DisabledLinkDirective, InputFocusDirective } from "@app/shared/directives";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
@@ -54,7 +54,8 @@ import { MatRippleModule } from "@angular/material/core";
     SnackbarErrorComponent,
     UserListBottomSheetComponent,
     PageTitleComponent,
-    GlassBtnMiniComponent
+    GlassBtnMiniComponent,
+    DisabledLinkDirective
   ],
   exports: [
     GlassCardComponent,
@@ -75,7 +76,8 @@ import { MatRippleModule } from "@angular/material/core";
     SnackbarErrorComponent,
     UserListBottomSheetComponent,
     PageTitleComponent,
-    GlassBtnMiniComponent
+    GlassBtnMiniComponent,
+    DisabledLinkDirective
   ],
   imports: [
     CommonModule,

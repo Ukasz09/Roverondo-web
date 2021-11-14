@@ -7,8 +7,14 @@
   background-image: functions.image("activities-bg-3.jpg");
   height: 100vh;
 
-  .user-list {
-    flex: 1;
-    overflow: hidden
+  .content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .user-list {
+      flex: 1;
+      overflow: hidden
+    }
   }
 }

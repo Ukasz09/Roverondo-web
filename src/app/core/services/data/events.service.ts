@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
-import { User, UserBottomSheet } from "@app/core/models";
+import { User } from "@app/core/models";
 import { environment } from "@app/env";
 import { tap } from "rxjs/operators";
 

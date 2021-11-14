@@ -1,16 +1,16 @@
 <mat-action-list>
   <button mat-list-item (click)="navigate(ActivitiesRoutes.completed)"
-          [ngClass]="{'disabled':activatedRouteType==ActivitiesRoutes.completed}">
+          [appDisabledLink]="ActivitiesRoutes.completed" [appDisabledLinkIndex]="3">
     <mat-icon class="icon">directions_bike</mat-icon>
     <span>Activities</span>
   </button>
   <button mat-list-item (click)="navigate(ActivitiesRoutes.events)"
-          [ngClass]="{'disabled':activatedRouteType==ActivitiesRoutes.events}">
+          [appDisabledLink]="ActivitiesRoutes.events" [appDisabledLinkIndex]="3">
     <mat-icon class="icon">event</mat-icon>
     <span>Events</span>
   </button>
   <button mat-list-item (click)="navigate(ActivitiesRoutes.planned)"
-          [ngClass]="{'disabled':activatedRouteType==ActivitiesRoutes.planned}">
+          [appDisabledLink]="ActivitiesRoutes.planned" [appDisabledLinkIndex]="3">
     <mat-icon class="icon">lightbulb</mat-icon>
     <span>Planned routes</span>
   </button>

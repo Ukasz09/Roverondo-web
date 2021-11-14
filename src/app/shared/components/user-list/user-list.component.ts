@@ -10,7 +10,7 @@ import { Utils } from "@app/shared/utils";
   styleUrls: ["./user-list.component.scss"]
 })
 export class UserListComponent implements OnInit {
-  @Input() public userList: User[] = [];
+  @Input() public userList?: User[] = [];
   @Input() public withRankMedals = false;
 
   public readonly AppRoutes = AppRoutes;

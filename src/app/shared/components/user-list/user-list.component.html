@@ -1,28 +1,27 @@
 <div class="content-wrapper">
   <div class="content">
-    <ng-container *ngIf="userList.length>0; else notFoundUsersTemplate">
-      <app-scroll-container [id]="'followers-list'"
-                            [withScrollbar]="!isMobileLayout"
-                            [initialScrollTopOffsetPx]="0">
-        <div class="content">
-          <div *ngFor="let user of userList; let i=index" class="card-wrapper" mat-ripple>
-            <app-user-card [user]="user">
+    <ng-content select="[searchBar]"></ng-content>
+    <ng-container *ngIf="userList">
+      <ng-container *ngIf="userList.length>0; else notFoundUsersTemplate">
+        <app-scroll-container [id]="'followers-list'"
+                              [withScrollbar]="!isMobileLayout"
+                              [initialScrollTopOffsetPx]="0">
+          <div class="content">
+            <app-user-card *ngFor="let user of userList; let i=index" mat-ripple [user]="user">
               <img *ngIf="withRankMedals && rankMedalImg(i)"
-                   height="64px"
+                   height="48px"
                    [src]="rankMedalImg(i)"
                    alt="medal-image"
                    class="fadeIn"
               >
             </app-user-card>
           </div>
-        </div>
-      </app-scroll-container>
+        </app-scroll-container>
+      </ng-container>
     </ng-container>
     <ng-template #notFoundUsersTemplate>
       <div class="no-users">
-              <span class="text">
-                Not found any users
-              </span>
+        <span class="text">Not found any users</span>
       </div>
     </ng-template>
   </div>

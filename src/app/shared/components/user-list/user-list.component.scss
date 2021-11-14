@@ -53,21 +53,19 @@
       .content {
         width: 100%;
 
-        .card-wrapper {
+        app-user-card {
+          width: 100%;
+          min-height: 90px;
           margin-bottom: 0.25rem;
-
-          app-user-card {
-            width: 100%;
-            height: 100%;
-          }
+          border-radius: 5px;
         }
       }
     }
 
     .no-users {
       @include mixins.mx(auto);
-      height: 100vh;
-      width: 90%;
+      height: 100%;
+      width: 100%;
       display: flex;
       align-items: flex-start;
 

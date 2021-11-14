@@ -1,8 +1,10 @@
 <div class="container">
   <app-aside-layout>
-    <app-page-title [user]="user" [headerText]="'Followings'"></app-page-title>
-    <div class="user-list">
-      <app-user-list [userList]="followings"></app-user-list>
+    <div class="content">
+      <app-page-title [user]="user" [headerText]="'Followings'"></app-page-title>
+      <div class="user-list">
+        <app-user-list [userList]="followings"></app-user-list>
+      </div>
     </div>
   </app-aside-layout>
 </div>

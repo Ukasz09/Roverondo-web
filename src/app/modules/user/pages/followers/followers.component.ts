@@ -15,7 +15,7 @@ export class FollowersComponent implements OnInit {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly spinner: NgxSpinnerService,
+    private readonly spinner: NgxSpinnerService
   ) {
   }
 

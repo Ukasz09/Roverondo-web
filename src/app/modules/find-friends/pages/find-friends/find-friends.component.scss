@@ -1,9 +1,28 @@
 @use "/src/app/styles/abstracts/mixins";
 @use "/src/app/styles/abstracts/functions";
+@use "/src/app/styles/abstracts/variables";
 
 .container {
   @include mixins.bg-fill();
   @include mixins.max-viewport();
   background-image: functions.image("activities-bg-2.jpg");
   height: 100vh;
+
+  .search-form {
+    padding-top: 2.5rem;
+    width: 100%;
+
+    .search-input {
+      @include mixins.my(0);
+      width: 100%;
+      border-radius: 0.5rem;
+
+      @include mixins.glass-effect(variables.$glass-lighter-bg);
+
+      ::ng-deep .mat-form-field-wrapper {
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
 }
