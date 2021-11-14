@@ -20,6 +20,7 @@ export class PostsResolver implements Resolve<ActivityType[]> {
     const userId = route.paramMap.get("userId") || "";
     if (userId) {
       const type = route.paramMap.get("type") || "";
+      this.scrollService.clearScrollPosition(Utils.getScrollContainerId(type));
       return this.getActivities$(+userId, 0, type);
     } else {
       this.router.navigate([`/${AppRoutes.home}`]).then();
@@ -46,7 +47,6 @@ export class PostsResolver implements Resolve<ActivityType[]> {
         this.router.navigate([`/${AppRoutes.home}`]).then();
         return throwError(`Not found route for type = ${type}. Redirected to /home`);
     }
-    this.scrollService.clearScrollPosition(Utils.getScrollContainerId(type));
     return activities$;
   }
 }
