@@ -102,6 +102,10 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
     }
   }
 
+  public openFilterSheet(): void {
+    console.log("open filter sheet");
+  }
+
   private needToLoadMoreActivities(id: string, bottomPosition: number): boolean {
     return id === this.scrollContainerId &&
       bottomPosition < this.loadMoreDataScrollOffsetPx &&

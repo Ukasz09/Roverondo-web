@@ -1,0 +1,13 @@
+@use "/src/app/styles/abstracts/mixins";
+
+.glass-mini-btn {
+  @include mixins.glass-effect();
+  outline: 2px solid #f8f9fa;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

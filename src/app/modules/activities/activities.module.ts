@@ -19,6 +19,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
+import { MatButtonModule } from "@angular/material/button";
+import {MatRippleModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
     CommonModule,
     ActivitiesRoutingModule,
     AppSharedModule,
+    MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
     MatListModule,
@@ -41,7 +44,8 @@ import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatRippleModule
   ],
   providers: [
     ActivitiesResolver,

@@ -12,7 +12,12 @@
           </div>
         </div>
         <ng-template #activitiesWall>
-          <app-page-title [user]="user" [headerText]="headerText"></app-page-title>
+          <div class="filter-btn">
+            <app-page-title [user]="user" [headerText]="headerText"></app-page-title>
+            <app-glass-btn-mini (click)="openFilterSheet()">
+              <mat-icon class="icon" id="filter-icon">filter_alt</mat-icon>
+            </app-glass-btn-mini>
+          </div>
           <div class="activities-list">
             <app-activities-list
               [activities]="activities"

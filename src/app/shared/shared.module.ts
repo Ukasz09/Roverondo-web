@@ -18,7 +18,7 @@ import {
   UserCardComponent,
   SnackbarErrorComponent,
   UserListBottomSheetComponent,
-  PageTitleComponent
+  PageTitleComponent, GlassBtnMiniComponent
 } from "@app/shared/components";
 import { ActiveLinkDirective, InputFocusDirective } from "@app/shared/directives";
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -30,6 +30,7 @@ import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { MatIconModule } from "@angular/material/icon";
 import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
 import { MatListModule } from "@angular/material/list";
+import { MatRippleModule } from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { MatListModule } from "@angular/material/list";
     UserCardComponent,
     SnackbarErrorComponent,
     UserListBottomSheetComponent,
-    PageTitleComponent
+    PageTitleComponent,
+    GlassBtnMiniComponent
   ],
   exports: [
     GlassCardComponent,
@@ -72,7 +74,8 @@ import { MatListModule } from "@angular/material/list";
     UserCardComponent,
     SnackbarErrorComponent,
     UserListBottomSheetComponent,
-    PageTitleComponent
+    PageTitleComponent,
+    GlassBtnMiniComponent
   ],
   imports: [
     CommonModule,
@@ -86,6 +89,7 @@ import { MatListModule } from "@angular/material/list";
     NgxChartsModule,
     MatIconModule,
     MatListModule,
+    MatRippleModule
   ]
 })
 export class AppSharedModule {

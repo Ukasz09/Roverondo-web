@@ -17,6 +17,16 @@
       flex: 1;
       overflow: hidden
     }
+
+    .filter-btn{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      app-page-title{
+        margin-right: 0.5rem;
+      }
+    }
   }
 
   .details {
