@@ -9,9 +9,7 @@
   height: 100vh;
 
   .content {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    @include mixins.full-page-list-wrapper();
 
     .search-form {
       padding-top: 2.5rem;

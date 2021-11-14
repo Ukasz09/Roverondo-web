@@ -33,10 +33,8 @@ export class FindFriendsComponent implements OnInit {
   public onSubmit(queryModel: NgModel): void {
     if (this.queryIsValid(queryModel)) {
       this.showSpinner = true;
-      // this.usersService.searchUsers$(this.searchQuery).subscribe((userList) => {
-      this.usersService.getUsers$().subscribe((userList) => {
-        // this.userList = userList;
-        this.userList = userList.concat(userList);
+      this.usersService.searchUsers$(this.searchQuery).subscribe((userList) => {
+        this.userList = userList;
       });
     }
   }

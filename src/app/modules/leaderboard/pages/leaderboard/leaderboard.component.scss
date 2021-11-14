@@ -6,4 +6,9 @@
   @include mixins.max-viewport();
   background-image: functions.image("home.jpg");
   height: 100vh;
+
+  .content{
+    @include mixins.full-page-list-wrapper();
+    height: 100vh;
+  }
 }

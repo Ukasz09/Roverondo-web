@@ -71,3 +71,39 @@
   background-clip: initial;
   -webkit-background-clip: text;
 }
+
+@mixin full-page-list-wrapper {
+  height: 100%;
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+  @include media(sm-medium) {
+    width: 85%;
+  }
+
+  @include media(sm-large) {
+    width: 95%;
+  }
+
+  @include media(md-small) {
+    width: 90%;
+  }
+
+  @include media(md-large) {
+    width: 90%;
+  }
+
+  @include media(lg-small) {
+    width: 80%;
+  }
+
+  @include media(lg-large) {
+    width: 65%;
+  }
+
+  @include media(lg-xlarge) {
+    width: 55%;
+  }
+}

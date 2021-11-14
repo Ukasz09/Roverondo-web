@@ -7,51 +7,21 @@
   height: 100%;
   width: 100%;
 
-  .content {
+  .mobile-logo {
+    @include mixins.my(1rem);
+    @include mixins.mx(auto);
+  }
+
+  app-scroll-container {
+    width: 100%;
     height: 100%;
-    width: 95%;
-    display: flex;
-    flex-direction: column;
 
-    @include mixins.media(sm-medium) {
-      width: 85%;
-    }
-
-    @include mixins.media(sm-large) {
-      width: 95%;
-    }
-
-    @include mixins.media(md-small) {
-      width: 90%;
-    }
-
-    @include mixins.media(md-large) {
-      width: 90%;
-    }
-
-    @include mixins.media(lg-small) {
-      width: 80%;
-    }
-
-    @include mixins.media(lg-large) {
-      width: 65%;
-    }
-
-    @include mixins.media(lg-xlarge) {
-      width: 55%;
-    }
-
-    .mobile-logo {
-      @include mixins.my(1rem);
-      @include mixins.mx(auto);
-    }
-
-    app-scroll-container {
+    .content {
       width: 100%;
-      height: 100%;
 
-      .content {
-        width: 100%;
+      .user-card-wrapper {
+        margin-bottom: 0.25rem;
+        border-radius: 5px;
 
         app-user-card {
           width: 100%;
@@ -60,27 +30,28 @@
           border-radius: 5px;
         }
       }
+
     }
+  }
 
-    .no-users {
-      @include mixins.mx(auto);
-      height: 100%;
+  .no-users {
+    @include mixins.mx(auto);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+
+    .text {
+      @include mixins.glass-effect(variables.$glass-lighter-bg);
+      @include mixins.py(1.5rem);
       width: 100%;
-      display: flex;
-      align-items: flex-start;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 5px;
 
-      .text {
-        @include mixins.glass-effect(variables.$glass-lighter-bg);
-        @include mixins.py(1.5rem);
-        width: 100%;
-        text-align: center;
-        font-size: 16px;
-        font-weight: 600;
-        border-radius: 5px;
-
-        @include mixins.media(sm-large) {
-          font-size: 20px;
-        }
+      @include mixins.media(sm-large) {
+        font-size: 20px;
       }
     }
   }
