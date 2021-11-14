@@ -8,7 +8,7 @@ import {
   ActivitiesListComponent,
   ActivityCardContentComponent,
   ActivityDetailsComponent,
-  CommentsSheetComponent, EventParticipantsSheetComponent,
+  CommentsSheetComponent, EventParticipantsSheetComponent, FilterSheetComponent,
   ReactionsSheetComponent
 } from "./components";
 import { ActivitiesResolver } from "./services";
@@ -30,7 +30,8 @@ import {MatRippleModule} from '@angular/material/core';
     CommentsSheetComponent,
     ReactionsSheetComponent,
     ActivitiesListComponent,
-    EventParticipantsSheetComponent
+    EventParticipantsSheetComponent,
+    FilterSheetComponent
   ],
   imports: [
     CommonModule,

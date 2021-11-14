@@ -9,6 +9,8 @@ import { switchMap } from "rxjs/operators";
 import { combineLatest, Observable, Subscription, throwError } from "rxjs";
 import { Utils } from "@app/shared/utils";
 import { NgxSpinnerService } from "ngx-spinner";
+import { MatBottomSheet } from "@angular/material/bottom-sheet";
+import { FilterSheetComponent } from "../../components";
 
 @Component({
   selector: "app-activities-wall",
@@ -37,7 +39,8 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
     private readonly activitiesResolver: ActivitiesResolver,
     public readonly scrollService: ScrollService,
     public readonly currentUserService: CurrentUserService,
-    private readonly spinner: NgxSpinnerService
+    private readonly spinner: NgxSpinnerService,
+    private readonly _bottomSheet: MatBottomSheet
   ) {
   }
 
@@ -103,7 +106,9 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
   }
 
   public openFilterSheet(): void {
-    console.log("open filter sheet");
+    this._bottomSheet.open(FilterSheetComponent, {
+      hasBackdrop: true
+    });
   }
 
   private needToLoadMoreActivities(id: string, bottomPosition: number): boolean {
