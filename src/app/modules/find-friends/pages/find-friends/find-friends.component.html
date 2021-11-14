@@ -1,20 +1,22 @@
 <div class="container">
   <app-aside-layout>
-    <div style="height: 100%;">
-      <app-user-list [userList]="queryIsValid(query) ? userList : undefined">
-        <form (ngSubmit)="onSubmit(query)" class="search-form" searchBar>
-          <mat-form-field appearance="outline" class="search-input">
-            <mat-label>Expand your horizons</mat-label>
-            <input matInput placeholder="Search for the name"
-                   [(ngModel)]="searchQuery"
-                   (ngModelChange)="onModelChange(query)"
-                   name="search" #query="ngModel"
-                   minlength="3" maxlength="100" [inputFocus]="true">
-            <mat-icon matSuffix class="search-icon" (click)="onSubmit(query)">search</mat-icon>
-            <button type="submit" style="display: none"></button>
-          </mat-form-field>
-        </form>
-      </app-user-list>
+    <div class="content">
+      <form (ngSubmit)="onSubmit(query)" class="search-form">
+        <mat-form-field appearance="outline" class="search-input">
+          <mat-label>Expand your horizons</mat-label>
+          <input matInput placeholder="Search for the name"
+                 [(ngModel)]="searchQuery"
+                 (ngModelChange)="onModelChange(query)"
+                 name="search" #query="ngModel"
+                 minlength="3" maxlength="100" [inputFocus]="true">
+          <mat-icon matSuffix class="search-icon" (click)="onSubmit(query)">search</mat-icon>
+          <button type="submit" style="display: none"></button>
+        </mat-form-field>
+      </form>
+      <div class="user-list-wrapper" >
+        <app-user-list [userList]="userList">
+        </app-user-list>
+      </div>
     </div>
   </app-aside-layout>
 </div>

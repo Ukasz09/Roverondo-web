@@ -1,6 +1,5 @@
 <div class="content-wrapper">
   <div class="content">
-    <ng-content select="[searchBar]"></ng-content>
     <ng-container *ngIf="userList">
       <ng-container *ngIf="userList.length>0; else notFoundUsersTemplate">
         <app-scroll-container [id]="'followers-list'"
