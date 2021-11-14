@@ -88,6 +88,15 @@
         id="following">
         Following
       </h3></li>
+      <li><h3
+        class="link"
+        [appActiveLink]="AppRoutes.findFriends"
+        (click)="closeDrawer.emit()"
+        [routeIndex]="0"
+        [routerLink]="getRouteLink([AppRoutes.findFriends])"
+        id="find-friends">
+        Find friends
+      </h3></li>
       <li>
         <h3
           class="link"

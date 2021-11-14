@@ -1,0 +1,9 @@
+@use "/src/app/styles/abstracts/mixins";
+@use "/src/app/styles/abstracts/functions";
+
+.container {
+  @include mixins.bg-fill();
+  @include mixins.max-viewport();
+  background-image: functions.image("activities-bg-2.jpg");
+  height: 100vh;
+}

@@ -79,6 +79,9 @@
       ],
       "@app/modules/leaderboard": [
         "src/app/modules/leaderboard/index"
+      ],
+      "@app/modules/find-friends": [
+        "src/app/modules/find-friends/index"
       ]
     },
     "resolveJsonModule": true

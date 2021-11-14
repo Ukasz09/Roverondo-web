@@ -32,6 +32,11 @@ const routes: Routes = [
     loadChildren: async () => (await import("@app/modules/leaderboard")).LeaderboardModule
   },
   {
+    path: AppRoutes.findFriends,
+    canActivate: [CustomAuthGuard],
+    loadChildren: async () => (await import("@app/modules/find-friends")).FindFriendsModule
+  },
+  {
     path: "**",
     redirectTo: `/${AppRoutes.home}`
   }
