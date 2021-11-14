@@ -2,14 +2,22 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "@app/env";
-import { PostComment, Reaction } from "@app/core/models";
-import { tap } from "rxjs/operators";
+import {
+  ActivityType,
+  EventPostExtended,
+  PlannedPostExtended,
+  PostComment,
+  PostExtended,
+  Reaction
+} from "@app/core/models";
+import { map, tap } from "rxjs/operators";
+import { MockedSpeedAdapterService } from "../adapters";
 
 @Injectable({
   providedIn: "root"
 })
 export class PostsService {
-  constructor(private readonly http: HttpClient) {
+  constructor(private readonly http: HttpClient, private readonly mockedSpeedAdapter: MockedSpeedAdapterService) {
   }
 
   public addReactionToActivity$(userId: number, activityId: number): Observable<void> {
@@ -66,5 +74,39 @@ export class PostsService {
   public getCommentsReactions$(commentId: number): Observable<Reaction[]> {
     const endpoint = `${environment.backendApi}/api/comments/${commentId}/reactions`;
     return this.http.get<Reaction[]>(endpoint);
+  }
+
+  public getCompletedActivities$(userId: number, offset = 0): Observable<PostExtended[]> {
+    // TODO: tmp mocked - integrate with backend
+    const endpoint = `${environment.backendApi}/api/wall/${userId}?offset=${offset}&amount=3&postTypes=ActivityPost&extended=true`;
+    return this.http.get<ActivityType[]>(endpoint).pipe(
+      tap(data => console.log(data)),
+      map(data => data as PostExtended[]),
+      map(data => data.map(p => this.mockedSpeedAdapter.adapt(p)))
+    );
+  }
+
+  public getPlannedRoutes$(userId: number, offset = 0): Observable<PlannedPostExtended[]> {
+    // TODO: tmp mocked - integrate with backend
+    const endpoint = `${environment.backendApi}/api/wall/${userId}?offset=${offset}&amount=3&postTypes=PlannedRoutePost&extended=true`;
+    return this.http.get<ActivityType[]>(endpoint).pipe(
+      tap(data => console.log(data)),
+      map(data => data as PlannedPostExtended[])
+    );
+  }
+
+  public getEvents$(userId: number, offset = 0): Observable<EventPostExtended[]> {
+    // TODO: tmp mocked - integrate with backend
+    return this.getPlannedRoutes$(userId, offset).pipe(
+      map(data => data.map(a => {
+        (a as any)["eventRoute"] = a.plannedRoute;
+        return (a as unknown) as EventPostExtended;
+      }))
+    );
+  }
+
+  public getLikedActivities$(userId: number, offset = 0): Observable<PostExtended[]> {
+    // TODO: tmp mocked - integrate with backend
+    return this.getCompletedActivities$(userId, offset);
   }
 }

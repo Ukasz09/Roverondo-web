@@ -7,15 +7,16 @@ import { Subscription } from "rxjs";
 })
 export class ActiveLinkDirective implements OnInit, OnDestroy {
   @Input() public appActiveLink = "";
+  @Input() public routeIndex = 0;
 
   private routeChange$?: Subscription;
 
-  constructor(private elementRef: ElementRef, private routesService: RoutesService) {
+  constructor(private readonly elementRef: ElementRef, private readonly routesService: RoutesService) {
   }
 
   public ngOnInit(): void {
-    this.decorateLink(this.getActiveRoute());
-    this.routeChange$ = this.routesService.routeChange.subscribe({
+    this.decorateLink(this.routesService.getActualRoute());
+    this.routeChange$ = this.routesService.routeChange$.subscribe({
       next: route => {
         this.decorateLink(route);
       }
@@ -26,16 +27,14 @@ export class ActiveLinkDirective implements OnInit, OnDestroy {
     this.routeChange$?.unsubscribe();
   }
 
-  private decorateLink(route: string): void {
-    if (this.appActiveLink === route) {
-      this.changeLinkToActive();
-    } else {
-      this.changeLinkToNotActive()
+  private decorateLink(route: string[]): void {
+    if (route.length >= this.routeIndex) {
+      if (this.appActiveLink === route[this.routeIndex]) {
+        this.changeLinkToActive();
+      } else {
+        this.changeLinkToNotActive();
+      }
     }
-  }
-
-  private getActiveRoute(): string {
-    return this.routesService.getActualRoute() ?? "";
   }
 
   private changeLinkToActive(): void {

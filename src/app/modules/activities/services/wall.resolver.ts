@@ -2,20 +2,21 @@ import { Injectable } from "@angular/core";
 import {
   Resolve,
   RouterStateSnapshot,
-  ActivatedRouteSnapshot
+  ActivatedRouteSnapshot, Router
 } from "@angular/router";
-import { Observable, of } from "rxjs";
+import { Observable, of, throwError } from "rxjs";
 import { WallPostsService, ScrollService } from "@app/core/services";
 import { ActivityType } from "@app/core/models";
-import { ActivitiesRoutes, SpinnerType } from "@app/core/enums";
+import { ActivitiesRoutes, AppRoutes, SpinnerType } from "@app/core/enums";
 import { Utils } from "@app/shared/utils";
 
 @Injectable()
-export class ActivitiesResolver implements Resolve<ActivityType[]> {
+export class WallResolver implements Resolve<ActivityType[]> {
 
   constructor(
-    private readonly activitiesService: WallPostsService,
-    private readonly scrollService: ScrollService
+    private readonly wallPostsService: WallPostsService,
+    private readonly scrollService: ScrollService,
+    private readonly router: Router
   ) {
   }
 
@@ -25,8 +26,8 @@ export class ActivitiesResolver implements Resolve<ActivityType[]> {
       const type = route.paramMap.get("type") || "";
       return this.getActivities$(+userId, 0, type);
     } else {
-      console.error("UserId not provided - return []");
-      return of([]);
+      this.router.navigate([`/${AppRoutes.home}`]).then();
+      return throwError(`User not provided - redirected to /home`);
     }
   }
 
@@ -34,20 +35,17 @@ export class ActivitiesResolver implements Resolve<ActivityType[]> {
     let activities$: Observable<ActivityType[]> = of([]);
     switch (type) {
       case ActivitiesRoutes.completed:
-        activities$ = this.activitiesService.getActivities$(userId, offset);
-        break;
-      case ActivitiesRoutes.liked:
-        activities$ = this.activitiesService.getLikedActivities$(userId, offset);
-        break;
-      case ActivitiesRoutes.my:
-        activities$ = this.activitiesService.getMyActivities$(userId, offset);
+        activities$ = this.wallPostsService.getCompletedActivities$(userId, offset);
         break;
       case ActivitiesRoutes.planned:
-        activities$ = this.activitiesService.getPlannedActivities$(userId, offset);
+        activities$ = this.wallPostsService.getPlannedRoutes$(userId, offset);
         break;
       case ActivitiesRoutes.events:
-        activities$ = this.activitiesService.getEventActivities$(userId, offset);
+        activities$ = this.wallPostsService.getEvents$(userId, offset);
         break;
+      default:
+        this.router.navigate([`/${AppRoutes.home}`]).then();
+        return throwError(`Not found route for type = ${type}`);
     }
     this.scrollService.clearScrollPosition(Utils.getScrollContainerId(type));
     return activities$;

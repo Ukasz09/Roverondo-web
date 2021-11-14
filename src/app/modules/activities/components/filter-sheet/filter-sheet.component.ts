@@ -41,7 +41,6 @@ export class FilterSheetComponent implements OnInit {
           console.error("User not found - not navigate");
         }
       }
-      this.spinner.hide(SpinnerType.main).then();
       this._bottomSheetRef.dismiss();
     });
   }

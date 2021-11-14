@@ -1,23 +1,24 @@
 import { Injectable } from "@angular/core";
-import { Subject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class RoutesService {
-  public readonly routeChange: Subject<string> = new Subject<string>();
+  private actualRoute = ["home"];
+  private readonly routeChangeSubject$: Subject<string[]> = new BehaviorSubject<string[]>(this.actualRoute);
 
-  private actualRoute?: string;
+  public readonly routeChange$ = this.routeChangeSubject$.asObservable();
 
   constructor() {
   }
 
-  public setActualRoute(value: string): void {
-    this.actualRoute = value;
-    this.routeChange.next(this.actualRoute);
+  public setActualRoute(route: string[]): void {
+    this.actualRoute = route;
+    this.routeChangeSubject$.next(this.actualRoute);
   }
 
-  public getActualRoute(): string | undefined {
+  public getActualRoute(): string[] {
     return this.actualRoute;
   }
 }

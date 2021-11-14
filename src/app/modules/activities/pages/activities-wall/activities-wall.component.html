@@ -1,7 +1,6 @@
 <div class="container">
   <app-aside-layout>
     <div class="content">
-      <ng-container *ngIf="wallReady">
         <div *ngIf="selectedActivity; else activitiesWall" class="details">
           <app-activity-details [id]="'activity-details'"
                                 [activity]="selectedActivity"
@@ -14,7 +13,7 @@
         <ng-template #activitiesWall>
           <div class="filter-btn">
             <app-page-title [user]="user" [headerText]="headerText"></app-page-title>
-            <app-glass-btn-mini (click)="openFilterSheet()">
+            <app-glass-btn-mini *ngIf="wallView"  (click)="openFilterSheet()">
               <mat-icon class="icon" id="filter-icon">filter_alt</mat-icon>
             </app-glass-btn-mini>
           </div>
@@ -27,7 +26,6 @@
             </app-activities-list>
           </div>
         </ng-template>
-      </ng-container>
     </div>
   </app-aside-layout>
 </div>

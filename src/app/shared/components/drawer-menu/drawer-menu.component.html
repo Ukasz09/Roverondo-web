@@ -25,43 +25,49 @@
     <ul class="drawer-links">
       <li><h3
         class="link"
-        (click)="navigate(AppRoutes.activities, ActivitiesRoutes.completed)"
-        [appActiveLink]="ActivitiesRoutes.completed"
-        id="all-activities">
+        (click)="navigateToWall(ActivitiesRoutes.completed)"
+        [appActiveLink]="ActivitiesRoutes.wall"
+        [routeIndex]="2"
+        id="wall">
         Wall
       </h3></li>
       <li><h3
         class="link"
-        [appActiveLink]="ActivitiesRoutes.my"
-        (click)="navigate(AppRoutes.activities,ActivitiesRoutes.my)"
+        [appActiveLink]="ActivitiesRoutes.completed"
+        (click)="navigate(AppRoutes.activities,ActivitiesRoutes.completed)"
+        [routeIndex]="2"
         id="my-activities">
-        My Activities
-      </h3></li>
-      <li><h3
-        class="link"
-        [appActiveLink]="ActivitiesRoutes.liked"
-        (click)="navigate(AppRoutes.activities,ActivitiesRoutes.liked)"
-        id="liked-activities">
-        Liked Activities
+        Activities
       </h3></li>
       <li><h3
         class="link"
         (click)="navigate(AppRoutes.activities, ActivitiesRoutes.planned)"
         [appActiveLink]="ActivitiesRoutes.planned"
-        id="plannedRoutes">
+        [routeIndex]="2"
+        id="my-planned-routes">
         Planned routes
       </h3></li>
       <li><h3
         class="link"
         (click)="navigate(AppRoutes.activities, ActivitiesRoutes.events)"
         [appActiveLink]="ActivitiesRoutes.events"
-        id="events">
+        [routeIndex]="2"
+        id="my-events">
         Events
+      </h3></li>
+      <li><h3
+        class="link"
+        [appActiveLink]="ActivitiesRoutes.liked"
+        [routeIndex]="2"
+        (click)="navigate(AppRoutes.activities,ActivitiesRoutes.liked)"
+        id="liked-activities">
+        Liked Activities
       </h3></li>
       <li><h3
         class="link"
         [routerLink]="getRouteLink([AppRoutes.leaderboard])"
         [appActiveLink]="AppRoutes.leaderboard"
+        [routeIndex]="0"
         (click)="closeDrawer.emit()"
         id="leaderboard">
         Leaderboard
@@ -70,12 +76,14 @@
         class="link"
         [appActiveLink]="UserRoutes.followers"
         (click)="navigate(AppRoutes.user,UserRoutes.followers)"
+        [routeIndex]="2"
         id="followers">
         Followers
       </h3></li>
       <li><h3
         class="link"
         [appActiveLink]="UserRoutes.followings"
+        [routeIndex]="2"
         (click)="navigate(AppRoutes.user,UserRoutes.followings)"
         id="following">
         Following

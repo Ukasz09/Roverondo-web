@@ -11,7 +11,7 @@ import {
   CommentsSheetComponent, EventParticipantsSheetComponent, FilterSheetComponent,
   ReactionsSheetComponent
 } from "./components";
-import { ActivitiesResolver } from "./services";
+import { PostsResolver, WallResolver } from "./services";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatListModule } from "@angular/material/list";
 import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
@@ -49,7 +49,8 @@ import {MatRippleModule} from '@angular/material/core';
     MatRippleModule
   ],
   providers: [
-    ActivitiesResolver,
+    WallResolver,
+    PostsResolver,
     LengthUnitPipe,
     DecimalPipe,
     SpeedUnitPipe

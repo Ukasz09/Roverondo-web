@@ -41,6 +41,10 @@ export class DrawerMenuComponent implements OnInit {
     this.closeDrawer.emit();
   }
 
+  public navigateToWall(type: ActivitiesRoutes): void {
+    this.navigate(AppRoutes.activities, `${ActivitiesRoutes.wall}/${type}`);
+  }
+
   public navigate(moduleRoute: string, subRoute: string): void {
     this.spinner.show(SpinnerType.main).then();
     this.currentUserService.currentUser$.subscribe((user) => {

@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { CurrentUserService, LayoutService, ScrollService, WallPostsService } from "@app/core/services";
-import { ActivitiesRoutes, AppRoutes, PostType, SpinnerType } from "@app/core/enums";
+import { ActivitiesRoutes, PostType, SpinnerType } from "@app/core/enums";
 import { ActivatedRoute } from "@angular/router";
 import { ScrollContainerComponent } from "@app/shared/components";
-import { ActivitiesResolver } from "../../services";
+import { PostsResolver, WallResolver } from "../../services";
 import { ActivityType, User } from "@app/core/models";
 import { switchMap } from "rxjs/operators";
 import { combineLatest, Observable, Subscription, throwError } from "rxjs";
@@ -23,8 +23,8 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
   public scrollContainerId = "activities-wall";
   public activities: ActivityType[] = [];
   public user!: User;
-  public wallReady = false;
   public selectedActivity?: ActivityType;
+  public wallView = false;
 
   private readonly loadMoreDataScrollOffsetPx = 700;
   private loadingMoreActivities = false;
@@ -36,7 +36,8 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
     private readonly layoutService: LayoutService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly activitiesService: WallPostsService,
-    private readonly activitiesResolver: ActivitiesResolver,
+    private readonly postsResolver: PostsResolver,
+    private readonly wallResolver: WallResolver,
     public readonly scrollService: ScrollService,
     public readonly currentUserService: CurrentUserService,
     private readonly spinner: NgxSpinnerService,
@@ -47,8 +48,9 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     combineLatest([
       this.activatedRoute.params,
-      this.activatedRoute.data
-    ]).subscribe(([params, data]) => {
+      this.activatedRoute.data,
+      this.activatedRoute.url
+    ]).subscribe(([params, data, url]) => {
       this.type = params.type;
       this.scrollContainerId = Utils.getScrollContainerId(this.type);
       this.activities = data.activities;
@@ -56,7 +58,7 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
       this.noMoreActivities = false;
       this.loadingMoreActivities = false;
       this.selectedActivity = undefined;
-      this.wallReady = true;
+      this.wallView = !!url.find(urlSegment => urlSegment.path === ActivitiesRoutes.wall);
       this.spinner.hide(SpinnerType.main).then();
     });
 
@@ -91,17 +93,18 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
   }
 
   public get headerText(): string {
+    const wallSuffixText=this.wallView ? 'wall' : '';
     switch (this.type) {
+      case ActivitiesRoutes.completed:
+        return `Activities ${wallSuffixText}`;
       case ActivitiesRoutes.events:
-        return "Events Wall";
+        return `Events ${wallSuffixText}`;
       case ActivitiesRoutes.planned:
-        return "Planned routes";
+        return `Planned routes ${wallSuffixText}`;
       case ActivitiesRoutes.liked:
         return "Liked activities";
-      case ActivitiesRoutes.my:
-        return "Activities";
       default:
-        return "Activities Wall";
+        return "Wall";
     }
   }
 
@@ -136,7 +139,10 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
     return this.currentUserService.currentUser$.pipe(
       switchMap((user) => {
         if (user) {
-          return this.activitiesResolver.getActivities$(user.id, this.activities.length, this.type);
+          if(this.wallView){
+            return this.wallResolver.getActivities$(user.id, this.activities.length, this.type);
+          }
+          return this.postsResolver.getActivities$(user.id, this.activities.length, this.type);
         }
         return throwError("User not found - data not fetched");
       })

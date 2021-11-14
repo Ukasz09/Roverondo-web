@@ -1,6 +1,6 @@
 export enum ActivitiesRoutes {
+  wall = "wall",
   completed = "completed",
-  my = "my",
   liked = "liked",
   planned = "planned",
   events = "events",
