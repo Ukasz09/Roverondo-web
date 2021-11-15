@@ -15,7 +15,7 @@
                     <div *ngIf="currentUser.id!== user.id " class="follow-btn-wrapper">
                       <app-glass-btn class="follow-btn" [paddingY]="'0'" (click)="onFollowClick()">
                         <mat-icon class="icon">
-                          {{alreadyFollowed ? 'remove' : 'add'}}
+                          {{alreadyFollowed ? 'close' : 'add'}}
                         </mat-icon>
                         <span>{{ alreadyFollowed ? 'Unfollow' : 'Follow'}}</span>
                       </app-glass-btn>

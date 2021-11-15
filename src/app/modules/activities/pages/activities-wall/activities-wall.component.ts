@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { CurrentUserService, LayoutService, ScrollService, WallPostsService } from "@app/core/services";
+import { LayoutService, ScrollService, WallPostsService } from "@app/core/services";
 import { ActivitiesRoutes, PostType, SpinnerType } from "@app/core/enums";
 import { ActivatedRoute } from "@angular/router";
 import { ScrollContainerComponent } from "@app/shared/components";
 import { PostsResolver, WallResolver } from "../../services";
 import { ActivityType, User } from "@app/core/models";
-import { switchMap } from "rxjs/operators";
 import { combineLatest, Observable, Subscription, throwError } from "rxjs";
 import { Utils } from "@app/shared/utils";
 import { NgxSpinnerService } from "ngx-spinner";
@@ -39,7 +38,6 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
     private readonly postsResolver: PostsResolver,
     private readonly wallResolver: WallResolver,
     public readonly scrollService: ScrollService,
-    public readonly currentUserService: CurrentUserService,
     private readonly spinner: NgxSpinnerService,
     private readonly _bottomSheet: MatBottomSheet
   ) {
@@ -136,17 +134,13 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
   }
 
   private getMoreActivitiesData$(): Observable<ActivityType[]> {
-    // TODO: FIX
-    return this.currentUserService.currentUser$.pipe(
-      switchMap((user) => {
-        if (user) {
-          if (this.wallView) {
-            return this.wallResolver.getActivities$(user.id, this.activities.length, this.type);
-          }
-          return this.postsResolver.getActivities$(user.id, this.activities.length, this.type);
-        }
-        return throwError("User not found - data not fetched");
-      })
-    );
+    if (this.user) {
+      if (this.wallView) {
+        return this.wallResolver.getActivities$(this.user.id, this.activities.length, this.type);
+      }
+      return this.postsResolver.getActivities$(this.user.id, this.activities.length, this.type);
+    } else {
+      return throwError("User not found - data not fetched");
+    }
   }
 }

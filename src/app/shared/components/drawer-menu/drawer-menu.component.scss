@@ -92,6 +92,8 @@
 .link {
   display: flex;
   flex-direction: row;
+  cursor: pointer !important;
+  outline: none;
 
   &#logout {
     margin-top: 2rem;
