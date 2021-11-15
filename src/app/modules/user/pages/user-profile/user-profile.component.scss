@@ -1,0 +1,135 @@
+@use "/src/app/styles/abstracts/mixins";
+@use "/src/app/styles/abstracts/functions";
+
+.container {
+  @include mixins.bg-fill();
+  @include mixins.max-viewport();
+  background-image: functions.image("activities-bg-3.jpg");
+
+  .content {
+    height: 100vh;
+    width: 100%;
+
+    @include mixins.media(sm-small) {
+      width: 90%;
+    }
+
+    @include mixins.media(sm-large) {
+      width: 85%;
+    }
+
+    app-glass-card {
+      height: 100%;
+      width: 100%;
+
+      .card-content {
+        @include mixins.py(0.5rem);
+        @include mixins.px(0.5rem);
+
+        @include mixins.media(sm-xsmall) {
+          @include mixins.py(1rem);
+          @include mixins.px(1rem);
+        }
+
+        @include mixins.media(md-small) {
+          @include mixins.px(1.5rem);
+        }
+
+        @include mixins.media(md-large) {
+          @include mixins.px(2.5rem);
+        }
+
+        .row {
+          display: flex;
+          flex-direction: row;
+
+          app-profile-avatar {
+            margin-right: 1rem;
+            width: 30%;
+
+            @include mixins.media(sm-xsmall) {
+              width: 20%;
+            }
+
+            @include mixins.media(sm-medium) {
+              width: 15%;
+            }
+
+            @include mixins.media(sm-large) {
+              width: 25%;
+            }
+
+            @include mixins.media(md-small) {
+              width: 20%;
+            }
+
+            @include mixins.media(md-large) {
+              width: 15%;
+            }
+          }
+
+          .basic-info {
+            background: red;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            .name-and-bio {
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+
+              .name {
+                height: 50%;
+                background: dimgray;
+              }
+
+              .bio {
+                height: 50%;
+                background: yellow;
+              }
+            }
+
+            .mobile-distance {
+              height: 50%;
+              background: aquamarine;
+              display: flex;
+              flex-direction: column;
+
+              @include mixins.media(md-small) {
+                display: none;
+              }
+            }
+          }
+
+          .native-stats {
+            background: cornflowerblue;
+            width: 50%;
+            display: none;
+
+            @include mixins.media(md-small) {
+              display: flex;
+            }
+          }
+
+          .follow, .likes {
+            display: flex;
+            flex-direction: column;
+            margin-top: 1rem;
+            background: goldenrod;
+            width: 50%;
+
+            @include mixins.media(md-small) {
+              display: none;
+            }
+          }
+        }
+
+        .plot {
+          margin-top: 1rem;
+          background: #f390cd;
+        }
+      }
+    }
+  }
+}

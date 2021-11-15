@@ -1,3 +1,55 @@
-<div>
-  {{  userStringify()  }}
+<div class="container">
+  <app-aside-layout [withAvatar]="false">
+    <div class="content">
+      <app-glass-card [borderRadius]="'0'">
+        <div class="card-content">
+          <div class="row">
+            <app-profile-avatar [avatarImgPath]="user.profilePicture" [nickname]="user.nickname"></app-profile-avatar>
+
+            <div class="basic-info">
+              <div class="name-and-bio">
+                <div class="name">
+                  //
+                </div>
+                <div class="bio">
+                  //
+                </div>
+              </div>
+              <div class="mobile-distance">
+                //
+              </div>
+            </div>
+
+            <div class="native-stats">
+              //
+            </div>
+
+          </div>
+          <div class="row">
+
+            <div class="follow">
+              //
+            </div>
+
+            <div class="likes">
+              //
+            </div>
+
+          </div>
+          <div class="plot">
+            monthly activities
+          </div>
+          <div class="plot">
+            monthly distance
+          </div>
+          <div class="plot">
+            monthly elevation
+          </div>
+          <div class="plot">
+            monthly speed
+          </div>
+        </div>
+      </app-glass-card>
+    </div>
+  </app-aside-layout>
 </div>

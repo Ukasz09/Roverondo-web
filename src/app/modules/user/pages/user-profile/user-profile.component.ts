@@ -10,7 +10,7 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ["./user-profile.component.scss"]
 })
 export class UserProfileComponent implements OnInit {
-  private user!: User;
+  public user!: User;
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,

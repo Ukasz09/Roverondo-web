@@ -12,22 +12,23 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ["./drawer-menu.component.scss"]
 })
 export class DrawerMenuComponent implements OnInit {
+  @Input() public menuForMobile = false;
+  @Input() public withAvatar = true;
+
   public readonly AppRoutes = AppRoutes;
   public readonly ActivitiesRoutes = ActivitiesRoutes;
   public readonly UserRoutes = UserRoutes;
 
-  @Input() menuForMobile = false;
-
-  @Output() closeDrawer = new EventEmitter<void>();
-
   constructor(
-    @Inject(DOCUMENT) private readonly document: Document,
     public readonly auth: AuthService,
-    private readonly currentUserService: CurrentUserService,
+    public readonly currentUserService: CurrentUserService,
     private readonly router: Router,
-    private readonly spinner: NgxSpinnerService
+    private readonly spinner: NgxSpinnerService,
+    @Inject(DOCUMENT) private readonly document: Document,
   ) {
   }
+
+  @Output() closeDrawer = new EventEmitter<void>();
 
   public ngOnInit(): void {
   }
@@ -61,5 +62,9 @@ export class DrawerMenuComponent implements OnInit {
 
   public get homeRouterLink(): string {
     return `/${AppRoutes.home}`;
+  }
+
+  public navigateToUserProfile(userId: number): void {
+    this.router.navigate([`${AppRoutes.user}/${userId.toString()}/${UserRoutes.profile}`]).then();
   }
 }

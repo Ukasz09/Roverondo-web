@@ -74,6 +74,10 @@
     width: fit-content;
     margin: auto;
   }
+
+  .divider {
+    @include mixins.my(2rem);
+  }
 }
 
 .profile-spinner-wrapper {
@@ -85,19 +89,19 @@
   align-items: center;
 }
 
-.link{
+.link {
   display: flex;
   flex-direction: row;
 
-  &#logout{
+  &#logout {
     margin-top: 2rem;
   }
 
-  .logout-text{
+  .logout-text {
     margin-right: 0.5rem;
   }
 
-  .icon{
+  .icon {
     display: flex;
     flex-direction: row;
     align-items: center;
