@@ -9,33 +9,41 @@
             <div class="basic-info">
               <div class="name-and-bio">
                 <div class="name">
-                  //
+                  {{ user.nickname }}
                 </div>
-                <div class="bio">
-                  //
+                <div *ngIf="user.bio" class="bio">
+                  <span>
+                     {{user.bio}}
+                  </span>
                 </div>
               </div>
-              <div class="mobile-distance">
-                //
+
+              <div class="mobile-distance" [ngStyle]="{'margin-top':user.bio ? '0' : '1rem' }">
+                <ng-container [ngTemplateOutlet]="distanceStatsTemplate"></ng-container>
               </div>
             </div>
-
             <div class="native-stats">
-              //
+              <ng-container [ngTemplateOutlet]="distanceStatsTemplate"></ng-container>
+              <ng-container [ngTemplateOutlet]="followStatsTemplate"></ng-container>
+              <ng-container [ngTemplateOutlet]="likeStatsTemplate"></ng-container>
             </div>
-
           </div>
-          <div class="row">
-
+          <hr class="mobile-hide">
+          <div class="row mobile-hide" style="justify-content: space-between; margin-top: 1rem">
             <div class="follow">
-              //
+              <ng-container [ngTemplateOutlet]="followStatsTemplate"></ng-container>
             </div>
-
             <div class="likes">
-              //
+              <ng-container [ngTemplateOutlet]="likeStatsTemplate"></ng-container>
             </div>
-
           </div>
+          <hr class="mobile-hide">
+          <div class="row" style="display: flex; justify-content: center">
+            <app-glass-btn class="follow-btn" [paddingY]="'0'">
+              <span>Follow</span>
+            </app-glass-btn>
+          </div>
+
           <div class="plot">
             monthly activities
           </div>
@@ -53,3 +61,36 @@
     </div>
   </app-aside-layout>
 </div>
+
+<ng-template #likeStatsTemplate>
+  <div>
+    <span class="label">Received likes:</span>
+    <span class="value">23</span>
+  </div>
+  <div>
+    <span class="label">Given likes:</span>
+    <span class="value">12</span>
+  </div>
+</ng-template>
+
+<ng-template #followStatsTemplate>
+  <div>
+    <span class="label">Followers:</span>
+    <span class="value">25</span>
+  </div>
+  <div>
+    <span class="label">Following:</span>
+    <span class="value">43</span>
+  </div>
+</ng-template>
+
+<ng-template #distanceStatsTemplate>
+  <div>
+    <span class="label">Distance travelled:</span>
+    <span class="value">1050km</span>
+  </div>
+  <div>
+    <span class="label">Time in motion:</span>
+    <span class="value">51:49h</span>
+  </div>
+</ng-template>

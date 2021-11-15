@@ -25,7 +25,4 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  public userStringify(): string {
-    return JSON.stringify(this.user);
-  }
 }

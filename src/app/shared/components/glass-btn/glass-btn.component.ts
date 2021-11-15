@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
   selector: "app-glass-btn",
@@ -6,6 +6,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./glass-btn.component.scss"]
 })
 export class GlassBtnComponent implements OnInit {
+  @Input() paddingY = "0.5rem";
 
   constructor() {
   }
