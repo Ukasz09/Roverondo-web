@@ -3,6 +3,7 @@ import { ActivatedRoute, Data } from "@angular/router";
 import { User } from "@app/core/models";
 import { SpinnerType } from "@app/core/enums";
 import { NgxSpinnerService } from "ngx-spinner";
+import { CurrentUserService } from "@app/core/services";
 
 @Component({
   selector: "app-user-profile",
@@ -11,8 +12,10 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class UserProfileComponent implements OnInit {
   public user!: User;
+  public alreadyFollowed = false;
 
   constructor(
+    public readonly currentUserService: CurrentUserService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly spinner: NgxSpinnerService
   ) {
@@ -23,6 +26,11 @@ export class UserProfileComponent implements OnInit {
       this.user = data.user;
       this.spinner.hide(SpinnerType.main).then();
     });
+  }
+
+  public onFollowClick(): void {
+    this.alreadyFollowed = !this.alreadyFollowed;
+    // TODO: add logic
   }
 
 }

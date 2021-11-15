@@ -5,18 +5,32 @@
         <div class="card-content">
           <div class="row">
             <app-profile-avatar [avatarImgPath]="user.profilePicture" [nickname]="user.nickname"></app-profile-avatar>
-
             <div class="basic-info">
+
               <div class="name-and-bio">
-                <div class="name">
-                  {{ user.nickname }}
+                <div class="name-and-follow-btn">
+                  <div class="name">
+                    {{ user.nickname }}
+                  </div>
+                  <ng-container *ngIf="currentUserService.currentUser$ | async as currentUser">
+                    <div *ngIf="currentUser.id!== user.id " class="follow-btn-wrapper">
+                      <app-glass-btn class="follow-btn" [paddingY]="'0'" (click)="onFollowClick()">
+                        <mat-icon style="margin-right: 0.5rem">
+                          {{alreadyFollowed ? 'remove' : 'add'}}
+                        </mat-icon>
+                        <span>{{ alreadyFollowed ? 'Unfollow' : 'Follow'}}</span>
+                      </app-glass-btn>
+                    </div>
+                  </ng-container>
                 </div>
+
                 <div *ngIf="user.bio" class="bio">
                   <span>
                      {{user.bio}}
                   </span>
                 </div>
               </div>
+
 
               <div class="mobile-distance" [ngStyle]="{'margin-top':user.bio ? '0' : '1rem' }">
                 <ng-container [ngTemplateOutlet]="distanceStatsTemplate"></ng-container>
@@ -37,13 +51,7 @@
               <ng-container [ngTemplateOutlet]="likeStatsTemplate"></ng-container>
             </div>
           </div>
-          <hr class="mobile-hide">
-          <div class="row" style="display: flex; justify-content: center">
-            <app-glass-btn class="follow-btn" [paddingY]="'0'">
-              <span>Follow</span>
-            </app-glass-btn>
-          </div>
-
+          <hr>
           <div class="plot">
             monthly activities
           </div>

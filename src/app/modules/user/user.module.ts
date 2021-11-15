@@ -5,6 +5,7 @@ import { AppSharedModule } from "@app/shared";
 import { UserRoutingModule } from "./user-routing.module";
 import { FollowersResolver, FollowingsResolver } from "./services";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatIconModule } from "@angular/material/icon";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     CommonModule,
     AppSharedModule,
     UserRoutingModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   exports: [],
   providers: [
