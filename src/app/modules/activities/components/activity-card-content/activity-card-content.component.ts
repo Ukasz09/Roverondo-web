@@ -59,7 +59,7 @@ export class ActivityCardContentComponent implements OnInit {
   }
 
   public get userProfileLink(): string {
-    return `/${AppRoutes.user}/${UserRoutes.profile}/${this.activity.user.id}`;
+    return `/${AppRoutes.user}/${this.activity.user.id}/${UserRoutes.profile}`;
   }
 
   public get alreadyReacted(): boolean {

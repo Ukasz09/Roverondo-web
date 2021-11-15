@@ -27,4 +27,5 @@ export class ReactionsSheetComponent implements OnInit {
       this.userList = reactions.map(r => r.user);
     });
   }
+
 }

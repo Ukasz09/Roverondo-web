@@ -120,7 +120,7 @@
 
                 .follow-btn {
                   width: 100%;
-                  max-width: 200px;
+                  max-width: 150px;
                   margin-top: 1rem;
 
                   @include mixins.media(xs-medium) {
@@ -248,6 +248,24 @@
           margin-top: 1rem;
           background: #f390cd;
         }
+
+        .links{
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: space-evenly;
+
+          @include mixins.media(md-small){
+            justify-content: center;
+          }
+
+          app-glass-btn{
+            margin-right: 1rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            width: 200px;
+          }
+          //justify-content: space-between;
+        }
       }
     }
 
@@ -259,6 +277,10 @@
     hr {
       border-color: variables.$text-muted-color;
       opacity: 0.1;
+    }
+
+    .icon {
+      margin-right: 0.5rem;
     }
   }
 }

@@ -31,10 +31,6 @@ export class UserListComponent implements OnInit {
     return this.layoutService.layoutType === LayoutType.ASIDE_MOBILE;
   }
 
-  public get homeRouterLink(): string {
-    return `/${AppRoutes.home}`;
-  }
-
   public rankMedalImg(index: number): string | undefined {
     return this.rankMedals[index];
   }

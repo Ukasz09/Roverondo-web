@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Data } from "@angular/router";
+import { ActivatedRoute, Data, Router } from "@angular/router";
 import { User } from "@app/core/models";
-import { SpinnerType } from "@app/core/enums";
+import { ActivitiesRoutes, AppRoutes, SpinnerType, UserRoutes } from "@app/core/enums";
 import { NgxSpinnerService } from "ngx-spinner";
 import { CurrentUserService } from "@app/core/services";
 
@@ -17,7 +17,8 @@ export class UserProfileComponent implements OnInit {
   constructor(
     public readonly currentUserService: CurrentUserService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly spinner: NgxSpinnerService
+    private readonly spinner: NgxSpinnerService,
+    private readonly router: Router
   ) {
   }
 
@@ -33,4 +34,27 @@ export class UserProfileComponent implements OnInit {
     // TODO: add logic
   }
 
+  public navigateToActivities(): void {
+    this.router.navigate([`/${AppRoutes.activities}/${this.user.id}/${ActivitiesRoutes.completed}`]).then();
+  }
+
+  public navigateToPlannedRoutes(): void {
+    this.router.navigate([`/${AppRoutes.activities}/${this.user.id}/${ActivitiesRoutes.planned}`]).then();
+  }
+
+  public navigateToEvents(): void {
+    this.router.navigate([`/${AppRoutes.activities}/${this.user.id}/${ActivitiesRoutes.events}`]).then();
+  }
+
+  public navigateToLiked(): void {
+    this.router.navigate([`/${AppRoutes.activities}/${this.user.id}/${ActivitiesRoutes.liked}`]).then();
+  }
+
+  public navigateToFollowers(): void {
+    this.router.navigate([`/${AppRoutes.user}/${this.user.id}/${UserRoutes.followers}`]).then();
+  }
+
+  public navigateToFollowings(): void {
+    this.router.navigate([`/${AppRoutes.user}/${this.user.id}/${UserRoutes.followings}`]).then();
+  }
 }

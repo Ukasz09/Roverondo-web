@@ -22,6 +22,6 @@ export class UserCardComponent implements OnInit {
   }
 
   public onUserClick(user: User): void {
-    this.router.navigate([`${AppRoutes.user}/${UserRoutes.profile}/${user.id}`]).then();
+    this.router.navigate([`${AppRoutes.user}/${user.id}/${UserRoutes.profile}`]).then();
   }
 }

@@ -93,7 +93,7 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
   }
 
   public get headerText(): string {
-    const wallSuffixText=this.wallView ? 'wall' : '';
+    const wallSuffixText = this.wallView ? "wall" : "";
     switch (this.type) {
       case ActivitiesRoutes.completed:
         return `Activities ${wallSuffixText}`;
@@ -136,10 +136,11 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
   }
 
   private getMoreActivitiesData$(): Observable<ActivityType[]> {
+    // TODO: FIX
     return this.currentUserService.currentUser$.pipe(
       switchMap((user) => {
         if (user) {
-          if(this.wallView){
+          if (this.wallView) {
             return this.wallResolver.getActivities$(user.id, this.activities.length, this.type);
           }
           return this.postsResolver.getActivities$(user.id, this.activities.length, this.type);

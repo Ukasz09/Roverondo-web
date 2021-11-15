@@ -3,6 +3,7 @@
     <app-logo-text [routerLink]="homeRouterLink" [lightText]="false"></app-logo-text>
   </div>
   <app-profile-avatar [avatarImgPath]="user.profilePicture"
+                      [userId]="user.id"
                       [nickname]="user.nickname"></app-profile-avatar>
   <div class="text">{{ headerText }}</div>
 </div>

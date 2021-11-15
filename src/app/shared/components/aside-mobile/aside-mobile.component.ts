@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Icons } from "@app/core/enums";
 import { Utils } from "@app/shared/utils";
 import { AuthService } from "@auth0/auth0-angular";
+import { CurrentUserService } from "@app/core/services";
 
 @Component({
   selector: "app-aside-mobile",
@@ -9,15 +10,12 @@ import { AuthService } from "@auth0/auth0-angular";
   styleUrls: ["./aside-mobile.component.scss"]
 })
 export class AsideMobileComponent implements OnInit {
-  @Input()
-  public withAvatar = true;
+  @Input() public withAvatar = true;
+  @Output() public hamburgerMenuClick: EventEmitter<void> = new EventEmitter();
 
-  @Output()
-  public hamburgerMenuClick: EventEmitter<void> = new EventEmitter();
+  public Icons = Icons;
 
-  public iconsClassRef = Icons;
-
-  constructor(public readonly auth: AuthService) {
+  constructor(public readonly currentUserService: CurrentUserService) {
   }
 
   public ngOnInit(): void {
@@ -29,9 +27,5 @@ export class AsideMobileComponent implements OnInit {
 
   public getIconPath(iconName: string): string {
     return Utils.getIconPath(iconName);
-  }
-
-  public getDefaultUserPicture(name?: string): string {
-    return Utils.getInitialsImage(name as string);
   }
 }

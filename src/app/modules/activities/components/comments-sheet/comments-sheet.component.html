@@ -14,9 +14,10 @@
         <div class="comment-wrapper">
           <div style="display: flex; flex-direction: row">
             <div class="user">
-              <app-profile-avatar (click)="navigateToProfile(comment.user.id)"
+              <app-profile-avatar [userId]="comment.user.id"
                                   [avatarImgPath]="comment.user.profilePicture"
                                   [nickname]="comment.user.nickname"
+                                  (click)="dismissSheet()"
               ></app-profile-avatar>
               <span class="name" (click)="navigateToProfile(comment.user.id)">{{comment.user.nickname}}</span>
             </div>

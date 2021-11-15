@@ -28,10 +28,14 @@ export class UserListBottomSheetComponent implements OnInit {
 
   public navigateToProfile(userId: string | number): void {
     this.router.navigate([this.getUserProfileLink(userId)]).then();
+    this.dismissSheet();
+  }
+
+  public dismissSheet(): void {
     this._bottomSheetRef.dismiss();
   }
 
   public getUserProfileLink(userId: string | number): string {
-    return `/${AppRoutes.user}/${UserRoutes.profile}/${userId?.toString()}`;
+    return `/${AppRoutes.user}/${userId}/${UserRoutes.profile}`;
   }
 }

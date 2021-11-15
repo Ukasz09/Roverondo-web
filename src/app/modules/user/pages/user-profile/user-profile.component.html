@@ -4,18 +4,17 @@
       <app-glass-card [borderRadius]="'0'">
         <div class="card-content">
           <div class="row">
-            <app-profile-avatar [avatarImgPath]="user.profilePicture" [nickname]="user.nickname"></app-profile-avatar>
+            <app-profile-avatar [avatarImgPath]="user.profilePicture"
+                                [nickname]="user.nickname"
+                                [userId]="user.id"></app-profile-avatar>
             <div class="basic-info">
-
               <div class="name-and-bio">
                 <div class="name-and-follow-btn">
-                  <div class="name">
-                    {{ user.nickname }}
-                  </div>
+                  <div class="name">{{ user.nickname }}</div>
                   <ng-container *ngIf="currentUserService.currentUser$ | async as currentUser">
                     <div *ngIf="currentUser.id!== user.id " class="follow-btn-wrapper">
                       <app-glass-btn class="follow-btn" [paddingY]="'0'" (click)="onFollowClick()">
-                        <mat-icon style="margin-right: 0.5rem">
+                        <mat-icon class="icon">
                           {{alreadyFollowed ? 'remove' : 'add'}}
                         </mat-icon>
                         <span>{{ alreadyFollowed ? 'Unfollow' : 'Follow'}}</span>
@@ -23,15 +22,10 @@
                     </div>
                   </ng-container>
                 </div>
-
                 <div *ngIf="user.bio" class="bio">
-                  <span>
-                     {{user.bio}}
-                  </span>
+                  <span>{{user.bio}}</span>
                 </div>
               </div>
-
-
               <div class="mobile-distance" [ngStyle]="{'margin-top':user.bio ? '0' : '1rem' }">
                 <ng-container [ngTemplateOutlet]="distanceStatsTemplate"></ng-container>
               </div>
@@ -50,6 +44,33 @@
             <div class="likes">
               <ng-container [ngTemplateOutlet]="likeStatsTemplate"></ng-container>
             </div>
+          </div>
+          <hr>
+          <div class="links">
+            <app-glass-btn [paddingY]="'0'" (click)="navigateToActivities()">
+              <mat-icon class="icon">directions_bike</mat-icon>
+              <span>Activities</span>
+            </app-glass-btn>
+            <app-glass-btn [paddingY]="'0'" (click)="navigateToPlannedRoutes()">
+              <mat-icon class="icon">lightbulb</mat-icon>
+              <span>Planned routes</span>
+            </app-glass-btn>
+            <app-glass-btn [paddingY]="'0'" (click)="navigateToEvents()">
+              <mat-icon class="icon">event</mat-icon>
+              <span>Events</span>
+            </app-glass-btn>
+            <app-glass-btn [paddingY]="'0'" (click)="navigateToLiked()">
+              <mat-icon class="icon liked-activities">favorite</mat-icon>
+              <span>Liked activities</span>
+            </app-glass-btn>
+            <app-glass-btn [paddingY]="'0'" (click)="navigateToFollowers()">
+              <mat-icon class="icon">people</mat-icon>
+              <span>Followers</span>
+            </app-glass-btn>
+            <app-glass-btn [paddingY]="'0'" (click)="navigateToFollowings()">
+              <mat-icon class="icon">groups</mat-icon>
+              <span>Followings</span>
+            </app-glass-btn>
           </div>
           <hr>
           <div class="plot">

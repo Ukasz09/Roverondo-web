@@ -5,9 +5,10 @@
         <div class="reaction-wrapper">
           <div style="display: flex; flex-direction: row">
             <div class="user">
-              <app-profile-avatar (click)="navigateToProfile(user.id)"
+              <app-profile-avatar [userId]="user.id"
                                   [avatarImgPath]="user.profilePicture"
                                   [nickname]="user.nickname"
+                                  (click)="dismissSheet()"
               ></app-profile-avatar>
               <span class="name" (click)="navigateToProfile(user.id)">{{user.nickname}}</span>
             </div>
