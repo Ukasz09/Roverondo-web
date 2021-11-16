@@ -35,26 +35,31 @@ export class UserProfileComponent implements OnInit {
   }
 
   public navigateToActivities(): void {
-    this.router.navigate([`/${AppRoutes.activities}/${this.user.id}/${ActivitiesRoutes.completed}`]).then();
+    this.navigateWithSpinner(`/${AppRoutes.activities}/${this.user.id}/${ActivitiesRoutes.completed}`);
   }
 
   public navigateToPlannedRoutes(): void {
-    this.router.navigate([`/${AppRoutes.activities}/${this.user.id}/${ActivitiesRoutes.planned}`]).then();
+    this.navigateWithSpinner(`/${AppRoutes.activities}/${this.user.id}/${ActivitiesRoutes.planned}`);
   }
 
   public navigateToEvents(): void {
-    this.router.navigate([`/${AppRoutes.activities}/${this.user.id}/${ActivitiesRoutes.events}`]).then();
+    this.navigateWithSpinner(`/${AppRoutes.activities}/${this.user.id}/${ActivitiesRoutes.events}`);
   }
 
   public navigateToLiked(): void {
-    this.router.navigate([`/${AppRoutes.activities}/${this.user.id}/${ActivitiesRoutes.liked}`]).then();
+    this.navigateWithSpinner(`/${AppRoutes.activities}/${this.user.id}/${ActivitiesRoutes.liked}`);
   }
 
   public navigateToFollowers(): void {
-    this.router.navigate([`/${AppRoutes.user}/${this.user.id}/${UserRoutes.followers}`]).then();
+    this.navigateWithSpinner(`/${AppRoutes.user}/${this.user.id}/${UserRoutes.followers}`);
   }
 
   public navigateToFollowings(): void {
-    this.router.navigate([`/${AppRoutes.user}/${this.user.id}/${UserRoutes.followings}`]).then();
+    this.navigateWithSpinner(`/${AppRoutes.user}/${this.user.id}/${UserRoutes.followings}`);
+  }
+
+  private navigateWithSpinner(route: string): void {
+    this.router.navigate([route]).then();
+    this.spinner.show(SpinnerType.main).then();
   }
 }

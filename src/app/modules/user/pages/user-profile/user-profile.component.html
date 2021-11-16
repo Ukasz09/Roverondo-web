@@ -27,21 +27,36 @@
                 </div>
               </div>
               <div class="mobile-distance" [ngStyle]="{'margin-top':user.bio ? '0' : '1rem' }">
-                <ng-container [ngTemplateOutlet]="distanceStatsTemplate"></ng-container>
+                <!--                <ng-container [ngTemplateOutlet]="distanceStatsTemplate"></ng-container>-->
               </div>
             </div>
             <div class="native-stats">
-              <ng-container [ngTemplateOutlet]="distanceStatsTemplate"></ng-container>
+              <div>
+                <span class="label">Distance travelled:</span>
+                <span class="value">1050km</span>
+              </div>
+              <div>
+                <span class="label">Time in motion:</span>
+                <span class="value">51:49h</span>
+              </div>
               <ng-container [ngTemplateOutlet]="followStatsTemplate"></ng-container>
               <ng-container [ngTemplateOutlet]="likeStatsTemplate"></ng-container>
             </div>
           </div>
           <hr class="mobile-hide">
-          <div class="row mobile-hide" style="justify-content: space-between; margin-top: 1rem">
-            <div class="follow">
+          <div class="row mobile-hide mobile-stats">
+            <div class="column">
+              <div>
+                <span class="label">Distance travelled:</span>
+                <span class="value">1050km</span>
+              </div>
               <ng-container [ngTemplateOutlet]="followStatsTemplate"></ng-container>
             </div>
-            <div class="likes">
+            <div class="column">
+              <div>
+                <span class="label">Time in motion:</span>
+                <span class="value">51:49h</span>
+              </div>
               <ng-container [ngTemplateOutlet]="likeStatsTemplate"></ng-container>
             </div>
           </div>
@@ -110,16 +125,5 @@
   <div>
     <span class="label">Following:</span>
     <span class="value">43</span>
-  </div>
-</ng-template>
-
-<ng-template #distanceStatsTemplate>
-  <div>
-    <span class="label">Distance travelled:</span>
-    <span class="value">1050km</span>
-  </div>
-  <div>
-    <span class="label">Time in motion:</span>
-    <span class="value">51:49h</span>
   </div>
 </ng-template>
