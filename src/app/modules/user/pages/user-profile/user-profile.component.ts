@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Data, Router } from "@angular/router";
-import { User } from "@app/core/models";
+import { Gender, User } from "@app/core/models";
 import { ActivitiesRoutes, AppRoutes, SpinnerType, UserRoutes } from "@app/core/enums";
 import { NgxSpinnerService } from "ngx-spinner";
 import { CurrentUserService } from "@app/core/services";
@@ -56,6 +56,29 @@ export class UserProfileComponent implements OnInit {
 
   public navigateToFollowings(): void {
     this.navigateWithSpinner(`/${AppRoutes.user}/${this.user.id}/${UserRoutes.followings}`);
+  }
+
+  public get userGender(): Gender {
+    // TODO: tmp mocked - integrate with backend
+    return Gender.female;
+  }
+
+  public get userWeightText():string{
+    if(this.user.weight){
+      return `${this.user.weight}kg`
+    }
+    return "Not specified";
+  }
+
+  public get userGenderIcon(): string {
+    switch (this.userGender) {
+      case Gender.male:
+        return "male";
+      case Gender.female:
+        return "female";
+      default:
+        return "transgender";
+    }
   }
 
   private navigateWithSpinner(route: string): void {

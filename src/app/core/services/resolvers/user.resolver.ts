@@ -21,7 +21,7 @@ export class UserResolver implements Resolve<User> {
 
   public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User> {
     const userId = route.paramMap.get("userId");
-    if (!userId) {
+    if (!userId || isNaN(+userId)) {
       this.navigateHomeAndHideSpinner();
       return throwError("User id not given");
     }
