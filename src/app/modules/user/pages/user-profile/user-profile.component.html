@@ -101,17 +101,43 @@
             </app-glass-btn>
           </div>
           <hr>
-          <div class="plot">
-            monthly activities
-          </div>
-          <div class="plot">
-            monthly distance
-          </div>
-          <div class="plot">
-            monthly elevation
-          </div>
-          <div class="plot">
-            monthly speed
+          <div *ngIf="plotData; else spinner" class="plot-wrapper">
+            <div class="plot">
+              <div class="label">Activities</div>
+              <app-area-graph [id]="'activities-plot'"
+                              [label]="'Activities'"
+                              [data]="plotData.activities"
+                              [xAxis]="false"
+                              [yScaleMin]="0">
+              </app-area-graph>
+            </div>
+            <div class="plot">
+              <div class="label">Distance</div>
+              <app-area-graph [id]="'distance-plot'"
+                              [label]="'Distance'"
+                              [data]="plotData.distance"
+                              [xAxis]="false"
+                              [yScaleMin]="0">
+              </app-area-graph>
+            </div>
+            <div class="plot">
+              <div class="label">Elevation</div>
+              <app-area-graph [id]="'elevation-plot'"
+                              [label]="'Elevation'"
+                              [data]="plotData.elevation"
+                              [xAxis]="false"
+                              [yScaleMin]="0">
+              </app-area-graph>
+            </div>
+            <div class="plot">
+              <div class="label">Average Speed</div>
+              <app-area-graph [id]="'speed-plot'"
+                              [label]="'Speed'"
+                              [data]="plotData.averageSpeed"
+                              [xAxis]="false"
+                              [yScaleMin]="0">
+              </app-area-graph>
+            </div>
           </div>
         </div>
       </app-glass-card>
@@ -152,5 +178,11 @@
   <div>
     <span class="label">Time in motion:</span>
     <span class="value">{{ timeInMotionText }}</span>
+  </div>
+</ng-template>
+
+<ng-template #spinner>
+  <div class="spinner-wrapper">
+    <mat-spinner></mat-spinner>
   </div>
 </ng-template>

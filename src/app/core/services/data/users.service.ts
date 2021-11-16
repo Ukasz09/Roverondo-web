@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { User, UserExtended, UserPlotData } from "@app/core/models";
-import { map, tap } from "rxjs/operators";
+import { delay, map, tap } from "rxjs/operators";
 import { environment } from "@app/env";
 import { UserAllTimeStatisticsAdapterService, UserPlotDataAdapterService } from "../adapters";
 
@@ -62,7 +62,7 @@ export class UsersService {
     const mockedDataList = this.userPlotDataAdapter.getMockedDataList();
     return of(mockedDataList).pipe(
       map(userStatPeriod => this.userPlotDataAdapter.adapt(userStatPeriod)),
-      tap(d => console.log(d))
+      tap(d => console.log(d)),
     );
   }
 }

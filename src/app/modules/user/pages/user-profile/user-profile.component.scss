@@ -263,10 +263,29 @@
           }
         }
 
-        .plot {
+        .plot-wrapper {
           margin-top: 1rem;
-          background: #f390cd;
+          display: flex;
+          flex-direction: column;
+
+          .label {
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-size: 18px;
+
+            @include mixins.media(md-large) {
+              font-size: 20px;
+            }
+          }
+
+          .plot {
+            margin-top: 1rem;
+            margin-bottom: 4rem;
+            width: 100%;
+            height: 250px;
+          }
         }
+
 
         .links {
           display: flex;
@@ -310,4 +329,10 @@
   @include mixins.media(md-small) {
     display: none !important;
   }
+}
+
+.spinner-wrapper {
+  @include mixins.py(5rem);
+  display: flex;
+  justify-content: center;
 }

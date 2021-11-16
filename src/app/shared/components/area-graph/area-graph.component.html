@@ -12,7 +12,8 @@
     [results]="data"
     [gradient]="withGradient"
     [scheme]="colorScheme"
-    [yScaleMin]="yScaleMin"
+    [yScaleMin]="yScaleMin ?? 0"
+    [autoScale]="yScaleMin===undefined"
     [animations]="true"
   >
   </ngx-charts-area-chart>

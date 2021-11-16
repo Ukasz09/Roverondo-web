@@ -1,36 +1,50 @@
 import { Injectable } from "@angular/core";
-import { Adapter } from "@app/core/services";
-import { UserPlotData, UserStatisticsPeriod } from "@app/core/models";
+import { Adapter, MockedSpeedAdapterService } from "@app/core/services";
+import { PlotData, UserPlotData, UserStatisticsPeriod } from "@app/core/models";
 import { Utils } from "@app/shared/utils";
 
 @Injectable({
   providedIn: "root"
 })
 export class UserPlotDataAdapterService implements Adapter<UserPlotData> {
-  public adapt(statisticsPeriods: UserStatisticsPeriod[]): UserPlotData {
-    const userPlotData: UserPlotData = {
-      activities: { name: "activities", series: [] },
-      averageSpeed: { name: "averageSpeed", series: [] },
-      distance: { name: "distance", series: [] },
-      elevation: { name: "elevation", series: [] }
-    };
-    for (const stats of statisticsPeriods) {
-      userPlotData.activities.series.push({ name: stats.from, value: stats.activities });
-      userPlotData.averageSpeed.series.push({ name: stats.from, value: stats.avgSpeed });
-      userPlotData.distance.series.push({ name: stats.from, value: stats.distance });
-      userPlotData.elevation.series.push({ name: stats.from, value: stats.elevation });
-    }
-    return userPlotData;
+  constructor(private readonly mockedSpeedAdapter: MockedSpeedAdapterService) {
   }
 
-  public getMockedData(): UserStatisticsPeriod {
-    const activities = Utils.randomNumber(0, 8);
-    const avgSpeed = activities ? Utils.randomNumber(17, 45) : 0;
-    const distance = activities ? Utils.randomNumber(activities * 15, 900) : 0;
-    const elevation = activities ? Utils.randomNumber(970, 1250) : 0;
+
+  public adapt(statisticsPeriods: UserStatisticsPeriod[]): UserPlotData {
+    const activities: PlotData = { name: "activities", series: [] };
+    const averageSpeed: PlotData = { name: "averageSpeed", series: [] };
+    const distance: PlotData = { name: "distance", series: [] };
+    const elevation: PlotData = { name: "elevation", series: [] };
+
+    for (const stats of statisticsPeriods) {
+      activities.series.push({ name: stats.from, value: stats.activities });
+      if (stats.avgSpeed) {
+        averageSpeed.series.push({ name: stats.from, value: stats.avgSpeed });
+      }
+      if (stats.distance) {
+        distance.series.push({ name: stats.from, value: stats.distance });
+      }
+      if (stats.elevation) {
+        elevation.series.push({ name: stats.from, value: stats.elevation });
+      }
+    }
     return {
-      from: new Date().toISOString(),
-      to: new Date().toISOString(),
+      activities: [activities],
+      averageSpeed: [averageSpeed],
+      distance: [distance],
+      elevation: [elevation]
+    };
+  }
+
+  public getMockedData(index: number): UserStatisticsPeriod {
+    const activities = Math.trunc(Utils.randomNumber(0, 8));
+    const avgSpeed = activities ? Utils.randomNumber(25, 35) : 0;
+    const distance = activities ? Math.trunc(Utils.randomNumber(activities * 15, 900)) : 0;
+    const elevation = activities ? Math.trunc(Utils.randomNumber(970, 1250)) : 0;
+    return {
+      from: (index - 1).toString(),
+      to: index.toString(),
       activities,
       avgSpeed,
       distance,
@@ -41,7 +55,7 @@ export class UserPlotDataAdapterService implements Adapter<UserPlotData> {
   public getMockedDataList(pointsQty = 100): UserStatisticsPeriod[] {
     const data: UserStatisticsPeriod[] = [];
     for (let i = 0; i < pointsQty; i++) {
-      data.push(this.getMockedData());
+      data.push(this.getMockedData(i + 1));
     }
     return data;
   }

@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Data, Router } from "@angular/router";
-import { Gender, UserExtended } from "@app/core/models";
+import { Gender, UserExtended, UserPlotData } from "@app/core/models";
 import { ActivitiesRoutes, AppRoutes, SpinnerType, UserRoutes } from "@app/core/enums";
 import { NgxSpinnerService } from "ngx-spinner";
-import { CurrentUserService } from "@app/core/services";
+import { CurrentUserService, UsersService } from "@app/core/services";
 import { TimeTransformType, TimeUnitPipe } from "@app/shared/pipes";
 
 @Component({
@@ -16,9 +16,11 @@ export class UserProfileComponent implements OnInit {
 
   public user!: UserExtended;
   public alreadyFollowed = false;
+  public plotData?: UserPlotData;
 
   constructor(
     public readonly currentUserService: CurrentUserService,
+    public readonly usersService: UsersService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly spinner: NgxSpinnerService,
     private readonly router: Router,
@@ -31,6 +33,7 @@ export class UserProfileComponent implements OnInit {
       this.user = data.user;
       this.spinner.hide(SpinnerType.main).then();
     });
+    this.fetchPlotData();
   }
 
   public onFollowClick(): void {
@@ -91,5 +94,9 @@ export class UserProfileComponent implements OnInit {
   private navigateWithSpinner(route: string): void {
     this.router.navigate([route]).then();
     this.spinner.show(SpinnerType.main).then();
+  }
+
+  private fetchPlotData(): void {
+    this.usersService.plotSummarizedData(this.user.id).subscribe((plotData) => this.plotData = plotData);
   }
 }
