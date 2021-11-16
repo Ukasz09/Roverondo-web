@@ -1,10 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Data, Router } from "@angular/router";
 import { Gender, UserExtended, UserPlotData } from "@app/core/models";
-import { ActivitiesRoutes, AppRoutes, SpinnerType, UserRoutes } from "@app/core/enums";
+import { ActivitiesRoutes, AppRoutes, PlotColors, SpinnerType, UserRoutes } from "@app/core/enums";
 import { NgxSpinnerService } from "ngx-spinner";
 import { CurrentUserService, UsersService } from "@app/core/services";
 import { TimeTransformType, TimeUnitPipe } from "@app/shared/pipes";
+import { Color } from "@swimlane/ngx-charts";
+import { timer } from "rxjs";
 
 @Component({
   selector: "app-user-profile",
@@ -13,6 +15,10 @@ import { TimeTransformType, TimeUnitPipe } from "@app/shared/pipes";
 })
 export class UserProfileComponent implements OnInit {
   public readonly Gender = Gender;
+  public readonly elevationColorScheme = { domain: [PlotColors.elevation] } as Color;
+  public readonly speedColorScheme = { domain: [PlotColors.speed] } as Color;
+  public readonly distanceColorScheme = { domain: [PlotColors.distance] } as Color;
+  public readonly activitiesColorScheme = { domain: [PlotColors.activities] } as Color;
 
   public user!: UserExtended;
   public alreadyFollowed = false;
@@ -33,7 +39,8 @@ export class UserProfileComponent implements OnInit {
       this.user = data.user;
       this.spinner.hide(SpinnerType.main).then();
     });
-    this.fetchPlotData();
+    // Workaround for lib bug
+    timer(250).subscribe(() => this.fetchPlotData());
   }
 
   public onFollowClick(): void {

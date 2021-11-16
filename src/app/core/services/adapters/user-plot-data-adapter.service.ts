@@ -18,15 +18,15 @@ export class UserPlotDataAdapterService implements Adapter<UserPlotData> {
     const elevation: PlotData = { name: "elevation", series: [] };
 
     for (const stats of statisticsPeriods) {
-      activities.series.push({ name: stats.from, value: stats.activities });
+      activities.series.push({ name: stats.from, value: Math.trunc(stats.activities) });
       if (stats.avgSpeed) {
-        averageSpeed.series.push({ name: stats.from, value: stats.avgSpeed });
+        averageSpeed.series.push({ name: stats.from, value: Math.trunc(stats.avgSpeed) });
       }
       if (stats.distance) {
-        distance.series.push({ name: stats.from, value: stats.distance });
+        distance.series.push({ name: stats.from, value: Math.trunc(stats.distance) });
       }
       if (stats.elevation) {
-        elevation.series.push({ name: stats.from, value: stats.elevation });
+        elevation.series.push({ name: stats.from, value: Math.trunc(stats.elevation) });
       }
     }
     return {
