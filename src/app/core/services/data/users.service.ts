@@ -1,15 +1,16 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { User } from "@app/core/models";
-import { tap } from "rxjs/operators";
+import { User, UserExtended, UserSummarizedStatistics } from "@app/core/models";
+import { map, tap } from "rxjs/operators";
 import { environment } from "@app/env";
+import { UserSummarizedStatisticsAdapterService } from "../adapters/user-summarized-statistics-adapter.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class UsersService {
-  constructor(private readonly http: HttpClient) {
+  constructor(private readonly http: HttpClient, private readonly userSummarizedStatisticsAdapter: UserSummarizedStatisticsAdapterService) {
   }
 
   public registerUser$(): Observable<User> {
@@ -22,9 +23,11 @@ export class UsersService {
     return this.http.get<User[]>(endpoint).pipe(tap(data => console.log(data)));
   }
 
-  public getUser$(userId: number, extended = false): Observable<User> {
+  public getUser$(userId: number, extended = false): Observable<User | UserExtended> {
     const endpoint = `${environment.backendApi}/api/users/${userId}?extended=${extended}`;
-    return this.http.get<User>(endpoint).pipe(tap(data => console.log(data)));
+    return this.http.get<User>(endpoint).pipe(
+      map(u => extended ? this.userSummarizedStatisticsAdapter.adapt(u) : u),
+      tap(data => console.log(data)));
   }
 
   public getUserByProvider$(providerId: string): Observable<User> {

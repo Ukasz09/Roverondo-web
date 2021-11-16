@@ -1,9 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Data, Router } from "@angular/router";
-import { Gender, User } from "@app/core/models";
+import { Gender, UserExtended } from "@app/core/models";
 import { ActivitiesRoutes, AppRoutes, SpinnerType, UserRoutes } from "@app/core/enums";
 import { NgxSpinnerService } from "ngx-spinner";
 import { CurrentUserService } from "@app/core/services";
+import { TimeTransformType, TimeUnitPipe } from "@app/shared/pipes";
 
 @Component({
   selector: "app-user-profile",
@@ -11,14 +12,17 @@ import { CurrentUserService } from "@app/core/services";
   styleUrls: ["./user-profile.component.scss"]
 })
 export class UserProfileComponent implements OnInit {
-  public user!: User;
+  public readonly Gender = Gender;
+
+  public user!: UserExtended;
   public alreadyFollowed = false;
 
   constructor(
     public readonly currentUserService: CurrentUserService,
     private readonly activatedRoute: ActivatedRoute,
     private readonly spinner: NgxSpinnerService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly timeUnitPipe: TimeUnitPipe
   ) {
   }
 
@@ -58,11 +62,6 @@ export class UserProfileComponent implements OnInit {
     this.navigateWithSpinner(`/${AppRoutes.user}/${this.user.id}/${UserRoutes.followings}`);
   }
 
-  public get userGender(): Gender {
-    // TODO: tmp mocked - integrate with backend
-    return Gender.female;
-  }
-
   public get userWeightText(): string {
     if (this.user.weight) {
       return `${this.user.weight}kg`;
@@ -71,7 +70,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   public get userGenderIcon(): string {
-    switch (this.userGender) {
+    switch (this.user.gender) {
       case Gender.male:
         return "male";
       case Gender.female:
@@ -79,6 +78,14 @@ export class UserProfileComponent implements OnInit {
       default:
         return "transgender";
     }
+  }
+
+  public get timeInMotionText(): string {
+    const hours = this.timeUnitPipe.transform(this.user.allTimeStatistics.timeInMotion, TimeTransformType.secondsToHours);
+    const hoursInt = Math.trunc(hours);
+    const hoursRest = hours - hoursInt;
+    const minutes = this.timeUnitPipe.transform(hoursRest, TimeTransformType.hoursToMinutes);
+    return `${hoursInt}:${minutes.toFixed()}h`;
   }
 
   private navigateWithSpinner(route: string): void {

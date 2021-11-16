@@ -11,6 +11,6 @@ export class ExtendedUserResolver extends UserResolver {
 
   public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<UserExtended> {
     const userId = route.paramMap.get("userId");
-    return this.resolveUser(userId, true);
+    return this.resolveUser(userId, true) as Observable<UserExtended>;
   }
 }

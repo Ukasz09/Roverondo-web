@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Adapter } from "@app/core/services";
 import { PostExtended } from "@app/core/models";
+import { Utils } from "@app/shared/utils";
 
 @Injectable({
   providedIn: "root"
@@ -13,7 +14,7 @@ export class MockedSpeedAdapterService implements Adapter<PostExtended> {
     let y = 0;
     let maxY = y;
     for (const point of item.workout.route.route) {
-      let newValue = Math.random() * (this.max - this.min) + this.min;
+      let newValue = Utils.randomNumber(this.min, this.max);
       let sign = Math.random() < 0.5 ? -1 : 1;
       newValue *= sign;
       if ((y + newValue) < 0) {

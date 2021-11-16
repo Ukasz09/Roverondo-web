@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
 import { Observable, throwError } from "rxjs";
-import { User } from "@app/core/models";
+import { User, UserExtended } from "@app/core/models";
 import { UsersService } from "@app/core/services";
 import { catchError } from "rxjs/operators";
 import { AppRoutes, SpinnerType } from "@app/core/enums";
@@ -24,7 +24,7 @@ export class UserResolver implements Resolve<User> {
     return this.resolveUser(userId);
   }
 
-  protected resolveUser(userId: string | null, extended = false): Observable<User> {
+  protected resolveUser(userId: string | null, extended = false): Observable<User | UserExtended> {
     if (!userId || isNaN(+userId)) {
       this.navigateHomeAndHideSpinner();
       return throwError("User id not given");

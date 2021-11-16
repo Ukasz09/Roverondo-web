@@ -6,6 +6,7 @@ import { UserRoutingModule } from "./user-routing.module";
 import { FollowersResolver, FollowingsResolver } from "./services";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatIconModule } from "@angular/material/icon";
+import { TimeUnitPipe } from "@app/shared/pipes";
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { MatIconModule } from "@angular/material/icon";
   exports: [],
   providers: [
     FollowersResolver,
-    FollowingsResolver
+    FollowingsResolver,
+    TimeUnitPipe
   ]
 })
 export class UserModule {

@@ -1,3 +1,5 @@
+import { Gender } from "./gender";
+
 export interface User {
   id: number;
   providerId: string;
@@ -10,4 +12,5 @@ export interface User {
   weight?: number;
   maxHeartRate?: number;
   dateJoined: string;
+  gender: Gender;
 }

@@ -6,7 +6,8 @@
           <div class="row">
             <app-profile-avatar [avatarImgPath]="user.profilePicture"
                                 [nickname]="user.nickname"
-                                [userId]="user.id"></app-profile-avatar>
+                                [userId]="user.id">
+            </app-profile-avatar>
             <div class="basic-info">
               <div class="name-and-bio">
                 <div class="name-and-follow-btn">
@@ -26,18 +27,10 @@
                   <span>{{user.bio }}</span>
                 </div>
               </div>
-              <div class="mobile-distance" [ngStyle]="{'margin-top':user.bio ? '0' : '1rem' }">
-              </div>
             </div>
             <div class="native-stats">
-              <div>
-                <span class="label">Distance travelled:</span>
-                <span class="value">1050km</span>
-              </div>
-              <div>
-                <span class="label">Time in motion:</span>
-                <span class="value">51:49h</span>
-              </div>
+              <ng-container [ngTemplateOutlet]="distanceTravelledTemplate"></ng-container>
+              <ng-container [ngTemplateOutlet]="timeInMotionTemplate"></ng-container>
               <ng-container [ngTemplateOutlet]="followStatsTemplate"></ng-container>
               <ng-container [ngTemplateOutlet]="likeStatsTemplate"></ng-container>
             </div>
@@ -45,17 +38,11 @@
           <hr class="native-hide">
           <div class="row native-hide stats">
             <div class="column native-hide">
-              <div>
-                <span class="label">Distance travelled:</span>
-                <span class="value">1050km</span>
-              </div>
+              <ng-container [ngTemplateOutlet]="distanceTravelledTemplate"></ng-container>
               <ng-container [ngTemplateOutlet]="followStatsTemplate"></ng-container>
             </div>
             <div class="column native-hide">
-              <div>
-                <span class="label">Time in motion:</span>
-                <span class="value">51:49h</span>
-              </div>
+              <ng-container [ngTemplateOutlet]="timeInMotionTemplate"></ng-container>
               <ng-container [ngTemplateOutlet]="likeStatsTemplate"></ng-container>
             </div>
           </div>
@@ -77,7 +64,7 @@
               <div>
                 <mat-icon class="icon">{{ userGenderIcon }}</mat-icon>
                 <span class="label">Gender:</span>
-                <span class="value">{{ userGender | titlecase }}</span>
+                <span class="value">{{ (user.gender || Gender.notSpecified) | titlecase }}</span>
               </div>
               <div>
                 <mat-icon class="icon">fitness_center</mat-icon>
@@ -134,22 +121,36 @@
 
 <ng-template #likeStatsTemplate>
   <div>
-    <span class="label">Received likes:</span>
-    <span class="value">23</span>
+    <span class="label">Received reactions:</span>
+    <span class="value">{{user.allTimeStatistics.totalReceivedReactions}}</span>
   </div>
   <div>
     <span class="label">Given likes:</span>
-    <span class="value">12</span>
+    <span class="value">{{user.allTimeStatistics.totalGivenReactions}}</span>
   </div>
 </ng-template>
 
 <ng-template #followStatsTemplate>
   <div>
     <span class="label">Followers:</span>
-    <span class="value">25</span>
+    <span class="value">{{user.allTimeStatistics.followers}}</span>
   </div>
   <div>
     <span class="label">Following:</span>
-    <span class="value">43</span>
+    <span class="value">{{user.allTimeStatistics.followings}}</span>
+  </div>
+</ng-template>
+
+<ng-template #distanceTravelledTemplate>
+  <div>
+    <span class="label">Distance travelled:</span>
+    <span class="value">{{ user.allTimeStatistics.totalDistanceTravelled | lengthUnit | number:".0-2"}} km</span>
+  </div>
+</ng-template>
+
+<ng-template #timeInMotionTemplate>
+  <div>
+    <span class="label">Time in motion:</span>
+    <span class="value">{{ timeInMotionText }}</span>
   </div>
 </ng-template>

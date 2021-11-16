@@ -28,7 +28,7 @@ import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { MatIconModule } from "@angular/material/icon";
-import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
+import { LengthUnitPipe, SpeedUnitPipe, TimeUnitPipe } from "@app/shared/pipes";
 import { MatListModule } from "@angular/material/list";
 import { MatRippleModule } from "@angular/material/core";
 
@@ -56,7 +56,8 @@ import { MatRippleModule } from "@angular/material/core";
     PageTitleComponent,
     GlassBtnMiniComponent,
     DisabledLinkDirective,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    TimeUnitPipe
   ],
   exports: [
     GlassCardComponent,
@@ -79,7 +80,8 @@ import { MatRippleModule } from "@angular/material/core";
     PageTitleComponent,
     GlassBtnMiniComponent,
     DisabledLinkDirective,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    TimeUnitPipe
   ],
   imports: [
     CommonModule,

@@ -22,4 +22,8 @@ export class Utils {
   public static getScrollContainerId(type: string): string {
     return `${type}-activities-wall`;
   }
+
+  public static randomNumber(min: number, max: number): number {
+    return Math.random() * (max - min) + min;
+  }
 }

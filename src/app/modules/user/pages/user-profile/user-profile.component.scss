@@ -135,49 +135,11 @@
               }
             }
 
-
             .bio {
               @include mixins.py(1rem);
               height: 50%;
               display: flex;
               align-items: center;
-            }
-          }
-
-          .mobile-distance {
-            height: 50%;
-            //background: aquamarine;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-
-            @include mixins.media(md-small) {
-              display: none;
-            }
-
-            div {
-              padding-top: 0.5rem;
-
-              &:last-child {
-                padding-bottom: 0.5rem;
-              }
-            }
-
-            .label {
-              flex: 1;
-              max-width: 250px;
-              font-weight: 600;
-            }
-
-            .value {
-              display: flex;
-              justify-content: flex-end;
-              align-items: center;
-            }
-
-            div {
-              display: flex;
-              flex-direction: row
             }
           }
         }
