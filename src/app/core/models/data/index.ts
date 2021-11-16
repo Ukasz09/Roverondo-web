@@ -12,6 +12,6 @@ export * from "./planned-route";
 export * from "./point";
 export * from "./gender";
 export * from "./user-extended";
-export * from "./user-plot-data";
-export * from "./user-sumarized-statistics";
+export * from "./user-statistics-period";
+export * from "./all-time-statistics";
 

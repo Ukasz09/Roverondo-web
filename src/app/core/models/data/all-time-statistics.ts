@@ -1,4 +1,4 @@
-export interface UserSummarizedStatistics {
+export interface allTimeStatistics {
   totalDistanceTravelled: number;
   timeInMotion: number;
   followers: number;

@@ -6,7 +6,7 @@ import { Utils } from "@app/shared/utils";
 @Injectable({
   providedIn: "root"
 })
-export class UserSummarizedStatisticsAdapterService implements Adapter<UserExtended> {
+export class UserAllTimeStatisticsAdapterService implements Adapter<UserExtended> {
 
   public adapt(item: any): UserExtended {
     item.allTimeStatistics = {
