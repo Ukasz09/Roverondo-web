@@ -63,9 +63,9 @@ export class UserProfileComponent implements OnInit {
     return Gender.female;
   }
 
-  public get userWeightText():string{
-    if(this.user.weight){
-      return `${this.user.weight}kg`
+  public get userWeightText(): string {
+    if (this.user.weight) {
+      return `${this.user.weight}kg`;
     }
     return "Not specified";
   }

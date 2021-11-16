@@ -3,7 +3,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { FollowersComponent, FollowingsComponent, UserProfileComponent } from "./pages";
 import { FollowersResolver, FollowingsResolver } from "./services";
 import { AppRoutes, UserRoutes } from "@app/core/enums";
-import { UserResolver } from "@app/core/services";
+import { ExtendedUserResolver, UserResolver } from "@app/core/services";
 
 const routes: Routes = [
   {
@@ -16,7 +16,7 @@ const routes: Routes = [
     pathMatch: "full",
     component: UserProfileComponent,
     resolve: {
-      user: UserResolver
+      user: ExtendedUserResolver
     }
   },
   {

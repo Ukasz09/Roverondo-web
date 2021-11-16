@@ -11,4 +11,5 @@ export * from './event-route';
 export * from './planned-route';
 export * from './point';
 export * from './gender';
+export * from './user-extended';
 

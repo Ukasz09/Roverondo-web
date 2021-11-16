@@ -21,11 +21,15 @@ export class UserResolver implements Resolve<User> {
 
   public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User> {
     const userId = route.paramMap.get("userId");
+    return this.resolveUser(userId);
+  }
+
+  protected resolveUser(userId: string | null, extended = false): Observable<User> {
     if (!userId || isNaN(+userId)) {
       this.navigateHomeAndHideSpinner();
       return throwError("User id not given");
     }
-    return this.userService.getUser$(+userId).pipe(
+    return this.userService.getUser$(+userId, extended).pipe(
       catchError(() => {
         this.navigateHomeAndHideSpinner();
         return throwError(`Not found user with id=${userId}`);

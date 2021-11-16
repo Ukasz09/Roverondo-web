@@ -22,8 +22,8 @@ export class UsersService {
     return this.http.get<User[]>(endpoint).pipe(tap(data => console.log(data)));
   }
 
-  public getUser$(userId: number): Observable<User> {
-    const endpoint = `${environment.backendApi}/api/users/${userId}`;
+  public getUser$(userId: number, extended = false): Observable<User> {
+    const endpoint = `${environment.backendApi}/api/users/${userId}?extended=${extended}`;
     return this.http.get<User>(endpoint).pipe(tap(data => console.log(data)));
   }
 
