@@ -7,7 +7,7 @@ import { Utils } from "@app/shared/utils";
   providedIn: "root"
 })
 export class UserPlotDataAdapterService implements Adapter<UserPlotData> {
-  constructor(private readonly mockedSpeedAdapter: MockedSpeedAdapterService) {
+  constructor() {
   }
 
 
