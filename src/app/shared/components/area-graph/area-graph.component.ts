@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { AreaPlotData } from "@app/core/models";
-import { Color } from "@swimlane/ngx-charts";
+import { Color, LegendPosition } from "@swimlane/ngx-charts";
 
 @Component({
   selector: "app-area-graph",
@@ -21,6 +21,9 @@ export class AreaGraphComponent implements OnInit {
   @Input() public withGradient = true;
   @Input() public yScaleMin?: number;
   @Input() public withLegend = false;
+
+  public readonly LegendPosition = LegendPosition;
+
   public animations = true;
 
   constructor() {

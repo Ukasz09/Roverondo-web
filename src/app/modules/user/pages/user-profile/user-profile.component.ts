@@ -1,12 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Data, Router } from "@angular/router";
 import { Gender, UserExtended, UserPlotData } from "@app/core/models";
-import { ActivitiesRoutes, AppRoutes, PlotColors, SpinnerType, UserRoutes } from "@app/core/enums";
+import { ActivitiesRoutes, AppRoutes, TimeRange, PlotColors, SpinnerType, UserRoutes } from "@app/core/enums";
 import { NgxSpinnerService } from "ngx-spinner";
 import { CurrentUserService, UsersService } from "@app/core/services";
 import { TimeTransformType, TimeUnitPipe } from "@app/shared/pipes";
 import { Color } from "@swimlane/ngx-charts";
 import { timer } from "rxjs";
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-user-profile",
@@ -24,6 +25,7 @@ export class UserProfileComponent implements OnInit {
   public alreadyFollowed = false;
   public plotData?: UserPlotData;
   public minAvgSpeed = 0;
+  public minElevation = 0;
 
   constructor(
     public readonly currentUserService: CurrentUserService,
@@ -33,6 +35,7 @@ export class UserProfileComponent implements OnInit {
     private readonly router: Router,
     private readonly timeUnitPipe: TimeUnitPipe
   ) {
+
   }
 
   public ngOnInit(): void {
@@ -99,19 +102,26 @@ export class UserProfileComponent implements OnInit {
     return `${hoursInt}:${minutes.toFixed()}h`;
   }
 
+  public elevationXAxisFormat(x: string): string {
+    return new DatePipe("en-US").transform(x, "MMMM yyyy") ?? "";
+  }
+
   private navigateWithSpinner(route: string): void {
     this.router.navigate([route]).then();
     this.spinner.show(SpinnerType.main).then();
   }
 
   private fetchPlotData(): void {
-    this.usersService.plotSummarizedData(this.user.id).subscribe((plotData) => {
+    this.usersService.plotSummarizedData(this.user.id, TimeRange.monthly).subscribe((plotData) => {
       this.plotData = plotData;
       const avgSpeedValues = this.plotData.averageSpeed.map(plotData => plotData.value);
       this.minAvgSpeed = Math.min(...avgSpeedValues) - 1;
       if (this.minAvgSpeed < 0) {
         this.minAvgSpeed = 0;
       }
+
+      const elevationValues = this.plotData.elevation.map(plotData => plotData.value);
+      this.minElevation = Math.min(...elevationValues) - 1;
     });
   }
 }

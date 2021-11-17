@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";
 import { FollowersComponent, FollowingsComponent, UserProfileComponent } from "./pages";
 import { AppSharedModule } from "@app/shared";
 import { UserRoutingModule } from "./user-routing.module";
@@ -28,7 +28,8 @@ import { MatButtonToggleModule } from "@angular/material/button-toggle";
   providers: [
     FollowersResolver,
     FollowingsResolver,
-    TimeUnitPipe
+    TimeUnitPipe,
+    DatePipe
   ]
 })
 export class UserModule {

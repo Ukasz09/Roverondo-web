@@ -26,4 +26,12 @@ export class Utils {
   public static randomNumber(min: number, max: number, precision = 2): number {
     return +(Math.random() * (max - min) + min).toFixed(precision);
   }
+
+  public static addDaysToDate(date: Date, daysQty: number): Date {
+    return new Date(new Date().setDate(date.getDate() + daysQty));
+  }
+
+  public static addMonthsToDate(date: Date, monthsQty: number): Date {
+    return new Date(date.setMonth(date.getMonth() + monthsQty));
+  }
 }

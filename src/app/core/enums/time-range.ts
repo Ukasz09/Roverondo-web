@@ -1,4 +1,4 @@
-export enum PlotBatchRange {
+export enum TimeRange {
   weekly = "weekly",
   monthly = "monthly"
 }

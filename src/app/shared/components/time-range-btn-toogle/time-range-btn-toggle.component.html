@@ -1,13 +1,13 @@
 <div class="time-range">
-  <app-glass-btn [paddingY]="'0'" [highlighted]="true" [borderRadius]="'4px 0 0 4px'">
-   <mat-icon>
-     calendar_view_week
-   </mat-icon>
+  <app-glass-btn [paddingY]="'0'" [highlighted]="activeTimeRange===TimeRange.weekly" [borderRadius]="'4px 0 0 4px'">
+    <mat-icon>
+      calendar_view_week
+    </mat-icon>
     <span>
      Weekly
    </span>
   </app-glass-btn>
-  <app-glass-btn [paddingY]="'0'" [borderRadius]="'0 4px 4px 0'">
+  <app-glass-btn [paddingY]="'0'" [highlighted]="activeTimeRange===TimeRange.monthly" [borderRadius]="'0 4px 4px 0'">
     <mat-icon>
       calendar_view_month
     </mat-icon>

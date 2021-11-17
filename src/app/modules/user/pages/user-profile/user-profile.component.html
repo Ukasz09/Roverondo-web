@@ -1,5 +1,5 @@
 <div class="container">
-  <app-aside-layout [withAvatar]="false">
+  <app-aside-layout [withAvatar]="(currentUserService.currentUser$ | async)?.id!==user.id">
     <div class="content">
       <app-scroll-container [id]="'user-profile-container'">
         <app-glass-card [borderRadius]="'0'">
@@ -109,6 +109,7 @@
                                         [label]="'Activities'"
                                         [data]="plotData.activities"
                                         [xAxis]="true"
+                                        [xAxisFormat]="elevationXAxisFormat"
                                         [colorScheme]="activitiesColorScheme"
                                         [yScaleMin]="0">
                 </app-vertical-bar-graph>
@@ -120,7 +121,7 @@
                 <app-vertical-bar-graph [id]="'distance-plot'"
                                         [label]="'Distance'"
                                         [data]="plotData.distance"
-                                        [xAxis]="true"
+                                        [xAxis]="true" [xAxisFormat]="elevationXAxisFormat"
                                         [colorScheme]="distanceColorScheme"
                                         [yScaleMin]="0">
                 </app-vertical-bar-graph>
@@ -134,7 +135,8 @@
                                         [data]="plotData.elevation"
                                         [xAxis]="true"
                                         [colorScheme]="elevationColorScheme"
-                                        [yScaleMin]="0">
+                                        [xAxisFormat]="elevationXAxisFormat"
+                                        [yScaleMin]="minElevation">
                 </app-vertical-bar-graph>
               </div>
               <app-time-range-btn-toggle></app-time-range-btn-toggle>
@@ -145,7 +147,7 @@
                                         [label]="'AvgSpeed'"
                                         [data]="plotData.averageSpeed"
                                         [colorScheme]="speedColorScheme"
-                                        [yScaleMin]="minAvgSpeed"
+                                        [yScaleMin]="minAvgSpeed" [xAxisFormat]="elevationXAxisFormat"
                                         [xAxis]="true">
                 </app-vertical-bar-graph>
               </div>
