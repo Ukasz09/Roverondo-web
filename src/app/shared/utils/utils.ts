@@ -23,7 +23,7 @@ export class Utils {
     return `${type}-activities-wall`;
   }
 
-  public static randomNumber(min: number, max: number): number {
-    return Math.random() * (max - min) + min;
+  public static randomNumber(min: number, max: number, precision = 2): number {
+    return +(Math.random() * (max - min) + min).toFixed(precision);
   }
 }

@@ -18,9 +18,9 @@ import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
+import { LengthUnitPipe, PressureUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
 import { MatButtonModule } from "@angular/material/button";
-import {MatRippleModule} from '@angular/material/core';
+import { MatRippleModule } from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -53,7 +53,7 @@ import {MatRippleModule} from '@angular/material/core';
     PostsResolver,
     LengthUnitPipe,
     DecimalPipe,
-    SpeedUnitPipe
+    SpeedUnitPipe,
   ]
 })
 export class ActivitiesModule {

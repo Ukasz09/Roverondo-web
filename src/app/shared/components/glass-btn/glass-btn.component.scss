@@ -1,6 +1,11 @@
 @use "/src/app/styles/abstracts/mixins";
+@use "/src/app/styles/abstracts/variables";
 
 .glass-btn {
   @include mixins.glass-effect();
   width: 100%;
+
+  &.highlighted {
+    background: variables.$light-gray-color;
+  }
 }

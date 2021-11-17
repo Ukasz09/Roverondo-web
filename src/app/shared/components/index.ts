@@ -16,3 +16,5 @@ export * from "./user-list-bottom-sheet/user-list-bottom-sheet.component";
 export * from "./page-title/page-title.component";
 export * from "./glass-btn-mini/glass-btn-mini.component";
 export * from "./page-not-found/page-not-found.component";
+export * from "./vertical-bar-graph/vertical-bar-graph.component";
+export * from "./time-range-btn-toogle/time-range-btn-toggle.component";

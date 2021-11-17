@@ -1,6 +1,7 @@
-import { PlotData } from "@app/core/models";
+import { AreaPlotData } from "@app/core/models";
 
 export interface Plots {
-  speed: PlotData;
-  elevation: PlotData;
+  speed?: AreaPlotData;
+  elevation: AreaPlotData;
+  pressure?: AreaPlotData;
 }

@@ -1,4 +1,4 @@
 export interface PlotData {
   name: string,
-  series: { name: string, value: number }[]
+  value: number
 }

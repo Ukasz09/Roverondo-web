@@ -1,3 +1,4 @@
-<button class="glass-btn" [ngStyle]="{ 'padding-top':paddingY, 'padding-bottom':paddingY }" mat-raised-button>
+<button class="glass-btn" [ngClass]="{highlighted:highlighted}"
+        [ngStyle]="{ 'padding-top':paddingY, 'padding-bottom':paddingY, 'border-radius':borderRadius}" mat-raised-button>
   <ng-content></ng-content>
 </button>

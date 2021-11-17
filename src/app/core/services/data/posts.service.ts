@@ -11,13 +11,17 @@ import {
   Reaction
 } from "@app/core/models";
 import { delay, map, tap } from "rxjs/operators";
-import { MockedSpeedAdapterService } from "../adapters";
+import { MockedPressureAdapterService, MockedSpeedAdapterService } from "../adapters";
 
 @Injectable({
   providedIn: "root"
 })
 export class PostsService {
-  constructor(private readonly http: HttpClient, private readonly mockedSpeedAdapter: MockedSpeedAdapterService) {
+  constructor(
+    private readonly http: HttpClient,
+    private readonly mockedSpeedAdapter: MockedSpeedAdapterService,
+    private readonly mockedPressureAdapter: MockedPressureAdapterService
+  ) {
   }
 
   public addReactionToActivity$(userId: number, activityId: number): Observable<void> {
@@ -82,7 +86,8 @@ export class PostsService {
     return this.http.get<ActivityType[]>(endpoint).pipe(
       tap(data => console.log(data)),
       map(data => data as PostExtended[]),
-      map(data => data.map(p => this.mockedSpeedAdapter.adapt(p)))
+      map(data => data.map(p => this.mockedSpeedAdapter.adapt(p))),
+      map(data => data.map(p => this.mockedPressureAdapter.adapt(p)))
     );
   }
 

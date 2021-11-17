@@ -6,7 +6,9 @@ import { Component, Input, OnInit } from "@angular/core";
   styleUrls: ["./glass-btn.component.scss"]
 })
 export class GlassBtnComponent implements OnInit {
-  @Input() paddingY = "0.5rem";
+  @Input() public paddingY = "0.5rem";
+  @Input() public borderRadius = "4px";
+  @Input() public highlighted = false;
 
   constructor() {
   }

@@ -4,11 +4,13 @@ import { Pipe, PipeTransform } from "@angular/core";
   name: "lengthUnit"
 })
 export class LengthUnitPipe implements PipeTransform {
+  private readonly unitsMap = new Map([
+    [LengthTransformType.metersToKilometers, (v: number) => v / 1000]
+  ]);
+
   public transform(value: number, type = LengthTransformType.metersToKilometers): number {
-    if (type === LengthTransformType.metersToKilometers) {
-      return value / 1000;
-    }
-    return value;
+    const calcFunc = this.unitsMap.get(type);
+    return calcFunc ? calcFunc(value) : value;
   }
 }
 

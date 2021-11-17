@@ -8,3 +8,4 @@ export * from "./user-routes";
 export * from "./activities-routes";
 export * from "./auth-routes";
 export * from "./routes";
+export * from "./plot-batch-range";

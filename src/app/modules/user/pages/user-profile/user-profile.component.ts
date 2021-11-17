@@ -23,6 +23,7 @@ export class UserProfileComponent implements OnInit {
   public user!: UserExtended;
   public alreadyFollowed = false;
   public plotData?: UserPlotData;
+  public minAvgSpeed = 0;
 
   constructor(
     public readonly currentUserService: CurrentUserService,
@@ -104,6 +105,13 @@ export class UserProfileComponent implements OnInit {
   }
 
   private fetchPlotData(): void {
-    this.usersService.plotSummarizedData(this.user.id).subscribe((plotData) => this.plotData = plotData);
+    this.usersService.plotSummarizedData(this.user.id).subscribe((plotData) => {
+      this.plotData = plotData;
+      const avgSpeedValues = this.plotData.averageSpeed.map(plotData => plotData.value);
+      this.minAvgSpeed = Math.min(...avgSpeedValues) - 1;
+      if (this.minAvgSpeed < 0) {
+        this.minAvgSpeed = 0;
+      }
+    });
   }
 }

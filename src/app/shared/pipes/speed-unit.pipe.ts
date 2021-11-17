@@ -4,10 +4,13 @@ import { Pipe, PipeTransform } from "@angular/core";
   name: "speedUnit"
 })
 export class SpeedUnitPipe implements PipeTransform {
+  private readonly unitsMap = new Map([
+    [SpeedUnitTransformType.metersPerSecToKilometersPerHour, (v: number) => v * 3.6]
+  ]);
+
   public transform(value: number, type = SpeedUnitTransformType.metersPerSecToKilometersPerHour): number {
-    if (type === SpeedUnitTransformType.metersPerSecToKilometersPerHour)
-      return value * 3.6;
-    return value;
+    const calcFunc = this.unitsMap.get(type);
+    return calcFunc ? calcFunc(value) : value;
   }
 }
 

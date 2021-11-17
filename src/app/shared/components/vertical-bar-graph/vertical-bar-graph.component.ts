@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { AreaPlotData } from "@app/core/models";
+import {  PlotData } from "@app/core/models";
 import { Color } from "@swimlane/ngx-charts";
 
 @Component({
-  selector: "app-area-graph",
-  templateUrl: "./area-graph.component.html",
-  styleUrls: ["./area-graph.component.scss"]
+  selector: "app-vertical-bar-graph",
+  templateUrl: "./vertical-bar-graph.component.html",
+  styleUrls: ["./vertical-bar-graph.component.scss"]
 })
-export class AreaGraphComponent implements OnInit {
-  @Input() public data?: AreaPlotData[];
+export class VerticalBarGraphComponent implements OnInit {
+  @Input() public data?: PlotData[];
   @Input() public id!: string;
   @Input() public label!: string;
   @Input() public showYAxisLabel = false;

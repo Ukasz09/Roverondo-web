@@ -7,8 +7,8 @@ import { Utils } from "@app/shared/utils";
   providedIn: "root"
 })
 export class MockedSpeedAdapterService implements Adapter<PostExtended> {
-  private readonly min = 15;
-  private readonly max = 45;
+  private readonly min = 15 / 3.6;
+  private readonly max = 45 / 3.6;
 
   public adapt(item: PostExtended): PostExtended {
     let y = 0;

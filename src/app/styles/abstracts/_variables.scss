@@ -13,11 +13,13 @@ $primary-color: $light-color;
 $text-primary-color: #343a40;
 $text-light-color: $light-color;
 $text-muted-color: #6C757D;
+$light-gray-color: #c4c2c2;
 
 $like-color: $red-color;
 
 $glass-light-bg: linear-gradient(125deg, $primary-color 0%, rgba(248, 249, 250, 0.5) 100%);
 $glass-lighter-bg: linear-gradient(125deg, $primary-color 0%, rgba(248, 249, 250, 0) 100%);
+$glass-gray-bg: linear-gradient(125deg, #6C757D 0%, rgba(248, 249, 250, 0) 100%);
 $glass-lighter-bg-reversed: linear-gradient(125deg, rgba(248, 249, 250, 0) 0%, $primary-color 100%);
 $glass-lighter-bg-left-right: linear-gradient(90deg, rgba(248, 249, 250, 0.25) 0%, $primary-color 100%);
 

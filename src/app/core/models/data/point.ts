@@ -3,4 +3,5 @@ export interface Point {
   latitude: number;
   elevation: number;
   speed?: number;
+  pressure?: number;
 }

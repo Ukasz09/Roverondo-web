@@ -18,7 +18,11 @@ import {
   UserCardComponent,
   SnackbarErrorComponent,
   UserListBottomSheetComponent,
-  PageTitleComponent, GlassBtnMiniComponent, PageNotFoundComponent
+  PageTitleComponent,
+  GlassBtnMiniComponent,
+  PageNotFoundComponent,
+  TimeRangeBtnToggleComponent,
+  VerticalBarGraphComponent
 } from "@app/shared/components";
 import { ActiveLinkDirective, DisabledLinkDirective, InputFocusDirective } from "@app/shared/directives";
 import { MatSidenavModule } from "@angular/material/sidenav";
@@ -28,7 +32,7 @@ import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { MatIconModule } from "@angular/material/icon";
-import { LengthUnitPipe, SpeedUnitPipe, TimeUnitPipe } from "@app/shared/pipes";
+import { LengthUnitPipe, PressureUnitPipe, SpeedUnitPipe, TimeUnitPipe } from "@app/shared/pipes";
 import { MatListModule } from "@angular/material/list";
 import { MatRippleModule } from "@angular/material/core";
 
@@ -57,7 +61,10 @@ import { MatRippleModule } from "@angular/material/core";
     GlassBtnMiniComponent,
     DisabledLinkDirective,
     PageNotFoundComponent,
-    TimeUnitPipe
+    TimeUnitPipe,
+    PressureUnitPipe,
+    TimeRangeBtnToggleComponent,
+    VerticalBarGraphComponent
   ],
   exports: [
     GlassCardComponent,
@@ -81,7 +88,10 @@ import { MatRippleModule } from "@angular/material/core";
     GlassBtnMiniComponent,
     DisabledLinkDirective,
     PageNotFoundComponent,
-    TimeUnitPipe
+    TimeUnitPipe,
+    PressureUnitPipe,
+    TimeRangeBtnToggleComponent,
+    VerticalBarGraphComponent
   ],
   imports: [
     CommonModule,

@@ -7,6 +7,7 @@ import { FollowersResolver, FollowingsResolver } from "./services";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatIconModule } from "@angular/material/icon";
 import { TimeUnitPipe } from "@app/shared/pipes";
+import { MatButtonToggleModule } from "@angular/material/button-toggle";
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { TimeUnitPipe } from "@app/shared/pipes";
     AppSharedModule,
     UserRoutingModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonToggleModule
   ],
   exports: [],
   providers: [

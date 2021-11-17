@@ -30,7 +30,7 @@
             <ng-container>
               <div class="reactions">
                 <mat-icon class="icon" [ngClass]="{'reacted':commentAlreadyReacted(comment.id)}"
-                (click)="onCommentReactionClick(comment.id)"
+                          (click)="onCommentReactionClick(comment.id)"
                 >
                   {{commentAlreadyReacted(comment.id) ? 'favorite' : 'favorite_border'}}
                 </mat-icon>

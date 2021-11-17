@@ -105,45 +105,51 @@
             <div *ngIf="plotData; else spinner" class="plot-wrapper">
               <div class="label">Activities</div>
               <div class="plot">
-                <app-area-graph [id]="'activities-plot'"
-                                [label]="'Activities'"
-                                [data]="plotData.activities"
-                                [xAxis]="false"
-                                [colorScheme]="activitiesColorScheme"
-                                [yScaleMin]="0">
-                </app-area-graph>
+                <app-vertical-bar-graph [id]="'activities-plot'"
+                                        [label]="'Activities'"
+                                        [data]="plotData.activities"
+                                        [xAxis]="true"
+                                        [colorScheme]="activitiesColorScheme"
+                                        [yScaleMin]="0">
+                </app-vertical-bar-graph>
               </div>
+              <app-time-range-btn-toggle></app-time-range-btn-toggle>
+
               <div class="label">Distance</div>
               <div class="plot">
-                <app-area-graph [id]="'distance-plot'"
-                                [label]="'Distance'"
-                                [data]="plotData.distance"
-                                [xAxis]="false"
-                                [colorScheme]="distanceColorScheme"
-                                [yScaleMin]="0">
-                </app-area-graph>
+                <app-vertical-bar-graph [id]="'distance-plot'"
+                                        [label]="'Distance'"
+                                        [data]="plotData.distance"
+                                        [xAxis]="true"
+                                        [colorScheme]="distanceColorScheme"
+                                        [yScaleMin]="0">
+                </app-vertical-bar-graph>
               </div>
+              <app-time-range-btn-toggle></app-time-range-btn-toggle>
+
               <div class="label">Elevation</div>
               <div class="plot">
-                <app-area-graph [id]="'elevation-plot'"
-                                [label]="'Elevation'"
-                                [data]="plotData.elevation"
-                                [xAxis]="false"
-                                [colorScheme]="elevationColorScheme"
-                                [yScaleMin]="0">
-                </app-area-graph>
+                <app-vertical-bar-graph [id]="'elevation-plot'"
+                                        [label]="'Elevation'"
+                                        [data]="plotData.elevation"
+                                        [xAxis]="true"
+                                        [colorScheme]="elevationColorScheme"
+                                        [yScaleMin]="0">
+                </app-vertical-bar-graph>
               </div>
+              <app-time-range-btn-toggle></app-time-range-btn-toggle>
+
               <div class="label">Average Speed</div>
               <div class="plot">
-                <app-area-graph [id]="'avg-speed-plot'"
-                                [label]="'AvgSpeed'"
-                                [data]="plotData.averageSpeed"
-                                [colorScheme]="speedColorScheme"
-                                [xAxis]="false"
-                                [yScaleMin]="0">
-                </app-area-graph>
+                <app-vertical-bar-graph [id]="'avg-speed-plot'"
+                                        [label]="'AvgSpeed'"
+                                        [data]="plotData.averageSpeed"
+                                        [colorScheme]="speedColorScheme"
+                                        [yScaleMin]="minAvgSpeed"
+                                        [xAxis]="true">
+                </app-vertical-bar-graph>
               </div>
-
+              <app-time-range-btn-toggle></app-time-range-btn-toggle>
             </div>
           </div>
         </app-glass-card>

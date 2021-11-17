@@ -49,7 +49,7 @@ export class ActivityCardContentComponent implements OnInit {
     public readonly msgInfoService: SnackbarInfoService,
     public readonly mToKmPipe: LengthUnitPipe,
     public readonly decimalPipe: DecimalPipe,
-    public readonly msToKmhPipe: SpeedUnitPipe,
+    public readonly speedUnitPipe: SpeedUnitPipe,
     private readonly eventsService: EventsService
   ) {
   }
@@ -115,7 +115,7 @@ export class ActivityCardContentComponent implements OnInit {
   }
 
   public get avgSpeedText(): string {
-    return this.averageSpeed ? `${this.decimalPipe.transform(this.msToKmhPipe.transform(this.averageSpeed), "1.1-1")} km/h` : this.valueNotFoundPlaceholder;
+    return this.averageSpeed ? `${this.decimalPipe.transform(this.speedUnitPipe.transform(this.averageSpeed), "1.1-1")} km/h` : this.valueNotFoundPlaceholder;
   }
 
   public get avgElevationText(): string {

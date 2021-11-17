@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { WallPostsService, LayoutService, PlotDataAdapterService } from "@app/core/services";
 import { LayoutType, PlotColors, PostType } from "@app/core/enums";
-import { ActivityType, PlotData, Route } from "@app/core/models";
+import { ActivityType, AreaPlotData, Route } from "@app/core/models";
 import { Color } from "@swimlane/ngx-charts";
+import { SpeedUnitPipe } from "@app/shared/pipes";
 
 @Component({
   selector: "app-activity-details",
@@ -19,21 +20,25 @@ export class ActivityDetailsComponent implements OnInit {
   public readonly numberFormat = ".2-2";
   public readonly elevationColorScheme = { domain: [PlotColors.elevation] } as Color;
   public readonly speedColorScheme = { domain: [PlotColors.speed] } as Color;
+  public readonly pressureColorScheme = { domain: [PlotColors.pressure] } as Color;
   public readonly combinedColorScheme = { domain: this.elevationColorScheme.domain.concat(this.speedColorScheme.domain) } as Color;
 
-  public speedPlotData: PlotData[] = [];
-  public elevationPlotData: PlotData[] = [];
-  public combinedPlotData: PlotData[] = [];
+  public speedPlotData: AreaPlotData[] = [];
+  public elevationPlotData: AreaPlotData[] = [];
+  public pressurePlotData: AreaPlotData[] = [];
+  public combinedPlotData: AreaPlotData[] = [];
   public maxSpeed?: number;
   public minSpeed?: number;
   public avgSpeed?: number;
   public lowestPoint!: number;
   public highestPoint!: number;
+  public maxPressure!: number;
+  public minPressure!: number;
 
   constructor(
     private readonly layoutService: LayoutService,
     private readonly activitiesService: WallPostsService,
-    private readonly plotDataAdapter: PlotDataAdapterService
+    private readonly plotDataAdapter: PlotDataAdapterService,
   ) {
   }
 
@@ -46,7 +51,11 @@ export class ActivityDetailsComponent implements OnInit {
   }
 
   public get speedProvided(): boolean {
-    return this.speedPlotData[0].series.length > 0;
+    return this.speedPlotData.length > 0 && this.speedPlotData[0].series.length > 0;
+  }
+
+  public get pressureProvided(): boolean {
+    return this.pressurePlotData.length > 0 && this.pressurePlotData[0].series.length > 0;
   }
 
   public get yScaleMinCompound(): number {
@@ -57,17 +66,22 @@ export class ActivityDetailsComponent implements OnInit {
     const route = this.getRoute();
     const plots = this.plotDataAdapter.adapt(route);
 
-    this.speedPlotData = [plots.speed];
     this.elevationPlotData = [plots.elevation];
-    this.combinedPlotData = this.elevationPlotData.concat(this.speedPlotData);
-
-    if (this.speedProvided) {
+    if (plots.speed) {
+      this.speedPlotData = [plots.speed];
       const speedValues = plots.speed.series.map(data => data.value);
       this.maxSpeed = Math.max(...speedValues);
       this.minSpeed = Math.min(...speedValues);
       const speedSum = speedValues.reduce((acc, current) => acc + current, 0);
       this.avgSpeed = speedSum / plots.elevation.series.length;
     }
+    if (plots.pressure) {
+      this.pressurePlotData = [plots.pressure];
+      const pressureValues = plots.pressure.series.map(data => data.value);
+      this.maxPressure = Math.max(...pressureValues);
+      this.minPressure = Math.min(...pressureValues);
+    }
+    this.combinedPlotData = this.elevationPlotData.concat(this.speedPlotData);
 
     const elevationValues = plots.elevation.series.map(data => data.value);
     this.highestPoint = Math.max(...elevationValues);
