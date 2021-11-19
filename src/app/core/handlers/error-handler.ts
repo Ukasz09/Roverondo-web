@@ -7,15 +7,11 @@ export class AppErrorHandler implements IErrorHandler {
   }
 
   public handleError(err: unknown): void {
-    this.handleNavigationError(err);
-    throw err; // throw for now
-  }
-
-  public handleNavigationError(err: unknown): void {
     if (err instanceof Error) {
-      console.error(`Error occurred during navigating process:\n${err.message}`);
+      console.error(`Error occurred:\n${err.message}`);
     } else {
-      console.error("Unknown error occurred during navigating process.");
+      console.error("Unknown error occurred");
     }
+    throw err; // throw for now
   }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { TimeRange } from "@app/core/enums";
 
 @Component({
@@ -8,6 +8,9 @@ import { TimeRange } from "@app/core/enums";
 })
 export class TimeRangeBtnToggleComponent implements OnInit {
   @Input() public activeTimeRange = TimeRange.monthly;
+
+  @Output() public weeklyBtnClick = new EventEmitter<void>();
+  @Output() public monthlyBtnClick = new EventEmitter<void>();
 
   public readonly TimeRange = TimeRange;
 

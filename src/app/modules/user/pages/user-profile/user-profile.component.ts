@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Data, Router } from "@angular/router";
 import { Gender, UserExtended, UserPlotData } from "@app/core/models";
-import { ActivitiesRoutes, AppRoutes, TimeRange, PlotColors, SpinnerType, UserRoutes } from "@app/core/enums";
+import { ActivitiesRoutes, AppRoutes, PlotColors, SpinnerType, TimeRange, UserRoutes } from "@app/core/enums";
 import { NgxSpinnerService } from "ngx-spinner";
 import { CurrentUserService, UsersService } from "@app/core/services";
 import { TimeTransformType, TimeUnitPipe } from "@app/shared/pipes";
 import { Color } from "@swimlane/ngx-charts";
-import { timer } from "rxjs";
+import { timer, zip } from "rxjs";
 import { DatePipe } from "@angular/common";
 
 @Component({
@@ -16,6 +16,7 @@ import { DatePipe } from "@angular/common";
 })
 export class UserProfileComponent implements OnInit {
   public readonly Gender = Gender;
+  public readonly TimeRange = TimeRange;
   public readonly elevationColorScheme = { domain: [PlotColors.elevation] } as Color;
   public readonly speedColorScheme = { domain: [PlotColors.speed] } as Color;
   public readonly distanceColorScheme = { domain: [PlotColors.distance] } as Color;
@@ -23,9 +24,18 @@ export class UserProfileComponent implements OnInit {
 
   public user!: UserExtended;
   public alreadyFollowed = false;
-  public plotData?: UserPlotData;
+  public monthlyPlotData?: UserPlotData;
+  public weeklyPlotData?: UserPlotData;
   public minAvgSpeed = 0;
   public minElevation = 0;
+  public plotDataReady = false;
+
+  public avgSpeedPlotTimeRange = TimeRange.monthly;
+  public elevationPlotTimeRange = TimeRange.monthly;
+  public distancePlotTimeRange = TimeRange.monthly;
+  public activitiesTimeRange = TimeRange.monthly;
+
+  public labeledWeeklyTicksX: string[] = [];
 
   constructor(
     public readonly currentUserService: CurrentUserService,
@@ -102,8 +112,45 @@ export class UserProfileComponent implements OnInit {
     return `${hoursInt}:${minutes.toFixed()}h`;
   }
 
-  public elevationXAxisFormat(x: string): string {
-    return new DatePipe("en-US").transform(x, "MMMM yyyy") ?? "";
+  public getPlotData(timeRangeType: TimeRange): UserPlotData {
+    const plotData = timeRangeType === TimeRange.monthly ? this.monthlyPlotData : this.weeklyPlotData;
+    return plotData as UserPlotData;
+  }
+
+  public xActivitiesAxisFormat(x: string): string {
+    const dateFormat = "MMMM yyyy";
+    return  new DatePipe("en-US").transform(x, dateFormat) ?? "";
+    // if (this.activitiesTimeRange === TimeRange.weekly) {
+    //   return this.labeledWeeklyTicksX.includes(x) ? formattedDate : "";
+    // }
+    // return formattedDate;
+  }
+
+  public xDistanceAxisFormat(x: string): string {
+    const dateFormat = "MMMM yyyy";
+    return  new DatePipe("en-US").transform(x, dateFormat) ?? "";
+    // if (this.distancePlotTimeRange === TimeRange.weekly) {
+    //   return this.labeledWeeklyTicksX.includes(x) ? formattedDate : "";
+    // }
+    // return formattedDate;
+  }
+
+  public xElevationAxisFormat(x: string): string {
+    const dateFormat = "MMMM yyyy";
+    return  new DatePipe("en-US").transform(x, dateFormat) ?? "";
+    // if (this.elevationPlotTimeRange === TimeRange.weekly) {
+    //   return this.labeledWeeklyTicksX.includes(x) ? formattedDate : "";
+    // }
+    // return formattedDate;
+  }
+
+  public xAvgSpeedAxisFormat(x: string): string {
+    const dateFormat = "MMMM yyyy";
+    return  new DatePipe("en-US").transform(x, dateFormat) ?? "";
+    // if (this.avgSpeedPlotTimeRange === TimeRange.weekly) {
+    //   return this.labeledWeeklyTicksX.includes(x) ? formattedDate : "";
+    // }
+    // return formattedDate;
   }
 
   private navigateWithSpinner(route: string): void {
@@ -112,16 +159,41 @@ export class UserProfileComponent implements OnInit {
   }
 
   private fetchPlotData(): void {
-    this.usersService.plotSummarizedData(this.user.id, TimeRange.monthly).subscribe((plotData) => {
-      this.plotData = plotData;
-      const avgSpeedValues = this.plotData.averageSpeed.map(plotData => plotData.value);
-      this.minAvgSpeed = Math.min(...avgSpeedValues) - 1;
-      if (this.minAvgSpeed < 0) {
-        this.minAvgSpeed = 0;
-      }
-
-      const elevationValues = this.plotData.elevation.map(plotData => plotData.value);
-      this.minElevation = Math.min(...elevationValues) - 1;
+    zip(
+      this.usersService.plotSummarizedData(this.user.id, TimeRange.monthly),
+      this.usersService.plotSummarizedData(this.user.id, TimeRange.weekly)
+    ).subscribe(([monthly, weekly]) => {
+      this.monthlyPlotData = monthly;
+      this.weeklyPlotData = weekly;
+      this.minAvgSpeed = this.getMinAvgSpeed(monthly);
+      this.minElevation = this.getMinElevation(monthly);
+      this.updateLabeledWeeklyTicksList(weekly);
+      this.plotDataReady = true;
     });
+  }
+
+  private getMinAvgSpeed(plotData: UserPlotData): number {
+    const speedValues = plotData.averageSpeed.map(plotData => plotData.value);
+    let minAvgSpeed = Math.min(...speedValues) - 1;
+    if (minAvgSpeed < 0) {
+      minAvgSpeed = 0;
+    }
+    return minAvgSpeed;
+  }
+
+  private getMinElevation(plotData: UserPlotData): number {
+    const elevationValues = plotData.elevation.map(plotData => plotData.value);
+    return Math.min(...elevationValues) - 1;
+  }
+
+  public updateLabeledWeeklyTicksList(weeklyPlotData: UserPlotData): void {
+    this.labeledWeeklyTicksX = [];
+    for (const activity of weeklyPlotData.activities) {
+      const dateFormat = "MMMM yyyy";
+      const formattedDate = new DatePipe("en-US").transform(activity.name, dateFormat) ?? "";
+      if (!this.labeledWeeklyTicksX.includes(formattedDate)) {
+        this.labeledWeeklyTicksX.push(formattedDate);
+      }
+    }
   }
 }
