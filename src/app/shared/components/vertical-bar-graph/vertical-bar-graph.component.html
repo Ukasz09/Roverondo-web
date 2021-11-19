@@ -1,4 +1,4 @@
-<div class="graph-wrapper fadeIn">
+<div class="graph-wrapper fadeIn" >
   <ngx-charts-bar-vertical
     *ngIf="dataLoaded; else spinner"
     [id]="id"
@@ -14,7 +14,8 @@
     [scheme]="colorScheme"
     [yScaleMin]="yScaleMin ?? 0"
     [animations]="true"
-    [xAxisTickFormatting]="xAxisFormat"
+    [xAxisTickFormatting]="axisFormatBind"
+    [barPadding]="1"
   >
   </ngx-charts-bar-vertical>
 

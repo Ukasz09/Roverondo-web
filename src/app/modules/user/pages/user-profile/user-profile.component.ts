@@ -7,7 +7,6 @@ import { CurrentUserService, UsersService } from "@app/core/services";
 import { TimeTransformType, TimeUnitPipe } from "@app/shared/pipes";
 import { Color } from "@swimlane/ngx-charts";
 import { timer, zip } from "rxjs";
-import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-user-profile",
@@ -35,7 +34,7 @@ export class UserProfileComponent implements OnInit {
   public distancePlotTimeRange = TimeRange.monthly;
   public activitiesTimeRange = TimeRange.monthly;
 
-  public labeledWeeklyTicksX: string[] = [];
+  public labeledWeeklyTicksX: number[] = [];
 
   constructor(
     public readonly currentUserService: CurrentUserService,
@@ -117,40 +116,8 @@ export class UserProfileComponent implements OnInit {
     return plotData as UserPlotData;
   }
 
-  public xActivitiesAxisFormat(x: string): string {
-    const dateFormat = "MMMM yyyy";
-    return  new DatePipe("en-US").transform(x, dateFormat) ?? "";
-    // if (this.activitiesTimeRange === TimeRange.weekly) {
-    //   return this.labeledWeeklyTicksX.includes(x) ? formattedDate : "";
-    // }
-    // return formattedDate;
-  }
-
-  public xDistanceAxisFormat(x: string): string {
-    const dateFormat = "MMMM yyyy";
-    return  new DatePipe("en-US").transform(x, dateFormat) ?? "";
-    // if (this.distancePlotTimeRange === TimeRange.weekly) {
-    //   return this.labeledWeeklyTicksX.includes(x) ? formattedDate : "";
-    // }
-    // return formattedDate;
-  }
-
-  public xElevationAxisFormat(x: string): string {
-    const dateFormat = "MMMM yyyy";
-    return  new DatePipe("en-US").transform(x, dateFormat) ?? "";
-    // if (this.elevationPlotTimeRange === TimeRange.weekly) {
-    //   return this.labeledWeeklyTicksX.includes(x) ? formattedDate : "";
-    // }
-    // return formattedDate;
-  }
-
-  public xAvgSpeedAxisFormat(x: string): string {
-    const dateFormat = "MMMM yyyy";
-    return  new DatePipe("en-US").transform(x, dateFormat) ?? "";
-    // if (this.avgSpeedPlotTimeRange === TimeRange.weekly) {
-    //   return this.labeledWeeklyTicksX.includes(x) ? formattedDate : "";
-    // }
-    // return formattedDate;
+  public getDisplayedLabelIndexes(timeRange: TimeRange): number[] | undefined {
+    return timeRange === TimeRange.weekly ? this.labeledWeeklyTicksX : undefined;
   }
 
   private navigateWithSpinner(route: string): void {
@@ -167,7 +134,14 @@ export class UserProfileComponent implements OnInit {
       this.weeklyPlotData = weekly;
       this.minAvgSpeed = this.getMinAvgSpeed(monthly);
       this.minElevation = this.getMinElevation(monthly);
-      this.updateLabeledWeeklyTicksList(weekly);
+
+      for (let i = 0; i < this.weeklyPlotData.activities.length; i++) {
+        if (i % 4 === 0) {
+          this.labeledWeeklyTicksX.push(i);
+        }
+      }
+      this.labeledWeeklyTicksX.push(this.weeklyPlotData.activities.length - 1);
+
       this.plotDataReady = true;
     });
   }
@@ -184,16 +158,5 @@ export class UserProfileComponent implements OnInit {
   private getMinElevation(plotData: UserPlotData): number {
     const elevationValues = plotData.elevation.map(plotData => plotData.value);
     return Math.min(...elevationValues) - 1;
-  }
-
-  public updateLabeledWeeklyTicksList(weeklyPlotData: UserPlotData): void {
-    this.labeledWeeklyTicksX = [];
-    for (const activity of weeklyPlotData.activities) {
-      const dateFormat = "MMMM yyyy";
-      const formattedDate = new DatePipe("en-US").transform(activity.name, dateFormat) ?? "";
-      if (!this.labeledWeeklyTicksX.includes(formattedDate)) {
-        this.labeledWeeklyTicksX.push(formattedDate);
-      }
-    }
   }
 }

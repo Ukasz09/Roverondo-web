@@ -28,7 +28,8 @@ export class Utils {
   }
 
   public static addDaysToDate(date: Date, daysQty: number): Date {
-    return new Date(new Date().setDate(date.getDate() + daysQty));
+    date.setDate(date.getDate() + daysQty);
+    return date;
   }
 
   public static addMonthsToDate(date: Date, monthsQty: number): Date {

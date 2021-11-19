@@ -109,8 +109,8 @@
                                         [label]="'Activities'"
                                         [data]="getPlotData(activitiesTimeRange).activities"
                                         [xAxis]="true"
-                                        [xAxisFormat]="xActivitiesAxisFormat"
                                         [colorScheme]="activitiesColorScheme"
+                                        [displayedLabelIndexes]="getDisplayedLabelIndexes(activitiesTimeRange)"
                                         [yScaleMin]="0">
                 </app-vertical-bar-graph>
               </div>
@@ -124,7 +124,7 @@
                                         [label]="'Distance'"
                                         [data]="getPlotData(distancePlotTimeRange).distance"
                                         [xAxis]="true"
-                                        [xAxisFormat]="xDistanceAxisFormat"
+                                        [displayedLabelIndexes]="getDisplayedLabelIndexes(distancePlotTimeRange)"
                                         [colorScheme]="distanceColorScheme"
                                         [yScaleMin]="0">
                 </app-vertical-bar-graph>
@@ -140,8 +140,8 @@
                                         [label]="'Elevation'"
                                         [data]="getPlotData(elevationPlotTimeRange).elevation"
                                         [xAxis]="true"
+                                        [displayedLabelIndexes]="getDisplayedLabelIndexes(elevationPlotTimeRange)"
                                         [colorScheme]="elevationColorScheme"
-                                        [xAxisFormat]="xElevationAxisFormat"
                                         [yScaleMin]="minElevation">
                 </app-vertical-bar-graph>
               </div>
@@ -157,8 +157,8 @@
                                         [label]="'AvgSpeed'"
                                         [data]="getPlotData(avgSpeedPlotTimeRange).averageSpeed"
                                         [colorScheme]="speedColorScheme"
+                                        [displayedLabelIndexes]="getDisplayedLabelIndexes(avgSpeedPlotTimeRange)"
                                         [yScaleMin]="minAvgSpeed"
-                                        [xAxisFormat]="xAvgSpeedAxisFormat"
                                         [xAxis]="true">
                 </app-vertical-bar-graph>
               </div>

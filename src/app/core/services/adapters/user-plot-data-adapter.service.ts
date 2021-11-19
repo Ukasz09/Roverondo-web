@@ -3,6 +3,7 @@ import { Adapter } from "@app/core/services";
 import { UserPlotData, UserStatisticsPeriod } from "@app/core/models";
 import { Utils } from "@app/shared/utils";
 import { TimeRange } from "@app/core/enums";
+import { DatePipe } from "@angular/common";
 
 @Injectable({
   providedIn: "root"
@@ -17,20 +18,22 @@ export class UserPlotDataAdapterService implements Adapter<UserPlotData> {
     const distance = [];
     const elevation = [];
 
+    let index=0;
     for (const stats of statisticsPeriods) {
-      activities.push({ name: stats.to, value: Math.trunc(stats.activities) });
+      activities.push({ name: `${stats.to};${index}`, value: Math.trunc(stats.activities) });
 
       if (stats.avgSpeed) {
-        averageSpeed.push({ name: stats.to, value: stats.avgSpeed });
+        averageSpeed.push({ name: `${stats.to};${index}`, value: stats.avgSpeed });
       }
 
       if (stats.distance) {
-        distance.push({ name: stats.to, value: stats.distance });
+        distance.push({ name: `${stats.to};${index}`, value: stats.distance });
       }
 
       if (stats.elevation) {
-        elevation.push({ name: stats.to, value: Math.trunc(stats.elevation) });
+        elevation.push({ name: `${stats.to};${index}`, value: Math.trunc(stats.elevation) });
       }
+      index++;
     }
     return {
       activities: activities,

@@ -18,7 +18,7 @@ export class AreaGraphComponent implements OnInit {
   @Input() public xAxis = true;
   @Input() public yAxis = true;
   @Input() public colorScheme: Color | string = "natural";
-  @Input() public withGradient = true;
+  @Input() public withGradient = false;
   @Input() public yScaleMin?: number;
   @Input() public withLegend = false;
 
