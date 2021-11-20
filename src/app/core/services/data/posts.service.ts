@@ -89,6 +89,11 @@ export class PostsService {
       tap(data => console.log(data)),
       map(data => data as PostExtended[]),
       // map(data => data.map(p => this.mockedSpeedAdapter.adapt(p))),
+      map(data => data.map(a => {
+        a.workout.route.route = a.workout.route.route.filter(p => p.speed && p.speed < 80 / 3.6);
+        a.workout.maxSpeed = Math.max(...a.workout.route.route.map(p => p.speed ?? 0));
+        return a;
+      })),
       map(data => data.map(p => this.mockedPressureAdapter.adapt(p)))
     );
   }

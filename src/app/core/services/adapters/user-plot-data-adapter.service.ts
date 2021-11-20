@@ -22,13 +22,13 @@ export class UserPlotDataAdapterService implements Adapter<UserPlotData> {
     for (const stats of statisticsPeriods) {
       const labelName = this.getLabelName(stats.from, stats.to);
       activities.push({ name: labelName, value: Math.trunc(stats.activities) });
-      if (stats.avgSpeed) {
-        averageSpeed.push({ name: labelName, value: stats.avgSpeed });
+      if (stats.averageSpeed || stats.averageSpeed === 0) {
+        averageSpeed.push({ name: labelName, value: stats.averageSpeed });
       }
-      if (stats.distance) {
+      if (stats.distance || stats.distance === 0) {
         distance.push({ name: labelName, value: stats.distance });
       }
-      if (stats.elevation) {
+      if (stats.elevation || stats.elevation === 0) {
         elevation.push({ name: labelName, value: Math.trunc(stats.elevation) });
       }
       index++;
@@ -51,7 +51,7 @@ export class UserPlotDataAdapterService implements Adapter<UserPlotData> {
       from: timeFrom.toISOString(),
       to: timeTo.toISOString(),
       activities,
-      avgSpeed,
+      averageSpeed: avgSpeed,
       distance,
       elevation
     };
@@ -72,7 +72,7 @@ export class UserPlotDataAdapterService implements Adapter<UserPlotData> {
   }
 
   private increaseEndTime(endTime: Date, plotBatchRange: TimeRange): Date {
-    return plotBatchRange === TimeRange.monthly ?Utils.addMonthsToDate(endTime, 1) : Utils.addDaysToDate(endTime, 7);
+    return plotBatchRange === TimeRange.monthly ? Utils.addMonthsToDate(endTime, 1) : Utils.addDaysToDate(endTime, 7);
   }
 
 

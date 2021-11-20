@@ -36,7 +36,7 @@ export class Utils {
     return new Date(date.setMonth(date.getMonth() + monthsQty));
   }
 
-  public static addYearToDate(date: Date): Date {
-    return new Date(date.setFullYear(date.getFullYear() + 1));
+  public static addYearToDate(date: Date, yearsQty: number): Date {
+    return new Date(date.setFullYear(date.getFullYear() + yearsQty));
   }
 }

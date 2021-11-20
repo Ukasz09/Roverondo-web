@@ -1,18 +1,27 @@
 <div class="wrapper">
   <div class="label">{{chartName}}</div>
-  <div class="plot">
-    <app-vertical-bar-graph [id]="chartName+'-plot'"
-                            [label]="chartName"
-                            [data]="plotData"
-                            [xAxis]="true"
-                            [xAxisFormat]="xLabelBindFormatter"
-                            [colorScheme]="colorScheme"
-                            [barPadding]="timeRange===TimeRange.monthly ? 5 : 1"
-                            [yScaleMin]="yScaleMin">
-    </app-vertical-bar-graph>
-  </div>
-  <app-time-range-btn-toggle [activeTimeRange]="timeRange"
-                             (weeklyBtnClick)="timeRange=TimeRange.weekly"
-                             (monthlyBtnClick)="timeRange=TimeRange.monthly">
-  </app-time-range-btn-toggle>
+  <ng-container *ngIf="plotData.length>0; else noPlotData">
+    <div class="plot">
+      <app-vertical-bar-graph [id]="chartName+'-plot'"
+                              [label]="chartName"
+                              [data]="plotData"
+                              [xAxis]="true"
+                              [xAxisFormat]="xLabelBindFormatter"
+                              [colorScheme]="colorScheme"
+                              [barPadding]="timeRange===TimeRange.monthly ? 5 : 1"
+                              [yScaleMin]="yScaleMin">
+      </app-vertical-bar-graph>
+    </div>
+    <app-time-range-btn-toggle [activeTimeRange]="timeRange"
+                               (weeklyBtnClick)="timeRange=TimeRange.weekly"
+                               (monthlyBtnClick)="timeRange=TimeRange.monthly">
+    </app-time-range-btn-toggle>
+  </ng-container>
 </div>
+
+<ng-template #noPlotData>
+  <div class="no-data">
+    <mat-icon class="icon">sentiment_dissatisfied</mat-icon>
+    <span class="text">No data</span>
+  </div>
+</ng-template>

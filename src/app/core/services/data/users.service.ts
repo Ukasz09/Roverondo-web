@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
-import { User, UserExtended, UserPlotData } from "@app/core/models";
+import { User, UserExtended, UserPlotData, UserStatisticsPeriod } from "@app/core/models";
 import { map, tap } from "rxjs/operators";
 import { environment } from "@app/env";
 import { UserAllTimeStatisticsAdapterService, UserPlotDataAdapterService } from "../adapters";
@@ -57,12 +57,15 @@ export class UsersService {
   }
 
   public plotSummarizedData(userId: string | number, plotBatchRange = TimeRange.monthly): Observable<UserPlotData> {
-    const from = new Date();
-    const fromFormatted = `${from.getFullYear()}--${from.getMonth()}--${from.getDay()}`;
-    const to = Utils.addYearToDate(from);
-    const toFormatted = `${to.getFullYear()}--${to.getMonth()}--${to.getDay()}`;
+    const from = Utils.addYearToDate(new Date(), -1);
+    const fromFormatted = `${from.getFullYear()}-${from.getMonth() + 1}-${from.getDate()}`;
+    const to = Utils.addYearToDate(from, 1);
+    const toFormatted = `${to.getFullYear()}-${to.getMonth() + 1}-${to.getDate()}`;
     const endpoint = `${environment.backendApi}/api/users/${userId}/statisticsOverTime/${fromFormatted}/${toFormatted}/${plotBatchRange}`;
-    return this.http.get<UserPlotData>(endpoint).pipe(tap(data => console.log(data)));
+    return this.http.get<UserStatisticsPeriod[]>(endpoint).pipe(
+      map(userStatPeriod => this.userPlotDataAdapter.adapt(userStatPeriod)),
+      tap(data => console.log(data))
+    );
 
     // const mockedDataList = this.userPlotDataAdapter.getMockedDataList(plotBatchRange);
     // return of(mockedDataList).pipe(

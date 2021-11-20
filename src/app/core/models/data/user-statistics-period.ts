@@ -4,5 +4,5 @@ export interface UserStatisticsPeriod {
   distance: number,
   elevation: number,
   activities: number,
-  avgSpeed: number
+  averageSpeed: number
 }
