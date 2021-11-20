@@ -9,6 +9,7 @@ export class GlassBtnComponent implements OnInit {
   @Input() public paddingY = "0.5rem";
   @Input() public borderRadius = "4px";
   @Input() public highlighted = false;
+  @Input() public lighter = false;
 
   constructor() {
   }

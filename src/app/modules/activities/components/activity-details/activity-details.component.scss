@@ -1,4 +1,5 @@
 @use "/src/app/styles/abstracts/mixins";
+@use "/src/app/styles/abstracts/variables";
 
 app-scroll-container {
   width: 100%;
@@ -9,8 +10,50 @@ app-scroll-container {
     height: 100%;
     width: 100%;
 
-    .basic-details {
-      margin-bottom: 2rem;
+    .full-stats {
+      @include mixins.my(0.5rem);
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: space-evenly;
+
+      @include mixins.media(md-small) {
+        justify-content: center;
+      }
+
+      .stat {
+        @include mixins.my(1rem);
+        display: flex;
+        flex-direction: row;
+        margin-right: 0.5rem;
+        align-items: center;
+        width: 200px;
+
+        .icon {
+          margin-right: 0.5rem;
+
+          &.distance {
+            transform: rotateZ(-135deg) translateY(-3px);
+          }
+
+          &.pressure-min {
+            transform: rotateZ(-180deg);
+          }
+
+          &.pressure-avg {
+            transform: rotateZ(90deg);
+          }
+        }
+
+        .details {
+          display: flex;
+          flex-direction: column;
+
+          .label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+          }
+        }
+      }
     }
 
     .description {
@@ -129,4 +172,11 @@ app-scroll-container {
 
     }
   }
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid variables.$text-muted-color;
+  opacity: 0.1;
 }

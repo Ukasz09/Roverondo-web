@@ -1,4 +1,4 @@
-<div class="card-content">
+<div class="card-content" [ngClass]="{'with-bottom-margin':withBottomMargin}">
   <div class="user-info">
     <app-profile-avatar [nickname]="activity.user.nickname"
                         [userId]="activity.user.id"
@@ -76,7 +76,7 @@
   </ng-template>
 
   <ng-template #stats>
-    <div class="stats">
+    <div class="stats" *ngIf="withStats">
       <div *ngIf="withTime" class="time">
         <mat-icon class="icon">timer</mat-icon>
         <span>{{getActivityDurationText()}}</span>

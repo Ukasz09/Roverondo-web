@@ -3,6 +3,11 @@
 
 .glass-btn {
   @include mixins.glass-effect();
+
+  &.lighter {
+    @include mixins.glass-effect(variables.$glass-lighter-bg);
+  }
+
   width: 100%;
 
   &.highlighted {

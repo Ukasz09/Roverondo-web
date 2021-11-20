@@ -10,7 +10,10 @@
   }
 
   @include mixins.media(sm-small) {
-    @include mixins.my(0.5rem);
+    &.with-bottom-margin{
+      margin-bottom: 0.5rem;
+    }
+    margin-top: 0.5rem;
   }
 
   .user-info {

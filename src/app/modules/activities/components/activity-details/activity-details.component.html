@@ -2,21 +2,148 @@
   <app-glass-card [borderRadius]="'0'">
     <div class="basic-details">
       <app-activity-card-content
+        [withBottomMargin]="false"
         [disableMapInteractions]="false"
         [activity]="activity"
+        [withStats]="false"
         [type]="type"
       ></app-activity-card-content>
     </div>
-
-
-
+    <hr>
+    <div class="full-stats">
+      <div class="stat">
+        <mat-icon class="icon">place</mat-icon>
+        <div class="details">
+          <span class="label">Location:</span>
+          <span>{{getRoute().location}}</span>
+        </div>
+      </div>
+      <div *ngIf="type === PostType.activityPost" class="stat">
+        <mat-icon class="icon">schedule</mat-icon>
+        <div class="details">
+          <span class="label">Start time:</span>
+          <span>{{ startTime | date:"shortTime" }}</span>
+        </div>
+      </div>
+      <div *ngIf="type === PostType.activityPost" class="stat">
+        <mat-icon class="icon">flag</mat-icon>
+        <div class="details">
+          <span class="label">End time:</span>
+          <span>{{ endTime | date:"shortTime"}}</span>
+        </div>
+      </div>
+      <div *ngIf="type === PostType.activityPost" class="stat">
+        <mat-icon class="icon">timer</mat-icon>
+        <div class="details">
+          <span class="label">Total duration:</span>
+          <span>{{ getActivityDurationText() }}</span>
+        </div>
+      </div>
+      <div class="stat">
+        <mat-icon class="icon distance">open_in_full</mat-icon>
+        <div class="details">
+          <span class="label">Total distance:</span>
+          <span>{{ getRoute().distance | lengthUnit | number:".2-2" }} km</span>
+        </div>
+      </div>
+      <div *ngIf="type === PostType.activityPost" class="stat">
+        <mat-icon class="icon average">speed</mat-icon>
+        <div class="details">
+          <span class="label">Average speed:</span>
+          <span>{{ avgSpeed | speedUnit | number:numberFormat}} km/h</span>
+        </div>
+      </div>
+      <div *ngIf="type === PostType.activityPost" class="stat">
+        <mat-icon class="icon average">rocket_launch</mat-icon>
+        <div class="details">
+          <span class="label">Max speed:</span>
+          <span>{{maxSpeed | speedUnit | number:numberFormat }} km/h</span>
+        </div>
+      </div>
+      <div class="stat">
+        <mat-icon class="icon">north_east</mat-icon>
+        <div class="details">
+          <span class="label">Elevation:</span>
+          <span>{{getRoute().elevation | number:".2-2"}} m</span>
+        </div>
+      </div>
+      <div *ngIf="type === PostType.eventPost" class="stat">
+        <mat-icon class="icon">date_range</mat-icon>
+        <div class="details">
+          <span class="label">Event start date:</span>
+          <span>{{eventStartDate}}</span>
+        </div>
+      </div>
+      <div *ngIf="type === PostType.eventPost" class="stat">
+        <mat-icon class="icon">query_builder</mat-icon>
+        <div class="details">
+          <span class="label">Event duration:</span>
+          <span>{{ eventDurationTime }}</span>
+        </div>
+      </div>
+      <div class="stat">
+        <mat-icon class="icon">whatshot</mat-icon>
+        <div class="details">
+          <span class="label">Calories burned:</span>
+          <span>{{ calories }}</span>
+        </div>
+      </div>
+      <div class="stat">
+        <mat-icon class="icon">trending_down</mat-icon>
+        <div class="details">
+          <span class="label">Min altitude:</span>
+          <span>{{getRoute().minAltitude | number:".2-2"}} m</span>
+        </div>
+      </div>
+      <div class="stat">
+        <mat-icon class="icon">trending_up</mat-icon>
+        <div class="details">
+          <span class="label">Max altitude:</span>
+          <span>{{getRoute().maxAltitude | number:".2-2"}} m</span>
+        </div>
+      </div>
+      <div class="stat">
+        <mat-icon class="icon">trending_flat</mat-icon>
+        <div class="details">
+          <span class="label">Average altitude:</span>
+          <span>{{getRoute().avgAltitude | number:".2-2"}} m</span>
+        </div>
+      </div>
+      <div class="stat" *ngIf="type === PostType.activityPost">
+        <mat-icon class="icon">publish</mat-icon>
+        <div class="details">
+          <span class="label">Max pressure:</span>
+          <span *ngIf="maxPressure; else valueNotFoundPlaceholderTemplate">
+            {{ maxPressure | number:".0-0" }} hPa
+          </span>
+        </div>
+      </div>
+      <div class="stat" *ngIf="type === PostType.activityPost">
+        <mat-icon class="icon pressure-min">publish</mat-icon>
+        <div class="details">
+          <span class="label">Min pressure:</span>
+          <span *ngIf="minPressure; else valueNotFoundPlaceholderTemplate">
+            {{ minPressure | number:".0-0" }} hPa
+          </span>
+        </div>
+      </div>
+      <div class="stat" *ngIf="type === PostType.activityPost">
+        <mat-icon class="icon pressure-avg">publish</mat-icon>
+        <div class="details">
+          <span class="label">Average pressure:</span>
+          <span *ngIf="minPressure; else valueNotFoundPlaceholderTemplate">
+            {{ avgPressure | number:".0-0" }} hPa
+          </span>
+        </div>
+      </div>
+    </div>
+    <hr>
     <div class="description">
       <div class="label">Description</div>
       <div class="content">
         {{ activity.description }}
       </div>
     </div>
-
     <div *ngIf="speedProvided" class="graph-plot">
       <div class="label">Speed</div>
       <div class="graph">
@@ -26,16 +153,6 @@
                         [xAxis]="false"
                         [colorScheme]="speedColorScheme">
         </app-area-graph>
-      </div>
-      <div class="stats">
-        <div>
-          <span class="name">Max speed:</span>
-          <span>{{ maxSpeed | speedUnit | number:numberFormat }} km/h </span>
-        </div>
-        <div>
-          <span class="name">Avg speed:</span>
-          <span>{{ avgSpeed | speedUnit | number:numberFormat}} km/h</span>
-        </div>
       </div>
     </div>
     <div class="graph-plot">
@@ -49,16 +166,6 @@
                         [yScaleMin]="getRoute().minAltitude ?? 0"
         >
         </app-area-graph>
-      </div>
-      <div class="stats">
-        <div>
-          <span class="name">Min altitude:</span>
-          <span>{{ getRoute().minAltitude | number:numberFormat}} m</span>
-        </div>
-        <div>
-          <span class="name">Max altitude:</span>
-          <span>{{ getRoute().maxAltitude |number:numberFormat}} m</span>
-        </div>
       </div>
     </div>
     <div *ngIf="speedProvided" class="graph-plot">
@@ -84,21 +191,10 @@
                         [yScaleMin]="950">
         </app-area-graph>
       </div>
-      <div class="stats">
-        <div>
-          <span class="name">Max pressure:</span>
-          <span>{{ maxPressure | number:".0-0"}} hPa</span>
-        </div>
-        <div>
-          <span class="name">Min pressure:</span>
-          <span>{{ minPressure |number:".0-0"}} hPa</span>
-        </div>
-      </div>
     </div>
-
     <div *ngIf="isMobileLayout" (click)="exitDetailsClick.emit()" class="back-to-wall-btn">
       <app-glass-btn>
-        <div class="content" btn-content>
+        <div class="content">
           <div class="icon">
             <mat-icon>chevron_left</mat-icon>
           </div>
@@ -106,6 +202,9 @@
         </div>
       </app-glass-btn>
     </div>
-
   </app-glass-card>
 </app-scroll-container>
+
+<ng-template #valueNotFoundPlaceholderTemplate>
+  <span>{{ valueNotFoundPlaceholder }}</span>
+</ng-template>

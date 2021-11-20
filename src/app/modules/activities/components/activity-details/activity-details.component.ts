@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { WallPostsService, LayoutService, PlotDataAdapterService } from "@app/core/services";
 import { LayoutType, PlotColors, PostType } from "@app/core/enums";
-import { ActivityType, AreaPlotData, Route } from "@app/core/models";
+import { ActivityType, AreaPlotData, EventPostExtended, PostExtended, Route } from "@app/core/models";
 import { Color } from "@swimlane/ngx-charts";
+import { Utils } from "@app/shared/utils";
 
 @Component({
   selector: "app-activity-details",
@@ -21,13 +22,13 @@ export class ActivityDetailsComponent implements OnInit {
   public readonly speedColorScheme = { domain: [PlotColors.speed] } as Color;
   public readonly pressureColorScheme = { domain: [PlotColors.pressure] } as Color;
   public readonly combinedColorScheme = { domain: this.elevationColorScheme.domain.concat(this.speedColorScheme.domain) } as Color;
+  public readonly PostType = PostType;
+  public readonly valueNotFoundPlaceholder = "N/A";
 
   public speedPlotData: AreaPlotData[] = [];
   public elevationPlotData: AreaPlotData[] = [];
   public pressurePlotData: AreaPlotData[] = [];
   public combinedPlotData: AreaPlotData[] = [];
-  public maxPressure!: number;
-  public minPressure!: number;
 
   constructor(
     private readonly layoutService: LayoutService,
@@ -76,6 +77,56 @@ export class ActivityDetailsComponent implements OnInit {
     return this.activity.eventRoute.route;
   }
 
+  public getActivityDurationText(): string {
+    if ("workout" in this.activity) {
+      if (this.activity.workout.startTime && this.activity.workout.endTime) {
+        const startDate = new Date(Date.parse(this.activity.workout.startTime));
+        const endDate = new Date(Date.parse(this.activity.workout.endTime));
+        const activityDuration = Utils.calcDeltaTime(startDate, endDate);
+        return `${activityDuration.hour}h ${activityDuration.minute}min`;
+      }
+    }
+    return this.valueNotFoundPlaceholder;
+  }
+
+  public get startTime(): string {
+    return (this.activity as PostExtended).workout.startTime;
+  }
+
+  public get endTime(): string {
+    return (this.activity as PostExtended).workout.endTime;
+  }
+
+  public get maxPressure(): number {
+    return (this.activity as PostExtended).workout.maxAtmosphericPressure ?? 0;
+  }
+
+  public get minPressure(): number {
+    return (this.activity as PostExtended).workout.minAtmosphericPressure ?? 0;
+  }
+
+  public get avgPressure(): number {
+    return (this.activity as PostExtended).workout.avgAtmosphericPressure ?? 0;
+  }
+
+  public get eventStartDate(): string {
+    const eventStartDate = (this.activity as EventPostExtended)?.eventRoute?.eventStartDate;
+    return eventStartDate ? `${eventStartDate} m` : this.valueNotFoundPlaceholder;
+  }
+
+  public get eventDurationTime(): string {
+    const eventDurationTime = (this.activity as EventPostExtended)?.eventRoute?.eventDurationTime;
+    return eventDurationTime ? `${eventDurationTime} m` : this.valueNotFoundPlaceholder;
+  }
+
+  public get calories(): string {
+    if ("workout" in this.activity) {
+      const calories = this.activity.workout.calories;
+      return calories ? `${calories} kcal` : "N/A";
+    }
+    return this.valueNotFoundPlaceholder;
+  }
+
   private parsePlotData(): void {
     const route = this.getRoute();
     const plots = this.plotDataAdapter.adapt(route);
@@ -85,11 +136,7 @@ export class ActivityDetailsComponent implements OnInit {
       this.speedPlotData = [plots.speed];
     }
     if (plots.pressure) {
-      // TODO: integrate with backend - display only if provided
       this.pressurePlotData = [plots.pressure];
-      const pressureValues = plots.pressure.series.map(data => data.value);
-      this.maxPressure = Math.max(...pressureValues);
-      this.minPressure = Math.min(...pressureValues);
     }
     this.combinedPlotData = this.elevationPlotData.concat(this.speedPlotData);
   }
