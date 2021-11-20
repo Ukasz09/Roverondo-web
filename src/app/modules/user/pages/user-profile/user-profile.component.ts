@@ -215,7 +215,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   private formatXLabel(xName: string): string {
-    const dateCleaned = xName.split(";")[0];
-    return new DatePipe("en-US").transform(dateCleaned, "MMMM yyyy") ?? "";
+    const dateTo = xName.split("-")[1];
+    return new DatePipe("en-US").transform(dateTo, "MMMM yyyy") ?? "";
   }
 }

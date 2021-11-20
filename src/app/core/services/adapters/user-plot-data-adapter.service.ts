@@ -3,6 +3,7 @@ import { Adapter } from "@app/core/services";
 import { UserPlotData, UserStatisticsPeriod } from "@app/core/models";
 import { Utils } from "@app/shared/utils";
 import { TimeRange } from "@app/core/enums";
+import { DatePipe } from "@angular/common";
 
 @Injectable({
   providedIn: "root"
@@ -17,23 +18,22 @@ export class UserPlotDataAdapterService implements Adapter<UserPlotData> {
     const distance = [];
     const elevation = [];
 
-    let index=0;
+    let index = 0;
     for (const stats of statisticsPeriods) {
-      activities.push({ name: `${stats.to};${index}`, value: Math.trunc(stats.activities) });
-
+      const labelName = this.getLabelName(stats.from, stats.to);
+      activities.push({ name: labelName, value: Math.trunc(stats.activities) });
       if (stats.avgSpeed) {
-        averageSpeed.push({ name: `${stats.to};${index}`, value: stats.avgSpeed });
+        averageSpeed.push({ name: labelName, value: stats.avgSpeed });
       }
-
       if (stats.distance) {
-        distance.push({ name: `${stats.to};${index}`, value: stats.distance });
+        distance.push({ name: labelName, value: stats.distance });
       }
-
       if (stats.elevation) {
-        elevation.push({ name: `${stats.to};${index}`, value: Math.trunc(stats.elevation) });
+        elevation.push({ name: labelName, value: Math.trunc(stats.elevation) });
       }
       index++;
     }
+
     return {
       activities: activities,
       averageSpeed: averageSpeed,
@@ -65,13 +65,22 @@ export class UserPlotDataAdapterService implements Adapter<UserPlotData> {
     let endTime = this.increaseEndTime(startTime, plotBatchRange);
     for (let i = 0; i < pointsQty; i++) {
       data.push(this.getMockedData(startTime, endTime));
-      startTime = endTime;
-      endTime = this.increaseEndTime(startTime, plotBatchRange);
+      startTime = new Date(endTime);
+      endTime = this.increaseEndTime(endTime, plotBatchRange);
     }
     return data;
   }
 
-  private increaseEndTime(startTime: Date, plotBatchRange: TimeRange): Date {
-    return plotBatchRange === TimeRange.monthly ? Utils.addMonthsToDate(startTime, 1) : Utils.addDaysToDate(startTime, 7);
+  private increaseEndTime(endTime: Date, plotBatchRange: TimeRange): Date {
+    return plotBatchRange === TimeRange.monthly ?Utils.addMonthsToDate(endTime, 1) : Utils.addDaysToDate(endTime, 7);
+  }
+
+
+  private getLabelName(from: string, to: string): string {
+    return `${this.formatDate(from)} - ${this.formatDate(to)}`;
+  }
+
+  private formatDate(date: string): string {
+    return new DatePipe("en-US").transform(date, "d MMMM yyyy") ?? "";
   }
 }
