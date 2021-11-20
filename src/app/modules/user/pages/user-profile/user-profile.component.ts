@@ -35,7 +35,10 @@ export class UserProfileComponent implements OnInit {
   public distancePlotTimeRange = TimeRange.monthly;
   public activitiesTimeRange = TimeRange.monthly;
 
-  public labeledWeeklyTicksX: number[] = [];
+  public xLabelTicksActivities: number[] = [];
+  public xLabelTicksDistance: number[] = [];
+  public xLabelTicksElevation: number[] = [];
+  public xLabelTicksAvgSpeed: number[] = [];
   public activitiesLabelBindFormatter: (x: string) => string = x => x;
   public distanceLabelBindFormatter: (x: string) => string = x => x;
   public elevationLabelBindFormatter: (x: string) => string = x => x;
@@ -120,10 +123,6 @@ export class UserProfileComponent implements OnInit {
     return plotData as UserPlotData;
   }
 
-  public getDisplayedLabelIndexes(timeRange: TimeRange): number[] | undefined {
-    return timeRange === TimeRange.weekly ? this.labeledWeeklyTicksX : undefined;
-  }
-
   private navigateWithSpinner(route: string): void {
     this.router.navigate([route]).then();
     this.spinner.show(SpinnerType.main).then();
@@ -139,12 +138,10 @@ export class UserProfileComponent implements OnInit {
       this.minAvgSpeed = this.getMinAvgSpeed(monthly);
       this.minElevation = this.getMinElevation(monthly);
 
-      for (let i = 0; i < this.weeklyPlotData.activities.length; i++) {
-        if (i % 4 === 0) {
-          this.labeledWeeklyTicksX.push(i);
-        }
-      }
-      this.labeledWeeklyTicksX.push(this.weeklyPlotData.activities.length - 1);
+      this.xLabelTicksActivities = this.getXLabelTicks(this.weeklyPlotData.activities);
+      this.xLabelTicksDistance = this.getXLabelTicks(this.weeklyPlotData.distance);
+      this.xLabelTicksElevation = this.getXLabelTicks(this.weeklyPlotData.elevation);
+      this.xLabelTicksAvgSpeed = this.getXLabelTicks(this.weeklyPlotData.averageSpeed);
 
       this.activitiesLabelBindFormatter = this.activitiesChartFormat.bind(this);
       this.distanceLabelBindFormatter = this.distanceChartFormat.bind(this);
@@ -169,39 +166,43 @@ export class UserProfileComponent implements OnInit {
     return Math.min(...elevationValues) - 1;
   }
 
+  private getXLabelTicks(plotData: PlotData[]): number[] {
+    return plotData.map((_, i) => i % 4 === 0 ? i : -1).filter((i) => i !== -1);
+  }
+
   private activitiesChartFormat(x: string): string {
     return (this.activitiesTimeRange === TimeRange.weekly && this.weeklyPlotData) ?
-      this.xAxisLabelWeeklyFormat(x, this.weeklyPlotData.activities) :
+      this.xAxisLabelWeeklyFormat(x, this.weeklyPlotData.activities, this.xLabelTicksActivities) :
       this.formatXLabel(x);
   }
 
   private elevationChartFormat(x: string): string {
     return (this.elevationPlotTimeRange === TimeRange.weekly && this.weeklyPlotData) ?
-      this.xAxisLabelWeeklyFormat(x, this.weeklyPlotData.elevation) :
+      this.xAxisLabelWeeklyFormat(x, this.weeklyPlotData.elevation, this.xLabelTicksElevation) :
       this.formatXLabel(x);
   }
 
   private distanceChartFormat(x: string): string {
     return (this.distancePlotTimeRange === TimeRange.weekly && this.weeklyPlotData) ?
-      this.xAxisLabelWeeklyFormat(x, this.weeklyPlotData.distance) :
+      this.xAxisLabelWeeklyFormat(x, this.weeklyPlotData.distance, this.xLabelTicksDistance) :
       this.formatXLabel(x);
     ;
   }
 
   private avgSpeedChartFormat(x: string): string {
     return (this.avgSpeedPlotTimeRange === TimeRange.weekly && this.weeklyPlotData) ?
-      this.xAxisLabelWeeklyFormat(x, this.weeklyPlotData.averageSpeed) :
+      this.xAxisLabelWeeklyFormat(x, this.weeklyPlotData.averageSpeed, this.xLabelTicksAvgSpeed) :
       this.formatXLabel(x);
   }
 
 
-  private xAxisLabelWeeklyFormat(x: string, plotData: PlotData[]): string {
-    if (!this.labeledWeeklyTicksX) {
+  private xAxisLabelWeeklyFormat(x: string, plotData: PlotData[], labelTicks: number[]): string {
+    if (!labelTicks) {
       return this.formatXLabel(x);
     }
 
     if (plotData) {
-      for (const index of this.labeledWeeklyTicksX) {
+      for (const index of labelTicks) {
         if (plotData.length >= index) {
           const xName = plotData[index].name;
           if (x === xName) {
