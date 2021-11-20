@@ -8,7 +8,7 @@
         <app-glass-card>
           <app-activity-card-content
             [activity]="activity"
-            [type]="postType"
+            [type]="postType ?? postTypeFromModel(activity)"
             (detailsClick)="activityDetailsClick.emit(activity)"
           ></app-activity-card-content>
         </app-glass-card>

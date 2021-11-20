@@ -14,7 +14,7 @@ export class ActivitiesListComponent implements OnInit, AfterViewInit {
 
   @Input() public activities: ActivityType[] = [];
   @Input() public scrollContainerId!: string;
-  @Input() public postType!: PostType;
+  @Input() public postType?: PostType;
 
   @Output() public activityDetailsClick = new EventEmitter<ActivityType>();
 
@@ -34,5 +34,15 @@ export class ActivitiesListComponent implements OnInit, AfterViewInit {
 
   public ngAfterViewInit() {
     this.scrollContainerComponent.scrollTop(this.scrollService.getScrollTopPosition(this.scrollContainerId));
+  }
+
+  public postTypeFromModel(activity: ActivityType): PostType {
+    if ("workout" in activity) {
+      return PostType.activityPost;
+    }
+    if ("plannedRoute" in activity) {
+      return PostType.plannedRoutePost;
+    }
+    return PostType.eventPost;
   }
 }

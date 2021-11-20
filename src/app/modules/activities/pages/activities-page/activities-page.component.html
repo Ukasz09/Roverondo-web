@@ -1,31 +1,30 @@
 <div class="container">
   <app-aside-layout>
     <div class="content">
-        <div *ngIf="selectedActivity; else activitiesWall" class="details">
-          <app-activity-details [id]="'activity-details'"
-                                [activity]="selectedActivity"
-                                (exitDetailsClick)="exitDetailsView()"
-                                [type]="postType">
-          </app-activity-details>
-          <div class="backdrop" (click)="exitDetailsView()">
-          </div>
+      <div *ngIf="selectedActivity; else activitiesWall" class="details">
+        <app-activity-details [id]="'activity-details'"
+                              [activity]="selectedActivity"
+                              (exitDetailsClick)="exitDetailsView()"
+                              [type]="postType(selectedActivity)">
+        </app-activity-details>
+        <div class="backdrop" (click)="exitDetailsView()">
         </div>
-        <ng-template #activitiesWall>
-          <div class="filter-btn">
-            <app-page-title [user]="user" [headerText]="headerText"></app-page-title>
-            <app-glass-btn-mini *ngIf="wallView"  (click)="openFilterSheet()">
-              <mat-icon class="icon" id="filter-icon">filter_alt</mat-icon>
-            </app-glass-btn-mini>
-          </div>
-          <div class="activities-list">
-            <app-activities-list
-              [activities]="activities"
-              [scrollContainerId]="scrollContainerId"
-              [postType]="postType"
-              (activityDetailsClick)="onActivityDetailsClick($event)">
-            </app-activities-list>
-          </div>
-        </ng-template>
+      </div>
+      <ng-template #activitiesWall>
+        <div class="filter-btn">
+          <app-page-title [user]="user" [headerText]="headerText"></app-page-title>
+          <app-glass-btn-mini *ngIf="wallView" (click)="openFilterSheet()">
+            <mat-icon class="icon" id="filter-icon">filter_alt</mat-icon>
+          </app-glass-btn-mini>
+        </div>
+        <div class="activities-list">
+          <app-activities-list
+            [activities]="activities"
+            [scrollContainerId]="scrollContainerId"
+            (activityDetailsClick)="onActivityDetailsClick($event)">
+          </app-activities-list>
+        </div>
+      </ng-template>
     </div>
   </app-aside-layout>
 </div>

@@ -81,7 +81,7 @@
           <span>{{ eventDurationTime }}</span>
         </div>
       </div>
-      <div class="stat">
+      <div *ngIf="type === PostType.activityPost" class="stat">
         <mat-icon class="icon">whatshot</mat-icon>
         <div class="details">
           <span class="label">Calories burned:</span>

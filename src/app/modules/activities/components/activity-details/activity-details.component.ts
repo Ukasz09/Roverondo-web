@@ -1,7 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { WallPostsService, LayoutService, PlotDataAdapterService } from "@app/core/services";
 import { LayoutType, PlotColors, PostType } from "@app/core/enums";
-import { ActivityType, AreaPlotData, EventPostExtended, PostExtended, Route } from "@app/core/models";
+import {
+  ActivityType,
+  AreaPlotData,
+  EventPostExtended,
+  PostExtended,
+  Route
+} from "@app/core/models";
 import { Color } from "@swimlane/ngx-charts";
 import { Utils } from "@app/shared/utils";
 
@@ -13,7 +19,7 @@ import { Utils } from "@app/shared/utils";
 export class ActivityDetailsComponent implements OnInit {
   @Input() public id!: string;
   @Input() public activity!: ActivityType;
-  @Input() public type!: PostType;
+  @Input() public type?: PostType;
 
   @Output() public exitDetailsClick = new EventEmitter<void>();
 
@@ -22,8 +28,8 @@ export class ActivityDetailsComponent implements OnInit {
   public readonly speedColorScheme = { domain: [PlotColors.speed] } as Color;
   public readonly pressureColorScheme = { domain: [PlotColors.pressure] } as Color;
   public readonly combinedColorScheme = { domain: this.elevationColorScheme.domain.concat(this.speedColorScheme.domain) } as Color;
-  public readonly PostType = PostType;
   public readonly valueNotFoundPlaceholder = "N/A";
+  public readonly PostType = PostType;
 
   public speedPlotData: AreaPlotData[] = [];
   public elevationPlotData: AreaPlotData[] = [];

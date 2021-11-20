@@ -80,15 +80,23 @@ export class ActivitiesPageComponent implements OnInit, OnDestroy {
     this.selectedActivity = undefined;
   }
 
-  public get postType(): PostType {
+  public postType(post?: ActivityType): PostType | undefined {
     switch (this.type) {
       case ActivitiesRoutes.planned:
         return PostType.plannedRoutePost;
       case ActivitiesRoutes.events:
         return PostType.eventPost;
-      default:
-        return PostType.activityPost;
     }
+    if (post) {
+      if ("workout" in post) {
+        return PostType.activityPost;
+      }
+      if ("plannedRoute" in post) {
+        return PostType.plannedRoutePost;
+      }
+      return PostType.eventPost;
+    }
+    return undefined;
   }
 
   public get headerText(): string {

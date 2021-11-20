@@ -114,7 +114,7 @@ export class PostsService {
 
   public getLikedActivities$(userId: number, page = 0): Observable<PostExtended[]> {
     // TODO: support for multi types
-    const endpoint = `${environment.backendApi}/api/wall/liked/${userId}?page=${page}&amount=${PostsService.amountPerPage}&postTypes=ActivityPost&extended=true`;
+    const endpoint = `${environment.backendApi}/api/wall/liked/${userId}?page=${page}&amount=${PostsService.amountPerPage}&extended=true`;
     return this.http.get<ActivityType[]>(endpoint).pipe(
       tap(data => console.log(data)),
       map(data => data as PostExtended[]),

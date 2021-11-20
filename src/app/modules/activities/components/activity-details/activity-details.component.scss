@@ -24,7 +24,7 @@ app-scroll-container {
         @include mixins.my(1rem);
         display: flex;
         flex-direction: row;
-        margin-right: 0.5rem;
+        margin-right: 1rem;
         align-items: center;
         width: 200px;
 

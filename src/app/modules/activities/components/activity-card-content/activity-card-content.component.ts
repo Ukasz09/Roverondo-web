@@ -20,7 +20,7 @@ import { EventParticipantsSheetComponent } from "../event-participants-sheet/eve
 })
 export class ActivityCardContentComponent implements OnInit {
   @Input() public activity!: ActivityType;
-  @Input() public type!: PostType;
+  @Input() public type?: PostType;
   @Input() public disableMapInteractions = true;
   @Input() public withStats = true;
   @Input() public withBottomMargin = true;
