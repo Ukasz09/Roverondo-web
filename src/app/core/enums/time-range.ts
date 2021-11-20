@@ -1,4 +1,4 @@
 export enum TimeRange {
-  weekly = "weekly",
-  monthly = "monthly"
+  weekly = "week",
+  monthly = "month"
 }
