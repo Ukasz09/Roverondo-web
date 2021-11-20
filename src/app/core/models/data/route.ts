@@ -3,8 +3,9 @@ import { Point } from './point';
 export interface Route {
   distance: number;
   elevation: number;
-  minAttitude: number;
-  maxAttitude: number;
+  minAltitude: number;
+  maxAltitude: number;
+  avgAltitude: number;
   location: string;
   route: Point[];
 }

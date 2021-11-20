@@ -4,4 +4,5 @@ export interface Point {
   elevation: number;
   speed?: number;
   pressure?: number;
+  timestamp: string;
 }

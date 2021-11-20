@@ -9,4 +9,5 @@ export interface PostComment {
     "profilePicture"?: string
   };
   reactions: number;
+  alreadyReactedTo: boolean;
 }

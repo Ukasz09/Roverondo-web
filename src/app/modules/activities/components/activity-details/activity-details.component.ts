@@ -3,7 +3,6 @@ import { WallPostsService, LayoutService, PlotDataAdapterService } from "@app/co
 import { LayoutType, PlotColors, PostType } from "@app/core/enums";
 import { ActivityType, AreaPlotData, Route } from "@app/core/models";
 import { Color } from "@swimlane/ngx-charts";
-import { SpeedUnitPipe } from "@app/shared/pipes";
 
 @Component({
   selector: "app-activity-details",
@@ -27,18 +26,13 @@ export class ActivityDetailsComponent implements OnInit {
   public elevationPlotData: AreaPlotData[] = [];
   public pressurePlotData: AreaPlotData[] = [];
   public combinedPlotData: AreaPlotData[] = [];
-  public maxSpeed?: number;
-  public minSpeed?: number;
-  public avgSpeed?: number;
-  public lowestPoint!: number;
-  public highestPoint!: number;
   public maxPressure!: number;
   public minPressure!: number;
 
   constructor(
     private readonly layoutService: LayoutService,
     private readonly activitiesService: WallPostsService,
-    private readonly plotDataAdapter: PlotDataAdapterService,
+    private readonly plotDataAdapter: PlotDataAdapterService
   ) {
   }
 
@@ -58,8 +52,28 @@ export class ActivityDetailsComponent implements OnInit {
     return this.pressurePlotData.length > 0 && this.pressurePlotData[0].series.length > 0;
   }
 
-  public get yScaleMinCompound(): number {
-    return Math.min(this.lowestPoint ?? 0, this.minSpeed ?? 0);
+  public get avgSpeed(): number {
+    if ("workout" in this.activity) {
+      return this.activity.workout.averageSpeed;
+    }
+    return 0;
+  }
+
+  public get maxSpeed(): number {
+    if ("workout" in this.activity) {
+      return this.activity.workout.maxSpeed;
+    }
+    return 0;
+  }
+
+  public getRoute(): Route {
+    if ("workout" in this.activity) {
+      return this.activity.workout.route;
+    }
+    if ("plannedRoute" in this.activity) {
+      return this.activity.plannedRoute.route;
+    }
+    return this.activity.eventRoute.route;
   }
 
   private parsePlotData(): void {
@@ -69,32 +83,14 @@ export class ActivityDetailsComponent implements OnInit {
     this.elevationPlotData = [plots.elevation];
     if (plots.speed) {
       this.speedPlotData = [plots.speed];
-      const speedValues = plots.speed.series.map(data => data.value);
-      this.maxSpeed = Math.max(...speedValues);
-      this.minSpeed = Math.min(...speedValues);
-      const speedSum = speedValues.reduce((acc, current) => acc + current, 0);
-      this.avgSpeed = speedSum / plots.elevation.series.length;
     }
     if (plots.pressure) {
+      // TODO: integrate with backend - display only if provided
       this.pressurePlotData = [plots.pressure];
       const pressureValues = plots.pressure.series.map(data => data.value);
       this.maxPressure = Math.max(...pressureValues);
       this.minPressure = Math.min(...pressureValues);
     }
     this.combinedPlotData = this.elevationPlotData.concat(this.speedPlotData);
-
-    const elevationValues = plots.elevation.series.map(data => data.value);
-    this.highestPoint = Math.max(...elevationValues);
-    this.lowestPoint = Math.min(...elevationValues);
-  }
-
-  private getRoute(): Route {
-    if ("workout" in this.activity) {
-      return this.activity.workout.route;
-    }
-    if ("plannedRoute" in this.activity) {
-      return this.activity.plannedRoute.route;
-    }
-    return this.activity.eventRoute.route;
   }
 }

@@ -1,11 +1,11 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from "@angular/material/bottom-sheet";
 import { CurrentUserService, SnackbarInfoService, PostsService } from "@app/core/services";
-import { PostComment, PostExtended, Reaction, User } from "@app/core/models";
+import { PostComment, PostExtended, User } from "@app/core/models";
 import { NgModel } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Observable, throwError } from "rxjs";
-import { map, switchMap } from "rxjs/operators";
+import { throwError } from "rxjs";
+import { switchMap } from "rxjs/operators";
 import { AppRoutes, UserRoutes } from "@app/core/enums";
 
 @Component({
@@ -17,7 +17,6 @@ export class CommentsSheetComponent implements OnInit {
   public commentList: PostComment[] = [];
   public newCommentValue = "";
   public showSpinner = true;
-  public alreadyReactedMap: Map<number, Reaction | undefined> = new Map<number, Reaction | undefined>();
 
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: { post: PostExtended, withFocus: boolean },
@@ -39,11 +38,10 @@ export class CommentsSheetComponent implements OnInit {
       this.currentUserService.currentUser$.subscribe((user) => {
         if (user) {
           this.addComment(user);
-          this.showSpinner = false;
         } else {
-          this.showSpinner = false;
           console.error("Current user not found - comment not added");
         }
+        this.showSpinner = false;
       });
     }
   }
@@ -57,56 +55,46 @@ export class CommentsSheetComponent implements OnInit {
     this._bottomSheetRef.dismiss();
   }
 
-  public commentAlreadyReacted(commentId: number): boolean {
-    return !!this.alreadyReactedMap.get(commentId);
-  }
-
-  public onCommentReactionClick(commentId: number): void {
-    if (this.commentAlreadyReacted(commentId)) {
-      const userReaction = this.alreadyReactedMap.get(commentId);
-      if (userReaction) {
-        this.removeReactionFromComment(commentId, userReaction.id);
-      } else {
-        console.error(`Not found reaction in map for comment with id=${commentId}`);
-      }
-      return;
+  public onCommentReactionClick(comment: PostComment): void {
+    if (comment.alreadyReactedTo) {
+      this.postsService.getCommentsReactions$(comment.id).subscribe(reactions => {
+        this.currentUserService.currentUser$.subscribe(u => {
+          console.log('TEST',reactions);
+          const userReaction = reactions.find(r => r.user.id === u?.id);
+          if (userReaction) {
+            this.removeReactionFromComment(comment, userReaction.id);
+          } else {
+            console.error(`Not found reaction in map for comment with id=${comment.id}`);
+          }
+        });
+      });
+    } else {
+      this.addReactionToComment(comment);
     }
-    this.addReactionToComment(commentId);
   }
 
-  private removeReactionFromComment(commentId: number, reactionId: number): void {
+  private removeReactionFromComment(comment: PostComment, reactionId: number): void {
     this.postsService.removeReactionFromComment$(reactionId).subscribe(() => {
-      this.alreadyReactedMap.set(commentId, undefined);
-      const comment = this.commentList.find(c => c.id === commentId);
-      if (comment) {
-        comment.reactions--;
-        if (comment.reactions < 0) {
-          comment.reactions = 0;
-        }
+      comment.reactions--;
+      comment.alreadyReactedTo = false;
+      if (comment.reactions < 0) {
+        comment.reactions = 0;
       }
       this.msgInfoService.openTextSnackbar("Reaction removed from comment", "OK");
     });
   }
 
-  private addReactionToComment(commentId: number): void {
-    this.currentUserService.currentUser$.pipe(
-      switchMap(user => {
+  private addReactionToComment(comment: PostComment): void {
+    this.currentUserService.currentUser$.pipe(switchMap(user => {
         if (user) {
-          return this.postsService.addReactionToComment$(user.id, commentId);
+          return this.postsService.addReactionToComment$(user.id, comment.id);
         }
         return throwError("Current user not found");
       })
     ).subscribe(() => {
-      this.alreadyReactedCommentData$(commentId).subscribe(
-        reaction => {
-          this.alreadyReactedMap.set(commentId, reaction);
-          const comment = this.commentList.find(c => c.id === commentId);
-          if (comment) {
-            comment.reactions++;
-          }
-          this.msgInfoService.openTextSnackbar("Reaction added to comment", "OK");
-        }
-      );
+      comment.reactions++;
+      comment.alreadyReactedTo = true;
+      this.msgInfoService.openTextSnackbar("Reaction added to comment", "OK");
     });
   }
 
@@ -115,12 +103,6 @@ export class CommentsSheetComponent implements OnInit {
       this.commentList = comments;
       this.sortComments();
       this.showSpinner = false;
-
-      for (const c of comments) {
-        this.alreadyReactedCommentData$(c.id).subscribe(reaction => {
-          this.alreadyReactedMap.set(c.id, reaction);
-        });
-      }
     });
   }
 
@@ -135,44 +117,15 @@ export class CommentsSheetComponent implements OnInit {
   }
 
   private addComment(user: User): void {
-    this.postsService.addComment$(user.id, this.data.post.id.toString(), this.newCommentValue.trim()).subscribe(() => {
+    this.postsService.addComment$(user.id, this.data.post.id.toString(), this.newCommentValue.trim()).subscribe((comment) => {
       if (!this.commentList) {
         this.commentList = [];
       }
-      this.commentList.push(this.getNewComment(user));
+      this.commentList.push(comment);
       this.data.post.commentsCount++;
       this.sortComments();
       this.newCommentValue = "";
       this.msgInfoService.openTextSnackbar("Comment has been added", "OK");
     });
-  }
-
-  private getNewComment(user: User): PostComment {
-    const createDate = new Date().toISOString();
-    return {
-      id: 0, // TODO: fix - must be returned from backend
-      text: this.newCommentValue,
-      createdAt: createDate,
-      modifiedAt: createDate,
-      user: {
-        id: user.id,
-        nickname: user.nickname,
-        profilePicture: user.profilePicture
-      },
-      reactions: 0
-    };
-  }
-
-  private alreadyReactedCommentData$(commentId: number): Observable<Reaction | undefined> {
-    return this.currentUserService.currentUser$.pipe(
-      switchMap(user => {
-        if (user) {
-          return this.postsService
-            .getCommentsReactions$(commentId)
-            .pipe(map(reactions => reactions.find(r => r.user.id === user.id)));
-        }
-        return throwError("Not found current user");
-      })
-    );
   }
 }

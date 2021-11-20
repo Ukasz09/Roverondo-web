@@ -22,19 +22,17 @@
                         [label]="'Speed'"
                         [data]="speedPlotData"
                         [xAxis]="false"
-                        [colorScheme]="speedColorScheme"
-                        [yScaleMin]="minSpeed ?? 0"
-        >
+                        [colorScheme]="speedColorScheme">
         </app-area-graph>
       </div>
       <div class="stats">
         <div>
           <span class="name">Max speed:</span>
-          <span>{{ maxSpeed | number:numberFormat }}km/h </span>
+          <span>{{ maxSpeed | speedUnit | number:numberFormat }} km/h </span>
         </div>
         <div>
           <span class="name">Avg speed:</span>
-          <span>{{ avgSpeed | number:numberFormat}}km/h</span>
+          <span>{{ avgSpeed | speedUnit | number:numberFormat}} km/h</span>
         </div>
       </div>
     </div>
@@ -47,18 +45,18 @@
                         [data]="elevationPlotData"
                         [xAxis]="false"
                         [colorScheme]="elevationColorScheme"
-                        [yScaleMin]="lowestPoint ?? 0"
+                        [yScaleMin]="getRoute().minAltitude ?? 0"
         >
         </app-area-graph>
       </div>
       <div class="stats">
         <div>
-          <span class="name">Highest point:</span>
-          <span>{{ highestPoint | number:numberFormat}}m</span>
+          <span class="name">Min altitude:</span>
+          <span>{{ getRoute().minAltitude | number:numberFormat}} m</span>
         </div>
         <div>
-          <span class="name">Lowest point:</span>
-          <span>{{ lowestPoint |number:numberFormat}}m</span>
+          <span class="name">Max altitude:</span>
+          <span>{{ getRoute().maxAltitude |number:numberFormat}} m</span>
         </div>
       </div>
     </div>
@@ -71,9 +69,7 @@
                         [data]="combinedPlotData"
                         [xAxis]="false"
                         [colorScheme]="combinedColorScheme"
-                        [withLegend]="!isMobileLayout"
-                        [yScaleMin]="yScaleMinCompound"
-        >
+                        [withLegend]="!isMobileLayout">
         </app-area-graph>
       </div>
     </div>
@@ -92,11 +88,11 @@
       <div class="stats">
         <div>
           <span class="name">Max pressure:</span>
-          <span>{{ maxPressure | number:".0-0"}}hPa</span>
+          <span>{{ maxPressure | number:".0-0"}} hPa</span>
         </div>
         <div>
           <span class="name">Min pressure:</span>
-          <span>{{ minPressure |number:".0-0"}}hPa</span>
+          <span>{{ minPressure |number:".0-0"}} hPa</span>
         </div>
       </div>
     </div>

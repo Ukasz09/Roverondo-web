@@ -46,14 +46,14 @@ export class PostsService {
     return this.http.delete<void>(endpoint);
   }
 
-  public addReactionToComment$(userId: number, commentId: number): Observable<void> {
+  public addReactionToComment$(userId: number, commentId: number): Observable<Reaction> {
     const endpoint = `${environment.backendApi}/api/comments/reactions`;
     const payload = {
       "commentId": commentId,
       "createdAt": new Date().toISOString(),
       "userId": userId
     };
-    return this.http.post<void>(endpoint, payload);
+    return this.http.post<Reaction>(endpoint, payload);
   }
 
   public getComments$(activityId: string): Observable<PostComment[]> {
@@ -66,7 +66,7 @@ export class PostsService {
     return this.http.get<Reaction[]>(endpoint).pipe(tap(data => console.log(data)));
   }
 
-  public addComment$(userId: number, activityId: string, commentText: string): Observable<void> {
+  public addComment$(userId: number, activityId: string, commentText: string): Observable<PostComment> {
     const endpoint = `${environment.backendApi}/api/comments`;
     const comment = {
       "createdAt": new Date().toISOString(),
@@ -74,7 +74,7 @@ export class PostsService {
       "text": commentText,
       "userId": userId
     };
-    return this.http.post<void>(endpoint, comment);
+    return this.http.post<PostComment>(endpoint, comment);
   }
 
   public getCommentsReactions$(commentId: number): Observable<Reaction[]> {
