@@ -57,30 +57,17 @@ export class CommentsSheetComponent implements OnInit {
 
   public onCommentReactionClick(comment: PostComment): void {
     if (comment.alreadyReactedTo) {
-      this.postsService.getCommentsReactions$(comment.id).subscribe(reactions => {
-        this.currentUserService.currentUser$.subscribe(u => {
-          const userReaction = reactions.find(r => r.user.id === u?.id);
-          if (userReaction) {
-            this.removeReactionFromComment(comment, userReaction.id);
-          } else {
-            console.error(`Not found reaction in map for comment with id=${comment.id}`);
-          }
-        });
+      this.postsService.removeReactionFromComment$(comment.id).subscribe(() => {
+        comment.reactions--;
+        comment.alreadyReactedTo = false;
+        if (comment.reactions < 0) {
+          comment.reactions = 0;
+        }
+        this.msgInfoService.openTextSnackbar("Reaction removed from comment", "OK");
       });
     } else {
       this.addReactionToComment(comment);
     }
-  }
-
-  private removeReactionFromComment(comment: PostComment, reactionId: number): void {
-    this.postsService.removeReactionFromComment$(reactionId).subscribe(() => {
-      comment.reactions--;
-      comment.alreadyReactedTo = false;
-      if (comment.reactions < 0) {
-        comment.reactions = 0;
-      }
-      this.msgInfoService.openTextSnackbar("Reaction removed from comment", "OK");
-    });
   }
 
   private addReactionToComment(comment: PostComment): void {

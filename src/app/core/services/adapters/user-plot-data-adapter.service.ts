@@ -33,12 +33,11 @@ export class UserPlotDataAdapterService implements Adapter<UserPlotData> {
       }
       index++;
     }
-
     return {
-      activities: activities,
-      averageSpeed: averageSpeed,
-      distance: distance,
-      elevation: elevation
+      activities: statisticsPeriods.filter(s => s.activities > 0).map(s => s.activities).length > 0 ? activities : [],
+      averageSpeed: statisticsPeriods.filter(s => s.averageSpeed > 0).map(s => s.averageSpeed).length > 0 ? activities : [],
+      distance: statisticsPeriods.filter(s => s.distance > 0).map(s => s.distance).length > 0 ? activities : [],
+      elevation: statisticsPeriods.filter(s => s.elevation > 0).map(s => s.elevation).length > 0 ? activities : [],
     };
   }
 

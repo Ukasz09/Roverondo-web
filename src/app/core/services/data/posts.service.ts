@@ -41,8 +41,8 @@ export class PostsService {
     return this.http.delete<void>(endpoint);
   }
 
-  public removeReactionFromComment$(reactionId: number): Observable<void> {
-    const endpoint = `${environment.backendApi}/api/comments/reactions/${reactionId}`;
+  public removeReactionFromComment$(commentId: number): Observable<void> {
+    const endpoint = `${environment.backendApi}/api/comments/${commentId}/reactions`;
     return this.http.delete<void>(endpoint);
   }
 
