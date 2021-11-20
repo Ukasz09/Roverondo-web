@@ -1,7 +1,7 @@
 <mat-nav-list class="mat-list">
   <ng-container *ngIf="!showSpinner; else spinner">
     <form (ngSubmit)="onSubmit(comment)" class="comment-form">
-      <mat-form-field appearance="outline" class="comment-input">
+      <mat-form-field appearance="outline" class="comment-input" color="accent">
         <mat-label>Add comment</mat-label>
         <input matInput placeholder="Your comment" [(ngModel)]="newCommentValue" name="comment" #comment="ngModel"
                maxlength="100" [inputFocus]="data.withFocus">

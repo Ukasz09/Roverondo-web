@@ -10,13 +10,15 @@ import {
   PostExtended,
   Reaction
 } from "@app/core/models";
-import { delay, map, tap } from "rxjs/operators";
+import { map, tap } from "rxjs/operators";
 import { MockedPressureAdapterService, MockedSpeedAdapterService } from "../adapters";
 
 @Injectable({
   providedIn: "root"
 })
 export class PostsService {
+  public static readonly amountPerPage = 3;
+
   constructor(
     private readonly http: HttpClient,
     private readonly mockedSpeedAdapter: MockedSpeedAdapterService,
@@ -86,7 +88,7 @@ export class PostsService {
     return this.http.get<ActivityType[]>(endpoint).pipe(
       tap(data => console.log(data)),
       map(data => data as PostExtended[]),
-      map(data => data.map(p => this.mockedSpeedAdapter.adapt(p))),
+      // map(data => data.map(p => this.mockedSpeedAdapter.adapt(p))),
       map(data => data.map(p => this.mockedPressureAdapter.adapt(p)))
     );
   }
@@ -110,8 +112,13 @@ export class PostsService {
     );
   }
 
-  public getLikedActivities$(userId: number, offset = 0): Observable<PostExtended[]> {
-    // TODO: tmp mocked - integrate with backend
-    return this.getCompletedActivities$(userId, offset);
+  public getLikedActivities$(userId: number, page = 0): Observable<PostExtended[]> {
+    // TODO: support for multi types
+    const endpoint = `${environment.backendApi}/api/wall/liked/${userId}?page=${page}&amount=${PostsService.amountPerPage}&postTypes=ActivityPost&extended=true`;
+    return this.http.get<ActivityType[]>(endpoint).pipe(
+      tap(data => console.log(data)),
+      map(data => data as PostExtended[]),
+      map(data => data.map(p => this.mockedPressureAdapter.adapt(p)))
+    );
   }
 }

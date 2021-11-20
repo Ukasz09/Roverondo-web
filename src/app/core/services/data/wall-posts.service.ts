@@ -17,7 +17,7 @@ export class WallPostsService {
     return this.getWall$({ userId: userId, type: "ActivityPost", offset: offset })
       .pipe(
         map(data => data as PostExtended[]),
-        map(data => data.map(p => this.mockedSpeedAdapter.adapt(p)))
+        // map(data => data.map(p => this.mockedSpeedAdapter.adapt(p)))
       );
   }
 

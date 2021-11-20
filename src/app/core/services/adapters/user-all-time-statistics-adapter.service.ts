@@ -15,7 +15,7 @@ export class UserAllTimeStatisticsAdapterService implements Adapter<UserExtended
       followers: Utils.randomNumber(0, 4).toFixed(),
       followings: Utils.randomNumber(0, 10).toFixed(),
       totalGivenReactions: Utils.randomNumber(0, 40).toFixed(),
-      totalDistanceTravelled: Utils.randomNumber(1500, 2500000).toFixed(),
+      totalDistanceTravelled: Utils.randomNumber(1500, 2500000).toFixed()
     };
     return item;
   }

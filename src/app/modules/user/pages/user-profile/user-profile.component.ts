@@ -1,13 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Data, Router } from "@angular/router";
-import { Gender, PlotData, UserExtended, UserPlotData } from "@app/core/models";
+import { Gender, UserExtended, UserPlotData } from "@app/core/models";
 import { ActivitiesRoutes, AppRoutes, PlotColors, SpinnerType, TimeRange, UserRoutes } from "@app/core/enums";
 import { NgxSpinnerService } from "ngx-spinner";
 import { CurrentUserService, UsersService } from "@app/core/services";
 import { TimeTransformType, TimeUnitPipe } from "@app/shared/pipes";
 import { Color } from "@swimlane/ngx-charts";
 import { timer, zip } from "rxjs";
-import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-user-profile",
@@ -83,6 +82,17 @@ export class UserProfileComponent implements OnInit {
     return "Not specified";
   }
 
+  public get userGenderText():string{
+    switch (this.user.gender) {
+      case Gender.male:
+        return "Male";
+      case Gender.female:
+        return "Female";
+      default:
+        return "Not specified";
+    }
+  }
+
   public get userGenderIcon(): string {
     switch (this.user.gender) {
       case Gender.male:
@@ -99,7 +109,7 @@ export class UserProfileComponent implements OnInit {
     const hoursInt = Math.trunc(hours);
     const hoursRest = hours - hoursInt;
     const minutes = this.timeUnitPipe.transform(hoursRest, TimeTransformType.hoursToMinutes);
-    return `${hoursInt}:${minutes.toFixed()}h`;
+    return `${hoursInt}:${minutes.toFixed().padEnd(2,'0')} h`;
   }
 
   public getPlotData(timeRangeType: TimeRange): UserPlotData {

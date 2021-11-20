@@ -31,7 +31,7 @@ export class UsersService {
   public getUser$(userId: number, extended = false): Observable<User | UserExtended> {
     const endpoint = `${environment.backendApi}/api/users/${userId}?extended=${extended}`;
     return this.http.get<User>(endpoint).pipe(
-      map(u => extended ? this.userAllTimeStatisticsAdapter.adapt(u) : u),
+      // map(u => extended ? this.userAllTimeStatisticsAdapter.adapt(u) : u),
       tap(data => console.log(data)));
   }
 

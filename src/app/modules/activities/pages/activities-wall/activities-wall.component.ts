@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { LayoutService, ScrollService, WallPostsService } from "@app/core/services";
+import { LayoutService, PostsService, ScrollService, WallPostsService } from "@app/core/services";
 import { ActivitiesRoutes, PostType, SpinnerType } from "@app/core/enums";
 import { ActivatedRoute } from "@angular/router";
 import { ScrollContainerComponent } from "@app/shared/components";
@@ -30,6 +30,7 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
   private noMoreActivities = false;
   private type!: ActivitiesRoutes;
   private scrollBottomSubscription$?: Subscription;
+  private offsetOrPage = 0;
 
   constructor(
     private readonly layoutService: LayoutService,
@@ -135,12 +136,21 @@ export class ActivitiesWallComponent implements OnInit, OnDestroy {
 
   private getMoreActivitiesData$(): Observable<ActivityType[]> {
     if (this.user) {
+      this.updatePageOrOffset();
       if (this.wallView) {
-        return this.wallResolver.getActivities$(this.user.id, this.activities.length, this.type);
+        return this.wallResolver.getActivities$(this.user.id, this.offsetOrPage, this.type);
       }
-      return this.postsResolver.getActivities$(this.user.id, this.activities.length, this.type);
+      return this.postsResolver.getActivities$(this.user.id, this.offsetOrPage, this.type);
     } else {
       return throwError("User not found - data not fetched");
+    }
+  }
+
+  private updatePageOrOffset(): void {
+    if (this.type === ActivitiesRoutes.liked) {
+      this.offsetOrPage++;
+    } else {
+      this.offsetOrPage = this.activities.length;
     }
   }
 }

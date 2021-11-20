@@ -24,7 +24,7 @@ export class SnackbarInfoService {
     this.errSnackbarRef = this._snackBar.openFromComponent(SnackbarErrorComponent, {
       duration: durationMs,
       data: msg,
-      panelClass:['error-snackbar']
+      panelClass: ["error-snackbar"]
     });
   }
 }
