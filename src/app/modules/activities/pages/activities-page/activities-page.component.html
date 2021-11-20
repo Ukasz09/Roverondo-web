@@ -20,6 +20,7 @@
         <div class="activities-list">
           <app-activities-list
             [activities]="activities"
+            [postType]="postType()"
             [scrollContainerId]="scrollContainerId"
             (activityDetailsClick)="onActivityDetailsClick($event)">
           </app-activities-list>

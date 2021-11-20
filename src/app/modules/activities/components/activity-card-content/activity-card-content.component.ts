@@ -26,6 +26,7 @@ export class ActivityCardContentComponent implements OnInit {
   @Input() public withBottomMargin = true;
 
   @Output() public detailsClick: EventEmitter<void> = new EventEmitter<void>();
+
   public readonly PostType = PostType;
 
   // TODO: integrate with backend and use get
