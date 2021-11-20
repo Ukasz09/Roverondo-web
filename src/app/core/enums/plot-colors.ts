@@ -1,6 +1,6 @@
 export enum PlotColors {
-  elevation = "#29D559",
-  speed = "#E87D46",
+  elevation = "#1fc253",
+  speed = "#ff7043",
   distance = "#5A7BCF",
   activities = "#795548",
   pressure = "#e171af"

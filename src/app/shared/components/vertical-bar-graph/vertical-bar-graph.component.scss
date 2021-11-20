@@ -11,6 +11,10 @@
     color: variables.$text-primary-color;
   }
 
+  ::ng-deep .ngx-charts .bar {
+    stroke: variables.$light-color-half-transparent;
+  }
+
   .spinner-wrapper {
     @include mixins.py(2.5rem);
     display: flex;

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { PlotData } from "@app/core/models";
 import { Color } from "@swimlane/ngx-charts";
-import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-vertical-bar-graph",
@@ -23,6 +22,8 @@ export class VerticalBarGraphComponent implements OnInit {
   @Input() public yScaleMin?: number;
   @Input() public withLegend = false;
   @Input() public xAxisFormat: (x: string) => string = x => x;
+  @Input() public barPadding = 2;
+
   public animations = true;
 
   constructor() {

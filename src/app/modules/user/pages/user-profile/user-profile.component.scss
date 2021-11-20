@@ -274,25 +274,6 @@
           margin-top: 1rem;
           display: flex;
           flex-direction: column;
-
-          .label {
-            margin-bottom: 1rem;
-            font-weight: 600;
-            font-size: 18px;
-
-            @include mixins.media(md-large) {
-              font-size: 20px;
-            }
-          }
-
-          .plot {
-
-            overflow: auto;
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-            width: 100%;
-            height: 250px;
-          }
         }
 
         .links {

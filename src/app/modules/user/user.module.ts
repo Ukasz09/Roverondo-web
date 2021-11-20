@@ -8,13 +8,15 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatIconModule } from "@angular/material/icon";
 import { TimeUnitPipe } from "@app/shared/pipes";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
+import { UserStatChartComponent } from './components/user-stat-chart/user-stat-chart.component';
 
 
 @NgModule({
   declarations: [
     UserProfileComponent,
     FollowersComponent,
-    FollowingsComponent
+    FollowingsComponent,
+    UserStatChartComponent
   ],
   imports: [
     CommonModule,

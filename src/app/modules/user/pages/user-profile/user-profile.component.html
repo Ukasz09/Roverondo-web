@@ -102,71 +102,27 @@
               </app-glass-btn>
             </div>
             <hr>
-            <div *ngIf="plotDataReady; else spinner" class="plot-wrapper">
-              <div class="label">Activities</div>
-              <div class="plot">
-                <app-vertical-bar-graph [id]="'activities-plot'"
-                                        [label]="'Activities'"
-                                        [data]="getPlotData(activitiesTimeRange).activities"
-                                        [xAxis]="true"
-                                        [xAxisFormat]="activitiesLabelBindFormatter"
-                                        [colorScheme]="activitiesColorScheme"
-                                        [yScaleMin]="0">
-                </app-vertical-bar-graph>
-              </div>
-              <app-time-range-btn-toggle [activeTimeRange]="activitiesTimeRange"
-                                         (weeklyBtnClick)="activitiesTimeRange=TimeRange.weekly"
-                                         (monthlyBtnClick)="activitiesTimeRange=TimeRange.monthly"></app-time-range-btn-toggle>
-
-              <div class="label">Distance</div>
-              <div class="plot">
-                <app-vertical-bar-graph [id]="'distance-plot'"
-                                        [label]="'Distance'"
-                                        [data]="getPlotData(distancePlotTimeRange).distance"
-                                        [xAxis]="true"
-                                        [xAxisFormat]="distanceLabelBindFormatter"
-                                        [colorScheme]="distanceColorScheme"
-                                        [yScaleMin]="0">
-                </app-vertical-bar-graph>
-              </div>
-              <app-time-range-btn-toggle
-                [activeTimeRange]="distancePlotTimeRange"
-                (weeklyBtnClick)="distancePlotTimeRange=TimeRange.weekly"
-                (monthlyBtnClick)="distancePlotTimeRange=TimeRange.monthly"></app-time-range-btn-toggle>
-
-              <div class="label">Elevation</div>
-              <div class="plot">
-                <app-vertical-bar-graph [id]="'elevation-plot'"
-                                        [label]="'Elevation'"
-                                        [data]="getPlotData(elevationPlotTimeRange).elevation"
-                                        [xAxis]="true"
-                                        [xAxisFormat]="elevationLabelBindFormatter"
-                                        [colorScheme]="elevationColorScheme"
-                                        [yScaleMin]="minElevation">
-                </app-vertical-bar-graph>
-              </div>
-              <app-time-range-btn-toggle
-                [activeTimeRange]="elevationPlotTimeRange"
-                (weeklyBtnClick)="elevationPlotTimeRange=TimeRange.weekly"
-                (monthlyBtnClick)="elevationPlotTimeRange=TimeRange.monthly">
-              </app-time-range-btn-toggle>
-
-              <div class="label">Average Speed</div>
-              <div class="plot">
-                <app-vertical-bar-graph [id]="'avg-speed-plot'"
-                                        [label]="'AvgSpeed'"
-                                        [data]="getPlotData(avgSpeedPlotTimeRange).averageSpeed"
-                                        [xAxisFormat]="avgSpeedLabelBindFormatter"
-                                        [colorScheme]="speedColorScheme"
-                                        [yScaleMin]="minAvgSpeed"
-                                        [xAxis]="true">
-                </app-vertical-bar-graph>
-              </div>
-              <app-time-range-btn-toggle
-                [activeTimeRange]="avgSpeedPlotTimeRange"
-                (weeklyBtnClick)="avgSpeedPlotTimeRange=TimeRange.weekly"
-                (monthlyBtnClick)="avgSpeedPlotTimeRange=TimeRange.monthly">
-              </app-time-range-btn-toggle>
+            <div *ngIf="weeklyPlotData && monthlyPlotData; else spinner" class="plot-wrapper">
+              <app-user-stat-chart [colorScheme]="activitiesColorScheme"
+                                   [chartName]="'Activities'"
+                                   [monthlyChartData]="monthlyPlotData.activities"
+                                   [weeklyChartData]="weeklyPlotData.activities">
+              </app-user-stat-chart>
+              <app-user-stat-chart [colorScheme]="distanceColorScheme"
+                                   [chartName]="'Distance'"
+                                   [monthlyChartData]="monthlyPlotData.distance"
+                                   [weeklyChartData]="weeklyPlotData.distance">
+              </app-user-stat-chart>
+              <app-user-stat-chart [colorScheme]="elevationColorScheme"
+                                   [chartName]="'Elevation'"
+                                   [monthlyChartData]="monthlyPlotData.elevation"
+                                   [weeklyChartData]="weeklyPlotData.elevation">
+              </app-user-stat-chart>
+              <app-user-stat-chart [colorScheme]="speedColorScheme"
+                                   [chartName]="'Average Speed'"
+                                   [monthlyChartData]="monthlyPlotData.averageSpeed"
+                                   [weeklyChartData]="weeklyPlotData.averageSpeed">
+              </app-user-stat-chart>
             </div>
           </div>
         </app-glass-card>
