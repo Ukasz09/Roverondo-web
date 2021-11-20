@@ -1,12 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Data, Router } from "@angular/router";
-import { Gender, UserExtended, UserPlotData } from "@app/core/models";
+import { Gender, PlotData, UserExtended, UserPlotData } from "@app/core/models";
 import { ActivitiesRoutes, AppRoutes, PlotColors, SpinnerType, TimeRange, UserRoutes } from "@app/core/enums";
 import { NgxSpinnerService } from "ngx-spinner";
 import { CurrentUserService, UsersService } from "@app/core/services";
 import { TimeTransformType, TimeUnitPipe } from "@app/shared/pipes";
 import { Color } from "@swimlane/ngx-charts";
 import { timer, zip } from "rxjs";
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-user-profile",
@@ -35,6 +36,10 @@ export class UserProfileComponent implements OnInit {
   public activitiesTimeRange = TimeRange.monthly;
 
   public labeledWeeklyTicksX: number[] = [];
+  public activitiesLabelBindFormatter: (x: string) => string = x => x;
+  public distanceLabelBindFormatter: (x: string) => string = x => x;
+  public elevationLabelBindFormatter: (x: string) => string = x => x;
+  public avgSpeedLabelBindFormatter: (x: string) => string = x => x;
 
   constructor(
     public readonly currentUserService: CurrentUserService,
@@ -44,7 +49,6 @@ export class UserProfileComponent implements OnInit {
     private readonly router: Router,
     private readonly timeUnitPipe: TimeUnitPipe
   ) {
-
   }
 
   public ngOnInit(): void {
@@ -142,6 +146,11 @@ export class UserProfileComponent implements OnInit {
       }
       this.labeledWeeklyTicksX.push(this.weeklyPlotData.activities.length - 1);
 
+      this.activitiesLabelBindFormatter = this.activitiesChartFormat.bind(this);
+      this.distanceLabelBindFormatter = this.distanceChartFormat.bind(this);
+      this.avgSpeedLabelBindFormatter = this.avgSpeedChartFormat.bind(this);
+      this.elevationLabelBindFormatter = this.elevationChartFormat.bind(this);
+
       this.plotDataReady = true;
     });
   }
@@ -158,5 +167,54 @@ export class UserProfileComponent implements OnInit {
   private getMinElevation(plotData: UserPlotData): number {
     const elevationValues = plotData.elevation.map(plotData => plotData.value);
     return Math.min(...elevationValues) - 1;
+  }
+
+  private activitiesChartFormat(x: string): string {
+    return (this.activitiesTimeRange === TimeRange.weekly && this.weeklyPlotData) ?
+      this.xAxisLabelWeeklyFormat(x, this.weeklyPlotData.activities) :
+      this.formatXLabel(x);
+  }
+
+  private elevationChartFormat(x: string): string {
+    return (this.elevationPlotTimeRange === TimeRange.weekly && this.weeklyPlotData) ?
+      this.xAxisLabelWeeklyFormat(x, this.weeklyPlotData.elevation) :
+      this.formatXLabel(x);
+  }
+
+  private distanceChartFormat(x: string): string {
+    return (this.distancePlotTimeRange === TimeRange.weekly && this.weeklyPlotData) ?
+      this.xAxisLabelWeeklyFormat(x, this.weeklyPlotData.distance) :
+      this.formatXLabel(x);
+    ;
+  }
+
+  private avgSpeedChartFormat(x: string): string {
+    return (this.avgSpeedPlotTimeRange === TimeRange.weekly && this.weeklyPlotData) ?
+      this.xAxisLabelWeeklyFormat(x, this.weeklyPlotData.averageSpeed) :
+      this.formatXLabel(x);
+  }
+
+
+  private xAxisLabelWeeklyFormat(x: string, plotData: PlotData[]): string {
+    if (!this.labeledWeeklyTicksX) {
+      return this.formatXLabel(x);
+    }
+
+    if (plotData) {
+      for (const index of this.labeledWeeklyTicksX) {
+        if (plotData.length >= index) {
+          const xName = plotData[index].name;
+          if (x === xName) {
+            return this.formatXLabel(xName);
+          }
+        }
+      }
+    }
+    return "";
+  }
+
+  private formatXLabel(xName: string): string {
+    const dateCleaned = xName.split(";")[0];
+    return new DatePipe("en-US").transform(dateCleaned, "MMMM yyyy") ?? "";
   }
 }

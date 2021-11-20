@@ -3,7 +3,6 @@ import { Adapter } from "@app/core/services";
 import { UserPlotData, UserStatisticsPeriod } from "@app/core/models";
 import { Utils } from "@app/shared/utils";
 import { TimeRange } from "@app/core/enums";
-import { DatePipe } from "@angular/common";
 
 @Injectable({
   providedIn: "root"
