@@ -29,6 +29,7 @@ export class ActivityDetailsComponent implements OnInit {
   public readonly pressureColorScheme = { domain: [PlotColors.pressure] } as Color;
   public readonly combinedColorScheme = { domain: this.elevationColorScheme.domain.concat(this.speedColorScheme.domain) } as Color;
   public readonly valueNotFoundPlaceholder = "N/A";
+  public readonly xAxisFormatter = (_: string) => "";
   public readonly PostType = PostType;
 
   public speedPlotData: AreaPlotData[] = [];

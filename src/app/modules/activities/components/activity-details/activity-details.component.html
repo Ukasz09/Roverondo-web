@@ -150,7 +150,8 @@
         <app-area-graph [id]="'speed-graph'"
                         [label]="'Speed'"
                         [data]="speedPlotData"
-                        [xAxis]="false"
+                        [xAxis]="true"
+                        [xAxisFormat]="xAxisFormatter"
                         [colorScheme]="speedColorScheme">
         </app-area-graph>
       </div>
@@ -161,7 +162,8 @@
         <app-area-graph [id]="'elevation-graph'"
                         [label]="'Speed'"
                         [data]="elevationPlotData"
-                        [xAxis]="false"
+                        [xAxis]="true"
+                        [xAxisFormat]="xAxisFormatter"
                         [colorScheme]="elevationColorScheme"
                         [yScaleMin]="getRoute().minAltitude ?? 0"
         >
@@ -174,7 +176,8 @@
         <app-area-graph [id]="'combined-graph'"
                         [label]="'Speed'"
                         [data]="combinedPlotData"
-                        [xAxis]="false"
+                        [xAxis]="true"
+                        [xAxisFormat]="xAxisFormatter"
                         [colorScheme]="combinedColorScheme"
                         [withLegend]="!isMobileLayout">
         </app-area-graph>
@@ -186,7 +189,8 @@
         <app-area-graph [id]="'pressure-graph'"
                         [label]="'Pressure'"
                         [data]="pressurePlotData"
-                        [xAxis]="false"
+                        [xAxis]="true"
+                        [xAxisFormat]="xAxisFormatter"
                         [colorScheme]="pressureColorScheme"
                         [yScaleMin]="950">
         </app-area-graph>

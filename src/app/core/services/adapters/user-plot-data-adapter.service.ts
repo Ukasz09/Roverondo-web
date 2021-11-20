@@ -4,12 +4,13 @@ import { UserPlotData, UserStatisticsPeriod } from "@app/core/models";
 import { Utils } from "@app/shared/utils";
 import { TimeRange } from "@app/core/enums";
 import { DatePipe } from "@angular/common";
+import { SpeedUnitPipe } from "@app/shared/pipes";
 
 @Injectable({
   providedIn: "root"
 })
 export class UserPlotDataAdapterService implements Adapter<UserPlotData> {
-  constructor() {
+  constructor(private readonly speedUnit: SpeedUnitPipe) {
   }
 
   public adapt(statisticsPeriods: UserStatisticsPeriod[]): UserPlotData {
@@ -23,7 +24,8 @@ export class UserPlotDataAdapterService implements Adapter<UserPlotData> {
       const labelName = this.getLabelName(stats.from, stats.to);
       activities.push({ name: labelName, value: Math.trunc(stats.activities) });
       if (stats.averageSpeed || stats.averageSpeed === 0) {
-        averageSpeed.push({ name: labelName, value: stats.averageSpeed });
+        const speed = stats.averageSpeed;
+        averageSpeed.push({ name: labelName, value: this.speedUnit.transform(speed) });
       }
       if (stats.distance || stats.distance === 0) {
         distance.push({ name: labelName, value: stats.distance });
@@ -33,11 +35,12 @@ export class UserPlotDataAdapterService implements Adapter<UserPlotData> {
       }
       index++;
     }
+
     return {
-      activities: statisticsPeriods.filter(s => s.activities > 0).map(s => s.activities).length > 0 ? activities : [],
-      averageSpeed: statisticsPeriods.filter(s => s.averageSpeed > 0).map(s => s.averageSpeed).length > 0 ? activities : [],
-      distance: statisticsPeriods.filter(s => s.distance > 0).map(s => s.distance).length > 0 ? activities : [],
-      elevation: statisticsPeriods.filter(s => s.elevation > 0).map(s => s.elevation).length > 0 ? activities : [],
+      activities,
+      averageSpeed,
+      distance,
+      elevation
     };
   }
 

@@ -21,6 +21,7 @@ export class AreaGraphComponent implements OnInit {
   @Input() public withGradient = false;
   @Input() public yScaleMin?: number;
   @Input() public withLegend = false;
+  @Input() public xAxisFormat: (x: string) => string = x => x;
 
   public readonly LegendPosition = LegendPosition;
 
