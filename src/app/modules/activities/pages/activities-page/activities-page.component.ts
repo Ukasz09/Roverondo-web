@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
-import { LayoutService, PostsService, ScrollService, WallPostsService } from "@app/core/services";
+import { LayoutService, ScrollService, WallPostsService } from "@app/core/services";
 import { ActivitiesRoutes, PostType, SpinnerType } from "@app/core/enums";
 import { ActivatedRoute } from "@angular/router";
 import { ScrollContainerComponent } from "@app/shared/components";
@@ -12,11 +12,11 @@ import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { FilterSheetComponent } from "../../components";
 
 @Component({
-  selector: "app-activities-wall",
-  templateUrl: "./activities-wall.component.html",
-  styleUrls: ["./activities-wall.component.scss"]
+  selector: "app-activities-page",
+  templateUrl: "./activities-page.component.html",
+  styleUrls: ["./activities-page.component.scss"]
 })
-export class ActivitiesWallComponent implements OnInit, OnDestroy {
+export class ActivitiesPageComponent implements OnInit, OnDestroy {
   @ViewChild("scrollContainerComponent") scrollContainerComponent?: ScrollContainerComponent;
 
   public scrollContainerId = "activities-wall";

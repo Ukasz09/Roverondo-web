@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CommonModule, DecimalPipe } from "@angular/common";
-import { ActivitiesWallComponent } from "./pages";
 import { AppSharedModule } from "@app/shared";
 import { ActivitiesRoutingModule } from "./activities-routing.module";
 import { MatIconModule } from "@angular/material/icon";
@@ -18,13 +17,14 @@ import { MatBottomSheetModule } from "@angular/material/bottom-sheet";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { LengthUnitPipe, PressureUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
+import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
 import { MatButtonModule } from "@angular/material/button";
 import { MatRippleModule } from "@angular/material/core";
+import { ActivitiesPageComponent } from "./pages";
 
 @NgModule({
   declarations: [
-    ActivitiesWallComponent,
+    ActivitiesPageComponent,
     ActivityCardContentComponent,
     ActivityDetailsComponent,
     CommentsSheetComponent,
@@ -53,7 +53,7 @@ import { MatRippleModule } from "@angular/material/core";
     PostsResolver,
     LengthUnitPipe,
     DecimalPipe,
-    SpeedUnitPipe,
+    SpeedUnitPipe
   ]
 })
 export class ActivitiesModule {

@@ -1,1 +1,1 @@
-export * from "./activities-wall/activities-wall.component";
+export * from "./activities-page/activities-page.component";

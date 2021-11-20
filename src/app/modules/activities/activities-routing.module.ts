@@ -1,13 +1,13 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { ActivitiesWallComponent } from "./pages";
 import { PostsResolver, WallResolver } from "./services";
 import { UserResolver } from "@app/core/services";
+import { ActivitiesPageComponent } from "./pages";
 
 const routes: Routes = [
   {
     path: `:userId/wall/:type`,
-    component: ActivitiesWallComponent,
+    component: ActivitiesPageComponent,
     resolve: {
       activities: WallResolver,
       user: UserResolver
@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: `:userId/:type`,
-    component: ActivitiesWallComponent,
+    component: ActivitiesPageComponent,
     resolve: {
       activities: PostsResolver,
       user: UserResolver

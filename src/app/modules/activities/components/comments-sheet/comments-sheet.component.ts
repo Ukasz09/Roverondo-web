@@ -59,7 +59,6 @@ export class CommentsSheetComponent implements OnInit {
     if (comment.alreadyReactedTo) {
       this.postsService.getCommentsReactions$(comment.id).subscribe(reactions => {
         this.currentUserService.currentUser$.subscribe(u => {
-          console.log('TEST',reactions);
           const userReaction = reactions.find(r => r.user.id === u?.id);
           if (userReaction) {
             this.removeReactionFromComment(comment, userReaction.id);
