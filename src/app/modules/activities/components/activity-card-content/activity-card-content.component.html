@@ -59,10 +59,10 @@
       <div *ngIf="type===PostType.eventPost" class="action cursor-pointer"
            (click)="activityAsEventPostExtended.alreadyJoined ? leaveEvent() : joinEvent()">
         <mat-icon class="icon" id="join-leave-event">
-          {{ activityAsEventPostExtended.alreadyJoined ? 'person_add' : 'person_add_disabled' }}
+          {{ activityAsEventPostExtended.alreadyJoined ? 'person_add_disabled' : 'person_add' }}
         </mat-icon>
         <label for="join-leave-event" class="text cursor-pointer">
-          <span>{{activityAsEventPostExtended.alreadyJoined ? 'Join' : 'Leave'}}</span>
+          <span>{{activityAsEventPostExtended.alreadyJoined ? 'Leave' : 'Join'}}</span>
         </label>
       </div>
 

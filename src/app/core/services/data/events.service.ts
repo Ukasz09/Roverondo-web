@@ -11,13 +11,14 @@ export class EventsService {
   constructor(private readonly http: HttpClient) {
   }
 
-  public joinToTheEvent$(eventId: number): Observable<boolean> {
-    return of(true);
+  public joinToTheEvent$(eventId: number, currentUserId: number): Observable<void> {
+    const endpoint = `${environment.backendApi}/api/events/${eventId}/enrolled/${currentUserId}`;
+    return this.http.post<void>(endpoint, {});
   }
 
-  public leaveEvent$(eventId: number): Observable<boolean> {
-    // TODO: integrate with backend - tmp mocked
-    return of(true);
+  public leaveEvent$(eventId: number, currentUserId: number): Observable<void> {
+    const endpoint = `${environment.backendApi}/api/events/${eventId}/enrolled/${currentUserId}`;
+    return this.http.delete<void>(endpoint, {});
   }
 
   public getParticipants$(eventId: number): Observable<User[]> {

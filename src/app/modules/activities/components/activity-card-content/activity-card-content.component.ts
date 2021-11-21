@@ -67,7 +67,14 @@ export class ActivityCardContentComponent implements OnInit {
   }
 
   public joinEvent(): void {
-    this.eventsService.joinToTheEvent$(this.activity.id).subscribe(() => {
+    this.currentUserService.currentUser$.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.eventsService.joinToTheEvent$(this.activity.id, user.id);
+        }
+        return throwError("Not found current user - not joined");
+      })
+    ).subscribe(() => {
       const eventPostExtended = this.activity as EventPostExtended;
       eventPostExtended.enrolledUsers++;
       eventPostExtended.alreadyJoined = true;
@@ -75,7 +82,14 @@ export class ActivityCardContentComponent implements OnInit {
   }
 
   public leaveEvent(): void {
-    this.eventsService.leaveEvent$(this.activity.id).subscribe(() => {
+    this.currentUserService.currentUser$.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.eventsService.leaveEvent$(this.activity.id, user.id);
+        }
+        return throwError("Not found current user - not left");
+      })
+    ).subscribe(() => {
       const eventPostExtended = this.activity as EventPostExtended;
       eventPostExtended.enrolledUsers--;
       eventPostExtended.alreadyJoined = false;
