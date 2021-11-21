@@ -3,7 +3,6 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { User } from "@app/core/models";
 import { environment } from "@app/env";
-import { tap } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -13,7 +12,6 @@ export class EventsService {
   }
 
   public joinToTheEvent$(eventId: number): Observable<boolean> {
-    // TODO: integrate with backend - tmp mocked
     return of(true);
   }
 
@@ -23,8 +21,7 @@ export class EventsService {
   }
 
   public getParticipants$(eventId: number): Observable<User[]> {
-    // TODO: integrate with backend - tmp mocked
-    const endpoint = `${environment.backendApi}/api/users`;
-    return this.http.get<User[]>(endpoint).pipe(tap(data => console.log(data)));
+    const endpoint = `${environment.backendApi}/api/events/${eventId}/enrolled`;
+    return this.http.get<User[]>(endpoint);
   }
 }

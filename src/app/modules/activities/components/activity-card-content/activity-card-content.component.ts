@@ -3,7 +3,7 @@ import { Utils } from "@app/shared/utils";
 import { AuthService } from "@auth0/auth0-angular";
 import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { CommentsSheetComponent } from "../comments-sheet/comments-sheet.component";
-import { ActivityType, Point, Route } from "@app/core/models";
+import { ActivityType, EventPostExtended, Point, Route } from "@app/core/models";
 import { ReactionsSheetComponent } from "../reactions-sheet/reactions-sheet.component";
 import { CurrentUserService, SnackbarInfoService, PostsService, EventsService } from "@app/core/services";
 import { AppRoutes, PostType, UserRoutes } from "@app/core/enums";
@@ -30,18 +30,6 @@ export class ActivityCardContentComponent implements OnInit {
   @Output() public backBtnClick: EventEmitter<void> = new EventEmitter<void>();
 
   public readonly PostType = PostType;
-
-  // TODO: integrate with backend and use get
-  public alreadyJoinedToEvent = false;
-  // public get alreadyJoinedToEvent(): boolean {
-  //   return false;
-  // }
-
-  // TODO: integrate with backend and use get
-  public eventParticipantsQty = 0;
-// public get eventParticipantsQty(): number {
-  //   return 0;
-  // }
 
   private readonly valueNotFoundPlaceholder = "N/A";
   private currentUserId?: string = undefined;
@@ -80,15 +68,17 @@ export class ActivityCardContentComponent implements OnInit {
 
   public joinEvent(): void {
     this.eventsService.joinToTheEvent$(this.activity.id).subscribe(() => {
-      this.alreadyJoinedToEvent = true;
-      this.eventParticipantsQty++;
+      const eventPostExtended = this.activity as EventPostExtended;
+      eventPostExtended.enrolledUsers++;
+      eventPostExtended.alreadyJoined = true;
     });
   }
 
   public leaveEvent(): void {
     this.eventsService.leaveEvent$(this.activity.id).subscribe(() => {
-      this.alreadyJoinedToEvent = false;
-      this.eventParticipantsQty--;
+      const eventPostExtended = this.activity as EventPostExtended;
+      eventPostExtended.enrolledUsers--;
+      eventPostExtended.alreadyJoined = false;
     });
   }
 
@@ -193,6 +183,10 @@ export class ActivityCardContentComponent implements OnInit {
 
   public get eventStartTime(): string {
     return this.getEventStartDate("shortTime");
+  }
+
+  public get activityAsEventPostExtended(): EventPostExtended {
+    return this.activity as EventPostExtended;
   }
 
   private addReactionToActivity(): void {
