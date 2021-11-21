@@ -78,29 +78,17 @@ export class PostsService {
     return this.http.post<PostComment>(endpoint, comment);
   }
 
-  public getCommentsReactions$(commentId: number): Observable<Reaction[]> {
-    const endpoint = `${environment.backendApi}/api/comments/${commentId}/reactions`;
-    return this.http.get<Reaction[]>(endpoint);
-  }
-
   public getCompletedActivities$(userId: number, currentUserId: number, page = 0): Observable<PostExtended[]> {
-    const endpoint = `${environment.backendApi}/api/users/${userId}/posts?` +
-      `extended=true&amount=${PostsService.amountPerPage}&caller-id=${currentUserId}&page=${page}&postTypes=ActivityPost`;
-    return this.http.get<ActivityType[]>(endpoint).pipe(
-      tap(data => console.log(data)),
+    return this.getUserPost$(userId, currentUserId, "ActivityPost", page).pipe(
       map(data => data as PostExtended[]),
       map(data => data.map(a => this.speedFixAdapter.adapt(a))),
       map(data => data.map(p => this.mockedPressureAdapter.adapt(p)))
     );
   }
 
-  public getPlannedRoutes$(userId: number, offset = 0): Observable<PlannedPostExtended[]> {
-    // TODO: tmp mocked - integrate with backend
-    const endpoint = `${environment.backendApi}/api/wall/${userId}?offset=${offset}&amount=3&postTypes=PlannedRoutePost&extended=true`;
-    return this.http.get<ActivityType[]>(endpoint).pipe(
-      tap(data => console.log(data)),
-      map(data => data as PlannedPostExtended[])
-    );
+  public getPlannedRoutes$(userId: number, currentUserId: number, page = 0): Observable<PlannedPostExtended[]> {
+    return this.getUserPost$(userId, currentUserId, "PlannedRoutePost", page).pipe(
+      map(data => data as PlannedPostExtended[]));
   }
 
   public getEvents$(userId: number, offset = 0): Observable<EventPostExtended[]> {
@@ -121,5 +109,11 @@ export class PostsService {
       map(data => data as PostExtended[]),
       map(data => data.map(p => this.mockedPressureAdapter.adapt(p)))
     );
+  }
+
+  private getUserPost$(userId: number, currentUserId: number, postType: string, page = 0): Observable<ActivityType[]> {
+    const endpoint = `${environment.backendApi}/api/users/${userId}/posts?` +
+      `extended=true&amount=${PostsService.amountPerPage}&caller-id=${currentUserId}&page=${page}&postTypes=${postType}`;
+    return this.http.get<ActivityType[]>(endpoint).pipe(tap(data => console.log(data)));
   }
 }
