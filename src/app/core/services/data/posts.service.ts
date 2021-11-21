@@ -82,13 +82,12 @@ export class PostsService {
     return this.http.get<Reaction[]>(endpoint);
   }
 
-  public getCompletedActivities$(userId: number, offset = 0): Observable<PostExtended[]> {
-    // TODO: tmp mocked - integrate with backend
-    const endpoint = `${environment.backendApi}/api/wall/${userId}?offset=${offset}&amount=3&postTypes=ActivityPost&extended=true`;
+  public getCompletedActivities$(userId: number, currentUserId: number, page = 0): Observable<PostExtended[]> {
+    const endpoint = `${environment.backendApi}/api/users/${userId}/posts?` +
+      `extended=true&amount=${PostsService.amountPerPage}&caller-id=${currentUserId}&page=${page}&postTypes=ActivityPost`;
     return this.http.get<ActivityType[]>(endpoint).pipe(
       tap(data => console.log(data)),
       map(data => data as PostExtended[]),
-      // map(data => data.map(p => this.mockedSpeedAdapter.adapt(p))),
       map(data => data.map(a => {
         a.workout.route.route = a.workout.route.route.filter(p => p.speed && p.speed < 80 / 3.6);
         a.workout.maxSpeed = Math.max(...a.workout.route.route.map(p => p.speed ?? 0));
