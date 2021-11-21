@@ -11,7 +11,7 @@ import {
   Reaction
 } from "@app/core/models";
 import { map, tap } from "rxjs/operators";
-import { MockedPressureAdapterService, MockedSpeedAdapterService } from "../adapters";
+import { MockedPressureAdapterService, MockedSpeedAdapterService, SpeedFixAdapterService } from "../adapters";
 
 @Injectable({
   providedIn: "root"
@@ -22,7 +22,8 @@ export class PostsService {
   constructor(
     private readonly http: HttpClient,
     private readonly mockedSpeedAdapter: MockedSpeedAdapterService,
-    private readonly mockedPressureAdapter: MockedPressureAdapterService
+    private readonly mockedPressureAdapter: MockedPressureAdapterService,
+    private readonly speedFixAdapter: SpeedFixAdapterService
   ) {
   }
 
@@ -88,11 +89,7 @@ export class PostsService {
     return this.http.get<ActivityType[]>(endpoint).pipe(
       tap(data => console.log(data)),
       map(data => data as PostExtended[]),
-      map(data => data.map(a => {
-        a.workout.route.route = a.workout.route.route.filter(p => p.speed && p.speed < 80 / 3.6);
-        a.workout.maxSpeed = Math.max(...a.workout.route.route.map(p => p.speed ?? 0));
-        return a;
-      })),
+      map(data => data.map(a => this.speedFixAdapter.adapt(a))),
       map(data => data.map(p => this.mockedPressureAdapter.adapt(p)))
     );
   }

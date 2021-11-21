@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { ActivityType, EventPostExtended, PlannedPostExtended, PostExtended } from "@app/core/models";
 import { map, tap } from "rxjs/operators";
-import { MockedPressureAdapterService, MockedSpeedAdapterService } from "../adapters";
+import { MockedPressureAdapterService, MockedSpeedAdapterService, SpeedFixAdapterService } from "../adapters";
 import { environment } from "@app/env";
 
 @Injectable({
@@ -13,7 +13,8 @@ export class WallPostsService {
   constructor(
     private readonly http: HttpClient,
     private readonly mockedSpeedAdapter: MockedSpeedAdapterService,
-    private readonly mockedPressureAdapter: MockedPressureAdapterService
+    private readonly mockedPressureAdapter: MockedPressureAdapterService,
+    private readonly speedFixAdapter: SpeedFixAdapterService
   ) {
   }
 
@@ -21,13 +22,8 @@ export class WallPostsService {
     return this.getWall$({ userId, type: "ActivityPost", offset })
       .pipe(
         map(data => data as PostExtended[]),
-        map(data => data.map(a => {
-          a.workout.route.route = a.workout.route.route.filter(p => p.speed && p.speed < 80 / 3.6);
-          a.workout.maxSpeed = Math.max(...a.workout.route.route.map(p => p.speed ?? 0));
-          return a;
-        })),
+        map(data => data.map(a => this.speedFixAdapter.adapt(a))),
         map(data => data.map(p => this.mockedPressureAdapter.adapt(p)))
-        // map(data => data.map(p => this.mockedSpeedAdapter.adapt(p)))
       );
   }
 
