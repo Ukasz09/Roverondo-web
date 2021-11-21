@@ -1,15 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { WallPostsService, LayoutService, ActivityChartsDataAdapterService } from "@app/core/services";
+import { ActivityChartsDataAdapterService, LayoutService, WallPostsService } from "@app/core/services";
 import { LayoutType, PlotColors, PostType } from "@app/core/enums";
-import {
-  ActivityType,
-  AreaPlotData,
-  EventPostExtended,
-  PostExtended,
-  Route
-} from "@app/core/models";
+import { ActivityType, AreaPlotData, EventPostExtended, PostExtended, Route } from "@app/core/models";
 import { Color } from "@swimlane/ngx-charts";
 import { Utils } from "@app/shared/utils";
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: "app-activity-details",
@@ -113,14 +108,19 @@ export class ActivityDetailsComponent implements OnInit {
     return (this.activity as PostExtended).workout.avgAtmosphericPressure ?? 0;
   }
 
-  public get eventStartDate(): string {
-    const eventStartDate = undefined; // TODO: tmp
-    return eventStartDate ? `${eventStartDate} m` : this.valueNotFoundPlaceholder;
+  public getEventStartDate(format = "longDate"): string {
+    if (this.type == PostType.eventPost) {
+      if ("startsAt" in this.activity) {
+        const eventStartFullDate = this.activity.startsAt;
+        const formattedDate = new DatePipe("en-US").transform(eventStartFullDate, format) ?? this.valueNotFoundPlaceholder;
+        return eventStartFullDate ? formattedDate : this.valueNotFoundPlaceholder;
+      }
+    }
+    return this.valueNotFoundPlaceholder;
   }
 
-  public get eventDurationTime(): string {
-    const eventDurationTime = undefined; // TODO: tmp
-    return eventDurationTime ? `${eventDurationTime} m` : this.valueNotFoundPlaceholder;
+  public get eventStartTime(): string {
+    return this.getEventStartDate("shortTime");
   }
 
   public get calories(): string {

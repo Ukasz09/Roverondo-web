@@ -73,14 +73,14 @@
         <mat-icon class="icon">date_range</mat-icon>
         <div class="details">
           <span class="label">Event start date:</span>
-          <span>{{eventStartDate}}</span>
+          <span>{{getEventStartDate()}}</span>
         </div>
       </div>
       <div *ngIf="type === PostType.eventPost" class="stat">
         <mat-icon class="icon">query_builder</mat-icon>
         <div class="details">
-          <span class="label">Event duration:</span>
-          <span>{{ eventDurationTime }}</span>
+          <span class="label">Event start time:</span>
+          <span>{{ eventStartTime }}</span>
         </div>
       </div>
       <div *ngIf="type === PostType.activityPost" class="stat">

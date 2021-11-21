@@ -18,7 +18,7 @@
   </div>
   <div class="trip-title">
     <mat-icon class="icon">directions_bike</mat-icon>
-    <span class="cursor-pointer" (click)="detailsClick.emit()">{{activity.title}}</span>
+    <span class="cursor-pointer title-text" (click)="detailsClick.emit()">{{activity.title}}</span>
   </div>
   <div class="map fadeIn">
     <app-map [disabledInteractions]="disableMapInteractions" [routePoints]="routes"></app-map>
@@ -98,11 +98,11 @@
       </div>
       <div *ngIf="withEventStartDate" class="event-start-date">
         <mat-icon class="icon">date_range</mat-icon>
-        <span>{{eventStartDateText}}</span>
+        <span>{{getEventStartDate()}}</span>
       </div>
-      <div *ngIf="withEventDurationTime" class="event-duration-time">
+      <div *ngIf="withEventStartTime" class="event-duration-time">
         <mat-icon class="icon">query_builder</mat-icon>
-        <span>{{eventDurationTimeText}}</span>
+        <span>{{eventStartTime}}</span>
       </div>
     </div>
   </ng-template>

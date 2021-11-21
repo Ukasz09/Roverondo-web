@@ -10,7 +10,7 @@ import { AppRoutes, PostType, UserRoutes } from "@app/core/enums";
 import { switchMap } from "rxjs/operators";
 import { throwError } from "rxjs";
 import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
-import { DecimalPipe } from "@angular/common";
+import { DatePipe, DecimalPipe } from "@angular/common";
 import { EventParticipantsSheetComponent } from "../event-participants-sheet/event-participants-sheet.component";
 
 @Component({
@@ -128,14 +128,6 @@ export class ActivityCardContentComponent implements OnInit {
     return elevation ? `${this.decimalPipe.transform(elevation, "1.0-0")} m` : this.valueNotFoundPlaceholder;
   }
 
-  public get eventStartDateText(): string {
-    return this.eventStartDate ? `${this.eventStartDate} m` : this.valueNotFoundPlaceholder;
-  }
-
-  public get eventDurationTimeText(): string {
-    return this.eventDurationTime ? `${this.eventDurationTime} m` : this.valueNotFoundPlaceholder;
-  }
-
   public get routes(): Point[] {
     return this.route.route;
   }
@@ -152,7 +144,7 @@ export class ActivityCardContentComponent implements OnInit {
     return this.type === PostType.activityPost;
   }
 
-  public get withEventDurationTime(): boolean {
+  public get withEventStartTime(): boolean {
     return this.type === PostType.eventPost;
   }
 
@@ -188,12 +180,19 @@ export class ActivityCardContentComponent implements OnInit {
     return 0;
   }
 
-  public get eventDurationTime(): string {
-    return "99"; // TODO: tmp
+  public getEventStartDate(format = "shortDate"): string {
+    if (this.type == PostType.eventPost) {
+      if ("startsAt" in this.activity) {
+        const eventStartFullDate = this.activity.startsAt;
+        const formattedDate = new DatePipe("en-US").transform(eventStartFullDate, format) ?? this.valueNotFoundPlaceholder;
+        return eventStartFullDate ? formattedDate : this.valueNotFoundPlaceholder;
+      }
+    }
+    return this.valueNotFoundPlaceholder;
   }
 
-  public get eventStartDate(): string {
-    return "99"; // TODO: tmp
+  public get eventStartTime(): string {
+    return this.getEventStartDate("shortTime");
   }
 
   private addReactionToActivity(): void {
