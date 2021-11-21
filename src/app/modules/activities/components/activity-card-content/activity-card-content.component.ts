@@ -24,8 +24,10 @@ export class ActivityCardContentComponent implements OnInit {
   @Input() public disableMapInteractions = true;
   @Input() public withStats = true;
   @Input() public withBottomMargin = true;
+  @Input() public backBtnVisible = false;
 
   @Output() public detailsClick: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public backBtnClick: EventEmitter<void> = new EventEmitter<void>();
 
   public readonly PostType = PostType;
 

@@ -6,7 +6,9 @@
         [disableMapInteractions]="false"
         [activity]="activity"
         [withStats]="false"
+        [backBtnVisible]="!isMobileLayout"
         [type]="type"
+        (backBtnClick)="exitDetailsClick.emit()"
       ></app-activity-card-content>
     </div>
     <hr>
@@ -22,14 +24,14 @@
         <mat-icon class="icon">schedule</mat-icon>
         <div class="details">
           <span class="label">Start time:</span>
-          <span>{{ startTime | date:"shortTime" }}</span>
+          <span>{{ startTime | date:"short" }}</span>
         </div>
       </div>
       <div *ngIf="type === PostType.activityPost" class="stat">
         <mat-icon class="icon">flag</mat-icon>
         <div class="details">
           <span class="label">End time:</span>
-          <span>{{ endTime | date:"shortTime"}}</span>
+          <span>{{ endTime | date:"short"}}</span>
         </div>
       </div>
       <div *ngIf="type === PostType.activityPost" class="stat">
@@ -197,7 +199,7 @@
       </div>
     </div>
     <div *ngIf="isMobileLayout" (click)="exitDetailsClick.emit()" class="back-to-wall-btn">
-      <app-glass-btn>
+      <app-glass-btn [lighter]="true">
         <div class="content">
           <div class="icon">
             <mat-icon>chevron_left</mat-icon>

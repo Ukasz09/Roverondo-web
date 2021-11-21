@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { WallPostsService, LayoutService, PlotDataAdapterService } from "@app/core/services";
+import { WallPostsService, LayoutService, ActivityChartsDataAdapterService } from "@app/core/services";
 import { LayoutType, PlotColors, PostType } from "@app/core/enums";
 import {
   ActivityType,
@@ -40,7 +40,7 @@ export class ActivityDetailsComponent implements OnInit {
   constructor(
     private readonly layoutService: LayoutService,
     private readonly activitiesService: WallPostsService,
-    private readonly plotDataAdapter: PlotDataAdapterService
+    private readonly plotDataAdapter: ActivityChartsDataAdapterService
   ) {
   }
 

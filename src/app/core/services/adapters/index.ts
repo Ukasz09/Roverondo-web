@@ -1,4 +1,4 @@
-export * from "./plot-data-adapter.service";
+export * from "./activity-charts-data-adapter.service";
 export * from "./user-plot-data-adapter.service";
 export * from "./user-all-time-statistics-adapter.service";
 export * from "./adapter";

@@ -10,7 +10,7 @@
   }
 
   @include mixins.media(sm-small) {
-    &.with-bottom-margin{
+    &.with-bottom-margin {
       margin-bottom: 0.5rem;
     }
     margin-top: 0.5rem;
@@ -140,6 +140,16 @@
       order: 3;
       margin-top: 0;
       height: 450px;
+    }
+  }
+
+  .back-btn {
+    margin-left: 1rem;
+    display: flex;
+    justify-content: flex-end;
+
+    @include mixins.media(md-large) {
+      flex: 1;
     }
   }
 
