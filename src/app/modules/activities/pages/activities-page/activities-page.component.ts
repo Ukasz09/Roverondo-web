@@ -155,10 +155,11 @@ export class ActivitiesPageComponent implements OnInit, OnDestroy {
   }
 
   private updatePageOrOffset(): void {
-    if (this.type === ActivitiesRoutes.liked) {
-      this.offsetOrPage++;
-    } else {
+    const isOffsetType = this.wallView;
+    if (isOffsetType) {
       this.offsetOrPage = this.activities.length;
+    } else {
+      this.offsetOrPage++;
     }
   }
 }
