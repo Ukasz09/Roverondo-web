@@ -14,14 +14,22 @@
                   <div class="name-and-follow-btn">
                     <div class="name">{{ user.nickname }}</div>
                     <ng-container *ngIf="currentUserService.currentUser$ | async as currentUser">
-                      <div *ngIf="currentUser.id!== user.id " class="follow-btn-wrapper">
-                        <app-glass-btn class="follow-btn" [paddingY]="'0'" (click)="onFollowClick()">
-                          <mat-icon class="icon">
-                            {{alreadyFollowed ? 'close' : 'add'}}
-                          </mat-icon>
-                          <span>{{ alreadyFollowed ? 'Unfollow' : 'Follow'}}</span>
-                        </app-glass-btn>
-                      </div>
+                      <ng-container *ngIf="alreadyFollowed!==undefined; else followBtnSpinnerTemplate">
+                        <div *ngIf="currentUser.id!== user.id" class="follow-btn-wrapper">
+                          <app-glass-btn class="follow-btn" [paddingY]="'0'" (click)="onFollowClick()">
+                            <mat-icon class="icon">
+                              {{alreadyFollowed ? 'close' : 'add'}}
+                            </mat-icon>
+                            <span>{{ alreadyFollowed ? 'Unfollow' : 'Follow'}}</span>
+                          </app-glass-btn>
+                        </div>
+                      </ng-container>
+
+                      <ng-template #followBtnSpinnerTemplate>
+                        <div class="spinner-wrapper" style="padding-left: 0.5rem">
+                          <mat-spinner [diameter]="50"></mat-spinner>
+                        </div>
+                      </ng-template>
                     </ng-container>
                   </div>
                   <div *ngIf="user.bio" class="bio">
@@ -102,27 +110,29 @@
               </app-glass-btn>
             </div>
             <hr>
-            <div *ngIf="weeklyPlotData && monthlyPlotData; else spinner" class="plot-wrapper">
-              <app-user-stat-chart [colorScheme]="activitiesColorScheme"
-                                   [chartName]="'Activities'"
-                                   [monthlyChartData]="monthlyPlotData.activities"
-                                   [weeklyChartData]="weeklyPlotData.activities">
-              </app-user-stat-chart>
-              <app-user-stat-chart [colorScheme]="distanceColorScheme"
-                                   [chartName]="'Distance'"
-                                   [monthlyChartData]="monthlyPlotData.distance"
-                                   [weeklyChartData]="weeklyPlotData.distance">
-              </app-user-stat-chart>
-              <app-user-stat-chart [colorScheme]="elevationColorScheme"
-                                   [chartName]="'Elevation'"
-                                   [monthlyChartData]="monthlyPlotData.elevation"
-                                   [weeklyChartData]="weeklyPlotData.elevation">
-              </app-user-stat-chart>
-              <app-user-stat-chart [colorScheme]="speedColorScheme"
-                                   [chartName]="'Average Speed'"
-                                   [monthlyChartData]="monthlyPlotData.averageSpeed"
-                                   [weeklyChartData]="weeklyPlotData.averageSpeed">
-              </app-user-stat-chart>
+            <div class="plot-wrapper">
+              <ng-container *ngIf="weeklyPlotData && monthlyPlotData; else spinnerTemplate">
+                <app-user-stat-chart [colorScheme]="activitiesColorScheme"
+                                     [chartName]="'Activities'"
+                                     [monthlyChartData]="monthlyPlotData.activities"
+                                     [weeklyChartData]="weeklyPlotData.activities">
+                </app-user-stat-chart>
+                <app-user-stat-chart [colorScheme]="distanceColorScheme"
+                                     [chartName]="'Distance'"
+                                     [monthlyChartData]="monthlyPlotData.distance"
+                                     [weeklyChartData]="weeklyPlotData.distance">
+                </app-user-stat-chart>
+                <app-user-stat-chart [colorScheme]="elevationColorScheme"
+                                     [chartName]="'Elevation'"
+                                     [monthlyChartData]="monthlyPlotData.elevation"
+                                     [weeklyChartData]="weeklyPlotData.elevation">
+                </app-user-stat-chart>
+                <app-user-stat-chart [colorScheme]="speedColorScheme"
+                                     [chartName]="'Average Speed'"
+                                     [monthlyChartData]="monthlyPlotData.averageSpeed"
+                                     [weeklyChartData]="weeklyPlotData.averageSpeed">
+                </app-user-stat-chart>
+              </ng-container>
             </div>
           </div>
         </app-glass-card>
@@ -167,7 +177,7 @@
   </div>
 </ng-template>
 
-<ng-template #spinner>
+<ng-template #spinnerTemplate>
   <div class="spinner-wrapper">
     <mat-spinner></mat-spinner>
   </div>

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { User, UserExtended, UserPlotData, UserStatisticsPeriod } from "@app/core/models";
-import { map, tap } from "rxjs/operators";
+import { map, switchMap, tap } from "rxjs/operators";
 import { environment } from "@app/env";
 import { UserAllTimeStatisticsAdapterService, UserPlotDataAdapterService } from "../adapters";
 import { TimeRange } from "@app/core/enums";
@@ -46,9 +46,19 @@ export class UsersService {
     return this.http.get<User[]>(endpoint).pipe(tap(data => console.log(data)));
   }
 
-  public getFollowing$(userId: number): Observable<User[]> {
+  public getFollowings$(userId: number): Observable<User[]> {
     const endpoint = `${environment.backendApi}/api/users/${userId}/followings`;
     return this.http.get<User[]>(endpoint).pipe(tap(data => console.log(data)));
+  }
+
+  public followUser$(followedId: number, followerId:number): Observable<void> {
+    const endpoint = `${environment.backendApi}/api/users/${followedId}/${followerId}`;
+    return this.http.post<void>(endpoint, {});
+  }
+
+  public unfollowUser$(followedId: number, followerId:number): Observable<void> {
+    const endpoint = `${environment.backendApi}/api/users/${followedId}/${followerId}`;
+    return this.http.delete<void>(endpoint);
   }
 
   public searchUsers$(query: string, amount = 10, offset = 0): Observable<User[]> {

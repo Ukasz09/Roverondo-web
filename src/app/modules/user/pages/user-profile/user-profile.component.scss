@@ -107,6 +107,13 @@
                 justify-content: center;
               }
 
+              .spinner-wrapper {
+                @include mixins.py(1rem);
+
+                display: flex;
+                justify-content: center;
+              }
+
               .name {
                 height: 50%;
                 //background: dimgray;
@@ -274,6 +281,13 @@
           margin-top: 1rem;
           display: flex;
           flex-direction: column;
+
+
+          .spinner-wrapper {
+            @include mixins.py(5rem);
+            display: flex;
+            justify-content: center;
+          }
         }
 
         .links {
@@ -318,8 +332,3 @@
   }
 }
 
-.spinner-wrapper {
-  @include mixins.py(5rem);
-  display: flex;
-  justify-content: center;
-}

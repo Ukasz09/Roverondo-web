@@ -6,7 +6,9 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { CurrentUserService, UsersService } from "@app/core/services";
 import { TimeTransformType, TimeUnitPipe } from "@app/shared/pipes";
 import { Color } from "@swimlane/ngx-charts";
-import { timer, zip } from "rxjs";
+import { throwError, timer, zip } from "rxjs";
+import { delay, switchMap } from "rxjs/operators";
+import { environment } from "@app/env";
 
 @Component({
   selector: "app-user-profile",
@@ -21,7 +23,7 @@ export class UserProfileComponent implements OnInit {
   public readonly activitiesColorScheme = { domain: [PlotColors.activities] } as Color;
 
   public user!: UserExtended;
-  public alreadyFollowed = false;
+  public alreadyFollowed?: boolean = undefined;
   public monthlyPlotData?: UserPlotData;
   public weeklyPlotData?: UserPlotData;
   public minAvgSpeed = 0;
@@ -42,13 +44,34 @@ export class UserProfileComponent implements OnInit {
       this.user = data.user;
       this.spinner.hide(SpinnerType.main).then();
     });
+
     // Workaround for lib bug
     timer(250).subscribe(() => this.fetchPlotData());
+
+    this.currentUserService.currentUser$.subscribe(currentUser => {
+      if (currentUser) {
+        this.usersService.getFollowers$(this.user.id).subscribe(followers => {
+            this.alreadyFollowed = !!followers.find(u => u.id === currentUser.id);
+          }
+        );
+      }
+      return throwError("Not found current user - follownigs not fetched");
+    });
   }
 
   public onFollowClick(): void {
-    this.alreadyFollowed = !this.alreadyFollowed;
-    // TODO: add logic
+    const alreadyFollowedCopy = this.alreadyFollowed;
+    this.alreadyFollowed = undefined;
+    this.currentUserService.currentUser$.pipe(switchMap(currentUser => {
+      if (currentUser) {
+        return alreadyFollowedCopy ?
+          this.usersService.unfollowUser$(this.user.id, currentUser.id) :
+          this.usersService.followUser$(this.user.id, currentUser.id);
+      }
+      return throwError("Current user not found - request not sent");
+    })).subscribe(() => {
+      this.alreadyFollowed = !alreadyFollowedCopy;
+    });
   }
 
   public navigateToActivities(): void {
@@ -82,7 +105,7 @@ export class UserProfileComponent implements OnInit {
     return "Not specified";
   }
 
-  public get userGenderText():string{
+  public get userGenderText(): string {
     switch (this.user.gender) {
       case Gender.male:
         return "Male";
@@ -109,7 +132,7 @@ export class UserProfileComponent implements OnInit {
     const hoursInt = Math.trunc(hours);
     const hoursRest = hours - hoursInt;
     const minutes = this.timeUnitPipe.transform(hoursRest, TimeTransformType.hoursToMinutes);
-    return `${hoursInt}:${minutes.toFixed().padEnd(2,'0')} h`;
+    return `${hoursInt}:${minutes.toFixed().padEnd(2, "0")} h`;
   }
 
   public getPlotData(timeRangeType: TimeRange): UserPlotData {

@@ -23,7 +23,7 @@ export class FollowingsResolver implements Resolve<User[]> {
       this.navigateHomeAndHideSpinner();
       return throwError(`User id not given`);
     }
-    return this.userService.getFollowing$(+userId).pipe(
+    return this.userService.getFollowings$(+userId).pipe(
       catchError(() => {
         this.navigateHomeAndHideSpinner();
         return throwError(`Not found followings for user with id=${userId}`);
