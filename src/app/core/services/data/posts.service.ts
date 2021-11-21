@@ -3,8 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "@app/env";
 import {
-  ActivityType,
-  EventPostExtended,
+  ActivityType, EventPostExtended,
   PlannedPostExtended,
   PostComment,
   PostExtended,
@@ -91,18 +90,12 @@ export class PostsService {
       map(data => data as PlannedPostExtended[]));
   }
 
-  public getEvents$(userId: number, offset = 0): Observable<EventPostExtended[]> {
-    // TODO: tmp mocked - integrate with backend
-    return this.getPlannedRoutes$(userId, offset).pipe(
-      map(data => data.map(a => {
-        (a as any)["eventRoute"] = a.plannedRoute;
-        return (a as unknown) as EventPostExtended;
-      }))
-    );
+  public getEvents$(userId: number, currentUserId: number, page = 0): Observable<EventPostExtended[]> {
+    return this.getUserPost$(userId, currentUserId, "EventPost", page).pipe(
+      map(data => data as EventPostExtended[]));
   }
 
   public getLikedActivities$(userId: number, page = 0): Observable<PostExtended[]> {
-    // TODO: support for multi types
     const endpoint = `${environment.backendApi}/api/wall/liked/${userId}?page=${page}&amount=${PostsService.amountPerPage}&extended=true`;
     return this.http.get<ActivityType[]>(endpoint).pipe(
       tap(data => console.log(data)),

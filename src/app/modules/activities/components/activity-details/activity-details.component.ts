@@ -78,10 +78,7 @@ export class ActivityDetailsComponent implements OnInit {
     if ("workout" in this.activity) {
       return this.activity.workout.route;
     }
-    if ("plannedRoute" in this.activity) {
-      return this.activity.plannedRoute.route;
-    }
-    return this.activity.eventRoute.route;
+    return this.activity.plannedRoute.route;
   }
 
   public getActivityDurationText(): string {
@@ -117,12 +114,12 @@ export class ActivityDetailsComponent implements OnInit {
   }
 
   public get eventStartDate(): string {
-    const eventStartDate = (this.activity as EventPostExtended)?.eventRoute?.eventStartDate;
+    const eventStartDate = undefined; // TODO: tmp
     return eventStartDate ? `${eventStartDate} m` : this.valueNotFoundPlaceholder;
   }
 
   public get eventDurationTime(): string {
-    const eventDurationTime = (this.activity as EventPostExtended)?.eventRoute?.eventDurationTime;
+    const eventDurationTime = undefined; // TODO: tmp
     return eventDurationTime ? `${eventDurationTime} m` : this.valueNotFoundPlaceholder;
   }
 

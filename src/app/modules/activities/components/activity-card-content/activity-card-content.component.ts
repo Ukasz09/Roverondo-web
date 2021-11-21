@@ -164,10 +164,7 @@ export class ActivityCardContentComponent implements OnInit {
     if ("workout" in this.activity) {
       return this.activity.workout.route;
     }
-    if ("plannedRoute" in this.activity) {
-      return this.activity.plannedRoute.route;
-    }
-    return this.activity.eventRoute.route;
+    return this.activity.plannedRoute.route;
   }
 
   public get startTime(): string {
@@ -192,17 +189,11 @@ export class ActivityCardContentComponent implements OnInit {
   }
 
   public get eventDurationTime(): string {
-    if ("eventRoute" in this.activity) {
-      return this.activity.eventRoute.eventDurationTime;
-    }
-    return "";
+    return "99"; // TODO: tmp
   }
 
   public get eventStartDate(): string {
-    if ("eventRoute" in this.activity) {
-      return this.activity.eventRoute.eventStartDate;
-    }
-    return "";
+    return "99"; // TODO: tmp
   }
 
   private addReactionToActivity(): void {

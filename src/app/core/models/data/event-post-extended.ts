@@ -1,5 +1,4 @@
-import { EventRoute, Post } from "@app/core/models";
+import { PlannedPostExtended } from "@app/core/models";
 
-export interface EventPostExtended extends Post {
-  eventRoute: EventRoute;
+export interface EventPostExtended extends PlannedPostExtended {
 }

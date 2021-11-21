@@ -33,22 +33,18 @@ export class WallPostsService {
   }
 
   public getEvents$(userId: number, offset = 0): Observable<EventPostExtended[]> {
-    // TODO: integrate with backend
-    return this.getPlannedRoutes$(userId, offset).pipe(
-      map(data => data.map(a => {
-        (a as any)["eventRoute"] = a.plannedRoute;
-        return (a as unknown) as EventPostExtended;
-      }))
-    );
+    return this.getWall$({ userId, type: "EventPost", offset })
+      .pipe(map(data => data as EventPostExtended[]));
   }
 
-  private getWall$({
-                     userId,
-                     type,
-                     offset = 0,
-                     extended = true,
-                     amount = 3
-                   }: wallRequestParameters): Observable<ActivityType[]> {
+  private getWall$(
+    {
+      userId,
+      type,
+      offset = 0,
+      extended = true,
+      amount = 3
+    }: wallRequestParameters): Observable<ActivityType[]> {
     const endpoint = `${environment.backendApi}/api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=${type}&extended=${extended}`;
     return this.http.get<(PostExtended | PlannedPostExtended)[]>(endpoint).pipe(
       tap(data => console.log(data))

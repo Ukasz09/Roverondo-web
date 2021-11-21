@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from "@angular/router";
-import { ActivityType, PlannedPostExtended, PostExtended } from "@app/core/models";
+import { ActivityType, EventPostExtended, PlannedPostExtended, PostExtended } from "@app/core/models";
 import { CurrentUserService, PostsService, ScrollService } from "@app/core/services";
-import { Observable, of, throwError } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { ActivitiesRoutes, AppRoutes, SpinnerType } from "@app/core/enums";
 import { Utils } from "@app/shared/utils";
 import { NgxSpinnerService } from "ngx-spinner";
@@ -39,7 +39,7 @@ export class PostsResolver implements Resolve<ActivityType[]> {
       case ActivitiesRoutes.planned:
         return this.getPlannedRoutes$(userId, page);
       case ActivitiesRoutes.events:
-        return this.postsService.getEvents$(userId, page);
+        return this.getEventPosts$(userId, page);
       case ActivitiesRoutes.liked:
         return this.postsService.getLikedActivities$(userId, page);
       default:
@@ -62,6 +62,16 @@ export class PostsResolver implements Resolve<ActivityType[]> {
     return this.currentUserService.currentUser$.pipe(switchMap(currentUser => {
       if (currentUser) {
         return this.postsService.getPlannedRoutes$(userId, currentUser.id, page);
+      }
+      this.navigateHomeAndHideSpinner();
+      return throwError("Current user not found - activities not fetched");
+    })).pipe(take(1));
+  }
+
+  private getEventPosts$(userId: number, page: number): Observable<EventPostExtended[]> {
+    return this.currentUserService.currentUser$.pipe(switchMap(currentUser => {
+      if (currentUser) {
+        return this.postsService.getEvents$(userId, currentUser.id, page);
       }
       this.navigateHomeAndHideSpinner();
       return throwError("Current user not found - activities not fetched");
