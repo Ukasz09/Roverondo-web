@@ -153,6 +153,8 @@
                         [label]="'Speed'"
                         [data]="speedPlotData"
                         [xAxis]="true"
+                        [showYAxisLabel]="true"
+                        [yAxisLabel]="'km / h'"
                         [xAxisFormat]="xAxisFormatter"
                         [colorScheme]="speedColorScheme">
         </app-area-graph>
@@ -165,6 +167,8 @@
                         [label]="'Speed'"
                         [data]="elevationPlotData"
                         [xAxis]="true"
+                        [showYAxisLabel]="true"
+                        [yAxisLabel]="'m'"
                         [xAxisFormat]="xAxisFormatter"
                         [colorScheme]="elevationColorScheme"
                         [yScaleMin]="getRoute().minAltitude ?? 0"
