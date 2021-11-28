@@ -96,16 +96,16 @@ export class ActivityDetailsComponent implements OnInit {
     return (this.activity as PostExtended).workout.endTime;
   }
 
-  public get maxPressure(): number {
-    return (this.activity as PostExtended).workout.maxAtmosphericPressure ?? 0;
+  public get maxPressure(): number | undefined {
+    return (this.activity as PostExtended).workout.maxAtmosphericPressure;
   }
 
-  public get minPressure(): number {
-    return (this.activity as PostExtended).workout.minAtmosphericPressure ?? 0;
+  public get minPressure(): number | undefined {
+    return (this.activity as PostExtended).workout.minAtmosphericPressure;
   }
 
-  public get avgPressure(): number {
-    return (this.activity as PostExtended).workout.avgAtmosphericPressure ?? 0;
+  public get avgPressure(): number | undefined {
+    return (this.activity as PostExtended).workout.avgAtmosphericPressure;
   }
 
   public getEventStartDate(format = "longDate"): string {

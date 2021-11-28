@@ -28,7 +28,7 @@
     "docker:up:prod-prebuilt": "docker-compose -f deployment/production/roverondo-web-prod-prebuilt/docker-compose.yml up --build --force-recreate",
     "docker:up:dev-local": "docker-compose -f deployment/development/roverondo-web-dev-local/docker-compose.yml up --build --force-recreate",
     "test": "ng test",
-    "compodoc": "npx compodoc -p tsconfig.doc.json"
+    "compodoc": "npx compodoc -p tsconfig.doc.json --hideGenerator --disableSourceCode --disableDomTree --disableTemplateTab --disableStyleTab --disablePrivate --theme compodoc_lightmode"
   },
   "private": true,
   "dependencies": {

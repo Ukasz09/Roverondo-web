@@ -13,7 +13,6 @@ export class WallPostsService {
   constructor(
     private readonly http: HttpClient,
     private readonly mockedSpeedAdapter: MockedSpeedAdapterService,
-    private readonly mockedPressureAdapter: MockedPressureAdapterService,
     private readonly speedFixAdapter: SpeedFixAdapterService
   ) {
   }
@@ -23,7 +22,6 @@ export class WallPostsService {
       .pipe(
         map(data => data as PostExtended[]),
         map(data => data.map(a => this.speedFixAdapter.adapt(a))),
-        map(data => data.map(p => this.mockedPressureAdapter.adapt(p)))
       );
   }
 

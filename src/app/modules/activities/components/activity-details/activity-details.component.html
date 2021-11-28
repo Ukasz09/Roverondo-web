@@ -111,29 +111,29 @@
           <span>{{getRoute().avgAltitude | number:".2-2"}} m</span>
         </div>
       </div>
-      <div class="stat" *ngIf="type === PostType.activityPost">
+      <div class="stat" *ngIf="type === PostType.activityPost && maxPressure!==undefined && maxPressure !== null">
         <mat-icon class="icon">publish</mat-icon>
         <div class="details">
           <span class="label">Max pressure:</span>
-          <span *ngIf="maxPressure; else valueNotFoundPlaceholderTemplate">
+          <span>
             {{ maxPressure | number:".0-0" }} hPa
           </span>
         </div>
       </div>
-      <div class="stat" *ngIf="type === PostType.activityPost">
+      <div class="stat" *ngIf="type === PostType.activityPost && minPressure!==undefined && minPressure !== null">
         <mat-icon class="icon pressure-min">publish</mat-icon>
         <div class="details">
           <span class="label">Min pressure:</span>
-          <span *ngIf="minPressure; else valueNotFoundPlaceholderTemplate">
+          <span>
             {{ minPressure | number:".0-0" }} hPa
           </span>
         </div>
       </div>
-      <div class="stat" *ngIf="type === PostType.activityPost">
+      <div class="stat" *ngIf="type === PostType.activityPost && avgPressure!==undefined && avgPressure !== null">
         <mat-icon class="icon pressure-avg">publish</mat-icon>
         <div class="details">
           <span class="label">Average pressure:</span>
-          <span *ngIf="minPressure; else valueNotFoundPlaceholderTemplate">
+          <span>
             {{ avgPressure | number:".0-0" }} hPa
           </span>
         </div>

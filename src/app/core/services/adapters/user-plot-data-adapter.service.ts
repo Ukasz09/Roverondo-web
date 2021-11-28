@@ -4,13 +4,13 @@ import { UserPlotData, UserStatisticsPeriod } from "@app/core/models";
 import { Utils } from "@app/shared/utils";
 import { TimeRange } from "@app/core/enums";
 import { DatePipe } from "@angular/common";
-import { SpeedUnitPipe } from "@app/shared/pipes";
+import { LengthUnitPipe, SpeedUnitPipe } from "@app/shared/pipes";
 
 @Injectable({
   providedIn: "root"
 })
 export class UserPlotDataAdapterService implements Adapter<UserPlotData> {
-  constructor(private readonly speedUnit: SpeedUnitPipe) {
+  constructor(private readonly speedUnit: SpeedUnitPipe, private readonly lengthUnitPipe: LengthUnitPipe) {
   }
 
   public adapt(statisticsPeriods: UserStatisticsPeriod[]): UserPlotData {
@@ -28,7 +28,7 @@ export class UserPlotDataAdapterService implements Adapter<UserPlotData> {
         averageSpeed.push({ name: labelName, value: this.speedUnit.transform(speed) });
       }
       if (stats.distance || stats.distance === 0) {
-        distance.push({ name: labelName, value: stats.distance });
+        distance.push({ name: labelName, value: this.lengthUnitPipe.transform(stats.distance) });
       }
       if (stats.elevation || stats.elevation === 0) {
         elevation.push({ name: labelName, value: Math.trunc(stats.elevation) });

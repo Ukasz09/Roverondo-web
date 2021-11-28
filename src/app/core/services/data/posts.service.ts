@@ -21,7 +21,6 @@ export class PostsService {
   constructor(
     private readonly http: HttpClient,
     private readonly mockedSpeedAdapter: MockedSpeedAdapterService,
-    private readonly mockedPressureAdapter: MockedPressureAdapterService,
     private readonly speedFixAdapter: SpeedFixAdapterService
   ) {
   }
@@ -81,7 +80,6 @@ export class PostsService {
     return this.getUserPost$(userId, currentUserId, "ActivityPost", page).pipe(
       map(data => data as PostExtended[]),
       map(data => data.map(a => this.speedFixAdapter.adapt(a))),
-      map(data => data.map(p => this.mockedPressureAdapter.adapt(p)))
     );
   }
 
@@ -100,7 +98,6 @@ export class PostsService {
     return this.http.get<ActivityType[]>(endpoint).pipe(
       tap(data => console.log(data)),
       map(data => data as PostExtended[]),
-      map(data => data.map(p => this.mockedPressureAdapter.adapt(p)))
     );
   }
 

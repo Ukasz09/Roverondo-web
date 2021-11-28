@@ -15,6 +15,7 @@ export class UserStatChartComponent implements OnInit {
   @Input() public monthlyChartData!: PlotData[];
   @Input() public colorScheme!: Color;
   @Input() public yScaleMin = 0;
+  @Input() public yLabel?: string;
 
   public readonly TimeRange = TimeRange;
 
