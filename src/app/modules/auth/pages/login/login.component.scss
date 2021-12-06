@@ -4,19 +4,19 @@
 .login-page {
   @include mixins.max-viewport();
   @include mixins.bg-fill();
-  background-image: functions.image("login-page-2.jpg");
+  background-image: functions.image("5.jpg");
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   @include mixins.media(sm-medium) {
-    background-image: functions.image("login-page.jpg");
+    background-image: functions.image("4.jpg");
   }
 
   @include mixins.media(md-large) {
     @include mixins.bg-fill($background-position: left);
-    background-image: functions.image("login-page-4.jpg");
+    background-image: functions.image("6.jpg");
   }
 
   .card-wrapper {

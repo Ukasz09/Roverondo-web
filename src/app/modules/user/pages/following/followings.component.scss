@@ -4,7 +4,7 @@
 .container {
   @include mixins.bg-fill();
   @include mixins.max-viewport();
-  background-image: functions.image("activities-bg-3.jpg");
+  background-image: functions.image("1.jpg");
   height: 100vh;
 
   .content {

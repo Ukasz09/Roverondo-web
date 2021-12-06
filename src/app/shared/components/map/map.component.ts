@@ -69,8 +69,6 @@ export class MapComponent implements OnInit {
       this.routeLayers.push(lineBorder);
       this.routeLayers.push(line);
       this.fitBounds = line.getBounds();
-    } else {
-      console.log("Not found route points - not drawn");
     }
   }
 }

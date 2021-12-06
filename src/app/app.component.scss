@@ -5,7 +5,7 @@
 .auth-loader {
   @include mixins.bg-fill();
   @include mixins.max-viewport();
-  background-image: functions.image("auth-login-bg.jpg");
+  background-image: functions.image("2.jpg");
   width: 100vw;
   height: 100vh;
 }

@@ -5,7 +5,7 @@
 .container {
   @include mixins.bg-fill();
   @include mixins.max-viewport();
-  background-image: functions.image("home-6.jpg");
+  background-image: functions.image("3.jpg");
 
   .content {
     height: 100%;
