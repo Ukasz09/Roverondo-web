@@ -42,10 +42,9 @@ export class UserProfileComponent implements OnInit {
     this.activatedRoute.data.subscribe((data: Data) => {
       this.user = data.user;
       this.spinner.hide(SpinnerType.main).then();
+      // Workaround for lib bug
+      timer(250).subscribe(() => this.fetchPlotData());
     });
-
-    // Workaround for lib bug
-    timer(250).subscribe(() => this.fetchPlotData());
 
     this.currentUserService.currentUser$.subscribe(currentUser => {
       if (currentUser) {
