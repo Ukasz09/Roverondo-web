@@ -45,5 +45,5 @@ testem.log
 Thumbs.db
 
 # App specific
-auth-config.json
+auth-config.*.json
 /documentation/*

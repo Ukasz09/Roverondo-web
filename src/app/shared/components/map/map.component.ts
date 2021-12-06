@@ -20,7 +20,7 @@ export class MapComponent implements OnInit {
   private readonly polylineBorderColor = "#fff";
   private readonly tileProvider = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
   private readonly initialLayer = tileLayer(this.tileProvider, {
-    maxZoom: 20,
+    maxZoom: 18,
     attribution: "Roverondo"
   });
   private readonly defaultCenterLatLng = latLng(53.107883, 22.038538);

@@ -1,4 +1,4 @@
-import * as config from "../../auth-config.json";
+import * as config from "../../auth-config.prod.json";
 
 const { domain, clientId, audience, apiUri, errorPath } = config as {
   domain: string;
