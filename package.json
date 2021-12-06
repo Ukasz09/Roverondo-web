@@ -1,6 +1,6 @@
 {
   "name": "roverondo",
-  "version": "0.0.13",
+  "version": "1.0.0",
   "files": [
     "dist/**/*"
   ],
@@ -23,6 +23,7 @@
     "start": "ng serve",
     "start:inside-docker": "ng serve --host 0.0.0.0 --disableHostCheck=true",
     "start:proxy": "ng serve --proxy-config proxy.conf.json",
+    "build:dev": "ng build --configuration deployment",
     "build:prod": "ng build --configuration production",
     "docker:up:prod-local": "docker-compose -f deployment/production/roverondo-web-prod-local/docker-compose.yml up --build --force-recreate",
     "docker:up:prod-prebuilt": "docker-compose -f deployment/production/roverondo-web-prod-prebuilt/docker-compose.yml up --build --force-recreate",
