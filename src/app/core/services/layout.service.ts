@@ -7,10 +7,10 @@ import { Constants } from "@app/core/constants";
 })
 export class LayoutService {
   public drawerIsOpen = false;
-  public width:number;
+  public width: number;
 
   constructor() {
-    this.width= window.innerWidth;
+    this.width = window.innerWidth;
   }
 
   public _layoutType = LayoutType.ASIDE_NATIVE;
@@ -20,7 +20,7 @@ export class LayoutService {
   }
 
   public setAsideLayoutType(width: number): void {
-    this.width=width
+    this.width = width;
     this._layoutType = this.width < Constants.pcResolutionThresholdPx ? LayoutType.ASIDE_MOBILE : LayoutType.ASIDE_NATIVE;
     if (this.layoutType === LayoutType.ASIDE_NATIVE) {
       this.drawerIsOpen = false;

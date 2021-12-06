@@ -9,8 +9,8 @@ import {
   PostExtended,
   Reaction
 } from "@app/core/models";
-import { map, tap } from "rxjs/operators";
-import { MockedPressureAdapterService, MockedSpeedAdapterService, SpeedFixAdapterService } from "../adapters";
+import { map } from "rxjs/operators";
+import { SpeedFixAdapterService } from "../adapters";
 
 @Injectable({
   providedIn: "root"
@@ -20,7 +20,6 @@ export class PostsService {
 
   constructor(
     private readonly http: HttpClient,
-    private readonly mockedSpeedAdapter: MockedSpeedAdapterService,
     private readonly speedFixAdapter: SpeedFixAdapterService
   ) {
   }
@@ -57,12 +56,12 @@ export class PostsService {
 
   public getComments$(activityId: string): Observable<PostComment[]> {
     const endpoint = `${environment.backendApi}/api/posts/${activityId}/comments`;
-    return this.http.get<PostComment[]>(endpoint).pipe(tap(data => console.log(data)));
+    return this.http.get<PostComment[]>(endpoint);
   }
 
   public getReactions$(activityId: string): Observable<Reaction[]> {
     const endpoint = `${environment.backendApi}/api/posts/${activityId}/reactions`;
-    return this.http.get<Reaction[]>(endpoint).pipe(tap(data => console.log(data)));
+    return this.http.get<Reaction[]>(endpoint);
   }
 
   public addComment$(userId: number, activityId: string, commentText: string): Observable<PostComment> {
@@ -79,7 +78,7 @@ export class PostsService {
   public getCompletedActivities$(userId: number, currentUserId: number, page = 0): Observable<PostExtended[]> {
     return this.getUserPost$(userId, currentUserId, "ActivityPost", page).pipe(
       map(data => data as PostExtended[]),
-      map(data => data.map(a => this.speedFixAdapter.adapt(a))),
+      map(data => data.map(a => this.speedFixAdapter.adapt(a)))
     );
   }
 
@@ -96,14 +95,13 @@ export class PostsService {
   public getLikedActivities$(userId: number, page = 0): Observable<PostExtended[]> {
     const endpoint = `${environment.backendApi}/api/wall/liked/${userId}?page=${page}&amount=${PostsService.amountPerPage}&extended=true`;
     return this.http.get<ActivityType[]>(endpoint).pipe(
-      tap(data => console.log(data)),
-      map(data => data as PostExtended[]),
+      map(data => data as PostExtended[])
     );
   }
 
   private getUserPost$(userId: number, currentUserId: number, postType: string, page = 0): Observable<ActivityType[]> {
     const endpoint = `${environment.backendApi}/api/users/${userId}/posts?` +
       `extended=true&amount=${PostsService.amountPerPage}&caller-id=${currentUserId}&page=${page}&postTypes=${postType}`;
-    return this.http.get<ActivityType[]>(endpoint).pipe(tap(data => console.log(data)));
+    return this.http.get<ActivityType[]>(endpoint);
   }
 }

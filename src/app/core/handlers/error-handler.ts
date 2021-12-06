@@ -12,6 +12,6 @@ export class AppErrorHandler implements IErrorHandler {
     } else {
       console.error("Unknown error occurred");
     }
-    throw err; // throw for now
+    throw err;
   }
 }

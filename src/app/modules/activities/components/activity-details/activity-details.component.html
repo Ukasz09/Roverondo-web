@@ -111,33 +111,6 @@
           <span>{{getRoute().avgAltitude | number:".2-2"}} m</span>
         </div>
       </div>
-      <div class="stat" *ngIf="type === PostType.activityPost && maxPressure!==undefined && maxPressure !== null">
-        <mat-icon class="icon">publish</mat-icon>
-        <div class="details">
-          <span class="label">Max pressure:</span>
-          <span>
-            {{ maxPressure | number:".0-0" }} hPa
-          </span>
-        </div>
-      </div>
-      <div class="stat" *ngIf="type === PostType.activityPost && minPressure!==undefined && minPressure !== null">
-        <mat-icon class="icon pressure-min">publish</mat-icon>
-        <div class="details">
-          <span class="label">Min pressure:</span>
-          <span>
-            {{ minPressure | number:".0-0" }} hPa
-          </span>
-        </div>
-      </div>
-      <div class="stat" *ngIf="type === PostType.activityPost && avgPressure!==undefined && avgPressure !== null">
-        <mat-icon class="icon pressure-avg">publish</mat-icon>
-        <div class="details">
-          <span class="label">Average pressure:</span>
-          <span>
-            {{ avgPressure | number:".0-0" }} hPa
-          </span>
-        </div>
-      </div>
     </div>
     <hr>
     <div class="description">
@@ -147,58 +120,25 @@
       </div>
     </div>
     <div *ngIf="speedProvided" class="graph-plot">
-      <div class="label">Speed</div>
+      <div class="label">Speed (km/h)</div>
       <div class="graph">
         <app-area-graph [id]="'speed-graph'"
                         [label]="'Speed'"
                         [data]="speedPlotData"
-                        [xAxis]="true"
-                        [showYAxisLabel]="true"
-                        [yAxisLabel]="'km / h'"
                         [xAxisFormat]="xAxisFormatter"
                         [colorScheme]="speedColorScheme">
         </app-area-graph>
       </div>
     </div>
     <div class="graph-plot">
-      <div class="label">Elevation</div>
+      <div class="label">Elevation (m)</div>
       <div class="graph">
         <app-area-graph [id]="'elevation-graph'"
                         [label]="'Speed'"
                         [data]="elevationPlotData"
-                        [xAxis]="true"
-                        [showYAxisLabel]="true"
-                        [yAxisLabel]="'m'"
                         [xAxisFormat]="xAxisFormatter"
                         [colorScheme]="elevationColorScheme"
-                        [yScaleMin]="getRoute().minAltitude ?? 0"
-        >
-        </app-area-graph>
-      </div>
-    </div>
-    <div *ngIf="speedProvided" class="graph-plot">
-      <div class="label">Speed + Elevation</div>
-      <div class="graph">
-        <app-area-graph [id]="'combined-graph'"
-                        [label]="'Speed'"
-                        [data]="combinedPlotData"
-                        [xAxis]="true"
-                        [xAxisFormat]="xAxisFormatter"
-                        [colorScheme]="combinedColorScheme"
-                        [withLegend]="!isMobileLayout">
-        </app-area-graph>
-      </div>
-    </div>
-    <div *ngIf="pressureProvided" class="graph-plot">
-      <div class="label">Pressure</div>
-      <div class="graph">
-        <app-area-graph [id]="'pressure-graph'"
-                        [label]="'Pressure'"
-                        [data]="pressurePlotData"
-                        [xAxis]="true"
-                        [xAxisFormat]="xAxisFormatter"
-                        [colorScheme]="pressureColorScheme"
-                        [yScaleMin]="950">
+                        [yScaleMin]="getRoute().minAltitude ?? 0">
         </app-area-graph>
       </div>
     </div>
@@ -214,7 +154,3 @@
     </div>
   </app-glass-card>
 </app-scroll-container>
-
-<ng-template #valueNotFoundPlaceholderTemplate>
-  <span>{{ valueNotFoundPlaceholder }}</span>
-</ng-template>

@@ -12,7 +12,7 @@
 
     <div [ngTemplateOutlet]="actions"></div>
     <div [ngTemplateOutlet]="stats"></div>
-    <div *ngIf="backBtnVisible" class="back-btn" (click)="backBtnClick.emit()">
+    <div *ngIf="backBtnVisible" class="back-btn cursor-pointer" (click)="backBtnClick.emit()">
       <mat-icon>arrow_back_ios</mat-icon>
     </div>
   </div>

@@ -8,7 +8,6 @@ import { AppRoutes } from "@app/core/enums";
   providedIn: "root"
 })
 export class CustomAuthGuard implements CanActivate {
-
   constructor(private readonly auth: AuthService, private readonly router: Router) {
   }
 
@@ -17,14 +16,12 @@ export class CustomAuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     this.auth.isAuthenticated$.subscribe(
-      (authenticated) => {
+      (authenticated: boolean) => {
         if (!authenticated) {
-          this.router.navigate([AppRoutes.auth]).then(_ => {
-          });
+          this.router.navigate([AppRoutes.auth]).then();
         }
       }
     );
     return this.auth.isAuthenticated$;
   }
-
 }

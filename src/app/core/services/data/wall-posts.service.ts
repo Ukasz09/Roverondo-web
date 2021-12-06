@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { ActivityType, EventPostExtended, PlannedPostExtended, PostExtended } from "@app/core/models";
-import { map, tap } from "rxjs/operators";
-import { MockedPressureAdapterService, MockedSpeedAdapterService, SpeedFixAdapterService } from "../adapters";
+import { map} from "rxjs/operators";
+import { SpeedFixAdapterService } from "../adapters";
 import { environment } from "@app/env";
 
 @Injectable({
@@ -12,7 +12,6 @@ import { environment } from "@app/env";
 export class WallPostsService {
   constructor(
     private readonly http: HttpClient,
-    private readonly mockedSpeedAdapter: MockedSpeedAdapterService,
     private readonly speedFixAdapter: SpeedFixAdapterService
   ) {
   }
@@ -44,9 +43,7 @@ export class WallPostsService {
       amount = 3
     }: wallRequestParameters): Observable<ActivityType[]> {
     const endpoint = `${environment.backendApi}/api/wall/${userId}?offset=${offset}&amount=${amount}&postTypes=${type}&extended=${extended}`;
-    return this.http.get<(PostExtended | PlannedPostExtended)[]>(endpoint).pipe(
-      tap(data => console.log(data))
-    );
+    return this.http.get<(PostExtended | PlannedPostExtended)[]>(endpoint);
   }
 }
 

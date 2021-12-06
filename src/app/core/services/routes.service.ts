@@ -6,6 +6,7 @@ import { BehaviorSubject, Subject } from "rxjs";
 })
 export class RoutesService {
   private actualRoute = ["home"];
+
   private readonly routeChangeSubject$: Subject<string[]> = new BehaviorSubject<string[]>(this.actualRoute);
 
   public readonly routeChange$ = this.routeChangeSubject$.asObservable();

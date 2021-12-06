@@ -37,7 +37,6 @@ export class UserResolver implements Resolve<User> {
     );
   }
 
-
   private navigateHomeAndHideSpinner(): void {
     this.router.navigate([AppRoutes.home]).then();
     this.spinner.hide(SpinnerType.main).then();

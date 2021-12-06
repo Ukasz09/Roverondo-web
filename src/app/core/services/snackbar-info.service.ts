@@ -12,9 +12,7 @@ export class SnackbarInfoService {
   }
 
   public openTextSnackbar(msg: string, actionMsg: string, durationMs = 2000): void {
-    this._snackBar.open(msg, actionMsg, {
-      duration: durationMs
-    });
+    this._snackBar.open(msg, actionMsg, { duration: durationMs });
   }
 
   public openErrorSnackbar(msg: string, durationMs = 5000): void {

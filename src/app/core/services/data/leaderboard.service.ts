@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { User } from "@app/core/models";
 import { environment } from "@app/env";
-import { tap } from "rxjs/operators";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable({
@@ -13,8 +12,8 @@ export class LeaderboardService {
   }
 
   public getUsersLeaderboard$(): Observable<User[]> {
-    // TODO: tmp mocked - integrate with backend
+    // TODO: Mocked
     const endpoint = `${environment.backendApi}/api/users`;
-    return this.http.get<User[]>(endpoint).pipe(tap(data => console.log(data)));
+    return this.http.get<User[]>(endpoint);
   }
 }
