@@ -17,11 +17,7 @@ export class DisabledLinkDirective implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.updateStyles(this.routesService.getActualRoute());
-    this.routeChange$ = this.routesService.routeChange$.subscribe({
-      next: route => {
-        this.updateStyles(route);
-      }
-    });
+    this.routeChange$ = this.routesService.routeChange$.subscribe((route: string[]) => this.updateStyles(route));
   }
 
   public ngOnDestroy(): void {
@@ -48,7 +44,7 @@ export class DisabledLinkDirective implements OnInit, OnDestroy {
   private changeLinkToDisabled(): void {
     this.elementRef.nativeElement.style.cursor = "not-allowed !important";
     this.elementRef.nativeElement.style["pointer-events"] = "none";
-    if(this.appDisabledTextDecoration){
+    if (this.appDisabledTextDecoration) {
       this.elementRef.nativeElement.style.opacity = 0.5;
       this.elementRef.nativeElement.style["text-decoration"] = "none";
     }

@@ -6,12 +6,11 @@ import { Component, Input, OnInit } from "@angular/core";
   styleUrls: ["./glass-btn-mini.component.scss"]
 })
 export class GlassBtnMiniComponent implements OnInit {
-  @Input() size= "35px";
+  @Input() size = "35px";
 
   constructor() {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
   }
-
 }

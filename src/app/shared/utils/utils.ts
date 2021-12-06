@@ -3,10 +3,6 @@ export class Utils {
     return `/assets/icons/${iconName}`;
   }
 
-  public static getImagePath(imageName: string): string {
-    return `/assets/images/${imageName}`;
-  }
-
   public static calcDeltaTime(startDate: Date, endDate: Date): { hour: number, minute: number } {
     const diff = endDate.getTime() - startDate.getTime();
     const days = Math.floor(diff / (60 * 60 * 24 * 1000));

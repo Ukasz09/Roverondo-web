@@ -7,8 +7,7 @@ import { CurrentUserService, UsersService } from "@app/core/services";
 import { TimeTransformType, TimeUnitPipe } from "@app/shared/pipes";
 import { Color } from "@swimlane/ngx-charts";
 import { throwError, timer, zip } from "rxjs";
-import { delay, switchMap } from "rxjs/operators";
-import { environment } from "@app/env";
+import { switchMap } from "rxjs/operators";
 
 @Component({
   selector: "app-user-profile",

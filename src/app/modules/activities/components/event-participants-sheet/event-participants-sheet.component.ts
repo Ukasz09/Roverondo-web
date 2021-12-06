@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { UserBottomSheet } from "@app/core/models";
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from "@angular/material/bottom-sheet";
-import { EventsService, PostsService } from "@app/core/services";
+import { EventsService } from "@app/core/services";
 
 @Component({
   selector: "app-event-participants-sheet",

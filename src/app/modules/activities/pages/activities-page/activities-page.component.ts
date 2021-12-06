@@ -130,7 +130,6 @@ export class ActivitiesPageComponent implements OnInit, OnDestroy {
   }
 
   private loadMoreActivities(): void {
-    console.log("Loading more activities");
     this.loadingMoreActivities = true;
 
     this.getMoreActivitiesData$().subscribe(data => {

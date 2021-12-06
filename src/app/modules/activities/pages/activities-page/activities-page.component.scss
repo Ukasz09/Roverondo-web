@@ -6,7 +6,6 @@
   @include mixins.bg-fill();
   @include mixins.max-viewport();
   background-image: functions.image("activities-bg-3.jpg");
-  //background-image: functions.image("activities-bg.jpg");
 
   .content {
     height: 100%;
@@ -19,12 +18,12 @@
       overflow: hidden
     }
 
-    .filter-btn{
+    .filter-btn {
       display: flex;
       align-items: center;
       justify-content: center;
 
-      app-page-title{
+      app-page-title {
         margin-right: 0.5rem;
       }
     }

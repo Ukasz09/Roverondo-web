@@ -1,13 +1,13 @@
 @use "/src/app/styles/abstracts/variables";
 
-.time-range{
+.time-range {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin-bottom: 2rem;
   width: 100%;
 
-  mat-icon{
+  mat-icon {
     color: variables.$text-muted-color;
   }
 }

@@ -18,7 +18,7 @@ export const environment = {
     errorPath
   },
   httpInterceptor: {
-    allowedList: [`${apiUri}/*`,"*"]
+    allowedList: [`${apiUri}/*`, "*"]
   },
   backendApi: "http://localhost:8080"
 };

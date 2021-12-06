@@ -16,11 +16,7 @@ export class ActiveLinkDirective implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.decorateLink(this.routesService.getActualRoute());
-    this.routeChange$ = this.routesService.routeChange$.subscribe({
-      next: route => {
-        this.decorateLink(route);
-      }
-    });
+    this.routeChange$ = this.routesService.routeChange$.subscribe((route: string[]) => this.decorateLink(route));
   }
 
   public ngOnDestroy(): void {

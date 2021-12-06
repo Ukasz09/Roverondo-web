@@ -14,7 +14,7 @@ export class ReactionsSheetComponent implements OnInit {
   constructor(
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: { postId: string },
     private readonly postsService: PostsService,
-    private readonly _bottomSheetRef: MatBottomSheetRef<ReactionsSheetComponent>,
+    private readonly _bottomSheetRef: MatBottomSheetRef<ReactionsSheetComponent>
   ) {
   }
 

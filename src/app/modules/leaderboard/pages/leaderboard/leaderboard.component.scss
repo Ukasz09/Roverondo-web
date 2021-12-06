@@ -7,7 +7,7 @@
   background-image: functions.image("activities-bg-3.jpg");
   height: 100vh;
 
-  .content{
+  .content {
     @include mixins.full-page-list-wrapper();
     height: 100vh;
   }

@@ -24,7 +24,7 @@ export class DrawerMenuComponent implements OnInit {
     public readonly currentUserService: CurrentUserService,
     private readonly router: Router,
     private readonly spinner: NgxSpinnerService,
-    @Inject(DOCUMENT) private readonly document: Document,
+    @Inject(DOCUMENT) private readonly document: Document
   ) {
   }
 
@@ -62,9 +62,5 @@ export class DrawerMenuComponent implements OnInit {
 
   public get homeRouterLink(): string {
     return `/${AppRoutes.home}`;
-  }
-
-  public navigateToUserProfile(userId: number): void {
-    this.router.navigate([`${AppRoutes.user}/${userId.toString()}/${UserRoutes.profile}`]).then();
   }
 }

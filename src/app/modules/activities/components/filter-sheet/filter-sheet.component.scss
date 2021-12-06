@@ -11,7 +11,7 @@ mat-action-list {
     }
   }
 
-  ::ng-deep .disabled{
+  ::ng-deep .disabled {
     cursor: not-allowed !important;
     opacity: 0.5;
     text-decoration: none;

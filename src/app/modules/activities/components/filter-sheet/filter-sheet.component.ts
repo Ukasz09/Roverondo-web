@@ -1,11 +1,9 @@
-import { Component, Inject, Input, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { ActivitiesRoutes, SpinnerType } from "@app/core/enums";
 import { NgxSpinnerService } from "ngx-spinner";
 import { CurrentUserService } from "@app/core/services";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from "@angular/material/bottom-sheet";
-import { combineLatest } from "rxjs";
-import { PostExtended } from "@app/core/models";
 
 @Component({
   selector: "app-filter-sheet",

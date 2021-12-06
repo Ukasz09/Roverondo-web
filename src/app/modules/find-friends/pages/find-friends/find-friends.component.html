@@ -13,7 +13,7 @@
           <button type="submit" style="display: none"></button>
         </mat-form-field>
       </form>
-      <div *ngIf="queryIsValid(query)" class="user-list-wrapper" >
+      <div *ngIf="queryIsValid(query)" class="user-list-wrapper">
         <app-user-list [userList]="userList">
         </app-user-list>
       </div>

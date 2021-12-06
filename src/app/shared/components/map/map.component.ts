@@ -16,6 +16,8 @@ export class MapComponent implements OnInit {
   public fitBounds!: LatLngBounds;
   public routeLayers: Layer[] = [];
 
+  private readonly polylineColor = "#d50000";
+  private readonly polylineBorderColor = "#fff";
   private readonly tileProvider = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
   private readonly initialLayer = tileLayer(this.tileProvider, {
     maxZoom: 20,
@@ -31,7 +33,7 @@ export class MapComponent implements OnInit {
     this.mapOptions = Object.assign({
       layers: [this.initialLayer],
       zoom: this.zoom,
-      center: this.defaultCenterLatLng,
+      center: this.defaultCenterLatLng
     }, extraOptions);
     setTimeout(() => {
       this.addRouteLayer();
@@ -62,8 +64,8 @@ export class MapComponent implements OnInit {
       for (const point of this.routePoints) {
         latLangExpression.push(new LatLng(point.latitude, point.longitude, point.elevation));
       }
-      const lineBorder = polyline(latLangExpression, { color: "#fff", weight: 9, opacity: 0.9 });
-      const line = polyline(latLangExpression, { color: "#d50000", weight: 4, opacity: 1 });
+      const lineBorder = polyline(latLangExpression, { color: this.polylineBorderColor, weight: 9, opacity: 0.9 });
+      const line = polyline(latLangExpression, { color: this.polylineColor, weight: 4, opacity: 1 });
       this.routeLayers.push(lineBorder);
       this.routeLayers.push(line);
       this.fitBounds = line.getBounds();

@@ -5,7 +5,7 @@
                             [withScrollbar]="!isMobileLayout"
                             [initialScrollTopOffsetPx]="0">
         <div class="content">
-          <div  *ngFor="let user of userList; let i=index" class="user-card-wrapper" mat-ripple>
+          <div *ngFor="let user of userList; let i=index" class="user-card-wrapper" mat-ripple>
             <app-user-card [user]="user">
               <img *ngIf="withRankMedals && rankMedalImg(i)"
                    height="48px"

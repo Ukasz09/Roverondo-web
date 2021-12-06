@@ -1,14 +1,11 @@
 import {
-  AfterViewInit,
   Component,
   ElementRef,
-  HostListener,
   Input,
   OnInit,
   ViewChild
 } from "@angular/core";
 import { ScrollService } from "@app/core/services";
-import { User } from "@app/core/models";
 
 @Component({
   selector: "app-scroll-container",

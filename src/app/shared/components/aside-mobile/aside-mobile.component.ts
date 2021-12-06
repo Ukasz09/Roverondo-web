@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Icons } from "@app/core/enums";
 import { Utils } from "@app/shared/utils";
-import { AuthService } from "@auth0/auth0-angular";
 import { CurrentUserService } from "@app/core/services";
 
 @Component({

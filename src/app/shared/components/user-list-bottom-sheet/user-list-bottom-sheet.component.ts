@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit, TemplateRef } from "@angular/core";
-import { Reaction, User, UserBottomSheet } from "@app/core/models";
+import { UserBottomSheet } from "@app/core/models";
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from "@angular/material/bottom-sheet";
 import { PostsService } from "@app/core/services";
 import { Router } from "@angular/router";

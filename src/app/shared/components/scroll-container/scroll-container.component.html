@@ -1,7 +1,6 @@
 <div class="scroll-container" [ngClass]="withScrollbar ? '' : 'scrollbar-hidden'"
      [scrollTop]="initialScrollTopOffsetPx"
      (scroll)="onScroll()"
-     #container
->
+     #container>
   <ng-content></ng-content>
 </div>

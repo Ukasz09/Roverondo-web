@@ -4,7 +4,7 @@ import { User } from "@app/core/models";
 import { UsersService } from "@app/core/services";
 import { Observable, throwError } from "rxjs";
 import { AppRoutes, SpinnerType } from "@app/core/enums";
-import { catchError, tap } from "rxjs/operators";
+import { catchError } from "rxjs/operators";
 import { NgxSpinnerService } from "ngx-spinner";
 
 @Injectable()

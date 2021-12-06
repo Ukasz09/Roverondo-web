@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { ActivityChartsDataAdapterService, LayoutService, WallPostsService } from "@app/core/services";
 import { LayoutType, PlotColors, PostType } from "@app/core/enums";
-import { ActivityType, AreaPlotData, EventPostExtended, PostExtended, Route } from "@app/core/models";
+import { ActivityType, AreaPlotData, PostExtended, Route } from "@app/core/models";
 import { Color } from "@swimlane/ngx-charts";
 import { Utils } from "@app/shared/utils";
 import { DatePipe } from "@angular/common";
@@ -21,15 +21,12 @@ export class ActivityDetailsComponent implements OnInit {
   public readonly numberFormat = ".2-2";
   public readonly elevationColorScheme = { domain: [PlotColors.elevation] } as Color;
   public readonly speedColorScheme = { domain: [PlotColors.speed] } as Color;
-  public readonly pressureColorScheme = { domain: [PlotColors.pressure] } as Color;
-  public readonly combinedColorScheme = { domain: this.elevationColorScheme.domain.concat(this.speedColorScheme.domain) } as Color;
   public readonly valueNotFoundPlaceholder = "N/A";
   public readonly xAxisFormatter = (_: string) => "";
   public readonly PostType = PostType;
 
   public speedPlotData: AreaPlotData[] = [];
   public elevationPlotData: AreaPlotData[] = [];
-  public pressurePlotData: AreaPlotData[] = [];
   public combinedPlotData: AreaPlotData[] = [];
 
   constructor(
@@ -49,10 +46,6 @@ export class ActivityDetailsComponent implements OnInit {
 
   public get speedProvided(): boolean {
     return this.speedPlotData.length > 0 && this.speedPlotData[0].series.length > 0;
-  }
-
-  public get pressureProvided(): boolean {
-    return this.pressurePlotData.length > 0 && this.pressurePlotData[0].series.length > 0;
   }
 
   public get avgSpeed(): number {
@@ -96,18 +89,6 @@ export class ActivityDetailsComponent implements OnInit {
     return (this.activity as PostExtended).workout.endTime;
   }
 
-  public get maxPressure(): number | undefined {
-    return (this.activity as PostExtended).workout.maxAtmosphericPressure;
-  }
-
-  public get minPressure(): number | undefined {
-    return (this.activity as PostExtended).workout.minAtmosphericPressure;
-  }
-
-  public get avgPressure(): number | undefined {
-    return (this.activity as PostExtended).workout.avgAtmosphericPressure;
-  }
-
   public getEventStartDate(format = "longDate"): string {
     if (this.type == PostType.eventPost) {
       if ("startsAt" in this.activity) {
@@ -138,9 +119,6 @@ export class ActivityDetailsComponent implements OnInit {
     this.elevationPlotData = [plots.elevation];
     if (plots.speed) {
       this.speedPlotData = [plots.speed];
-    }
-    if (plots.pressure) {
-      this.pressurePlotData = [plots.pressure];
     }
     this.combinedPlotData = this.elevationPlotData.concat(this.speedPlotData);
   }
