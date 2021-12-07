@@ -1,7 +1,10 @@
 <div class="container">
   <app-aside-layout>
     <div class="content">
-      <app-user-list *ngIf="userList" [userList]="userList" [withRankMedals]="true"></app-user-list>
+      <span class="title">Greatest distance travelled</span>
+      <app-user-list style="height: 100%" *ngIf="userList" [userList]="userList" [withRankMedals]="true"
+                     [withDistanceStats]="true">
+      </app-user-list>
     </div>
   </app-aside-layout>
 </div>

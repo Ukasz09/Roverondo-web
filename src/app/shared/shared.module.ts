@@ -35,6 +35,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { LengthUnitPipe, PressureUnitPipe, SpeedUnitPipe, TimeUnitPipe } from "@app/shared/pipes";
 import { MatListModule } from "@angular/material/list";
 import { MatRippleModule } from "@angular/material/core";
+import { MatChipsModule } from "@angular/material/chips";
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import { MatRippleModule } from "@angular/material/core";
     NgxChartsModule,
     MatIconModule,
     MatListModule,
-    MatRippleModule
+    MatRippleModule,
+    MatChipsModule
   ]
 })
 export class AppSharedModule {

@@ -33,7 +33,7 @@
         <mat-icon id="like-stat" class="icon" [ngClass]="{'liked':alreadyReacted}">
           {{ alreadyReacted ? 'favorite' : 'favorite_border' }}
         </mat-icon>
-        <label for="like-stat" class="text">{{activity.reactionsCount}}</label>
+        <label id="reactions-count" for="like-stat" class="text">{{activity.reactionsCount}}</label>
       </div>
       <div style="cursor: pointer" (click)="openCommentsSheet()">
         <mat-icon id="comment-stat" class="icon">chat_bubble_outline</mat-icon>
@@ -46,7 +46,7 @@
       <div class="action cursor-pointer" (click)="onReactionBtnClick()">
         <mat-icon class="icon" id="like"
                   [ngClass]="{'liked':alreadyReacted}">{{ alreadyReacted ? 'favorite' : 'favorite_border' }}</mat-icon>
-        <label for="like" class="text cursor-pointer">
+        <label id="reactions-count" for="like" class="text cursor-pointer">
           <span class="count">{{activity.reactionsCount}}</span><span class="action-name">Like</span>
         </label>
       </div>

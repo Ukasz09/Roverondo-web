@@ -13,98 +13,98 @@
     </div>
     <hr>
     <div class="full-stats">
-      <div class="stat">
+      <div class="stat" id="location-stat">
         <mat-icon class="icon">place</mat-icon>
         <div class="details">
           <span class="label">Location:</span>
           <span>{{getRoute().location}}</span>
         </div>
       </div>
-      <div *ngIf="type === PostType.activityPost" class="stat">
+      <div *ngIf="type === PostType.activityPost" class="stat" id="activity-start-time-stat">
         <mat-icon class="icon">schedule</mat-icon>
         <div class="details">
           <span class="label">Start time:</span>
           <span>{{ startTime | date:"short" }}</span>
         </div>
       </div>
-      <div *ngIf="type === PostType.activityPost" class="stat">
+      <div *ngIf="type === PostType.activityPost" class="stat" id="activity-end-time-stat">
         <mat-icon class="icon">flag</mat-icon>
         <div class="details">
           <span class="label">End time:</span>
           <span>{{ endTime | date:"short"}}</span>
         </div>
       </div>
-      <div *ngIf="type === PostType.activityPost" class="stat">
+      <div *ngIf="type === PostType.activityPost" class="stat" id="duration-stat">
         <mat-icon class="icon">timer</mat-icon>
         <div class="details">
           <span class="label">Total duration:</span>
           <span>{{ getActivityDurationText() }}</span>
         </div>
       </div>
-      <div class="stat">
+      <div class="stat" id="distance-stat">
         <mat-icon class="icon distance">open_in_full</mat-icon>
         <div class="details">
           <span class="label">Total distance:</span>
           <span>{{ getRoute().distance | lengthUnit | number:".2-2" }} km</span>
         </div>
       </div>
-      <div *ngIf="type === PostType.activityPost" class="stat">
+      <div *ngIf="type === PostType.activityPost" class="stat" id="speed-stat">
         <mat-icon class="icon average">speed</mat-icon>
         <div class="details">
           <span class="label">Average speed:</span>
           <span>{{ avgSpeed | speedUnit | number:numberFormat}} km/h</span>
         </div>
       </div>
-      <div *ngIf="type === PostType.activityPost" class="stat">
+      <div *ngIf="type === PostType.activityPost" class="stat" id="max-speed-stat">
         <mat-icon class="icon average">rocket_launch</mat-icon>
         <div class="details">
           <span class="label">Max speed:</span>
           <span>{{maxSpeed | speedUnit | number:numberFormat }} km/h</span>
         </div>
       </div>
-      <div class="stat">
+      <div class="stat" id="elevation-stat">
         <mat-icon class="icon">north_east</mat-icon>
         <div class="details">
           <span class="label">Elevation:</span>
           <span>{{getRoute().elevation | number:".2-2"}} m</span>
         </div>
       </div>
-      <div *ngIf="type === PostType.eventPost" class="stat">
+      <div *ngIf="type === PostType.eventPost" class="stat" id="event-start-date-stat">
         <mat-icon class="icon">date_range</mat-icon>
         <div class="details">
           <span class="label">Event start date:</span>
           <span>{{getEventStartDate()}}</span>
         </div>
       </div>
-      <div *ngIf="type === PostType.eventPost" class="stat">
+      <div *ngIf="type === PostType.eventPost" class="stat" id="event-start-time-stat">
         <mat-icon class="icon">query_builder</mat-icon>
         <div class="details">
           <span class="label">Event start time:</span>
           <span>{{ eventStartTime }}</span>
         </div>
       </div>
-      <div *ngIf="type === PostType.activityPost" class="stat">
+      <div *ngIf="type === PostType.activityPost" class="stat" id="calories-stat">
         <mat-icon class="icon">whatshot</mat-icon>
         <div class="details">
           <span class="label">Calories burned:</span>
           <span>{{ calories }}</span>
         </div>
       </div>
-      <div class="stat">
+      <div class="stat" id="min-altitude-stat">
         <mat-icon class="icon">trending_down</mat-icon>
         <div class="details">
           <span class="label">Min altitude:</span>
           <span>{{getRoute().minAltitude | number:".2-2"}} m</span>
         </div>
       </div>
-      <div class="stat">
+      <div class="stat" id="max-altitude-stat">
         <mat-icon class="icon">trending_up</mat-icon>
         <div class="details">
           <span class="label">Max altitude:</span>
           <span>{{getRoute().maxAltitude | number:".2-2"}} m</span>
         </div>
       </div>
-      <div class="stat">
+      <div class="stat" id="avg-altitude-stat">
         <mat-icon class="icon">trending_flat</mat-icon>
         <div class="details">
           <span class="label">Average altitude:</span>

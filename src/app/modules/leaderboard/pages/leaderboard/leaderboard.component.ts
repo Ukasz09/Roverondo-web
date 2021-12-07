@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { User } from "@app/core/models";
+import { User, UserExtended } from "@app/core/models";
 import { Router } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 import { SpinnerType } from "@app/core/enums";
@@ -11,7 +11,7 @@ import { LeaderboardService } from "@app/core/services";
   styleUrls: ["./leaderboard.component.scss"]
 })
 export class LeaderboardComponent implements OnInit {
-  public userList?: User[];
+  public userList?: UserExtended[];
 
   constructor(
     private readonly router: Router,
@@ -28,6 +28,9 @@ export class LeaderboardComponent implements OnInit {
   public fetchUsers(): void {
     this.leaderboardService.getUsersLeaderboard$().subscribe((users) => {
       this.userList = users;
+      this.userList = this.userList.sort((a, b) => {
+        return b.allTimeStatistics.totalDistanceTravelled - a.allTimeStatistics.totalDistanceTravelled;
+      });
       this.spinner.hide(SpinnerType.main).then();
     });
   }

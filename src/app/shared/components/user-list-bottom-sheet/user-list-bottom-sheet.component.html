@@ -1,10 +1,10 @@
-<mat-nav-list class="mat-list">
+<mat-nav-list id="user-list-bottom-sheet" class="mat-list">
   <ng-container *ngIf="userList; else spinner">
     <ng-container *ngIf="userList.length>0; else noUsersTemplate">
       <ng-container *ngFor="let user of this.userList">
         <div class="reaction-wrapper">
           <div style="display: flex; flex-direction: row">
-            <div class="user">
+            <div class="user" [id]="'btn-'+user.id">
               <app-profile-avatar [userId]="user.id"
                                   [avatarImgPath]="user.profilePicture"
                                   [nickname]="user.nickname"

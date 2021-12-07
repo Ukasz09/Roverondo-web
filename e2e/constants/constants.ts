@@ -3,6 +3,7 @@ export enum Constants {
   authPage = "auth/signIn",
   homePage = "home",
 
-  testUserLogin="testCafe",
-  testUserPass="testCafe1234"
+  testUserLogin = "testCafe",
+  testUserPass = "testCafe1234",
+  testUserId = "222",
 }

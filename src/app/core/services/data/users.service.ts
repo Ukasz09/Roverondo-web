@@ -74,4 +74,9 @@ export class UsersService {
       map(userStatPeriod => this.userPlotDataAdapter.adapt(userStatPeriod))
     );
   }
+
+  public getUsers$(): Observable<User[]> {
+    const endpoint = `${environment.backendApi}/api/users`;
+    return this.http.get<User[]>(endpoint);
+  }
 }

@@ -11,8 +11,15 @@
                    height="48px"
                    [src]="rankMedalImg(i)"
                    alt="medal-image"
-                   class="fadeIn"
-              >
+                   class="fadeIn">
+              <mat-chip-list *ngIf="withDistanceStats" class="chips">
+                <mat-chip>
+                  <span style="font-weight: 600; margin-right: 0.25rem">
+                    {{getDistance(user) | lengthUnit | number:".0-2"}}
+                  </span>
+                  <span>km</span>
+                </mat-chip>
+              </mat-chip-list>
             </app-user-card>
           </div>
         </div>

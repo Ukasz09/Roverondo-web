@@ -10,5 +10,13 @@
   .content {
     @include mixins.full-page-list-wrapper();
     height: 100vh;
+
+    .title {
+      @include mixins.py(2rem);
+      font-size: 25px;
+      font-weight: 600;
+      display: flex;
+      justify-content: center;
+    }
   }
 }

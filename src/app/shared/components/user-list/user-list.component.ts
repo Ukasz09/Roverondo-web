@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { User } from "@app/core/models";
+import { User, UserExtended } from "@app/core/models";
 import { AppRoutes, LayoutType } from "@app/core/enums";
 import { LayoutService } from "@app/core/services";
 import { Utils } from "@app/shared/utils";
@@ -10,8 +10,9 @@ import { Utils } from "@app/shared/utils";
   styleUrls: ["./user-list.component.scss"]
 })
 export class UserListComponent implements OnInit {
-  @Input() public userList?: User[] = [];
+  @Input() public userList?: (User | UserExtended)[] = [];
   @Input() public withRankMedals = false;
+  @Input() public withDistanceStats = false;
 
   public readonly AppRoutes = AppRoutes;
 
@@ -33,5 +34,12 @@ export class UserListComponent implements OnInit {
 
   public rankMedalImg(index: number): string | undefined {
     return this.rankMedals[index];
+  }
+
+  public getDistance(user: User | UserExtended): number {
+    if ("allTimeStatistics" in user) {
+      return user.allTimeStatistics.totalDistanceTravelled;
+    }
+    return 0;
   }
 }
