@@ -1,10 +1,17 @@
 <div class="container">
   <app-aside-layout>
     <div class="content">
-      <span class="title">Greatest distance travelled</span>
-      <app-user-list style="height: 100%" *ngIf="userList" [userList]="userList" [withRankMedals]="true"
-                     [withDistanceStats]="true">
-      </app-user-list>
+      <div style="height: 100%; width: 100%; display: flex; flex-direction: column">
+        <span class="title">Greatest distance travelled</span>
+        <div style="flex-grow:1; overflow: auto">
+          <app-user-list style="height: 100%"
+                         *ngIf="userList"
+                         [userList]="userList"
+                         [withRankMedals]="true"
+                         [withDistanceStats]="true">
+          </app-user-list>
+        </div>
+      </div>
     </div>
   </app-aside-layout>
 </div>
