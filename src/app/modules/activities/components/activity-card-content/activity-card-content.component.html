@@ -5,7 +5,9 @@
                         [avatarImgPath]="activity.user.profilePicture"></app-profile-avatar>
     <div class="route-header-text">
       <span class="activity-info">
-        <strong class="cursor-pointer" [routerLink]="userProfileLink">{{activity.user.nickname}}</strong> went bike riding
+        <strong style="margin-right: 0.25rem" class="cursor-pointer"
+                [routerLink]="userProfileLink">{{activity.user.nickname}}</strong>
+        <span>{{ postTypeText }}</span>
       </span>
       <span class="date">{{activity.createdAt|date:'medium'}}</span>
     </div>

@@ -5,7 +5,7 @@ import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { CommentsSheetComponent } from "../comments-sheet/comments-sheet.component";
 import { ActivityType, EventPostExtended, Point, Route } from "@app/core/models";
 import { ReactionsSheetComponent } from "../reactions-sheet/reactions-sheet.component";
-import { CurrentUserService, SnackbarInfoService, PostsService, EventsService } from "@app/core/services";
+import { CurrentUserService, EventsService, PostsService, SnackbarInfoService } from "@app/core/services";
 import { AppRoutes, PostType, UserRoutes } from "@app/core/enums";
 import { switchMap } from "rxjs/operators";
 import { throwError } from "rxjs";
@@ -182,6 +182,21 @@ export class ActivityCardContentComponent implements OnInit {
       return this.activity.workout.averageSpeed;
     }
     return 0;
+  }
+
+  public get postTypeText(): string {
+    switch (this.type) {
+      case PostType.activityPost: {
+        return "went bike riding";
+      }
+      case PostType.eventPost: {
+        return "created an event";
+      }
+      case PostType.plannedRoutePost: {
+        return "planned a route";
+      }
+    }
+    return "created a post"
   }
 
   public getEventStartDate(format = "shortDate"): string {
