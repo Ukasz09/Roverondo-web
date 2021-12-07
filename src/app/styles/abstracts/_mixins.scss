@@ -6,7 +6,7 @@
 // -----------------------------------------------------------------------------
 
 @mixin selection-style {
-  color: variables.$accent-color;
+  color: variables.$selection-color;
   background: transparent;
 }
 
