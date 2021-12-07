@@ -29,8 +29,6 @@
       width: 100%;
 
       .card-content {
-        //background: red;
-
         @include mixins.py(0.5rem);
         @include mixins.px(0rem);
 
@@ -79,7 +77,6 @@
         }
 
         .basic-info {
-          //background: red;
           display: flex;
           flex-direction: column;
           flex: 1;
@@ -116,7 +113,6 @@
 
               .name {
                 height: 50%;
-                //background: dimgray;
                 display: flex;
                 align-items: center;
                 font-size: 20px;
@@ -159,7 +155,6 @@
         }
 
         .native-stats {
-          //background: cornflowerblue;
           flex: 1;
           display: none;
           flex-direction: column;

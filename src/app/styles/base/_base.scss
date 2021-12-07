@@ -30,6 +30,22 @@ html {
 
 * {
   font-family: variables.$text-font-stack;
+
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  &::-webkit-scrollbar-track {
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: variables.$glass-lighter-bg;
+    border-radius: 25px;
+
+    &:hover {
+      background: variables.$glass-light-bg;
+    }
+  }
 }
 
 body {
