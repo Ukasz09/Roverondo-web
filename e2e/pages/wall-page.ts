@@ -32,10 +32,6 @@ export class WallPage {
     return card.find(".bottom #like");
   }
 
-  public static postIsLiked(card: Selector): Promise<boolean> {
-    return WallPage.getAddReactionBtn(card).hasClass("liked");
-  }
-
   public static getActivityTitle(card: Selector): Selector {
     return card.find(".trip-title span");
   }
