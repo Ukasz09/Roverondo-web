@@ -13,10 +13,15 @@
 
     .title {
       @include mixins.py(2rem);
-      font-size: 25px;
+      font-size: 20px;
       font-weight: 600;
       display: flex;
       justify-content: center;
+      text-align: center;
+
+      @include mixins.media(sm-xsmall){
+        font-size: 25px;
+      }
     }
   }
 }

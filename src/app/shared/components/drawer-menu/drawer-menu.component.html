@@ -1,7 +1,7 @@
 <div class="menu" [ngClass]="{'native':!menuForMobile}">
   <div class="user-info">
     <h1 *ngIf="!menuForMobile" class="logo" [routerLink]="homeRouterLink">
-      <app-logo-text></app-logo-text>
+      <app-logo-text [withVersion]="true"></app-logo-text>
     </h1>
     <ng-container *ngIf="withAvatar; else dividerTemplate">
       <ng-container *ngIf="currentUserService.currentUser$ | async as user; else userLoadingSpinner">

@@ -1,1 +1,3 @@
-<span class="fw-600" [ngClass]="themeCssClass">Rover</span><span [ngClass]="themeCssClass" class="fw-400">ondo</span>
+<div *ngIf="withVersion" class="version">v{{ version }}</div>
+<span class="fw-600" [ngClass]="{'light-theme':this.lightText}">Rover</span>
+<span [ngClass]="themeCssClass" class="fw-400">ondo</span>

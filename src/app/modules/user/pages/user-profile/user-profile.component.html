@@ -2,7 +2,7 @@
   <app-aside-layout [withAvatar]="(currentUserService.currentUser$ | async)?.id!==user.id">
     <div class="content">
       <app-scroll-container [id]="'user-profile-container'">
-        <app-glass-card [borderRadius]="'0'">
+        <app-glass-card [borderRadius]="'0'" [lighter]="false">
           <div class="card-content">
             <div class="row">
               <app-profile-avatar [avatarImgPath]="user.profilePicture"

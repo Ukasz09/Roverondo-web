@@ -1,24 +1,7 @@
 import * as config from "../../auth-config.dev.json";
-
-const { domain, clientId, audience, apiUri, errorPath } = config as {
-  domain: string;
-  clientId: string;
-  audience?: string;
-  apiUri: string;
-  errorPath: string;
-};
+import { environmentBase } from "./environment.base";
 
 export const environment = {
-  production: false,
-  auth: {
-    domain,
-    clientId,
-    ...(audience ? { audience } : null),
-    redirectUri: window.location.origin,
-    errorPath
-  },
-  httpInterceptor: {
-    allowedList: [`${apiUri}/*`]
-  },
+  ...environmentBase(config),
   backendApi: "http://localhost:8080"
 };

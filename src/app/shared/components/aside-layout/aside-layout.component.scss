@@ -9,7 +9,7 @@
   width: 100%;
 
   .drawer {
-    @include mixins.glass-effect(variables.$glass-lighter-bg);
+    @include mixins.glass-effect(variables.$glass-light-bg);
     width: 100%;
     border-radius: 0 25px 25px 0;
     padding: 1.5rem 1.75rem;
@@ -37,7 +37,7 @@
   }
 
   .native-menu {
-    @include mixins.glass-effect(variables.$glass-lighter-bg);
+    @include mixins.glass-effect(variables.$glass-light-bg);
     @include mixins.py(2rem);
     width: 300px;
     height: 100%;

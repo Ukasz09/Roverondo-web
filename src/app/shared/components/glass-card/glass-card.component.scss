@@ -2,10 +2,14 @@
 @use "/src/app/styles/abstracts/variables";
 
 .glass-card {
-  @include mixins.glass-effect(variables.$glass-lighter-bg);
   border-radius: 0;
   min-height: 100%;
   width: 100%;
+  @include mixins.glass-effect(variables.$glass-light-bg);
+
+  &.lighter{
+    @include mixins.glass-effect(variables.$glass-lighter-bg);
+  }
 
   .header {
     @include mixins.py($size: 0.5rem);

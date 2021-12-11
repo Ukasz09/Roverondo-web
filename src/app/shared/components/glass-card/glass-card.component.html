@@ -1,4 +1,4 @@
-<mat-card class="glass-card" [ngStyle]="{'border-radius':borderRadius}">
+<mat-card class="glass-card" [ngClass]="{'lighter': lighter}" [ngStyle]="{'border-radius':borderRadius}">
   <mat-card-header *ngIf="headerText" class="header">
     <mat-card-title>
       <h4>{{ headerText }}</h4>
