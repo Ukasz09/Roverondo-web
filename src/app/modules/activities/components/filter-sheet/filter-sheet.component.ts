@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { ActivitiesRoutes, SpinnerType } from "@app/core/enums";
+import { ActivitiesRoutes } from "@app/core/enums";
 import { NgxSpinnerService } from "ngx-spinner";
 import { CurrentUserService } from "@app/core/services";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -29,7 +29,6 @@ export class FilterSheetComponent implements OnInit {
   }
 
   public navigate(type: ActivitiesRoutes): void {
-    this.spinner.show(SpinnerType.main).then();
     this.currentUserService.currentUser$.subscribe((user) => {
       if (this.activatedRouteType !== type) {
         if (user) {

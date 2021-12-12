@@ -25,8 +25,6 @@ import {
   VerticalBarGraphComponent
 } from "@app/shared/components";
 import {
-  ActiveLinkDirective,
-  DisabledLinkDirective,
   InputFocusDirective,
   StopPropagateClickEventDirective
 } from "@app/shared/directives";
@@ -48,7 +46,6 @@ import { MatChipsModule } from "@angular/material/chips";
     GlassBtnComponent,
     LogoTextComponent,
     ProfileAvatarComponent,
-    ActiveLinkDirective,
     InputFocusDirective,
     AsideLayoutComponent,
     AsideMobileComponent,
@@ -65,7 +62,6 @@ import { MatChipsModule } from "@angular/material/chips";
     UserListBottomSheetComponent,
     PageTitleComponent,
     GlassBtnMiniComponent,
-    DisabledLinkDirective,
     StopPropagateClickEventDirective,
     PageNotFoundComponent,
     TimeUnitPipe,
@@ -78,7 +74,6 @@ import { MatChipsModule } from "@angular/material/chips";
     GlassBtnComponent,
     LogoTextComponent,
     ProfileAvatarComponent,
-    ActiveLinkDirective,
     InputFocusDirective,
     AsideLayoutComponent,
     NavbarComponent,
@@ -93,7 +88,6 @@ import { MatChipsModule } from "@angular/material/chips";
     UserListBottomSheetComponent,
     PageTitleComponent,
     GlassBtnMiniComponent,
-    DisabledLinkDirective,
     PageNotFoundComponent,
     TimeUnitPipe,
     PressureUnitPipe,

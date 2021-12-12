@@ -13,7 +13,6 @@ export class PageNotFoundComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.spinner.hide(SpinnerType.main).then();
     this.router.navigate([`/${AppRoutes.home}`]).then();
   }
 }

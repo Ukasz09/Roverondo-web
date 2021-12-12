@@ -43,7 +43,7 @@
       outline: none;
 
       &:hover {
-        color: variables.$text-primary-color;
+        color: variables.$selection-color;
       }
     }
   }
@@ -94,6 +94,11 @@
   flex-direction: row;
   cursor: pointer !important;
   outline: none;
+
+  &.active{
+    font-weight: 600;
+    color: darken(variables.$selection-color,10);
+  }
 
   &#logout {
     margin-top: 2rem;

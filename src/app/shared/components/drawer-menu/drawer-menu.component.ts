@@ -15,6 +15,8 @@ export class DrawerMenuComponent implements OnInit {
   @Input() public menuForMobile = false;
   @Input() public withAvatar = true;
 
+  @Output() public closeDrawer = new EventEmitter<void>();
+
   public readonly AppRoutes = AppRoutes;
   public readonly ActivitiesRoutes = ActivitiesRoutes;
   public readonly UserRoutes = UserRoutes;
@@ -28,8 +30,6 @@ export class DrawerMenuComponent implements OnInit {
   ) {
   }
 
-  @Output() closeDrawer = new EventEmitter<void>();
-
   public ngOnInit(): void {
   }
 
@@ -42,25 +42,11 @@ export class DrawerMenuComponent implements OnInit {
     this.closeDrawer.emit();
   }
 
-  public navigateToWall(type: ActivitiesRoutes): void {
-    this.navigate(AppRoutes.activities, `${ActivitiesRoutes.wall}/${type}`);
-  }
-
-  public navigate(moduleRoute: string, subRoute: string): void {
-    this.spinner.show(SpinnerType.main).then();
-    this.currentUserService.currentUser$.subscribe((user) => {
-      if (user) {
-        const link = this.getRouteLink([moduleRoute, user.id.toString(), subRoute]);
-        this.router.navigate([link]).then(() => {
-        });
-      } else {
-        console.error("User not found - not navigate");
-      }
-      this.closeDrawer.emit();
-    });
-  }
-
   public get homeRouterLink(): string {
     return `/${AppRoutes.home}`;
+  }
+
+  public onLinkClick(): void {
+    this.closeDrawer.emit();
   }
 }

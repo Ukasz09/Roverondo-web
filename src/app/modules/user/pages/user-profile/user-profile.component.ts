@@ -140,7 +140,6 @@ export class UserProfileComponent implements OnInit {
 
   private navigateWithSpinner(route: string): void {
     this.router.navigate([route]).then();
-    this.spinner.show(SpinnerType.main).then();
   }
 
   private fetchPlotData(): void {

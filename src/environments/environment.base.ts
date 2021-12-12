@@ -20,6 +20,6 @@ export const environmentBase = (authConfig: IAuthConfig) => {
     httpInterceptor: {
       allowedList: [`${apiUri}/*`]
     },
-    version: "1.2.1"
+    version: "1.2.2"
   };
 };

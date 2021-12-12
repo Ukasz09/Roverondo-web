@@ -1,15 +1,17 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { User } from "@app/core/models";
 import { UsersService } from "@app/core/services";
 import { NgModel } from "@angular/forms";
 import { Subscription, timer } from "rxjs";
+import { NgxSpinnerService } from "ngx-spinner";
+import { SpinnerType } from "@app/core/enums";
 
 @Component({
   selector: "app-find-friends",
   templateUrl: "./find-friends.component.html",
   styleUrls: ["./find-friends.component.scss"]
 })
-export class FindFriendsComponent implements OnInit {
+export class FindFriendsComponent implements OnInit, OnDestroy {
   public userList?: User[];
   public searchQuery = "";
   public showSpinner = false;
@@ -17,10 +19,14 @@ export class FindFriendsComponent implements OnInit {
   private readonly onTypeSearchRequestTimer = 150;
   private onTypeSearchRequestSubscription$?: Subscription;
 
-  constructor(private readonly usersService: UsersService) {
+  constructor(private readonly usersService: UsersService, private readonly spinner: NgxSpinnerService) {
   }
 
   public ngOnInit(): void {
+    this.spinner.hide(SpinnerType.main).then();
+  }
+
+  public ngOnDestroy(): void {
     this.onTypeSearchRequestSubscription$?.unsubscribe();
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { NavigationEnd, Router } from "@angular/router";
+import { NavigationEnd, NavigationStart, Router } from "@angular/router";
 import { filter } from "rxjs/operators";
 import { BehaviorSubject, Subscription } from "rxjs";
 import { CurrentUserService, RoutesService } from "@app/core/services";
@@ -45,6 +45,12 @@ export class AppComponent implements OnInit, OnDestroy {
       filter(event => event instanceof NavigationEnd)).subscribe((routeEvent) => {
       const params = (routeEvent as NavigationEnd).url.split("/");
       this.routesService.setActualRoute(params.slice(1));
+      this.spinner.hide(SpinnerType.main).then();
+    });
+
+    this.routerEventsSubscription$ = this.router.events.pipe(
+      filter(event => event instanceof NavigationStart)).subscribe(routerEvent => {
+        this.spinner.show(SpinnerType.main).then();
     });
   }
 

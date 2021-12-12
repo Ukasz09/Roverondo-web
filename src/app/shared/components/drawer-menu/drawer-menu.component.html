@@ -26,104 +26,74 @@
     </ng-template>
   </div>
   <div style="flex:1; overflow: auto">
-    <ul class="drawer-links">
+    <ul class="drawer-links" *ngIf="currentUserService.currentUser$ | async as user">
       <li><h3
         class="link"
-        (click)="navigateToWall(ActivitiesRoutes.completed)"
-        [appActiveLink]="ActivitiesRoutes.wall"
-        [appDisabledLink]="ActivitiesRoutes.wall"
-        [appActiveLinkIndex]="2"
-        [appDisabledLinkIndex]="2"
-        [appDisabledTextDecoration]="false"
+        [routerLink]="this.getRouteLink([AppRoutes.activities, user.id.toString(), ActivitiesRoutes.wall, ActivitiesRoutes.completed])"
+        [routerLinkActive]="'active'"
         id="wall">
         Wall
       </h3></li>
       <li><h3
         class="link"
-        (click)="navigate(AppRoutes.activities,ActivitiesRoutes.completed)"
-        [appActiveLink]="ActivitiesRoutes.completed"
-        [appDisabledLink]="ActivitiesRoutes.completed"
-        [appActiveLinkIndex]="2"
-        [appDisabledLinkIndex]="2"
-        [appDisabledTextDecoration]="false"
+        [routerLink]="this.getRouteLink([AppRoutes.activities, user.id.toString(), ActivitiesRoutes.completed])"
+        [routerLinkActive]="'active'"
+        (click)="onLinkClick()"
         id="my-activities">
         Activities
       </h3></li>
       <li><h3
         class="link"
-        (click)="navigate(AppRoutes.activities, ActivitiesRoutes.planned)"
-        [appActiveLink]="ActivitiesRoutes.planned"
-        [appDisabledLink]="ActivitiesRoutes.planned"
-        [appActiveLinkIndex]="2"
-        [appDisabledLinkIndex]="2"
-        [appDisabledTextDecoration]="false"
+        [routerLink]="this.getRouteLink([AppRoutes.activities, user.id.toString(), ActivitiesRoutes.planned])"
+        [routerLinkActive]="'active'"
+        (click)="onLinkClick()"
         id="my-planned-routes">
         Planned routes
       </h3></li>
       <li><h3
         class="link"
-        (click)="navigate(AppRoutes.activities, ActivitiesRoutes.events)"
-        [appActiveLink]="ActivitiesRoutes.events"
-        [appDisabledLink]="ActivitiesRoutes.events"
-        [appActiveLinkIndex]="2"
-        [appDisabledLinkIndex]="2"
-        [appDisabledTextDecoration]="false"
+        [routerLink]="this.getRouteLink([AppRoutes.activities, user.id.toString(), ActivitiesRoutes.events])"
+        [routerLinkActive]="'active'"
+        (click)="onLinkClick()"
         id="my-events">
         Events
       </h3></li>
       <li><h3
         class="link"
-        [appActiveLink]="ActivitiesRoutes.liked"
-        [appDisabledLink]="ActivitiesRoutes.liked"
-        [appActiveLinkIndex]="2"
-        [appDisabledLinkIndex]="2"
-        [appDisabledTextDecoration]="false"
-        (click)="navigate(AppRoutes.activities,ActivitiesRoutes.liked)"
+        [routerLinkActive]="'active'"
+        (click)="onLinkClick()"
+        [routerLink]="this.getRouteLink([AppRoutes.activities, user.id.toString(), ActivitiesRoutes.liked])"
         id="liked-activities">
         Liked Activities
       </h3></li>
       <li><h3
         class="link"
         [routerLink]="getRouteLink([AppRoutes.leaderboard])"
-        [appActiveLink]="AppRoutes.leaderboard"
-        [appDisabledLink]="AppRoutes.leaderboard"
-        [appActiveLinkIndex]="0"
-        [appDisabledLinkIndex]="0"
-        [appDisabledTextDecoration]="false"
-        (click)="closeDrawer.emit()"
+        [routerLinkActive]="'active'"
+        (click)="onLinkClick()"
         id="leaderboard">
         Leaderboard
       </h3></li>
       <li><h3
         class="link"
-        (click)="navigate(AppRoutes.user,UserRoutes.followers)"
-        [appActiveLink]="UserRoutes.followers"
-        [appDisabledLink]="UserRoutes.followers"
-        [appActiveLinkIndex]="2"
-        [appDisabledLinkIndex]="2"
-        [appDisabledTextDecoration]="false"
+        [routerLink]="this.getRouteLink([AppRoutes.user, user.id.toString(), UserRoutes.followers])"
+        [routerLinkActive]="'active'"
+        (click)="onLinkClick()"
         id="followers">
         Followers
       </h3></li>
       <li><h3
         class="link"
-        [appActiveLink]="UserRoutes.followings"
-        [appDisabledLink]="UserRoutes.followings"
-        [appActiveLinkIndex]="2"
-        [appDisabledLinkIndex]="2"
-        [appDisabledTextDecoration]="false"
-        (click)="navigate(AppRoutes.user,UserRoutes.followings)"
+        [routerLinkActive]="'active'"
+        (click)="onLinkClick()"
+        [routerLink]="this.getRouteLink([AppRoutes.user, user.id.toString(), UserRoutes.followings])"
         id="following">
         Following
       </h3></li>
       <li><h3
         class="link"
-        [appActiveLink]="AppRoutes.findFriends"
-        [appDisabledLink]="AppRoutes.findFriends"
-        [appActiveLinkIndex]="0"
-        [appDisabledLinkIndex]="0"
-        [appDisabledTextDecoration]="false"
-        (click)="closeDrawer.emit()"
+        (click)="onLinkClick()"
+        [routerLinkActive]="'active'"
         [routerLink]="getRouteLink([AppRoutes.findFriends])"
         id="find-friends">
         Find friends

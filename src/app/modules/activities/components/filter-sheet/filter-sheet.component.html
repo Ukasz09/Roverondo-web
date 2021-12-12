@@ -1,16 +1,13 @@
 <mat-action-list>
-  <button id="activities-filter" mat-list-item (click)="navigate(ActivitiesRoutes.completed)"
-          [appDisabledLink]="ActivitiesRoutes.completed" [appDisabledLinkIndex]="3">
+  <button id="activities-filter" mat-list-item (click)="navigate(ActivitiesRoutes.completed)">
     <mat-icon class="icon">directions_bike</mat-icon>
     <span>Activities</span>
   </button>
-  <button id="events-filter" mat-list-item (click)="navigate(ActivitiesRoutes.events)"
-          [appDisabledLink]="ActivitiesRoutes.events" [appDisabledLinkIndex]="3">
+  <button id="events-filter" mat-list-item (click)="navigate(ActivitiesRoutes.events)">
     <mat-icon class="icon">event</mat-icon>
     <span>Events</span>
   </button>
-  <button id="planned-routes-filter" mat-list-item (click)="navigate(ActivitiesRoutes.planned)"
-          [appDisabledLink]="ActivitiesRoutes.planned" [appDisabledLinkIndex]="3">
+  <button id="planned-routes-filter" mat-list-item (click)="navigate(ActivitiesRoutes.planned)">
     <mat-icon class="icon">lightbulb</mat-icon>
     <span>Planned routes</span>
   </button>
