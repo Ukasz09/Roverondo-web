@@ -15,4 +15,4 @@ RUN apk add nginx-mod-http-headers-more
 
 COPY --from=builder /usr/src/app/dist/roverondo /usr/share/nginx/html/
 COPY --from=builder /usr/src/app/deployment/production/nginx.conf /etc/nginx/nginx.conf
-EXPOSE 80/tcp
+CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/nginx.conf && nginx -g 'daemon off;'

@@ -3,5 +3,5 @@ import { environmentBase } from "./environment.base";
 
 export const environment = {
   ...environmentBase(config),
-  backendApi: "http://localhost:8080"
+  backendApi: "http://localhost:4200"
 };

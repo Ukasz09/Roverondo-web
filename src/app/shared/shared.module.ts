@@ -24,7 +24,12 @@ import {
   TimeRangeBtnToggleComponent,
   VerticalBarGraphComponent
 } from "@app/shared/components";
-import { ActiveLinkDirective, DisabledLinkDirective, InputFocusDirective } from "@app/shared/directives";
+import {
+  ActiveLinkDirective,
+  DisabledLinkDirective,
+  InputFocusDirective,
+  StopPropagateClickEventDirective
+} from "@app/shared/directives";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
@@ -61,6 +66,7 @@ import { MatChipsModule } from "@angular/material/chips";
     PageTitleComponent,
     GlassBtnMiniComponent,
     DisabledLinkDirective,
+    StopPropagateClickEventDirective,
     PageNotFoundComponent,
     TimeUnitPipe,
     PressureUnitPipe,
@@ -92,7 +98,8 @@ import { MatChipsModule } from "@angular/material/chips";
     TimeUnitPipe,
     PressureUnitPipe,
     TimeRangeBtnToggleComponent,
-    VerticalBarGraphComponent
+    VerticalBarGraphComponent,
+    StopPropagateClickEventDirective
   ],
   imports: [
     CommonModule,

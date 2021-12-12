@@ -196,7 +196,7 @@ export class ActivityCardContentComponent implements OnInit {
         return "planned a route";
       }
     }
-    return "created a post"
+    return "created a post";
   }
 
   public getEventStartDate(format = "shortDate"): string {

@@ -1,12 +1,14 @@
-<div class="card-content" [ngClass]="{'with-bottom-margin':withBottomMargin}">
+<div class="card-content cursor-pointer" [ngClass]="{'with-bottom-margin':withBottomMargin}" (click)="detailsClick.emit()">
   <div class="user-info">
     <app-profile-avatar [nickname]="activity.user.nickname"
                         [userId]="activity.user.id"
-                        [avatarImgPath]="activity.user.profilePicture"></app-profile-avatar>
+                        [avatarImgPath]="activity.user.profilePicture"
+                        stopPropagateClickEvent>
+    </app-profile-avatar>
     <div class="route-header-text">
       <span class="activity-info">
         <strong style="margin-right: 0.25rem" class="cursor-pointer"
-                [routerLink]="userProfileLink">{{activity.user.nickname}}</strong>
+                [routerLink]="userProfileLink" stopPropagateClickEvent>{{activity.user.nickname}}</strong>
         <span>{{ postTypeText }}</span>
       </span>
       <span class="date">{{activity.createdAt|date:'medium'}}</span>
@@ -14,13 +16,14 @@
 
     <div [ngTemplateOutlet]="actions"></div>
     <div [ngTemplateOutlet]="stats"></div>
-    <div *ngIf="backBtnVisible" class="back-btn cursor-pointer" (click)="backBtnClick.emit()">
+    <div *ngIf="backBtnVisible" class="back-btn cursor-pointer" (click)="backBtnClick.emit()" stopPropagateClickEvent>
       <mat-icon>arrow_back_ios</mat-icon>
     </div>
   </div>
   <div class="trip-title">
     <mat-icon class="icon">directions_bike</mat-icon>
-    <span class="cursor-pointer title-text" (click)="detailsClick.emit()">{{activity.title}}</span>
+    <span class="cursor-pointer title-text" (click)="detailsClick.emit()"
+          stopPropagateClickEvent>{{activity.title}}</span>
   </div>
   <div class="map fadeIn">
     <app-map [disabledInteractions]="disableMapInteractions" [routePoints]="routes"></app-map>
@@ -31,13 +34,13 @@
   <div class="bottom">
     <div [ngTemplateOutlet]="actions"></div>
     <div class="social-stats">
-      <div style="cursor: pointer" (click)="openReactionsSheet()">
+      <div style="cursor: pointer" (click)="openReactionsSheet()" stopPropagateClickEvent>
         <mat-icon id="like-stat" class="icon" [ngClass]="{'liked':alreadyReacted}">
           {{ alreadyReacted ? 'favorite' : 'favorite_border' }}
         </mat-icon>
         <label id="reactions-count" for="like-stat" class="text">{{activity.reactionsCount}}</label>
       </div>
-      <div style="cursor: pointer" (click)="openCommentsSheet()">
+      <div style="cursor: pointer" (click)="openCommentsSheet()" stopPropagateClickEvent>
         <mat-icon id="comment-stat" class="icon">chat_bubble_outline</mat-icon>
         <label for="comment-stat" class="text">{{activity.commentsCount}}</label>
       </div>
@@ -45,21 +48,21 @@
   </div>
   <ng-template #actions>
     <div class="actions">
-      <div class="action cursor-pointer" (click)="onReactionBtnClick()">
+      <div class="action cursor-pointer" (click)="onReactionBtnClick()" stopPropagateClickEvent>
         <mat-icon class="icon" id="like"
                   [ngClass]="{'liked':alreadyReacted}">{{ alreadyReacted ? 'favorite' : 'favorite_border' }}</mat-icon>
         <label id="reactions-count" for="like" class="text cursor-pointer">
           <span class="count">{{activity.reactionsCount}}</span><span class="action-name">Like</span>
         </label>
       </div>
-      <div class="action cursor-pointer" (click)="openCommentsSheet(true)">
+      <div class="action cursor-pointer" (click)="openCommentsSheet(true)" stopPropagateClickEvent>
         <mat-icon class="icon" id="comment">chat_bubble_outline</mat-icon>
         <label for="comment" class="text cursor-pointer">
           <span class="count">{{activity.commentsCount}}</span><span class="action-name">Comment</span>
         </label>
       </div>
       <div *ngIf="type===PostType.eventPost" class="action cursor-pointer"
-           (click)="activityAsEventPostExtended.alreadyJoined ? leaveEvent() : joinEvent()">
+           (click)="activityAsEventPostExtended.alreadyJoined ? leaveEvent() : joinEvent()" stopPropagateClickEvent>
         <mat-icon class="icon" id="join-leave-event">
           {{ activityAsEventPostExtended.alreadyJoined ? 'person_add_disabled' : 'person_add' }}
         </mat-icon>
@@ -69,7 +72,7 @@
       </div>
 
       <div *ngIf="type===PostType.eventPost" class="action cursor-pointer"
-           (click)="openEventParticipantsSheet()">
+           (click)="openEventParticipantsSheet()" stopPropagateClickEvent>
         <mat-icon class="icon" id="event-participants">face</mat-icon>
         <label for="event-participants" class="text cursor-pointer">
           <span>{{activityAsEventPostExtended.enrolledUsers}}</span>

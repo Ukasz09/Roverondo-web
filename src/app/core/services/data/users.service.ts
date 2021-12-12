@@ -12,6 +12,8 @@ import { Utils } from "@app/shared/utils";
   providedIn: "root"
 })
 export class UsersService {
+  public static readonly registerUserEndpoint = `${environment.backendApi}/api/users/register`;
+
   constructor(
     private readonly http: HttpClient,
     private readonly userPlotDataAdapter: UserPlotDataAdapterService
@@ -19,8 +21,7 @@ export class UsersService {
   }
 
   public registerUser$(): Observable<User> {
-    const endpoint = `${environment.backendApi}/api/users/register`;
-    return this.http.post<User>(endpoint, {});
+    return this.http.post<User>(UsersService.registerUserEndpoint, {});
   }
 
   public getUser$(userId: number, extended = false): Observable<User | UserExtended> {
