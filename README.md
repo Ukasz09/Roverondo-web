@@ -1,27 +1,101 @@
-# Roverondo
+# Roverondo [![License](https://img.shields.io/badge/licence-MIT-blue)](https://choosealicense.com/licenses/mit/) [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)](https://github.com/Ukasz09/Roverondo-web)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.5.
+### About application
 
-## Development server
+Roverondo - web application for cyclists, which is designed to work properly on both mobile and desktop devices.
+Application covers such features as displaying charts and statistics, drawing planned and recorded tracks on the map ,
+as well as social functions like adding reactions and comments to the posts, attending to organized events or tracking
+the other app users’ progress.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Demo
 
-## Code scaffolding
+![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/login-page-1.png)
+![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/wall-1.png)
+![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/wall-details-1.png)
+![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/wall-2.png)
+![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/comments.png)
+![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/events.png)
+![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/find-friends.png)
+![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/followers.png)
+![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/leaderboard.png)
+![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/profile.png)
+![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/wall-details-2.png)
+![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/aside-menu.png)
+![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/wall-2.png)
+![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/wall-3.png)
+![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/login-page-2.png)
+![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/profile-2.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Running application (development server)
 
-## Build
+Make sure you have installed:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- [NodeJs](https://nodejs.org/en/download/)
+- AngularCLI: `npm install -g @angular/cli`
+- Local packages (from project root directory): `npm install`
+- [Docker](https://www.docker.com/get-started)
 
-## Running unit tests
+#### Backend - docker
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+For proper working, you need to set up and run backend application:
 
-## Running end-to-end tests
+- Go to folder `deployment/roverondo-backend`
+- Create container and run it: `docker-compose up --build --force-recreate`
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+#### Frontend - dev server
 
-## Further help
+`npm start`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+or with proxy:
+
+`npm start:proxy`
+
+This will start a dev server. After that navigate to page `http://localhost:4200/`
+
+#### Frontend - docker
+
+You can use one of available run configurations:
+
+a) Local production build from sources:
+
+From project root folder run command:
+
+`npm run docker:up:prod-local`
+
+This will create container and start application. After that navigate to page `http://localhost:4200/`
+
+b) Production build with image from [DockerHub](https://hub.docker.com/r/ukasz09/roverondo-web-prod-prebuilt/tags)
+
+From project root folder run command:
+
+`npm run docker:up:prod-prebuilt`
+
+This will create container and start application. After that navigate to page `http://localhost:4200/`
+
+c) Local development build from sources (with live reload):
+
+From project root folder run command:
+
+`npm run docker:up:dev-local`
+
+This will create container and start application. After that navigate to page `http://localhost:4200/`
+
+### Tech stack and features
+
+- Angular, 
+- TypeScript
+- HTML + Sass
+- Angular Material, 
+- Material Icons
+- NgxCharts
+- TestCafe
+- Auth0
+- Leaflet + OpenStreetMaps
+- RWD
+
+
+### 📫 Contact
+
+| Created by                                                                                                                                       | gajerski.lukasz@gmail.com        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------- |
+| <a href="https://github.com/Ukasz09" target="_blank"><img src="https://avatars0.githubusercontent.com/u/44710226?s=460&v=4"  width="100px;"></a> | Feel free to contact me! :punch: |

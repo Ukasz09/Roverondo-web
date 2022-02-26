@@ -1,0 +1,27 @@
+version: '3.7'
+services:
+  prebuilt-roverondo-database:
+    image: postgres:14.0-alpine
+    container_name: prebuilt-roverondo-database
+    volumes:
+      - prebuilt-roverondo-database-data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: zpi
+      POSTGRES_DB: roverondo
+  prebuilt-roverondo-backend:
+    image: m1loseph/roverondo-backend:latest
+    container_name: prebuilt-roverondo-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - prebuilt-roverondo-database
+    environment:
+      ROVERONDO_DB_URL: jdbc:postgresql://prebuilt-roverondo-database:5432/roverondo
+      ROVERONDO_DB_USER: postgres
+      ROVERONDO_DB_PASSWORD: zpi
+      SPRING_PROFILES_ACTIVE: dev
+volumes:
+  prebuilt-roverondo-database-data:
