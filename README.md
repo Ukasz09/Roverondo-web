@@ -1,4 +1,4 @@
-# Roverondo [![License](https://img.shields.io/badge/licence-MIT-blue)](https://choosealicense.com/licenses/mit/) [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)](https://github.com/Ukasz09/Roverondo-web)
+# 🚲 Roverondo [![License](https://img.shields.io/badge/licence-MIT-blue)](https://choosealicense.com/licenses/mit/) [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)](https://github.com/Ukasz09/Roverondo-web)
 
 ### About application
 
@@ -122,6 +122,7 @@ This will create container and start application. After that navigate to page `h
 - Auth0
 - Leaflet + OpenStreetMaps
 - RWD
+- Docker
 
 
 ### 📫 Contact
