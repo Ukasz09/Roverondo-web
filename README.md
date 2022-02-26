@@ -19,12 +19,42 @@ the other app users’ progress.
 ![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/followers.png)
 ![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/leaderboard.png)
 ![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/profile.png)
+
+<div style="width: 50%; margin: auto">
+
 ![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/wall-details-2.png)
+
+</div>
+
+<div style="width: 50%; margin: auto">
+
 ![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/aside-menu.png)
+
+</div>
+
+<div style="width: 50%; margin: auto">
+
 ![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/wall-2.png)
+
+</div>
+
+<div style="width: 50%; margin: auto">
+
 ![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/wall-3.png)
+
+</div>
+
+<div style="width: 50%; margin: auto">
+
 ![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/login-page-2.png)
+
+</div>
+
+<div style="width: 50%; margin: auto">
+
 ![](https://raw.githubusercontent.com/Ukasz09/Roverondo-web/master/readme/profile-2.png)
+
+</div>
 
 ### Running application (development server)
 
